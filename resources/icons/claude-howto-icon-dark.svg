@@ -1,80 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#10b981"/>
-      <stop offset="100%" style="stop-color:#059669"/>
-    </linearGradient>
-    <linearGradient id="mintGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#6ee7b7"/>
-      <stop offset="100%" style="stop-color:#34d399"/>
-    </linearGradient>
-    <linearGradient id="bgDark" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0d1f0d"/>
-      <stop offset="100%" style="stop-color:#051515"/>
-    </linearGradient>
-    <filter id="glowDark">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feFlood flood-color="#10b981" flood-opacity="0.5"/>
-      <feComposite in2="blur" operator="in"/>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
+  <!-- Claude How-To Icon — Dark mode (256x256) -->
 
   <!-- Dark background -->
-  <circle cx="128" cy="128" r="128" fill="url(#bgDark)"/>
+  <circle cx="128" cy="128" r="128" fill="#0A0A0A"/>
 
-  <!-- Icon: Rounded starburst dark mode -->
-  <g transform="translate(128, 128)">
-    <!-- Central core with glow -->
-    <circle cx="0" cy="0" r="28" fill="#10b981" filter="url(#glowDark)"/>
-    <circle cx="0" cy="0" r="20" fill="url(#mintGrad)"/>
+  <!-- Compass mark centered -->
+  <g transform="translate(128, 128) scale(1.9)">
+    <!-- Outer compass ring -->
+    <circle cx="0" cy="0" r="52" fill="none" stroke="#FFFFFF" stroke-width="3"/>
 
-    <!-- 12 rays -->
-    <!-- Ray 1 (top) -->
-    <path d="M 0,-30 Q -10,-64 0,-96 Q 10,-64 0,-30" fill="url(#emeraldGrad)" opacity="1" filter="url(#glowDark)"/>
+    <!-- Cardinal tick marks -->
+    <line x1="0" y1="-52" x2="0" y2="-42" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="42" x2="0" y2="52" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-52" y1="0" x2="-42" y2="0" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="42" y1="0" x2="52" y2="0" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
 
-    <!-- Ray 2 (30°) -->
-    <path d="M 26,-16 Q 36,-44 56,-70 Q 46,-40 26,-16" fill="url(#emeraldGrad)" opacity="0.95"/>
+    <!-- Intercardinal tick marks -->
+    <line x1="-36.8" y1="-36.8" x2="-29.7" y2="-29.7" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="29.7" y1="-29.7" x2="36.8" y2="-36.8" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-36.8" y1="36.8" x2="-29.7" y2="29.7" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="29.7" y1="29.7" x2="36.8" y2="36.8" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
 
-    <!-- Ray 3 (60°) -->
-    <path d="M 44,14 Q 60,30 84,56 Q 56,36 44,14" fill="url(#emeraldGrad)" opacity="1" filter="url(#glowDark)"/>
+    <!-- Compass needle — north (green) -->
+    <polygon points="0,-40 -6,-2 0,-8 6,-2" fill="#22C55E"/>
 
-    <!-- Ray 4 (90°, right) -->
-    <path d="M 30,0 Q 64,-10 96,0 Q 64,10 30,0" fill="url(#emeraldGrad)" opacity="0.98"/>
+    <!-- Compass needle — south (white) -->
+    <polygon points="0,40 -6,2 0,8 6,2" fill="#FFFFFF"/>
 
-    <!-- Ray 5 (120°) -->
-    <path d="M 44,-14 Q 60,-30 84,-56 Q 56,-36 44,-14" fill="url(#emeraldGrad)" opacity="0.95"/>
+    <!-- Center > bracket -->
+    <polyline points="-8,-10 4,0 -8,10" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
-    <!-- Ray 6 (150°) -->
-    <path d="M 26,16 Q 36,44 56,70 Q 46,40 26,16" fill="url(#emeraldGrad)" opacity="1" filter="url(#glowDark)"/>
-
-    <!-- Ray 7 (180°, left) -->
-    <path d="M 0,30 Q -10,64 0,96 Q 10,64 0,30" fill="url(#emeraldGrad)" opacity="0.98"/>
-
-    <!-- Ray 8 (210°) -->
-    <path d="M -26,16 Q -36,44 -56,70 Q -46,40 -26,16" fill="url(#emeraldGrad)" opacity="0.95"/>
-
-    <!-- Ray 9 (240°) -->
-    <path d="M -44,-14 Q -60,-30 -84,-56 Q -56,-36 -44,-14" fill="url(#emeraldGrad)" opacity="1" filter="url(#glowDark)"/>
-
-    <!-- Ray 10 (270°) -->
-    <path d="M -30,0 Q -64,-10 -96,0 Q -64,10 -30,0" fill="url(#emeraldGrad)" opacity="0.98"/>
-
-    <!-- Ray 11 (300°) -->
-    <path d="M -44,14 Q -60,30 -84,56 Q -56,36 -44,14" fill="url(#emeraldGrad)" opacity="0.95"/>
-
-    <!-- Ray 12 (330°) -->
-    <path d="M -26,-16 Q -36,-44 -56,-70 Q -46,-40 -26,-16" fill="url(#emeraldGrad)" opacity="1" filter="url(#glowDark)"/>
-
-    <!-- Inner detail lines -->
-    <g opacity="0.8">
-      <rect x="-7" y="-6" width="14" height="2.4" fill="#0d1f0d" rx="1.2"/>
-      <rect x="-7" y="-0.4" width="14" height="2.4" fill="#0d1f0d" rx="1.2"/>
-      <rect x="-7" y="5.2" width="14" height="2.4" fill="#0d1f0d" rx="1.2"/>
-    </g>
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="2.5" fill="#22C55E"/>
   </g>
 </svg>

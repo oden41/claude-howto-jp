@@ -2,26 +2,25 @@
 
 ## Visual Identity
 
-### Icon Design Concept: Ascending Progression
+### Icon Design Concept: Compass with Code Bracket
 
-The Claude How To icon uses **three ascending hexagons** to represent the learning journey:
+The Claude How To icon uses a **compass with a `>` code bracket** to represent guided navigation through code:
 
 ```
-        🔷 Level 7-10 (MINT)
-        Advanced Features
-
-    🔶 Level 4-6 (EMERALD)
-    Intermediate Skills
-
-🔹 Level 1-3 (DARK EMERALD)
-Beginner Fundamentals
+     N (green)
+     ▲
+     │
+W ───>─── E     Compass = Guidance/Direction
+     │          > Bracket = Code/Terminal/CLI
+     ▼
+     S (black)
 ```
 
 This creates:
-- **Visual Clarity**: Immediate recognition of progression
-- **Symbolic Meaning**: Upward movement = growth & learning
+- **Visual Clarity**: Immediately communicates "code navigation guide"
+- **Symbolic Meaning**: Compass = finding your way; `>` = code/terminal
 - **Scalability**: Works at any size from 16px to 512px
-- **Brand Alignment**: Matches the tech-forward CLI aesthetic
+- **Brand Alignment**: Matches the developer tool aesthetic with minimal palette
 
 ---
 
@@ -31,153 +30,91 @@ This creates:
 
 | Color | Hex | RGB | Usage |
 |-------|-----|-----|-------|
-| Deep Forest (BG) | `#0d1f0d` | 13, 31, 13 | Backgrounds, containers |
-| Emerald (Primary) | `#10b981` | 16, 185, 129 | Main accents, buttons |
-| Dark Emerald | `#059669` | 5, 150, 105 | Secondary accents, borders |
-| Forest | `#047857` | 4, 120, 87 | Tertiary, deep accents |
-| Mint (Highlight) | `#6ee7b7` | 110, 231, 183 | Highlights, focus states |
-| Light Mint | `#34d399` | 52, 211, 153 | Secondary highlights |
+| Black (Primary) | `#000000` | 0, 0, 0 | Main strokes, text, south needle |
+| White (Background) | `#FFFFFF` | 255, 255, 255 | Light backgrounds |
+| Gray (Secondary) | `#6B7280` | 107, 114, 128 | Minor tick marks, secondary text |
+| Bright Green (Accent) | `#22C55E` | 34, 197, 94 | North needle, center dot, accent lines |
+| Near Black (Dark BG) | `#0A0A0A` | 10, 10, 10 | Dark mode backgrounds |
 
 ### Contrast Ratios (WCAG)
 
-- Emerald on Dark Forest: **8.2:1** ✅ AAA
-- Mint on Dark Forest: **9.1:1** ✅ AAA
-- All colors maintain AA compliance on dark backgrounds
+- Black on White: **21:1** AAA
+- Gray on White: **4.6:1** AA
+- Green on White: **3.2:1** (decorative only, not for text)
+- White on Dark: **19.5:1** AAA
 
----
+### Accent Color Rule
 
-## Gradient System
-
-### Primary Gradients
-
-**Emerald Gradient** (left→right, top→bottom):
-- Start: `#10b981` (bright emerald)
-- End: `#047857` (dark forest green)
-- Usage: Icon backgrounds, primary elements
-
-**Mint Gradient** (top→bottom):
-- Start: `#6ee7b7` (bright mint)
-- End: `#34d399` (darker mint)
-- Usage: Highlights, accent elements
-
-**Dark Emerald Gradient** (left→right, top→bottom):
-- Start: `#059669` (dark emerald)
-- End: `#064e3b` (forest green)
-- Usage: Secondary elements, depth
+**Bright Green (#22C55E) is reserved for highlights only:**
+- Compass north needle
+- Center dot
+- Accent underlines/borders
+- Never as a background color
+- Never for body text
 
 ---
 
 ## Typography
 
 ### Logo Font
-- **Family**: JetBrains Mono, SF Mono, Fira Code (monospace)
-- **Weight**: 700 (bold) for "Claude-", 400 (regular) for "Howto"
-- **Style**: Modern, tech-forward
-- **Usage**: Logo wordmark, code examples
+- **Family**: Inter, SF Pro Display, -apple-system, Segoe UI, sans-serif
+- **"Claude"**: 42px, weight 700 (bold), Black
+- **"How-To"**: 32px, weight 500 (medium), Gray (#6B7280)
+- **Subtitle**: 10px, weight 500, Gray, letter-spacing 1.5px, uppercase
 
 ### Interface Font
 - **Family**: Inter, SF Pro, system fonts (sans-serif)
 - **Weight**: 400-600
 - **Style**: Clean, readable
-- **Usage**: UI text, descriptions
 
 ---
 
 ## Icon Details
 
-### Hexagon Specifications
+### Compass Specifications
 
-All three hexagons follow the same geometry pattern:
+The compass mark is built from these geometric elements:
 
-```svg
-<!-- Regular hexagon with flat top -->
-M -26,0          <!-- Left point -->
-L -13,-22.5      <!-- Top-left corner -->
-L 13,-22.5       <!-- Top-right corner -->
-L 26,0           <!-- Right point -->
-L 13,22.5        <!-- Bottom-right corner -->
-L -13,22.5       <!-- Bottom-left corner -->
-Z                <!-- Close path -->
+```
+Element             | Stroke/Fill    | Color
+--------------------|----------------|------------------
+Outer ring          | 3px stroke     | Black / White (dark mode)
+North tick          | 2.5px stroke   | Black / White (dark mode)
+Other cardinal ticks| 2px stroke     | Gray / White 50% (dark mode)
+Intercardinal ticks | 1.5px stroke   | Gray / White 40% (dark mode)
+North needle        | filled polygon | #22C55E (always green)
+South needle        | filled polygon | Black / White (dark mode)
+> bracket           | 3px stroke     | Black / White (dark mode)
+Center dot          | filled circle  | #22C55E (always green)
 ```
 
-**Hexagon Sizes**:
-- Bottom (Beginner): 26 unit radius
-- Middle (Intermediate): 32 unit radius
-- Top (Advanced): 26 unit radius
+### Size Progression
 
-### Visual Elements
-
-1. **Strokes**: 1.5-2.5px width depending on size
-2. **Glows**: Soft emerald/mint blur for depth
-3. **Connecting Lines**: Dashed lines showing progression
-4. **Center Dot**: Accent element at center point
-5. **Outer Rings**: Subtle circular guides
+```
+16px  → Ring + needles + chevron only (minimal)
+32px  → Adds cardinal tick marks
+64px  → Adds intercardinal tick marks
+128px → Full detail, all elements crisp
+256px → Maximum detail, thick strokes
+```
 
 ---
 
 ## Sizing Guidelines
 
-### Favicon Hierarchy
-
-```
-16px   → Minimal geometry, browser tab
-32px   → Two hexagons visible
-64px   → All three hexagons clear
-128px  → Full detail with glows
-256px  → Complete with all effects
-```
-
 ### Logo Sizing
 
-- **Minimum**: 100px width (for web)
-- **Recommended**: 400-800px (high quality)
+- **Minimum**: 200px width (for web)
+- **Recommended**: 520px (native size)
 - **Maximum**: Unlimited (vector format)
-- **Aspect Ratio**: 4:1 (width:height)
+- **Aspect Ratio**: ~4.3:1 (width:height)
 
 ### Icon Sizing
 
-- **Minimum**: 32px (small thumbnails)
+- **Minimum**: 16px (favicon)
 - **Recommended**: 64-256px (apps, avatars)
 - **Maximum**: Unlimited (vector format)
 - **Aspect Ratio**: 1:1 (square)
-
----
-
-## Effects & Filters
-
-### Glow Effect
-
-```svg
-<filter id="softGlow">
-  <feGaussianBlur stdDeviation="2" result="blur"/>
-  <feFlood flood-color="#10b981" flood-opacity="0.4"/>
-  <feComposite in2="blur" operator="in"/>
-  <feMerge>
-    <feMergeNode/>
-    <feMergeNode in="SourceGraphic"/>
-  </feMerge>
-</filter>
-```
-
-Creates: Soft green glow around elements
-
-### Shadow Effect
-
-```svg
-<filter id="shadow">
-  <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-  <feOffset dx="2" dy="4" result="offsetblur"/>
-  <feComponentTransfer>
-    <feFuncA type="linear" slope="0.3"/>
-  </feComponentTransfer>
-  <feMerge>
-    <feMergeNode/>
-    <feMergeNode in="SourceGraphic"/>
-  </feMerge>
-</filter>
-```
-
-Creates: Subtle drop shadow for depth
 
 ---
 
@@ -189,18 +126,19 @@ Creates: Subtle drop shadow for depth
 ┌─────────────────────────────────────┐
 │                                     │
 │        Clear Space Minimum          │
-│         (logo width / 4)            │
+│         (logo height / 2)           │
 │                                     │
-│              [LOGO]                 │
+│    [COMPASS]  Claude                │
+│               How-To                │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
 ### Icon Center Point
 
-All icons center at (128, 128) for 256px canvas:
-- Allows proper scaling and transformation
-- Centers vertically and horizontally
+All icons center at the midpoint of their canvas:
+- 128×128 for 256px canvas
+- 64×64 for 128px canvas
 - Maintains alignment with other UI elements
 
 ---
@@ -208,49 +146,42 @@ All icons center at (128, 128) for 256px canvas:
 ## Accessibility
 
 ### Color Contrast
-- All foreground/background combinations meet WCAG AAA
+- All text meets WCAG AA (4.5:1 minimum)
+- Green accent is decorative, not informational
 - No red-green color dependency
-- Works for color-blind users
 
 ### Scalability
 - Vector format ensures clarity at any size
 - Geometric shapes remain recognizable at 16px
-- Maintains proportions when scaled
-
-### Animation Safe
-- SVG can be animated if needed
-- Static by default for performance
-- Use CSS/JS for interactive states
+- Progressive detail based on available size
 
 ---
 
 ## Application Examples
 
 ### Web Header
-- Size: 800×200px
+- Size: 520×120px logo
 - File: `logos/claude-howto-logo.svg`
-- Background: Transparent or dark
+- Background: White or dark (#0A0A0A)
 - Padding: 20px minimum
 
 ### App Icon
-- Size: 256×256px or larger
+- Size: 256×256px
 - File: `icons/claude-howto-icon.svg`
-- Background: Dark or transparent
+- Background: White or dark
 - Use: App shortcuts, avatars
 
 ### Browser Favicon
 - Size: 32px (primary), 16px (fallback)
 - File: `favicons/favicon-32.svg`
 - Format: SVG for crisp display
-- Use: Browser tabs, bookmarks
 
 ### Social Media
 - Profile: 256×256px icon
-- Banner: 800×200px logo (centered)
-- Story/Post: Icon at 1080×1080px
+- Banner: 520×120px logo (centered)
 
 ### Documentation
-- Chapter Headers: 400×100px logo
+- Chapter Headers: Logo scaled to fit
 - Section Icons: 64×64px favicon
 - Inline: 32×32px favicon
 
@@ -260,78 +191,54 @@ All icons center at (128, 128) for 256px canvas:
 
 ### SVG Structure
 
-All SVG files include:
-- XML declaration
-- `<defs>` section with gradients and filters
-- ViewBox attribute for responsiveness
-- Named gradients for reuse
-- Readable code structure
-
-### Optimization
-
-Files are optimized but readable:
-- Maintains whitespace for clarity
-- Includes comments where helpful
-- Gradients named for easy reference
-- Filters documented in code
+All SVG files are flat design:
+- No gradients (solid colors only)
+- No filter effects (no blur, glow, or shadow)
+- Clean stroke and fill geometry
+- ViewBox for responsive scaling
+- Readable, commented code
 
 ### Cross-Browser Compatibility
 
-- ✅ Chrome/Edge: Full support
-- ✅ Firefox: Full support
-- ✅ Safari: Full support
-- ✅ iOS Safari: Full support
-- ✅ All modern browsers: Full support
+- Chrome/Edge: Full support
+- Firefox: Full support
+- Safari: Full support
+- iOS Safari: Full support
+- All modern browsers: Full support
 
 ---
 
 ## Customization
 
-### Changing Colors
+### Changing the Accent Color
 
-To create variants with different colors:
+To create variants with a different accent:
 
-1. Replace gradient stop colors:
-```svg
-<stop offset="0%" style="stop-color:#NEW_COLOR"/>
-```
-
-2. Update filter colors:
-```svg
-<feFlood flood-color="#NEW_COLOR" flood-opacity="0.4"/>
-```
-
-3. Keep contrast ratios above 4.5:1 for accessibility
+1. Replace all instances of `#22C55E` with your accent color
+2. Ensure contrast ratio stays above 3:1 for decorative elements
+3. Keep black/white/gray structure unchanged
 
 ### Scaling
 
-To scale any icon:
 ```css
 svg {
   width: 256px;
   height: 256px;
-  transform: scale(1.5);
 }
 ```
 
-Or in SVG:
-```svg
-<svg transform="scale(2)">
-  <!-- content -->
-</svg>
-```
+SVGs scale automatically via viewBox — no transforms needed.
 
 ---
 
 ## Version Control
 
 Track design changes in git:
-- Use `.gitkeep` in empty directories
 - Version SVG files normally (they're text)
 - Tag releases with design changes
 - Include DESIGN-SYSTEM.md in commits
 
 ---
 
-**Last Updated**: January 2026
-**Design System Version**: 1.0
+**Last Updated**: February 2026
+**Design System Version**: 3.0

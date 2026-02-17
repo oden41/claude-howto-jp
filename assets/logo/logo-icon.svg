@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-  <!-- Claude How-To Icon — Light mode (256x256) -->
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- App Icon: Square with padding, rounded corners implied by container -->
 
-  <!-- White background -->
-  <circle cx="128" cy="128" r="128" fill="#FFFFFF"/>
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#FFFFFF"/>
 
-  <!-- Compass mark centered -->
-  <g transform="translate(128, 128) scale(1.9)">
+  <!-- Scaled mark centered with padding -->
+  <g transform="translate(256, 256) scale(3.2)">
     <!-- Outer compass ring -->
     <circle cx="0" cy="0" r="52" fill="none" stroke="#000000" stroke-width="3"/>
 
@@ -34,4 +34,7 @@
     <!-- Center dot -->
     <circle cx="0" cy="0" r="2.5" fill="#22C55E"/>
   </g>
+
+  <!-- Subtle border -->
+  <rect width="512" height="512" rx="80" fill="none" stroke="#E5E7EB" stroke-width="1"/>
 </svg>

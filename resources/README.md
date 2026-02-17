@@ -5,15 +5,15 @@
 
 # Claude How To - Brand Assets
 
-Complete collection of logos, icons, and favicons for the Claude How To project. All assets use the new V2.0 design: a 12-ray organic starburst inspired by Claude's official logo, with emerald green color and educational symbolism.
+Complete collection of logos, icons, and favicons for the Claude How To project. All assets use the V3.0 design: a compass with code bracket (`>`) symbol, representing guided navigation through code — using a Black/White/Gray palette with Bright Green (#22C55E) accent.
 
 ## Directory Structure
 
 ```
 resources/
 ├── logos/
-│   ├── claude-howto-logo.svg       # Main logo - Light mode (800×200px)
-│   └── claude-howto-logo-dark.svg  # Main logo - Dark mode (800×200px)
+│   ├── claude-howto-logo.svg       # Main logo - Light mode (520×120px)
+│   └── claude-howto-logo-dark.svg  # Main logo - Dark mode (520×120px)
 ├── icons/
 │   ├── claude-howto-icon.svg       # App icon - Light mode (256×256px)
 │   └── claude-howto-icon-dark.svg  # App icon - Dark mode (256×256px)
@@ -25,16 +25,28 @@ resources/
     └── favicon-256.svg             # Favicon - 256×256px
 ```
 
+Additional assets in `assets/logo/`:
+```
+assets/logo/
+├── logo-full.svg       # Mark + wordmark (horizontal)
+├── logo-mark.svg       # Compass symbol only (120×120px)
+├── logo-wordmark.svg   # Text only
+├── logo-icon.svg       # App icon (512×512, rounded)
+├── favicon.svg         # 16×16 optimized
+├── logo-white.svg      # White version for dark backgrounds
+└── logo-black.svg      # Black monochrome version
+```
+
 ## Assets Overview
 
-### Design Concept (V2.0)
+### Design Concept (V3.0)
 
-**12-Ray Organic Starburst** inspired by Claude's official logo:
-- **12 Rays** = Knowledge radiating outward
-- **Emerald Gradient** = Primary green color (#10b981 → #059669)
-- **Mint Core** = Learning value provided
-- **Three Inner Lines** = Guides, examples, documentation
-- **Claude-Aligned** = Matches official Claude logo pattern
+**Compass with Code Bracket** — guidance meets code:
+- **Compass Ring** = Navigation, finding your way
+- **North Needle (Green)** = Direction, progress on the learning path
+- **South Needle (Black)** = Grounding, solid foundation
+- **`>` Bracket** = Terminal prompt, code, CLI context
+- **Tick Marks** = Precision, structured learning
 
 ### Logos
 
@@ -43,15 +55,15 @@ resources/
 - `logos/claude-howto-logo-dark.svg` (Dark mode)
 
 **Specifications**:
-- **Size**: 800×200 px
+- **Size**: 520×120 px
 - **Purpose**: Main header/branding logo with wordmark
 - **Usage**:
   - Website headers
-  - Marketing materials
   - README badges
+  - Marketing materials
   - Print materials
 - **Format**: SVG (fully scalable)
-- **Modes**: Light (white background) & Dark (forest background)
+- **Modes**: Light (white background) & Dark (#0A0A0A background)
 
 ### Icons
 
@@ -68,14 +80,14 @@ resources/
   - Social media thumbnails
   - Documentation headers
 - **Format**: SVG (fully scalable)
-- **Modes**: Light (white background) & Dark (with glow effect)
+- **Modes**: Light (white background) & Dark (#0A0A0A background)
 
 **Design Elements**:
-- 12-ray organic starburst (Claude-inspired)
-- Emerald green gradient rays
-- Mint gradient core (represents guide hub)
-- Three inner lines (symbolize guides/examples/docs)
-- Glow effects in dark mode
+- Compass ring with cardinal and intercardinal tick marks
+- Green north needle (direction/guidance)
+- Black south needle (foundation)
+- `>` code bracket at center (terminal/CLI)
+- Green center dot accent
 
 ### Favicons
 
@@ -90,8 +102,9 @@ Optimized versions at multiple sizes for web use:
 | `favicon-256.svg` | 256×256 px | 4x | Modern browsers, PWA icons |
 
 **Optimization Notes**:
-- Smaller sizes (16-32px) use simplified geometry
-- Larger sizes (64-256px) include additional details
+- 16px: Minimal geometry — ring, needles, chevron only
+- 32px: Adds cardinal tick marks
+- 64px+: Full detail with intercardinal ticks
 - All maintain visual consistency with main icon
 - SVG format ensures crisp display at any size
 
@@ -129,53 +142,62 @@ Optimized versions at multiple sizes for web use:
   <link rel="shortcut icon" href="/resources/favicons/favicon-256.svg">
 
   <!-- PWA manifest reference (if using manifest.json) -->
-  <meta name="theme-color" content="#0d1f0d">
+  <meta name="theme-color" content="#000000">
 </head>
 ```
 
 ## Color Palette
 
 ### Primary Colors
-- **Deep Forest**: `#0d1f0d` (Background)
-- **Emerald**: `#10b981` (Primary accent)
-- **Dark Emerald**: `#059669` (Secondary)
-- **Forest**: `#047857` (Tertiary)
+- **Black**: `#000000` (Primary text, strokes, south needle)
+- **White**: `#FFFFFF` (Light backgrounds)
+- **Gray**: `#6B7280` (Secondary text, minor tick marks)
 
-### Accent Colors
-- **Mint**: `#6ee7b7` (Highlight)
-- **Light Mint**: `#34d399` (Secondary highlight)
+### Accent Color
+- **Bright Green**: `#22C55E` (North needle, center dot, accent lines — highlights only, never as background)
+
+### Dark Mode
+- **Background**: `#0A0A0A` (Near-black)
+
+### CSS Variables
+```css
+--color-primary: #000000;
+--color-secondary: #6B7280;
+--color-accent: #22C55E;
+--color-bg-light: #FFFFFF;
+--color-bg-dark: #0A0A0A;
+```
+
+### Tailwind Config
+```js
+colors: {
+  brand: {
+    primary: '#000000',
+    secondary: '#6B7280',
+    accent: '#22C55E',
+  }
+}
+```
 
 ### Usage Guidelines
-- Use emerald for primary interactions and accents
-- Use mint for highlights and emphasis
-- Deep forest for backgrounds
-- Maintain sufficient contrast for accessibility
+- Use black for primary text and structural elements
+- Use gray for secondary/supporting elements
+- Use green **only** for highlights — needle, dots, accent lines
+- Never use green as a background color
+- Maintain WCAG AA contrast (4.5:1 minimum)
 
 ## Design Guidelines
 
 ### Logo Usage
-✅ **Do**:
-- Use on dark backgrounds
-- Scale proportionally (maintain 4:1 aspect ratio)
-- Include clear space around logo
-- Use in color as shown
-
-❌ **Don't**:
-- Change colors or gradients
-- Stretch or distort proportions
-- Use on light backgrounds without modification
-- Apply effects that obscure the design
+- Use on white or dark (#0A0A0A) backgrounds
+- Scale proportionally
+- Include clear space around logo (minimum: logo height / 2)
+- Use provided light/dark variants for appropriate backgrounds
 
 ### Icon Usage
-✅ **Do**:
 - Use at standard sizes: 16, 32, 64, 128, 256px
-- Maintain the ascending progression concept
+- Maintain the compass proportions
 - Scale proportionally
-
-❌ **Don't**:
-- Rotate or flip the icon
-- Change the color scheme
-- Use small sizes where details are lost
 
 ### Favicon Usage
 - Use appropriate size for context
@@ -185,11 +207,11 @@ Optimized versions at multiple sizes for web use:
 
 ## SVG Optimization
 
-All SVG files include:
-- Gradient definitions for smooth color transitions
-- Filter effects for depth and glow
-- Optimized stroke widths
-- Responsive design patterns
+All SVG files are flat design with no gradients or filters:
+- Clean stroke-based geometry
+- No embedded rasters
+- Optimized paths
+- Responsive viewBox
 
 For web optimization:
 ```bash
@@ -219,24 +241,26 @@ inkscape -D -z --file=favicon-256.svg --export-png=favicon-256.png
 
 ## Accessibility
 
-- All icons include clear geometric shapes
-- High contrast color ratios (WCAG AA compliant)
-- Scalable vector format works at any size
-- No text in icons (text added separately if needed)
+- High contrast color ratios (WCAG AA compliant — 4.5:1 minimum)
+- Clean geometric shapes recognizable at all sizes
+- Scalable vector format
+- No text in icons (text added separately in wordmark)
+- No red-green color dependency for meaning
 
 ## Attribution
 
-These assets are part of the Claude How To project and use Anthropic's Claude color palette and design language.
+These assets are part of the Claude How To project.
 
 **License**: MIT (see project LICENSE file)
 
 ## Version History
 
-- **v2.0** (January 2026): Claude-inspired 12-ray starburst design with dark/light mode variants
+- **v3.0** (February 2026): Compass-bracket design with Black/White/Gray + Green accent palette
+- **v2.0** (January 2026): Claude-inspired 12-ray starburst design with emerald palette
 - **v1.0** (January 2026): Original hexagon-based progression icon design
 
 ---
 
-**Last Updated**: January 2026
-**Current Version**: 2.0 (Claude-Inspired Starburst)
-**All Assets**: Production-ready SVG, fully scalable, WCAG AAA accessible
+**Last Updated**: February 2026
+**Current Version**: 3.0 (Compass-Bracket)
+**All Assets**: Production-ready SVG, fully scalable, WCAG AA accessible

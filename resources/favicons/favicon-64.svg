@@ -1,49 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="emerald" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#10b981"/>
-      <stop offset="100%" style="stop-color:#059669"/>
-    </linearGradient>
-    <linearGradient id="mint" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#6ee7b7"/>
-      <stop offset="100%" style="stop-color:#34d399"/>
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="1" result="blur"/>
-      <feFlood flood-color="#10b981" flood-opacity="0.3"/>
-      <feComposite in2="blur" operator="in"/>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
+  <!-- Favicon 64x64: Full compass detail -->
+  <circle cx="32" cy="32" r="28" fill="none" stroke="#000000" stroke-width="2"/>
 
-  <!-- White background -->
-  <circle cx="32" cy="32" r="32" fill="#ffffff"/>
+  <!-- Cardinal ticks -->
+  <line x1="32" y1="4" x2="32" y2="10" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="54" x2="32" y2="60" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="4" y1="32" x2="10" y2="32" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="54" y1="32" x2="60" y2="32" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
 
-  <!-- Starburst (8 rays for 64px) -->
-  <g transform="translate(32, 32)">
-    <!-- Ray 1 (top) -->
-    <path d="M 0,-24 Q -4,-36 0,-48 Q 4,-36 0,-24" fill="url(#emerald)" opacity="0.95"/>
-    <!-- Ray 2 (top-right) -->
-    <path d="M 17,-17 Q 20,-30 32,-40 Q 24,-24 17,-17" fill="url(#emerald)" opacity="0.92"/>
-    <!-- Ray 3 (right) -->
-    <path d="M 24,0 Q 36,-8 48,0 Q 36,8 24,0" fill="url(#emerald)" opacity="0.95"/>
-    <!-- Ray 4 (bottom-right) -->
-    <path d="M 17,17 Q 24,24 32,40 Q 20,30 17,17" fill="url(#emerald)" opacity="0.92"/>
-    <!-- Ray 5 (bottom) -->
-    <path d="M 0,24 Q -4,36 0,48 Q 4,36 0,24" fill="url(#emerald)" opacity="0.95"/>
-    <!-- Ray 6 (bottom-left) -->
-    <path d="M -17,17 Q -24,24 -32,40 Q -20,30 -17,17" fill="url(#emerald)" opacity="0.92"/>
-    <!-- Ray 7 (left) -->
-    <path d="M -24,0 Q -36,-8 -48,0 Q -36,8 -24,0" fill="url(#emerald)" opacity="0.95"/>
-    <!-- Ray 8 (top-left) -->
-    <path d="M -17,-17 Q -20,-30 -32,-40 Q -24,-24 -17,-17" fill="url(#emerald)" opacity="0.92"/>
+  <!-- Intercardinal ticks -->
+  <line x1="12.2" y1="12.2" x2="16" y2="16" stroke="#6B7280" stroke-width="1" stroke-linecap="round"/>
+  <line x1="48" y1="16" x2="51.8" y2="12.2" stroke="#6B7280" stroke-width="1" stroke-linecap="round"/>
+  <line x1="12.2" y1="51.8" x2="16" y2="48" stroke="#6B7280" stroke-width="1" stroke-linecap="round"/>
+  <line x1="48" y1="48" x2="51.8" y2="51.8" stroke="#6B7280" stroke-width="1" stroke-linecap="round"/>
 
-    <!-- Center core -->
-    <circle cx="0" cy="0" r="10" fill="#10b981" filter="url(#glow)"/>
-    <circle cx="0" cy="0" r="6" fill="url(#mint)"/>
-  </g>
+  <!-- North needle (green) -->
+  <polygon points="32,11 29,31 32,28 35,31" fill="#22C55E"/>
+
+  <!-- South needle (dark) -->
+  <polygon points="32,53 29,33 32,36 35,33" fill="#000000"/>
+
+  <!-- > bracket -->
+  <polyline points="27,24 35,32 27,40" fill="none" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Center dot -->
+  <circle cx="32" cy="32" r="1.8" fill="#22C55E"/>
 </svg>
