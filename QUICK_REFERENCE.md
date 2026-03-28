@@ -3,71 +3,71 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code Examples - Quick Reference Card
+# Claude Code サンプル集 - クイックリファレンスカード
 
-## 🚀 Installation Quick Commands
+## 🚀 インストールクイックコマンド
 
 ### Slash Commands
 ```bash
-# Install all
+# すべてインストール
 cp 01-slash-commands/*.md .claude/commands/
 
-# Install specific
+# 特定のものをインストール
 cp 01-slash-commands/optimize.md .claude/commands/
 ```
 
 ### Memory
 ```bash
-# Project memory
+# プロジェクトmemory
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 
-# Personal memory
+# 個人memory
 cp 02-memory/personal-CLAUDE.md ~/.claude/CLAUDE.md
 ```
 
 ### Skills
 ```bash
-# Personal skills
+# 個人スキル
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# Project skills
+# プロジェクトスキル
 cp -r 03-skills/code-review .claude/skills/
 ```
 
 ### Subagents
 ```bash
-# Install all
+# すべてインストール
 cp 04-subagents/*.md .claude/agents/
 
-# Install specific
+# 特定のものをインストール
 cp 04-subagents/code-reviewer.md .claude/agents/
 ```
 
 ### MCP
 ```bash
-# Set credentials
+# 認証情報を設定
 export GITHUB_TOKEN="your_token"
 export DATABASE_URL="postgresql://..."
 
-# Install config (project scope)
+# 設定をインストール (プロジェクトスコープ)
 cp 05-mcp/github-mcp.json .mcp.json
 
-# Or user scope: add to ~/.claude.json
+# またはユーザースコープ: ~/.claude.json に追加
 ```
 
 ### Hooks
 ```bash
-# Install hooks
+# hooksをインストール
 mkdir -p ~/.claude/hooks
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 
-# Configure in settings (~/.claude/settings.json)
+# settingsで設定 (~/.claude/settings.json)
 ```
 
 ### Plugins
 ```bash
-# Install from examples (if published)
+# サンプルからインストール (公開済みの場合)
 /plugin install pr-review
 /plugin install devops-automation
 /plugin install documentation
@@ -75,87 +75,87 @@ chmod +x ~/.claude/hooks/*.sh
 
 ### Checkpoints
 ```bash
-# Checkpoints are created automatically with every user prompt
-# To rewind, press Esc twice or use:
+# Checkpointsはユーザーの各プロンプトで自動作成される
+# 巻き戻すには Esc を2回押すか以下を使用:
 /rewind
 
-# Then choose: Restore code and conversation, Restore conversation,
-# Restore code, Summarize from here, or Never mind
+# 選択肢: コードと会話を復元、会話を復元、
+# コードを復元、ここからまとめる、キャンセル
 ```
 
 ### Advanced Features
 ```bash
-# Configure in settings (.claude/settings.json)
-# See 09-advanced-features/config-examples.json
+# settingsで設定 (.claude/settings.json)
+# 09-advanced-features/config-examples.json を参照
 
 # Planning mode
-/plan Task description
+/plan タスクの説明
 
-# Permission modes (use --permission-mode flag)
-# default        - Ask for approval on risky actions
-# acceptEdits    - Auto-accept file edits, ask for others
-# plan           - Read-only analysis, no modifications
-# dontAsk        - Accept all actions except risky ones
-# auto           - Background classifier decides permissions automatically
-# bypassPermissions - Accept all actions (requires --dangerously-skip-permissions)
+# パーミッションモード (--permission-mode フラグを使用)
+# default        - リスクのある操作は承認を求める
+# acceptEdits    - ファイル編集を自動承認、その他は確認
+# plan           - 読み取り専用分析、変更なし
+# dontAsk        - リスクの高いもの以外はすべての操作を承認
+# auto           - バックグラウンド分類器が自動的にパーミッションを決定
+# bypassPermissions - すべての操作を承認 (--dangerously-skip-permissions が必要)
 
-# Session management
-/resume                # Resume a previous conversation
-/rename "name"         # Name the current session
-/fork                  # Fork the current session
-claude -c              # Continue most recent conversation
-claude -r "session"    # Resume session by name/ID
+# セッション管理
+/resume                # 以前の会話を再開
+/rename "名前"         # 現在のセッションに名前を付ける
+/fork                  # 現在のセッションをフォーク
+claude -c              # 最近の会話を続ける
+claude -r "session"    # 名前/IDでセッションを再開
 ```
 
 ---
 
-## 📋 Feature Cheat Sheet
+## 📋 機能チートシート
 
-| Feature | Install Path | Usage |
+| 機能 | インストールパス | 使い方 |
 |---------|-------------|-------|
-| **Slash Commands (55+)** | `.claude/commands/*.md` | `/command-name` |
-| **Memory** | `./CLAUDE.md` | Auto-loaded |
-| **Skills** | `.claude/skills/*/SKILL.md` | Auto-invoked |
-| **Subagents** | `.claude/agents/*.md` | Auto-delegated |
-| **MCP** | `.mcp.json` (project) or `~/.claude.json` (user) | `/mcp__server__action` |
-| **Hooks (25 events)** | `~/.claude/hooks/*.sh` | Event-triggered (4 types) |
-| **Plugins** | Via `/plugin install` | Bundles all |
-| **Checkpoints** | Built-in | `Esc+Esc` or `/rewind` |
-| **Planning Mode** | Built-in | `/plan <task>` |
-| **Permission Modes (6)** | Built-in | `--allowedTools`, `--permission-mode` |
-| **Sessions** | Built-in | `/session <command>` |
-| **Background Tasks** | Built-in | Run in background |
-| **Remote Control** | Built-in | WebSocket API |
-| **Web Sessions** | Built-in | `claude web` |
-| **Git Worktrees** | Built-in | `/worktree` |
-| **Auto Memory** | Built-in | Auto-saves to CLAUDE.md |
-| **Task List** | Built-in | `/task list` |
-| **Bundled Skills (5)** | Built-in | `/simplify`, `/loop`, `/claude-api`, `/voice`, `/browse` |
+| **Slash Commands (55以上)** | `.claude/commands/*.md` | `/コマンド名` |
+| **Memory** | `./CLAUDE.md` | 自動読み込み |
+| **Skills** | `.claude/skills/*/SKILL.md` | 自動呼び出し |
+| **Subagents** | `.claude/agents/*.md` | 自動委任 |
+| **MCP** | `.mcp.json` (プロジェクト) または `~/.claude.json` (ユーザー) | `/mcp__server__action` |
+| **Hooks (25イベント)** | `~/.claude/hooks/*.sh` | イベントトリガー (4タイプ) |
+| **Plugins** | `/plugin install` 経由 | すべてをバンドル |
+| **Checkpoints** | 組み込み | `Esc+Esc` または `/rewind` |
+| **Planning Mode** | 組み込み | `/plan <タスク>` |
+| **Permission Modes (6種類)** | 組み込み | `--allowedTools`, `--permission-mode` |
+| **Sessions** | 組み込み | `/session <コマンド>` |
+| **Background Tasks** | 組み込み | バックグラウンドで実行 |
+| **Remote Control** | 組み込み | WebSocket API |
+| **Web Sessions** | 組み込み | `claude web` |
+| **Git Worktrees** | 組み込み | `/worktree` |
+| **Auto Memory** | 組み込み | CLAUDE.mdに自動保存 |
+| **Task List** | 組み込み | `/task list` |
+| **バンドルSkills (5種類)** | 組み込み | `/simplify`, `/loop`, `/claude-api`, `/voice`, `/browse` |
 
 ---
 
-## 🎯 Common Use Cases
+## 🎯 よくあるユースケース
 
-### Code Review
+### コードレビュー
 ```bash
-# Method 1: Slash command
+# 方法1: Slash command
 cp 01-slash-commands/optimize.md .claude/commands/
-# Use: /optimize
+# 使い方: /optimize
 
-# Method 2: Subagent
+# 方法2: Subagent
 cp 04-subagents/code-reviewer.md .claude/agents/
-# Use: Auto-delegated
+# 使い方: 自動委任
 
-# Method 3: Skill
+# 方法3: Skill
 cp -r 03-skills/code-review ~/.claude/skills/
-# Use: Auto-invoked
+# 使い方: 自動呼び出し
 
-# Method 4: Plugin (best)
+# 方法4: Plugin (ベスト)
 /plugin install pr-review
-# Use: /review-pr
+# 使い方: /review-pr
 ```
 
-### Documentation
+### ドキュメント生成
 ```bash
 # Slash command
 cp 01-slash-commands/generate-api-docs.md .claude/commands/
@@ -166,140 +166,140 @@ cp 04-subagents/documentation-writer.md .claude/agents/
 # Skill
 cp -r 03-skills/doc-generator ~/.claude/skills/
 
-# Plugin (complete solution)
+# Plugin (完全なソリューション)
 /plugin install documentation
 ```
 
 ### DevOps
 ```bash
-# Complete plugin
+# 完全なplugin
 /plugin install devops-automation
 
-# Commands: /deploy, /rollback, /status, /incident
+# コマンド: /deploy, /rollback, /status, /incident
 ```
 
-### Team Standards
+### チーム標準
 ```bash
-# Project memory
+# プロジェクトmemory
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 
-# Edit for your team
+# チーム用に編集
 vim CLAUDE.md
 ```
 
-### Automation & Hooks
+### 自動化とHooks
 ```bash
-# Install hooks (25 events, 4 types: command, http, prompt, agent)
+# hooksをインストール (25イベント、4タイプ: command, http, prompt, agent)
 mkdir -p ~/.claude/hooks
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 
-# Examples:
-# - Pre-commit tests: pre-commit.sh
-# - Auto-format code: format-code.sh
-# - Security scanning: security-scan.sh
+# 例:
+# - コミット前テスト: pre-commit.sh
+# - コードの自動フォーマット: format-code.sh
+# - セキュリティスキャン: security-scan.sh
 
-# Auto Mode for fully autonomous workflows
-claude --enable-auto-mode -p "Refactor and test the auth module"
-# Or cycle modes interactively with Shift+Tab
+# 完全自律ワークフローのAuto Mode
+claude --enable-auto-mode -p "authモジュールをリファクタリングしてテストして"
+# またはShift+Tabでモードを対話的に切り替え
 ```
 
-### Safe Refactoring
+### 安全なリファクタリング
 ```bash
-# Checkpoints are created automatically before each prompt
-# Try refactoring
-# If it works: continue
-# If it fails: press Esc+Esc or use /rewind to go back
+# Checkpointは各プロンプトの前に自動作成される
+# リファクタリングを試みる
+# 成功: 続ける
+# 失敗: Esc+Esc を押すか /rewind で戻る
 ```
 
-### Complex Implementation
+### 複雑な実装
 ```bash
-# Use planning mode
-/plan Implement user authentication system
+# Planning modeを使用
+/plan ユーザー認証システムの実装
 
-# Claude creates detailed plan
-# Review and approve
-# Claude implements systematically
+# Claudeが詳細な計画を作成
+# レビューして承認
+# Claudeが体系的に実装
 ```
 
-### CI/CD Integration
+### CI/CD統合
 ```bash
-# Run in headless mode (non-interactive)
-claude -p "Run all tests and generate report"
+# ヘッドレスモードで実行 (非インタラクティブ)
+claude -p "すべてのテストを実行してレポートを生成して"
 
-# With permission mode for CI
-claude -p "Run tests" --permission-mode dontAsk
+# CI用パーミッションモード付き
+claude -p "テストを実行して" --permission-mode dontAsk
 
-# With Auto Mode for fully autonomous CI tasks
-claude --enable-auto-mode -p "Run tests and fix failures"
+# 完全自律CI タスクのAuto Mode付き
+claude --enable-auto-mode -p "テストを実行して失敗を修正して"
 
-# With hooks for automation
-# See 09-advanced-features/README.md
+# 自動化用hooksと組み合わせ
+# 09-advanced-features/README.md を参照
 ```
 
-### Learning & Experimentation
+### 学習と実験
 ```bash
-# Use plan mode for safe analysis
+# 安全な分析のためにplan modeを使用
 claude --permission-mode plan
 
-# Experiment safely - checkpoints are created automatically
-# If you need to rewind: press Esc+Esc or use /rewind
+# 安全に実験 — checkpointは自動作成される
+# 巻き戻す必要があれば: Esc+Esc を押すか /rewind を使用
 ```
 
 ### Agent Teams
 ```bash
-# Enable agent teams
+# agent teamsを有効化
 export CLAUDE_AGENT_TEAMS=1
 
-# Or in settings.json
+# またはsettings.jsonで
 { "agentTeams": { "enabled": true } }
 
-# Start with: "Implement feature X using a team approach"
+# 開始: "チームアプローチで機能Xを実装して"
 ```
 
-### Scheduled Tasks
+### スケジュールタスク
 ```bash
-# Run a command every 5 minutes
+# 5分ごとにコマンドを実行
 /loop 5m /check-status
 
-# One-time reminder
-/loop 30m "remind me to check the deploy"
+# 1回限りのリマインダー
+/loop 30m "デプロイを確認するように思い出させて"
 ```
 
 ---
 
-## 📁 File Locations Reference
+## 📁 ファイル場所リファレンス
 
 ```
-Your Project/
+プロジェクト/
 ├── .claude/
-│   ├── commands/              # Slash commands go here
-│   ├── agents/                # Subagents go here
-│   ├── skills/                # Project skills go here
-│   └── settings.json          # Project settings (hooks, etc.)
-├── .mcp.json                  # MCP configuration (project scope)
-├── CLAUDE.md                  # Project memory
+│   ├── commands/              # Slash commandsはここに
+│   ├── agents/                # Subagentsはここに
+│   ├── skills/                # プロジェクトskillsはここに
+│   └── settings.json          # プロジェクト設定 (hooks等)
+├── .mcp.json                  # MCP設定 (プロジェクトスコープ)
+├── CLAUDE.md                  # プロジェクトmemory
 └── src/
     └── api/
-        └── CLAUDE.md          # Directory-specific memory
+        └── CLAUDE.md          # ディレクトリ固有のmemory
 
-User Home/
+ユーザーホーム/
 ├── .claude/
-│   ├── commands/              # Personal commands
-│   ├── agents/                # Personal agents
-│   ├── skills/                # Personal skills
-│   ├── hooks/                 # Hook scripts
-│   ├── settings.json          # User settings
-│   ├── managed-settings.d/    # Managed settings (enterprise/org)
-│   └── CLAUDE.md              # Personal memory
-└── .claude.json               # Personal MCP config (user scope)
+│   ├── commands/              # 個人コマンド
+│   ├── agents/                # 個人エージェント
+│   ├── skills/                # 個人スキル
+│   ├── hooks/                 # Hookスクリプト
+│   ├── settings.json          # ユーザー設定
+│   ├── managed-settings.d/    # 管理設定 (エンタープライズ/組織)
+│   └── CLAUDE.md              # 個人memory
+└── .claude.json               # 個人MCP設定 (ユーザースコープ)
 ```
 
 ---
 
-## 🔍 Finding Examples
+## 🔍 サンプルを探す
 
-### By Category
+### カテゴリ別
 - **Slash Commands**: `01-slash-commands/`
 - **Memory**: `02-memory/`
 - **Skills**: `03-skills/`
@@ -311,70 +311,70 @@ User Home/
 - **Advanced Features**: `09-advanced-features/`
 - **CLI**: `10-cli/`
 
-### By Use Case
-- **Performance**: `01-slash-commands/optimize.md`
-- **Security**: `04-subagents/secure-reviewer.md`
-- **Testing**: `04-subagents/test-engineer.md`
-- **Docs**: `03-skills/doc-generator/`
+### ユースケース別
+- **パフォーマンス**: `01-slash-commands/optimize.md`
+- **セキュリティ**: `04-subagents/secure-reviewer.md`
+- **テスト**: `04-subagents/test-engineer.md`
+- **ドキュメント**: `03-skills/doc-generator/`
 - **DevOps**: `07-plugins/devops-automation/`
 
-### By Complexity
-- **Simple**: Slash commands
-- **Medium**: Subagents, Memory
-- **Advanced**: Skills, Hooks
-- **Complete**: Plugins
+### 複雑さ別
+- **シンプル**: Slash commands
+- **中程度**: Subagents、Memory
+- **上級**: Skills、Hooks
+- **完全**: Plugins
 
 ---
 
-## 🎓 Learning Path
+## 🎓 学習パス
 
-### Day 1
+### 1日目
 ```bash
-# Read overview
+# 概要を読む
 cat README.md
 
-# Install a command
+# コマンドをインストール
 cp 01-slash-commands/optimize.md .claude/commands/
 
-# Try it
+# 試してみる
 /optimize
 ```
 
-### Day 2-3
+### 2〜3日目
 ```bash
-# Set up memory
+# memoryをセットアップ
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 vim CLAUDE.md
 
-# Install subagent
+# subagentをインストール
 cp 04-subagents/code-reviewer.md .claude/agents/
 ```
 
-### Day 4-5
+### 4〜5日目
 ```bash
-# Set up MCP
+# MCPをセットアップ
 export GITHUB_TOKEN="your_token"
 cp 05-mcp/github-mcp.json .mcp.json
 
-# Try MCP commands
+# MCPコマンドを試す
 /mcp__github__list_prs
 ```
 
-### Week 2
+### 2週目
 ```bash
-# Install skill
+# skillをインストール
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# Let it auto-invoke
-# Just say: "Review this code for issues"
+# 自動呼び出しさせる
+# 単に: "このコードの問題点をレビューして"
 ```
 
-### Week 3+
+### 3週目以降
 ```bash
-# Install complete plugin
+# 完全なpluginをインストール
 /plugin install pr-review
 
-# Use bundled features
+# バンドル機能を使う
 /review-pr
 /check-security
 /check-tests
@@ -382,125 +382,125 @@ cp -r 03-skills/code-review ~/.claude/skills/
 
 ---
 
-## New Features (March 2026)
+## 新機能 (2026年3月)
 
-| Feature | Description | Usage |
+| 機能 | 説明 | 使い方 |
 |---------|-------------|-------|
-| **Auto Mode** | Fully autonomous operation with background classifier | `--enable-auto-mode` flag, `Shift+Tab` to cycle modes |
-| **Channels** | Discord and Telegram integration | `--channels` flag, Discord/Telegram bots |
-| **Voice Dictation** | Speak commands and context to Claude | `/voice` command |
-| **Hooks (25 events)** | Expanded hook system with 4 types | command, http, prompt, agent hook types |
-| **MCP Elicitation** | MCP servers can request user input at runtime | Auto-prompted when server needs clarification |
-| **WebSocket MCP** | WebSocket transport for MCP connections | Configure in `.mcp.json` with `ws://` URLs |
-| **Plugin LSP** | Language Server Protocol support for plugins | `userConfig`, `${CLAUDE_PLUGIN_DATA}` variable |
-| **Remote Control** | Control Claude Code via WebSocket API | `claude --remote` for external integrations |
-| **Web Sessions** | Browser-based Claude Code interface | `claude web` to launch |
-| **Desktop App** | Native desktop application | Download from claude.ai/download |
-| **Task List** | Manage background tasks | `/task list`, `/task status <id>` |
-| **Auto Memory** | Automatic memory saving from conversations | Claude auto-saves key context to CLAUDE.md |
-| **Git Worktrees** | Isolated workspaces for parallel development | `/worktree` to create isolated workspace |
-| **Model Selection** | Switch between Sonnet 4.6 and Opus 4.6 | `/model` or `--model` flag |
-| **Agent Teams** | Coordinate multiple agents on tasks | Enable with `CLAUDE_AGENT_TEAMS=1` env var |
-| **Scheduled Tasks** | Recurring tasks with `/loop` | `/loop 5m /command` or CronCreate tool |
-| **Chrome Integration** | Browser automation | `--chrome` flag or `/chrome` command |
-| **Keyboard Customization** | Custom keybindings | `/keybindings` command |
+| **Auto Mode** | バックグラウンド分類器による完全自律操作 | `--enable-auto-mode` フラグ、`Shift+Tab` でモード切り替え |
+| **Channels** | DiscordとTelegram連携 | `--channels` フラグ、Discord/Telegram bot |
+| **Voice Dictation** | Claudeにコマンドとコンテキストを音声入力 | `/voice` コマンド |
+| **Hooks (25イベント)** | 4タイプに拡張されたhookシステム | command, http, prompt, agent hookタイプ |
+| **MCP Elicitation** | MCPサーバーが実行時にユーザー入力を要求できる | サーバーが明確化を必要とする際に自動プロンプト |
+| **WebSocket MCP** | MCP接続のWebSocketトランスポート | `.mcp.json` に `ws://` URLで設定 |
+| **Plugin LSP** | pluginsのLanguage Server Protocolサポート | `userConfig`、`${CLAUDE_PLUGIN_DATA}` 変数 |
+| **Remote Control** | WebSocket APIでClaude Codeを制御 | 外部統合のために `claude --remote` |
+| **Web Sessions** | ブラウザベースのClaude Codeインターフェース | `claude web` で起動 |
+| **Desktop App** | ネイティブデスクトップアプリケーション | claude.ai/download からダウンロード |
+| **Task List** | バックグラウンドタスクを管理 | `/task list`、`/task status <id>` |
+| **Auto Memory** | 会話から自動的にmemoryを保存 | ClaudeがCLAUDE.mdに重要なコンテキストを自動保存 |
+| **Git Worktrees** | 並列開発のための独立したワークスペース | `/worktree` で独立したワークスペースを作成 |
+| **Model Selection** | Sonnet 4.6とOpus 4.6を切り替え | `/model` または `--model` フラグ |
+| **Agent Teams** | 複数エージェントをタスクで調整 | `CLAUDE_AGENT_TEAMS=1` 環境変数で有効化 |
+| **Scheduled Tasks** | `/loop` による繰り返しタスク | `/loop 5m /command` または CronCreateツール |
+| **Chrome Integration** | ブラウザ自動化 | `--chrome` フラグまたは `/chrome` コマンド |
+| **Keyboard Customization** | カスタムキーバインディング | `/keybindings` コマンド |
 
 ---
 
-## Tips & Tricks
+## ヒントとコツ
 
-### Customization
-- Start with examples as-is
-- Modify to fit your needs
-- Test before sharing with team
-- Version control your configurations
+### カスタマイズ
+- まずサンプルをそのまま使う
+- 自分のニーズに合わせて変更する
+- チームと共有する前にテストする
+- 設定をバージョン管理する
 
-### Best Practices
-- Use memory for team standards
-- Use plugins for complete workflows
-- Use subagents for complex tasks
-- Use slash commands for quick tasks
+### ベストプラクティス
+- チーム標準にmemoryを使う
+- 完全なワークフローにpluginsを使う
+- 複雑なタスクにsubagentsを使う
+- クイックタスクにslash commandsを使う
 
-### Troubleshooting
+### トラブルシューティング
 ```bash
-# Check file locations
+# ファイルの場所を確認
 ls -la .claude/commands/
 ls -la .claude/agents/
 
-# Verify YAML syntax
+# YAML構文を確認
 head -20 .claude/agents/code-reviewer.md
 
-# Test MCP connection
+# MCP接続をテスト
 echo $GITHUB_TOKEN
 ```
 
 ---
 
-## 📊 Feature Matrix
+## 📊 機能マトリクス
 
-| Need | Use This | Example |
+| ニーズ | 使うもの | サンプル |
 |------|----------|---------|
-| Quick shortcut | Slash Command (55+) | `01-slash-commands/optimize.md` |
-| Team standards | Memory | `02-memory/project-CLAUDE.md` |
-| Auto workflow | Skill | `03-skills/code-review/` |
-| Specialized task | Subagent | `04-subagents/code-reviewer.md` |
-| External data | MCP (+ Elicitation, WebSocket) | `05-mcp/github-mcp.json` |
-| Event automation | Hook (25 events, 4 types) | `06-hooks/pre-commit.sh` |
-| Complete solution | Plugin (+ LSP support) | `07-plugins/pr-review/` |
-| Safe experiment | Checkpoint | `08-checkpoints/checkpoint-examples.md` |
-| Fully autonomous | Auto Mode | `--enable-auto-mode` or `Shift+Tab` |
-| Chat integrations | Channels | `--channels` (Discord, Telegram) |
-| CI/CD pipeline | CLI | `10-cli/README.md` |
+| クイックショートカット | Slash Command (55以上) | `01-slash-commands/optimize.md` |
+| チーム標準 | Memory | `02-memory/project-CLAUDE.md` |
+| 自動ワークフロー | Skill | `03-skills/code-review/` |
+| 専門的なタスク | Subagent | `04-subagents/code-reviewer.md` |
+| 外部データ | MCP (+ Elicitation、WebSocket) | `05-mcp/github-mcp.json` |
+| イベント自動化 | Hook (25イベント、4タイプ) | `06-hooks/pre-commit.sh` |
+| 完全なソリューション | Plugin (+ LSPサポート) | `07-plugins/pr-review/` |
+| 安全な実験 | Checkpoint | `08-checkpoints/checkpoint-examples.md` |
+| 完全自律 | Auto Mode | `--enable-auto-mode` または `Shift+Tab` |
+| チャット統合 | Channels | `--channels` (Discord、Telegram) |
+| CI/CDパイプライン | CLI | `10-cli/README.md` |
 
 ---
 
-## 🔗 Quick Links
+## 🔗 クイックリンク
 
-- **Main Guide**: `README.md`
-- **Complete Index**: `INDEX.md`
-- **Summary**: `EXAMPLES_SUMMARY.md`
-- **Original Guide**: `claude_concepts_guide.md`
-
----
-
-## 📞 Common Questions
-
-**Q: Which should I use?**
-A: Start with slash commands, add features as needed.
-
-**Q: Can I mix features?**
-A: Yes! They work together. Memory + Commands + MCP = powerful.
-
-**Q: How do I share with team?**
-A: Commit `.claude/` directory to git.
-
-**Q: What about secrets?**
-A: Use environment variables, never hardcode.
-
-**Q: Can I modify examples?**
-A: Absolutely! They're templates to customize.
+- **メインガイド**: `README.md`
+- **完全インデックス**: `INDEX.md`
+- **サマリー**: `EXAMPLES_SUMMARY.md`
+- **オリジナルガイド**: `claude_concepts_guide.md`
 
 ---
 
-## ✅ Checklist
+## 📞 よくある質問
 
-Getting started checklist:
+**Q: どれを使えばいい？**
+A: slash commandsから始めて、必要に応じて機能を追加する。
 
-- [ ] Read `README.md`
-- [ ] Install 1 slash command
-- [ ] Try the command
-- [ ] Create project `CLAUDE.md`
-- [ ] Install 1 subagent
-- [ ] Set up 1 MCP integration
-- [ ] Install 1 skill
-- [ ] Try a complete plugin
-- [ ] Customize for your needs
-- [ ] Share with team
+**Q: 機能を組み合わせられる？**
+A: はい！一緒に使えます。Memory + Commands + MCP = 強力。
+
+**Q: チームと共有するには？**
+A: `.claude/` ディレクトリをgitにコミットする。
+
+**Q: シークレットは？**
+A: 環境変数を使う、絶対にハードコードしない。
+
+**Q: サンプルを変更できる？**
+A: もちろん！カスタマイズするためのテンプレートです。
 
 ---
 
-**Quick Start**: `cat README.md`
+## ✅ チェックリスト
 
-**Full Index**: `cat INDEX.md`
+はじめにやることチェックリスト:
 
-**This Card**: Keep it handy for quick reference!
+- [ ] `README.md` を読む
+- [ ] slash commandを1つインストール
+- [ ] コマンドを試す
+- [ ] プロジェクト用 `CLAUDE.md` を作成
+- [ ] subagentを1つインストール
+- [ ] MCP統合を1つセットアップ
+- [ ] skillを1つインストール
+- [ ] 完全なpluginを試す
+- [ ] 自分のニーズにカスタマイズ
+- [ ] チームと共有
+
+---
+
+**クイックスタート**: `cat README.md`
+
+**完全インデックス**: `cat INDEX.md`
+
+**このカード**: クイックリファレンスとして手元に置いておこう！

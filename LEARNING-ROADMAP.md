@@ -3,74 +3,74 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# 📚 Claude Code Learning Roadmap
+# 📚 Claude Code 学習ロードマップ
 
-**New to Claude Code?** This guide helps you master Claude Code features at your own pace. Whether you're a complete beginner or an experienced developer, start with the self-assessment quiz below to find the right path for you.
+**Claude Codeが初めて？** このガイドは自分のペースでClaude Codeの機能をマスターするためのものです。完全な初心者でも経験豊富な開発者でも、まず以下の自己評価クイズで自分に合ったパスを見つけましょう。
 
 ---
 
-## 🧭 Find Your Level
+## 🧭 自分のレベルを確認する
 
-Not everyone starts from the same place. Take this quick self-assessment to find the right entry point.
+スタート地点は人それぞれです。このクイックセルフアセスメントで適切な入口を見つけましょう。
 
-**Answer these questions honestly:**
+**以下の質問に正直に答えてください:**
 
-- [ ] I can start Claude Code and have a conversation (`claude`)
-- [ ] I have created or edited a CLAUDE.md file
-- [ ] I have used at least 3 built-in slash commands (e.g., /help, /compact, /model)
-- [ ] I have created a custom slash command or skill (SKILL.md)
-- [ ] I have configured an MCP server (e.g., GitHub, database)
-- [ ] I have set up hooks in ~/.claude/settings.json
-- [ ] I have created or used custom subagents (.claude/agents/)
-- [ ] I have used print mode (`claude -p`) for scripting or CI/CD
+- [ ] Claude Codeを起動して会話できる (`claude`)
+- [ ] CLAUDE.mdファイルを作成または編集したことがある
+- [ ] 組み込みslash commandsを3つ以上使ったことがある (例: /help, /compact, /model)
+- [ ] カスタムslash commandまたはskill (SKILL.md) を作成したことがある
+- [ ] MCPサーバーを設定したことがある (例: GitHub, データベース)
+- [ ] ~/.claude/settings.json にhooksを設定したことがある
+- [ ] カスタムsubagentsを作成または使ったことがある (.claude/agents/)
+- [ ] スクリプティングやCI/CDにプリントモード (`claude -p`) を使ったことがある
 
-**Your Level:**
+**あなたのレベル:**
 
-| Checks | Level | Start At | Time to Complete |
+| チェック数 | レベル | 始める場所 | 所要時間 |
 |--------|-------|----------|------------------|
-| 0-2 | **Level 1: Beginner** — Getting Started | [Milestone 1A](#milestone-1a-first-commands--memory) | ~3 hours |
-| 3-5 | **Level 2: Intermediate** — Building Workflows | [Milestone 2A](#milestone-2a-automation-skills--hooks) | ~5 hours |
-| 6-8 | **Level 3: Advanced** — Power User & Team Lead | [Milestone 3A](#milestone-3a-advanced-features) | ~5 hours |
+| 0〜2 | **Level 1: 初心者** — 入門 | [Milestone 1A](#milestone-1a-最初のコマンドとmemory) | 約3時間 |
+| 3〜5 | **Level 2: 中級者** — ワークフロー構築 | [Milestone 2A](#milestone-2a-自動化skillshooks) | 約5時間 |
+| 6〜8 | **Level 3: 上級者** — パワーユーザー＆チームリード | [Milestone 3A](#milestone-3a-高度な機能) | 約5時間 |
 
-> **Tip**: If you're unsure, start one level lower. It's better to review familiar material quickly than to miss foundational concepts.
+> **ヒント**: 迷ったら1つ下のレベルから始めましょう。知っている内容を素早く復習する方が、基礎的な概念を見逃すよりも良いです。
 
-> **Interactive version**: Run `/self-assessment` in Claude Code for a guided, interactive quiz that scores your proficiency across all 10 feature areas and generates a personalized learning path.
-
----
-
-## 🎯 Learning Philosophy
-
-The folders in this repository are numbered in **recommended learning order** based on three key principles:
-
-1. **Dependencies** - Foundational concepts come first
-2. **Complexity** - Easier features before advanced ones
-3. **Frequency of Use** - Most common features taught early
-
-This approach ensures you build a solid foundation while gaining immediate productivity benefits.
+> **インタラクティブ版**: Claude Codeで `/self-assessment` を実行すると、全10機能エリアにわたる熟練度をスコアリングしパーソナライズされた学習パスを生成するガイド付きインタラクティブクイズが受けられます。
 
 ---
 
-## 🗺️ Your Learning Path
+## 🎯 学習の考え方
+
+このリポジトリのフォルダは3つの主要な原則に基づいた**推奨学習順序**に番号が付けられています:
+
+1. **依存関係** — 基礎的な概念が先
+2. **複雑さ** — 簡単な機能から高度な機能へ
+3. **使用頻度** — 最も頻繁に使う機能を早めに学習
+
+このアプローチにより、即時の生産性向上を得ながら確固たる基礎を構築できます。
+
+---
+
+## 🗺️ 学習パス
 
 ```mermaid
 graph TD
-    Q["🧭 Self-Assessment Quiz<br/>Find Your Level"] --> L1
+    Q["🧭 自己評価クイズ<br/>レベルを確認"] --> L1
     Q --> L2
     Q --> L3
 
-    subgraph L1["🟢 Level 1: Beginner — Getting Started"]
+    subgraph L1["🟢 Level 1: 初心者 — 入門"]
         direction LR
-        A["1A: First Commands & Memory<br/>Slash Commands + Memory"] --> B["1B: Safe Exploration<br/>Checkpoints + CLI Basics"]
+        A["1A: 最初のコマンドとMemory<br/>Slash Commands + Memory"] --> B["1B: 安全な探索<br/>Checkpoints + CLI基礎"]
     end
 
-    subgraph L2["🔵 Level 2: Intermediate — Building Workflows"]
+    subgraph L2["🔵 Level 2: 中級者 — ワークフロー構築"]
         direction LR
-        C["2A: Automation<br/>Skills + Hooks"] --> D["2B: Integration<br/>MCP + Subagents"]
+        C["2A: 自動化<br/>Skills + Hooks"] --> D["2B: 統合<br/>MCP + Subagents"]
     end
 
-    subgraph L3["🔴 Level 3: Advanced — Power User"]
+    subgraph L3["🔴 Level 3: 上級者 — パワーユーザー"]
         direction LR
-        E["3A: Advanced Features<br/>Planning + Permissions"] --> F["3B: Team & Distribution<br/>Plugins + CLI Mastery"]
+        E["3A: 高度な機能<br/>Planning + Permissions"] --> F["3B: チームと配布<br/>Plugins + CLI完全習得"]
     end
 
     L1 --> L2
@@ -85,174 +85,174 @@ graph TD
     style F fill:#B71C1C,color:#fff
 ```
 
-**Color Legend:**
-- 💜 Purple: Self-Assessment Quiz
-- 🟢 Green: Level 1 — Beginner path
-- 🔵 Blue / 🟡 Gold: Level 2 — Intermediate path
-- 🔴 Red: Level 3 — Advanced path
+**カラー凡例:**
+- 💜 紫: 自己評価クイズ
+- 🟢 緑: Level 1 — 初心者パス
+- 🔵 青 / 🟡 金: Level 2 — 中級者パス
+- 🔴 赤: Level 3 — 上級者パス
 
 ---
 
-## 📊 Complete Roadmap Table
+## 📊 完全ロードマップ表
 
-| Step | Feature | Complexity | Time | Level | Dependencies | Why Learn This | Key Benefits |
+| ステップ | 機能 | 複雑さ | 時間 | レベル | 前提条件 | 学ぶ理由 | 主なメリット |
 |------|---------|-----------|------|-------|--------------|----------------|--------------|
-| **1** | [Slash Commands](01-slash-commands/) | ⭐ Beginner | 30 min | Level 1 | None | Quick productivity wins (55+ built-in + 5 bundled skills) | Instant automation, team standards |
-| **2** | [Memory](02-memory/) | ⭐⭐ Beginner+ | 45 min | Level 1 | None | Essential for all features | Persistent context, preferences |
-| **3** | [Checkpoints](08-checkpoints/) | ⭐⭐ Intermediate | 45 min | Level 1 | Session management | Safe exploration | Experimentation, recovery |
-| **4** | [CLI Basics](10-cli/) | ⭐⭐ Beginner+ | 30 min | Level 1 | None | Core CLI usage | Interactive & print mode |
-| **5** | [Skills](03-skills/) | ⭐⭐ Intermediate | 1 hour | Level 2 | Slash Commands | Automatic expertise | Reusable capabilities, consistency |
-| **6** | [Hooks](06-hooks/) | ⭐⭐ Intermediate | 1 hour | Level 2 | Tools, Commands | Workflow automation (25 events, 4 types) | Validation, quality gates |
-| **7** | [MCP](05-mcp/) | ⭐⭐⭐ Intermediate+ | 1 hour | Level 2 | Configuration | Live data access | Real-time integration, APIs |
-| **8** | [Subagents](04-subagents/) | ⭐⭐⭐ Intermediate+ | 1.5 hours | Level 2 | Memory, Commands | Complex task handling (6 built-in including Bash) | Delegation, specialized expertise |
-| **9** | [Advanced Features](09-advanced-features/) | ⭐⭐⭐⭐⭐ Advanced | 2-3 hours | Level 3 | All previous | Power user tools | Planning, Auto Mode, Channels, Voice Dictation, permissions |
-| **10** | [Plugins](07-plugins/) | ⭐⭐⭐⭐ Advanced | 2 hours | Level 3 | All previous | Complete solutions | Team onboarding, distribution |
-| **11** | [CLI Mastery](10-cli/) | ⭐⭐⭐ Advanced | 1 hour | Level 3 | Recommended: All | Master command-line usage | Scripting, CI/CD, automation |
+| **1** | [Slash Commands](01-slash-commands/) | ⭐ 初心者 | 30分 | Level 1 | なし | 即効性のある生産性向上 (55以上の組み込み + 5つのバンドルskill) | 即時自動化、チーム標準化 |
+| **2** | [Memory](02-memory/) | ⭐⭐ 初心者+ | 45分 | Level 1 | なし | すべての機能の基盤 | 永続的コンテキスト、設定保存 |
+| **3** | [Checkpoints](08-checkpoints/) | ⭐⭐ 中級者 | 45分 | Level 1 | セッション管理 | 安全な探索 | 実験、回復 |
+| **4** | [CLI Basics](10-cli/) | ⭐⭐ 初心者+ | 30分 | Level 1 | なし | コアCLI使用法 | インタラクティブ＆プリントモード |
+| **5** | [Skills](03-skills/) | ⭐⭐ 中級者 | 1時間 | Level 2 | Slash Commands | 自動的な専門知識 | 再利用可能な機能、一貫性 |
+| **6** | [Hooks](06-hooks/) | ⭐⭐ 中級者 | 1時間 | Level 2 | ツール、コマンド | ワークフロー自動化 (25イベント、4タイプ) | バリデーション、品質ゲート |
+| **7** | [MCP](05-mcp/) | ⭐⭐⭐ 中級者+ | 1時間 | Level 2 | 設定 | ライブデータアクセス | リアルタイム統合、API |
+| **8** | [Subagents](04-subagents/) | ⭐⭐⭐ 中級者+ | 1.5時間 | Level 2 | Memory、コマンド | 複雑なタスク処理 (Bashを含む6つの組み込み) | 委任、専門的な知識 |
+| **9** | [Advanced Features](09-advanced-features/) | ⭐⭐⭐⭐⭐ 上級者 | 2〜3時間 | Level 3 | すべての前項目 | パワーユーザーツール | Planning、Auto Mode、Channels、Voice Dictation、パーミッション |
+| **10** | [Plugins](07-plugins/) | ⭐⭐⭐⭐ 上級者 | 2時間 | Level 3 | すべての前項目 | 完全なソリューション | チームオンボーディング、配布 |
+| **11** | [CLI Mastery](10-cli/) | ⭐⭐⭐ 上級者 | 1時間 | Level 3 | 推奨: すべて | コマンドライン使用法の完全習得 | スクリプティング、CI/CD、自動化 |
 
-**Total Learning Time**: ~11-13 hours (or jump to your level and save time)
+**合計学習時間**: 約11〜13時間 (レベルにジャンプして時間を節約することも可能)
 
 ---
 
-## 🟢 Level 1: Beginner — Getting Started
+## 🟢 Level 1: 初心者 — 入門
 
-**For**: Users with 0-2 quiz checks
-**Time**: ~3 hours
-**Focus**: Immediate productivity, understanding fundamentals
-**Outcome**: Comfortable daily user, ready for Level 2
+**対象**: クイズのチェック数が0〜2の方
+**時間**: 約3時間
+**フォーカス**: 即時の生産性、基礎の理解
+**目標**: 日常的に使えるようになり、Level 2に進む準備ができる
 
-### Milestone 1A: First Commands & Memory
+### Milestone 1A: 最初のコマンドとMemory
 
-**Topics**: Slash Commands + Memory
-**Time**: 1-2 hours
-**Complexity**: ⭐ Beginner
-**Goal**: Immediate productivity boost with custom commands and persistent context
+**トピック**: Slash Commands + Memory
+**時間**: 1〜2時間
+**複雑さ**: ⭐ 初心者
+**目標**: カスタムコマンドと永続的コンテキストで即時生産性を向上させる
 
-#### What You'll Achieve
-✅ Create custom slash commands for repetitive tasks
-✅ Set up project memory for team standards
-✅ Configure personal preferences
-✅ Understand how Claude loads context automatically
+#### 達成できること
+✅ 繰り返しタスク用のカスタムslash commandsを作成する
+✅ チーム標準のプロジェクトmemoryをセットアップする
+✅ 個人設定を構成する
+✅ Claudeがコンテキストを自動的に読み込む仕組みを理解する
 
-#### Hands-on Exercises
+#### ハンズオン演習
 
 ```bash
-# Exercise 1: Install your first slash command
+# 演習1: 最初のslash commandをインストール
 mkdir -p .claude/commands
 cp 01-slash-commands/optimize.md .claude/commands/
 
-# Exercise 2: Create project memory
+# 演習2: プロジェクトmemoryを作成
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 
-# Exercise 3: Try it out
-# In Claude Code, type: /optimize
+# 演習3: 試してみる
+# Claude Codeで以下を入力: /optimize
 ```
 
-#### Success Criteria
-- [ ] Successfully invoke `/optimize` command
-- [ ] Claude remembers your project standards from CLAUDE.md
-- [ ] You understand when to use slash commands vs. memory
+#### 成功基準
+- [ ] `/optimize` コマンドを正常に呼び出せる
+- [ ] ClaudeがCLAUDE.mdからプロジェクト標準を記憶している
+- [ ] slash commandsとmemoryのどちらを使うべきか理解している
 
-#### Next Steps
-Once comfortable, read:
+#### 次のステップ
+慣れたら以下を読む:
 - [01-slash-commands/README.md](01-slash-commands/README.md)
 - [02-memory/README.md](02-memory/README.md)
 
-> **Check your understanding**: Run `/lesson-quiz slash-commands` or `/lesson-quiz memory` in Claude Code to test what you've learned.
+> **理解度チェック**: Claude Codeで `/lesson-quiz slash-commands` または `/lesson-quiz memory` を実行して学習内容をテスト。
 
 ---
 
-### Milestone 1B: Safe Exploration
+### Milestone 1B: 安全な探索
 
-**Topics**: Checkpoints + CLI Basics
-**Time**: 1 hour
-**Complexity**: ⭐⭐ Beginner+
-**Goal**: Learn to experiment safely and use core CLI commands
+**トピック**: Checkpoints + CLI基礎
+**時間**: 1時間
+**複雑さ**: ⭐⭐ 初心者+
+**目標**: 安全に実験し、コアCLIコマンドを使いこなす
 
-#### What You'll Achieve
-✅ Create and restore checkpoints for safe experimentation
-✅ Understand interactive vs. print mode
-✅ Use basic CLI flags and options
-✅ Process files via piping
+#### 達成できること
+✅ 安全な実験のためにcheckpointを作成・復元する
+✅ インタラクティブモードとプリントモードを理解する
+✅ 基本的なCLIフラグとオプションを使用する
+✅ パイプでファイルを処理する
 
-#### Hands-on Exercises
+#### ハンズオン演習
 
 ```bash
-# Exercise 1: Try checkpoint workflow
-# In Claude Code:
-# Make some experimental changes, then press Esc+Esc or use /rewind
-# Select the checkpoint before your experiment
-# Choose "Restore code and conversation" to go back
+# 演習1: checkpointワークフローを試す
+# Claude Codeで:
+# 実験的な変更を加えて、Esc+Esc を押すか /rewind を使う
+# 実験前のcheckpointを選択
+# 「コードと会話を復元」を選んで戻る
 
-# Exercise 2: Interactive vs Print mode
-claude "explain this project"           # Interactive mode
-claude -p "explain this function"       # Print mode (non-interactive)
+# 演習2: インタラクティブモードとプリントモード
+claude "このプロジェクトを説明して"           # インタラクティブモード
+claude -p "この関数を説明して"       # プリントモード (非インタラクティブ)
 
-# Exercise 3: Process file content via piping
-cat error.log | claude -p "explain this error"
+# 演習3: パイプでファイル内容を処理
+cat error.log | claude -p "このエラーを説明して"
 ```
 
-#### Success Criteria
-- [ ] Created and reverted to a checkpoint
-- [ ] Used both interactive and print mode
-- [ ] Piped a file to Claude for analysis
-- [ ] Understand when to use checkpoints for safe experimentation
+#### 成功基準
+- [ ] checkpointを作成して戻れた
+- [ ] インタラクティブモードとプリントモードの両方を使用した
+- [ ] ファイルをClaude に渡して分析した
+- [ ] 安全な実験にcheckpointをいつ使うべきか理解している
 
-#### Next Steps
-- Read: [08-checkpoints/README.md](08-checkpoints/README.md)
-- Read: [10-cli/README.md](10-cli/README.md)
-- **Ready for Level 2!** Proceed to [Milestone 2A](#milestone-2a-automation-skills--hooks)
+#### 次のステップ
+- 読む: [08-checkpoints/README.md](08-checkpoints/README.md)
+- 読む: [10-cli/README.md](10-cli/README.md)
+- **Level 2への準備完了！** [Milestone 2A](#milestone-2a-自動化skillshooks) へ進む
 
-> **Check your understanding**: Run `/lesson-quiz checkpoints` or `/lesson-quiz cli` to verify you're ready for Level 2.
-
----
-
-## 🔵 Level 2: Intermediate — Building Workflows
-
-**For**: Users with 3-5 quiz checks
-**Time**: ~5 hours
-**Focus**: Automation, integration, task delegation
-**Outcome**: Automated workflows, external integrations, ready for Level 3
-
-### Prerequisites Check
-
-Before starting Level 2, make sure you're comfortable with these Level 1 concepts:
-
-- [ ] Can create and use slash commands ([01-slash-commands/](01-slash-commands/))
-- [ ] Have set up project memory via CLAUDE.md ([02-memory/](02-memory/))
-- [ ] Know how to create and restore checkpoints ([08-checkpoints/](08-checkpoints/))
-- [ ] Can use `claude` and `claude -p` from the command line ([10-cli/](10-cli/))
-
-> **Gaps?** Review the linked tutorials above before continuing.
+> **理解度チェック**: `/lesson-quiz checkpoints` または `/lesson-quiz cli` を実行してLevel 2への準備ができているか確認。
 
 ---
 
-### Milestone 2A: Automation (Skills + Hooks)
+## 🔵 Level 2: 中級者 — ワークフロー構築
 
-**Topics**: Skills + Hooks
-**Time**: 2-3 hours
-**Complexity**: ⭐⭐ Intermediate
-**Goal**: Automate common workflows and quality checks
+**対象**: クイズのチェック数が3〜5の方
+**時間**: 約5時間
+**フォーカス**: 自動化、統合、タスク委任
+**目標**: 自動化されたワークフロー、外部統合、Level 3への準備
 
-#### What You'll Achieve
-✅ Auto-invoke specialized capabilities with YAML frontmatter (including `effort` and `shell` fields)
-✅ Set up event-driven automation across 25 hook events
-✅ Use all 4 hook types (command, http, prompt, agent)
-✅ Enforce code quality standards
-✅ Create custom hooks for your workflow
+### 前提条件チェック
 
-#### Hands-on Exercises
+Level 2を始める前に、以下のLevel 1の概念に慣れていることを確認:
+
+- [ ] slash commandsを作成・使用できる ([01-slash-commands/](01-slash-commands/))
+- [ ] CLAUDE.mdでプロジェクトmemoryをセットアップしている ([02-memory/](02-memory/))
+- [ ] checkpointを作成・復元できる ([08-checkpoints/](08-checkpoints/))
+- [ ] コマンドラインから `claude` と `claude -p` を使用できる ([10-cli/](10-cli/))
+
+> **ギャップがある？** 続ける前に上記のリンク先チュートリアルを復習。
+
+---
+
+### Milestone 2A: 自動化 (Skills + Hooks)
+
+**トピック**: Skills + Hooks
+**時間**: 2〜3時間
+**複雑さ**: ⭐⭐ 中級者
+**目標**: 一般的なワークフローと品質チェックを自動化する
+
+#### 達成できること
+✅ YAMLフロントマターで専門的な機能を自動呼び出しする (`effort` と `shell` フィールドを含む)
+✅ 25のhookイベントにわたるイベント駆動自動化をセットアップする
+✅ 4種類のhookタイプを使用する (command, http, prompt, agent)
+✅ コード品質標準を強制する
+✅ ワークフロー用のカスタムhooksを作成する
+
+#### ハンズオン演習
 
 ```bash
-# Exercise 1: Install a skill
+# 演習1: skillをインストール
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# Exercise 2: Set up hooks
+# 演習2: hooksをセットアップ
 mkdir -p ~/.claude/hooks
 cp 06-hooks/pre-tool-check.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/pre-tool-check.sh
 
-# Exercise 3: Configure hooks in settings
-# Add to ~/.claude/settings.json:
+# 演習3: settingsでhooksを設定
+# ~/.claude/settings.json に追加:
 {
   "hooks": {
     "PreToolUse": [
@@ -270,478 +270,478 @@ chmod +x ~/.claude/hooks/pre-tool-check.sh
 }
 ```
 
-#### Success Criteria
-- [ ] Code review skill automatically invoked when relevant
-- [ ] PreToolUse hook runs before tool execution
-- [ ] You understand skill auto-invocation vs. hook event triggers
+#### 成功基準
+- [ ] コードレビューskillが関連する場合に自動呼び出しされる
+- [ ] PreToolUse hookがツール実行前に動作する
+- [ ] skillの自動呼び出しとhookイベントトリガーの違いを理解している
 
-#### Next Steps
-- Create your own custom skill
-- Set up additional hooks for your workflow
-- Read: [03-skills/README.md](03-skills/README.md)
-- Read: [06-hooks/README.md](06-hooks/README.md)
+#### 次のステップ
+- 独自のカスタムskillを作成する
+- ワークフロー用の追加hooksをセットアップする
+- 読む: [03-skills/README.md](03-skills/README.md)
+- 読む: [06-hooks/README.md](06-hooks/README.md)
 
-> **Check your understanding**: Run `/lesson-quiz skills` or `/lesson-quiz hooks` to test your knowledge before moving on.
+> **理解度チェック**: 次に進む前に `/lesson-quiz skills` または `/lesson-quiz hooks` を実行して知識をテスト。
 
 ---
 
-### Milestone 2B: Integration (MCP + Subagents)
+### Milestone 2B: 統合 (MCP + Subagents)
 
-**Topics**: MCP + Subagents
-**Time**: 2-3 hours
-**Complexity**: ⭐⭐⭐ Intermediate+
-**Goal**: Integrate external services and delegate complex tasks
+**トピック**: MCP + Subagents
+**時間**: 2〜3時間
+**複雑さ**: ⭐⭐⭐ 中級者+
+**目標**: 外部サービスを統合し複雑なタスクを委任する
 
-#### What You'll Achieve
-✅ Access live data from GitHub, databases, etc.
-✅ Delegate work to specialized AI agents
-✅ Understand when to use MCP vs. subagents
-✅ Build integrated workflows
+#### 達成できること
+✅ GitHub・データベース等からライブデータにアクセスする
+✅ 専門AIエージェントに作業を委任する
+✅ MCPとsubagentsの使い分けを理解する
+✅ 統合されたワークフローを構築する
 
-#### Hands-on Exercises
+#### ハンズオン演習
 
 ```bash
-# Exercise 1: Set up GitHub MCP
+# 演習1: GitHub MCPをセットアップ
 export GITHUB_TOKEN="your_github_token"
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
-# Exercise 2: Test MCP integration
-# In Claude Code: /mcp__github__list_prs
+# 演習2: MCP統合をテスト
+# Claude Codeで: /mcp__github__list_prs
 
-# Exercise 3: Install subagents
+# 演習3: subagentsをインストール
 mkdir -p .claude/agents
 cp 04-subagents/*.md .claude/agents/
 ```
 
-#### Integration Exercise
-Try this complete workflow:
-1. Use MCP to fetch a GitHub PR
-2. Let Claude delegate review to code-reviewer subagent
-3. Use hooks to run tests automatically
+#### 統合演習
+この完全なワークフローを試す:
+1. MCPを使ってGitHub PRを取得する
+2. ClaudeにコードレビューをCode-reviewer subagentに委任させる
+3. hooksを使ってテストを自動実行する
 
-#### Success Criteria
-- [ ] Successfully query GitHub data via MCP
-- [ ] Claude delegates complex tasks to subagents
-- [ ] You understand the difference between MCP and subagents
-- [ ] Combined MCP + subagents + hooks in a workflow
+#### 成功基準
+- [ ] MCPを通じてGitHubデータを正常にクエリできる
+- [ ] Claudeが複雑なタスクをsubagentsに委任する
+- [ ] MCPとsubagentsの違いを理解している
+- [ ] MCP + subagents + hooksをワークフローで組み合わせた
 
-#### Next Steps
-- Set up additional MCP servers (database, Slack, etc.)
-- Create custom subagents for your domain
-- Read: [05-mcp/README.md](05-mcp/README.md)
-- Read: [04-subagents/README.md](04-subagents/README.md)
-- **Ready for Level 3!** Proceed to [Milestone 3A](#milestone-3a-advanced-features)
+#### 次のステップ
+- 追加のMCPサーバーをセットアップ (データベース、Slackなど)
+- 自分のドメイン用カスタムsubagentsを作成する
+- 読む: [05-mcp/README.md](05-mcp/README.md)
+- 読む: [04-subagents/README.md](04-subagents/README.md)
+- **Level 3への準備完了！** [Milestone 3A](#milestone-3a-高度な機能) へ進む
 
-> **Check your understanding**: Run `/lesson-quiz mcp` or `/lesson-quiz subagents` to verify you're ready for Level 3.
-
----
-
-## 🔴 Level 3: Advanced — Power User & Team Lead
-
-**For**: Users with 6-8 quiz checks
-**Time**: ~5 hours
-**Focus**: Team tooling, CI/CD, enterprise features, plugin development
-**Outcome**: Power user, can set up team workflows and CI/CD
-
-### Prerequisites Check
-
-Before starting Level 3, make sure you're comfortable with these Level 2 concepts:
-
-- [ ] Can create and use skills with auto-invocation ([03-skills/](03-skills/))
-- [ ] Have set up hooks for event-driven automation ([06-hooks/](06-hooks/))
-- [ ] Can configure MCP servers for external data ([05-mcp/](05-mcp/))
-- [ ] Know how to use subagents for task delegation ([04-subagents/](04-subagents/))
-
-> **Gaps?** Review the linked tutorials above before continuing.
+> **理解度チェック**: `/lesson-quiz mcp` または `/lesson-quiz subagents` を実行してLevel 3への準備ができているか確認。
 
 ---
 
-### Milestone 3A: Advanced Features
+## 🔴 Level 3: 上級者 — パワーユーザー＆チームリード
 
-**Topics**: Advanced Features (Planning, Permissions, Extended Thinking, Auto Mode, Channels, Voice Dictation, Remote/Desktop/Web)
-**Time**: 2-3 hours
-**Complexity**: ⭐⭐⭐⭐⭐ Advanced
-**Goal**: Master advanced workflows and power user tools
+**対象**: クイズのチェック数が6〜8の方
+**時間**: 約5時間
+**フォーカス**: チームツール、CI/CD、エンタープライズ機能、プラグイン開発
+**目標**: パワーユーザーとして、チームワークフローとCI/CDをセットアップできる
 
-#### What You'll Achieve
-✅ Planning mode for complex features
-✅ Fine-grained permission control with 6 modes (default, acceptEdits, plan, auto, dontAsk, bypassPermissions)
-✅ Extended thinking via Alt+T / Option+T toggle
-✅ Background task management
-✅ Auto Memory for learned preferences
-✅ Auto Mode with background safety classifier
-✅ Channels for structured multi-session workflows
-✅ Voice Dictation for hands-free interaction
-✅ Remote control, desktop app, and web sessions
-✅ Agent Teams for multi-agent collaboration
+### 前提条件チェック
 
-#### Hands-on Exercises
+Level 3を始める前に、以下のLevel 2の概念に慣れていることを確認:
+
+- [ ] 自動呼び出しでskillsを作成・使用できる ([03-skills/](03-skills/))
+- [ ] イベント駆動自動化のhooksをセットアップしている ([06-hooks/](06-hooks/))
+- [ ] 外部データ用のMCPサーバーを設定できる ([05-mcp/](05-mcp/))
+- [ ] タスク委任にsubagentsを使用できる ([04-subagents/](04-subagents/))
+
+> **ギャップがある？** 続ける前に上記のリンク先チュートリアルを復習。
+
+---
+
+### Milestone 3A: 高度な機能
+
+**トピック**: 高度な機能 (Planning、Permissions、Extended Thinking、Auto Mode、Channels、Voice Dictation、Remote/Desktop/Web)
+**時間**: 2〜3時間
+**複雑さ**: ⭐⭐⭐⭐⭐ 上級者
+**目標**: 高度なワークフローとパワーユーザーツールをマスターする
+
+#### 達成できること
+✅ 複雑な機能のためのPlanning mode
+✅ 6モードの細かなパーミッション制御 (default, acceptEdits, plan, auto, dontAsk, bypassPermissions)
+✅ Alt+T / Option+T トグルによるExtended thinking
+✅ バックグラウンドタスク管理
+✅ Auto Memory で設定を学習する
+✅ バックグラウンド安全分類器を持つAuto Mode
+✅ 構造化されたマルチセッションワークフローのChannels
+✅ ハンズフリー操作のVoice Dictation
+✅ Remote control・desktop app・webセッション
+✅ マルチエージェント連携のAgent Teams
+
+#### ハンズオン演習
 
 ```bash
-# Exercise 1: Use planning mode
-/plan Implement user authentication system
+# 演習1: Planning modeを使う
+/plan ユーザー認証システムの実装
 
-# Exercise 2: Try permission modes (6 available: default, acceptEdits, plan, auto, dontAsk, bypassPermissions)
-claude --permission-mode plan "analyze this codebase"
-claude --permission-mode acceptEdits "refactor the auth module"
-claude --permission-mode auto "implement the feature"
+# 演習2: パーミッションモードを試す (6種類: default, acceptEdits, plan, auto, dontAsk, bypassPermissions)
+claude --permission-mode plan "このコードベースを分析して"
+claude --permission-mode acceptEdits "authモジュールをリファクタリングして"
+claude --permission-mode auto "機能を実装して"
 
-# Exercise 3: Enable extended thinking
-# Press Alt+T (Option+T on macOS) during a session to toggle
+# 演習3: Extended thinkingを有効化
+# セッション中に Alt+T (macOSでは Option+T) を押してトグル
 
-# Exercise 4: Advanced checkpoint workflow
-# 1. Create checkpoint "Clean state"
-# 2. Use planning mode to design a feature
-# 3. Implement with subagent delegation
-# 4. Run tests in background
-# 5. If tests fail, rewind to checkpoint
-# 6. Try alternative approach
+# 演習4: 高度なcheckpointワークフロー
+# 1. checkpoint「クリーンな状態」を作成
+# 2. Planning modeで機能を設計
+# 3. subagent委任で実装
+# 4. バックグラウンドでテストを実行
+# 5. テスト失敗時はcheckpointに巻き戻し
+# 6. 別のアプローチを試す
 
-# Exercise 5: Try auto mode (background safety classifier)
-claude --permission-mode auto "implement user settings page"
+# 演習5: Auto modeを試す (バックグラウンド安全分類器)
+claude --permission-mode auto "ユーザー設定ページを実装して"
 
-# Exercise 6: Enable agent teams
+# 演習6: Agent teamsを有効化
 export CLAUDE_AGENT_TEAMS=1
-# Ask Claude: "Implement feature X using a team approach"
+# Claudeに聞く: "チームアプローチで機能Xを実装して"
 
-# Exercise 7: Scheduled tasks
+# 演習7: スケジュールタスク
 /loop 5m /check-status
-# Or use CronCreate for persistent scheduled tasks
+# または永続的なスケジュールタスクにはCronCreateを使用
 
-# Exercise 8: Channels for multi-session workflows
-# Use channels to organize work across sessions
+# 演習8: マルチセッションワークフローのChannels
+# channelsを使ってセッション間の作業を整理する
 
-# Exercise 9: Voice Dictation
-# Use voice input for hands-free interaction with Claude Code
+# 演習9: Voice Dictation
+# ハンズフリーでClaude Codeに音声入力する
 ```
 
-#### Success Criteria
-- [ ] Used planning mode for a complex feature
-- [ ] Configured permission modes (plan, acceptEdits, auto, dontAsk)
-- [ ] Toggled extended thinking with Alt+T / Option+T
-- [ ] Used auto mode with background safety classifier
-- [ ] Used background tasks for long operations
-- [ ] Explored Channels for multi-session workflows
-- [ ] Tried Voice Dictation for hands-free input
-- [ ] Understand Remote Control, Desktop App, and Web sessions
-- [ ] Enabled and used Agent Teams for collaborative tasks
-- [ ] Used `/loop` for recurring tasks or scheduled monitoring
+#### 成功基準
+- [ ] 複雑な機能にPlanning modeを使用した
+- [ ] パーミッションモードを設定した (plan, acceptEdits, auto, dontAsk)
+- [ ] Alt+T / Option+T でExtended thinkingをトグルした
+- [ ] バックグラウンド安全分類器でAuto modeを使用した
+- [ ] 長時間処理にバックグラウンドタスクを使用した
+- [ ] マルチセッションワークフローのChannelsを探索した
+- [ ] ハンズフリー入力のVoice Dictationを試した
+- [ ] Remote Control、Desktop App、Webセッションを理解した
+- [ ] 共同作業タスクにAgent Teamsを有効化・使用した
+- [ ] 繰り返しタスクに `/loop` を使用した
 
-#### Next Steps
-- Read: [09-advanced-features/README.md](09-advanced-features/README.md)
+#### 次のステップ
+- 読む: [09-advanced-features/README.md](09-advanced-features/README.md)
 
-> **Check your understanding**: Run `/lesson-quiz advanced` to test your mastery of power user features.
+> **理解度チェック**: `/lesson-quiz advanced` を実行してパワーユーザー機能の習得度をテスト。
 
 ---
 
-### Milestone 3B: Team & Distribution (Plugins + CLI Mastery)
+### Milestone 3B: チームと配布 (Plugins + CLI完全習得)
 
-**Topics**: Plugins + CLI Mastery + CI/CD
-**Time**: 2-3 hours
-**Complexity**: ⭐⭐⭐⭐ Advanced
-**Goal**: Build team tooling, create plugins, master CI/CD integration
+**トピック**: Plugins + CLI完全習得 + CI/CD
+**時間**: 2〜3時間
+**複雑さ**: ⭐⭐⭐⭐ 上級者
+**目標**: チームツールの構築、pluginsの作成、CI/CD統合のマスター
 
-#### What You'll Achieve
-✅ Install and create complete bundled plugins
-✅ Master CLI for scripting and automation
-✅ Set up CI/CD integration with `claude -p`
-✅ JSON output for automated pipelines
-✅ Session management and batch processing
+#### 達成できること
+✅ 完全なバンドルpluginsのインストールと作成
+✅ スクリプティングと自動化のためのCLIをマスターする
+✅ `claude -p` を使ったCI/CD統合をセットアップする
+✅ 自動化パイプライン用のJSON出力
+✅ セッション管理とバッチ処理
 
-#### Hands-on Exercises
+#### ハンズオン演習
 
 ```bash
-# Exercise 1: Install a complete plugin
-# In Claude Code: /plugin install pr-review
+# 演習1: 完全なpluginをインストール
+# Claude Codeで: /plugin install pr-review
 
-# Exercise 2: Print mode for CI/CD
-claude -p "Run all tests and generate report"
+# 演習2: CI/CDのプリントモード
+claude -p "すべてのテストを実行してレポートを生成して"
 
-# Exercise 3: JSON output for scripts
-claude -p --output-format json "list all functions"
+# 演習3: スクリプト用JSON出力
+claude -p --output-format json "すべての関数を一覧表示して"
 
-# Exercise 4: Session management and resumption
-claude -r "feature-auth" "continue implementation"
+# 演習4: セッション管理と再開
+claude -r "feature-auth" "実装を続けて"
 
-# Exercise 5: CI/CD integration with constraints
-claude -p --max-turns 3 --output-format json "review code"
+# 演習5: 制約付きCI/CD統合
+claude -p --max-turns 3 --output-format json "コードをレビューして"
 
-# Exercise 6: Batch processing
+# 演習6: バッチ処理
 for file in *.md; do
-  claude -p --output-format json "summarize this: $(cat $file)" > ${file%.md}.summary.json
+  claude -p --output-format json "これを要約して: $(cat $file)" > ${file%.md}.summary.json
 done
 ```
 
-#### CI/CD Integration Exercise
-Create a simple CI/CD script:
-1. Use `claude -p` to review changed files
-2. Output results as JSON
-3. Process with `jq` for specific issues
-4. Integrate into GitHub Actions workflow
+#### CI/CD統合演習
+シンプルなCI/CDスクリプトを作成:
+1. `claude -p` を使って変更されたファイルをレビューする
+2. 結果をJSONとして出力する
+3. `jq` で特定の問題を処理する
+4. GitHub Actionsワークフローに統合する
 
-#### Success Criteria
-- [ ] Installed and used a plugin
-- [ ] Built or modified a plugin for your team
-- [ ] Used print mode (`claude -p`) in CI/CD
-- [ ] Generated JSON output for scripting
-- [ ] Resumed a previous session successfully
-- [ ] Created a batch processing script
-- [ ] Integrated Claude into a CI/CD workflow
+#### 成功基準
+- [ ] pluginをインストールして使用した
+- [ ] チーム用にpluginを構築または変更した
+- [ ] CI/CDでプリントモード (`claude -p`) を使用した
+- [ ] スクリプティング用のJSON出力を生成した
+- [ ] 以前のセッションを正常に再開した
+- [ ] バッチ処理スクリプトを作成した
+- [ ] CI/CDワークフローにClaudeを統合した
 
-#### Real-World Use Cases for CLI
-- **Code Review Automation**: Run code reviews in CI/CD pipelines
-- **Log Analysis**: Analyze error logs and system outputs
-- **Documentation Generation**: Batch generate documentation
-- **Testing Insights**: Analyze test failures
-- **Performance Analysis**: Review performance metrics
-- **Data Processing**: Transform and analyze data files
+#### CLIの実際のユースケース
+- **コードレビュー自動化**: CI/CDパイプラインでコードレビューを実行
+- **ログ分析**: エラーログとシステム出力を分析
+- **ドキュメント生成**: ドキュメントをバッチ生成
+- **テストインサイト**: テスト失敗を分析
+- **パフォーマンス分析**: パフォーマンスメトリクスをレビュー
+- **データ処理**: データファイルを変換・分析
 
-#### Next Steps
-- Read: [07-plugins/README.md](07-plugins/README.md)
-- Read: [10-cli/README.md](10-cli/README.md)
-- Create team-wide CLI shortcuts and plugins
-- Set up batch processing scripts
+#### 次のステップ
+- 読む: [07-plugins/README.md](07-plugins/README.md)
+- 読む: [10-cli/README.md](10-cli/README.md)
+- チーム全体のCLIショートカットとpluginsを作成する
+- バッチ処理スクリプトをセットアップする
 
-> **Check your understanding**: Run `/lesson-quiz plugins` or `/lesson-quiz cli` to confirm your mastery.
+> **理解度チェック**: `/lesson-quiz plugins` または `/lesson-quiz cli` を実行して習得度を確認。
 
 ---
 
-## 🧪 Test Your Knowledge
+## 🧪 知識をテストする
 
-This repository includes two interactive skills you can use anytime in Claude Code to evaluate your understanding:
+このリポジトリには、いつでもClaude Codeで理解度を評価できる2つのインタラクティブskillsが含まれています:
 
-| Skill | Command | Purpose |
+| Skill | コマンド | 目的 |
 |-------|---------|---------|
-| **Self-Assessment** | `/self-assessment` | Evaluate your overall proficiency across all 10 features. Choose Quick (2 min) or Deep (5 min) mode to get a personalized skill profile and learning path. |
-| **Lesson Quiz** | `/lesson-quiz [lesson]` | Test your understanding of a specific lesson with 10 questions. Use before a lesson (pre-test), during (progress check), or after (mastery verification). |
+| **Self-Assessment** | `/self-assessment` | 全10機能にわたる総合熟練度を評価。Quick (2分) またはDeep (5分) モードを選んでパーソナライズされたスキルプロフィールと学習パスを取得。 |
+| **Lesson Quiz** | `/lesson-quiz [lesson]` | 特定のレッスンを10問でテスト。レッスン前 (プレテスト)、途中 (進捗確認)、または後 (習得度確認) に使用。 |
 
-**Examples:**
+**例:**
 ```
-/self-assessment                  # Find your overall level
-/lesson-quiz hooks                # Quiz on Lesson 06: Hooks
-/lesson-quiz 03                   # Quiz on Lesson 03: Skills
-/lesson-quiz advanced-features    # Quiz on Lesson 09
+/self-assessment                  # 全体レベルを確認
+/lesson-quiz hooks                # Lesson 06: Hooksのクイズ
+/lesson-quiz 03                   # Lesson 03: Skillsのクイズ
+/lesson-quiz advanced-features    # Lesson 09のクイズ
 ```
 
 ---
 
-## ⚡ Quick Start Paths
+## ⚡ クイックスタートパス
 
-### If You Only Have 15 Minutes
-**Goal**: Get your first win
+### 15分しかない場合
+**目標**: 最初の成果を得る
 
-1. Copy one slash command: `cp 01-slash-commands/optimize.md .claude/commands/`
-2. Try it in Claude Code: `/optimize`
-3. Read: [01-slash-commands/README.md](01-slash-commands/README.md)
+1. slash commandをコピー: `cp 01-slash-commands/optimize.md .claude/commands/`
+2. Claude Codeで試す: `/optimize`
+3. 読む: [01-slash-commands/README.md](01-slash-commands/README.md)
 
-**Outcome**: You'll have a working slash command and understand the basics
-
----
-
-### If You Have 1 Hour
-**Goal**: Set up essential productivity tools
-
-1. **Slash commands** (15 min): Copy and test `/optimize` and `/pr`
-2. **Project memory** (15 min): Create CLAUDE.md with your project standards
-3. **Install a skill** (15 min): Set up code-review skill
-4. **Try them together** (15 min): See how they work in harmony
-
-**Outcome**: Basic productivity boost with commands, memory, and auto-skills
+**結果**: 動作するslash commandを持ち、基礎を理解できる
 
 ---
 
-### If You Have a Weekend
-**Goal**: Become proficient with most features
+### 1時間ある場合
+**目標**: 必須の生産性ツールをセットアップする
 
-**Saturday Morning** (3 hours):
-- Complete Milestone 1A: Slash Commands + Memory
-- Complete Milestone 1B: Checkpoints + CLI Basics
+1. **Slash commands** (15分): `/optimize` と `/pr` をコピーしてテスト
+2. **プロジェクトmemory** (15分): プロジェクト標準をCLAUDE.mdに記述
+3. **skillをインストール** (15分): code-review skillをセットアップ
+4. **一緒に試す** (15分): どう連携するか確認
 
-**Saturday Afternoon** (3 hours):
-- Complete Milestone 2A: Skills + Hooks
-- Complete Milestone 2B: MCP + Subagents
-
-**Sunday** (4 hours):
-- Complete Milestone 3A: Advanced Features
-- Complete Milestone 3B: Plugins + CLI Mastery + CI/CD
-- Build a custom plugin for your team
-
-**Outcome**: You'll be a Claude Code power user ready to train others and automate complex workflows
+**結果**: コマンド・memory・自動skillによる基本的な生産性向上
 
 ---
 
-## 💡 Learning Tips
+### 週末ある場合
+**目標**: ほとんどの機能に習熟する
 
-### ✅ Do
+**土曜日の午前** (3時間):
+- Milestone 1A完了: Slash Commands + Memory
+- Milestone 1B完了: Checkpoints + CLI基礎
 
-- **Take the quiz first** to find your starting point
-- **Complete hands-on exercises** for each milestone
-- **Start simple** and add complexity gradually
-- **Test each feature** before moving to the next
-- **Take notes** on what works for your workflow
-- **Refer back** to earlier concepts as you learn advanced topics
-- **Experiment safely** using checkpoints
-- **Share knowledge** with your team
+**土曜日の午後** (3時間):
+- Milestone 2A完了: Skills + Hooks
+- Milestone 2B完了: MCP + Subagents
 
-### ❌ Don't
+**日曜日** (4時間):
+- Milestone 3A完了: 高度な機能
+- Milestone 3B完了: Plugins + CLI完全習得 + CI/CD
+- チーム用カスタムpluginを構築
 
-- **Skip the prerequisites check** when jumping to a higher level
-- **Try to learn everything at once** - it's overwhelming
-- **Copy configurations without understanding them** - you won't know how to debug
-- **Forget to test** - always verify features work
-- **Rush through milestones** - take time to understand
-- **Ignore the documentation** - each README has valuable details
-- **Work in isolation** - discuss with teammates
+**結果**: 他のメンバーをトレーニングし複雑なワークフローを自動化できるClaude Codeパワーユーザーになれる
 
 ---
 
-## 🎓 Learning Styles
+## 💡 学習のコツ
 
-### Visual Learners
-- Study the mermaid diagrams in each README
-- Watch the command execution flow
-- Draw your own workflow diagrams
-- Use the visual learning path above
+### ✅ やること
 
-### Hands-on Learners
-- Complete every hands-on exercise
-- Experiment with variations
-- Break things and fix them (use checkpoints!)
-- Create your own examples
+- **まずクイズを受ける** — 自分の出発点を確認する
+- **各マイルストーンのハンズオン演習を完了する**
+- **シンプルから始める** — 段階的に複雑さを追加する
+- **次に進む前に各機能をテストする**
+- **ノートを取る** — 自分のワークフローで何が効果的かメモする
+- **高度なトピックを学ぶ際に以前の概念を参照する**
+- **checkpointsを使って安全に実験する**
+- **チームと知識を共有する**
 
-### Reading Learners
-- Read each README thoroughly
-- Study the code examples
-- Review the comparison tables
-- Read the blog posts linked in resources
+### ❌ やってはいけないこと
 
-### Social Learners
-- Set up pair programming sessions
-- Teach concepts to teammates
-- Join Claude Code community discussions
-- Share your custom configurations
+- **上位レベルに飛ぶ際に前提条件チェックをスキップしない**
+- **一度にすべてを学ぼうとしない** — 圧倒される
+- **理解せずに設定をコピーしない** — デバッグ方法がわからなくなる
+- **テストを忘れない** — 常に機能が動作することを確認する
+- **マイルストーンを急がない** — 理解するための時間を取る
+- **ドキュメントを無視しない** — 各READMEには貴重な詳細がある
+- **孤立して作業しない** — チームメイトと話し合う
 
 ---
 
-## 📈 Progress Tracking
+## 🎓 学習スタイル
 
-Use these checklists to track your progress by level. Run `/self-assessment` anytime to get an updated skill profile, or `/lesson-quiz [lesson]` after each tutorial to verify your understanding.
+### ビジュアル学習者
+- 各READMEのMermaidダイアグラムを研究する
+- コマンド実行フローを見る
+- 自分のワークフローダイアグラムを描く
+- 上記のビジュアル学習パスを使用する
 
-### 🟢 Level 1: Beginner
-- [ ] Completed [01-slash-commands](01-slash-commands/)
-- [ ] Completed [02-memory](02-memory/)
-- [ ] Created first custom slash command
-- [ ] Set up project memory
-- [ ] **Milestone 1A achieved**
-- [ ] Completed [08-checkpoints](08-checkpoints/)
-- [ ] Completed [10-cli](10-cli/) basics
-- [ ] Created and reverted to a checkpoint
-- [ ] Used interactive and print mode
-- [ ] **Milestone 1B achieved**
+### ハンズオン学習者
+- すべてのハンズオン演習を完了する
+- バリエーションで実験する
+- 壊して直す (checkpointsを使って！)
+- 自分の例を作成する
 
-### 🔵 Level 2: Intermediate
-- [ ] Completed [03-skills](03-skills/)
-- [ ] Completed [06-hooks](06-hooks/)
-- [ ] Installed first skill
-- [ ] Set up PreToolUse hook
-- [ ] **Milestone 2A achieved**
-- [ ] Completed [05-mcp](05-mcp/)
-- [ ] Completed [04-subagents](04-subagents/)
-- [ ] Connected GitHub MCP
-- [ ] Created custom subagent
-- [ ] Combined integrations in a workflow
-- [ ] **Milestone 2B achieved**
+### 読書学習者
+- 各READMEを丁寧に読む
+- コード例を研究する
+- 比較表を確認する
+- リソースにリンクされているブログ記事を読む
 
-### 🔴 Level 3: Advanced
-- [ ] Completed [09-advanced-features](09-advanced-features/)
-- [ ] Used planning mode successfully
-- [ ] Configured permission modes (6 modes including auto)
-- [ ] Used auto mode with safety classifier
-- [ ] Used extended thinking toggle
-- [ ] Explored Channels and Voice Dictation
-- [ ] **Milestone 3A achieved**
-- [ ] Completed [07-plugins](07-plugins/)
-- [ ] Completed [10-cli](10-cli/) advanced usage
-- [ ] Set up print mode (`claude -p`) CI/CD
-- [ ] Created JSON output for automation
-- [ ] Integrated Claude into CI/CD pipeline
-- [ ] Created team plugin
-- [ ] **Milestone 3B achieved**
+### ソーシャル学習者
+- ペアプログラミングセッションをセットアップする
+- チームメイトに概念を教える
+- Claude Codeコミュニティのディスカッションに参加する
+- カスタム設定を共有する
 
 ---
 
-## 🆘 Common Learning Challenges
+## 📈 進捗管理
 
-### Challenge 1: "Too many concepts at once"
-**Solution**: Focus on one milestone at a time. Complete all exercises before moving forward.
+これらのチェックリストを使ってレベル別に進捗を管理。いつでも `/self-assessment` を実行して最新のスキルプロフィールを取得、または各チュートリアル後に `/lesson-quiz [lesson]` を実行して理解度を確認。
 
-### Challenge 2: "Don't know which feature to use when"
-**Solution**: Refer to the [Use Case Matrix](README.md#use-case-matrix) in the main README.
+### 🟢 Level 1: 初心者
+- [ ] [01-slash-commands](01-slash-commands/) 完了
+- [ ] [02-memory](02-memory/) 完了
+- [ ] 最初のカスタムslash commandを作成した
+- [ ] プロジェクトmemoryをセットアップした
+- [ ] **Milestone 1A達成**
+- [ ] [08-checkpoints](08-checkpoints/) 完了
+- [ ] [10-cli](10-cli/) 基礎完了
+- [ ] checkpointを作成して巻き戻した
+- [ ] インタラクティブモードとプリントモードを使用した
+- [ ] **Milestone 1B達成**
 
-### Challenge 3: "Configuration not working"
-**Solution**: Check the [Troubleshooting](README.md#troubleshooting) section and verify file locations.
+### 🔵 Level 2: 中級者
+- [ ] [03-skills](03-skills/) 完了
+- [ ] [06-hooks](06-hooks/) 完了
+- [ ] 最初のskillをインストールした
+- [ ] PreToolUse hookをセットアップした
+- [ ] **Milestone 2A達成**
+- [ ] [05-mcp](05-mcp/) 完了
+- [ ] [04-subagents](04-subagents/) 完了
+- [ ] GitHub MCPを接続した
+- [ ] カスタムsubagentを作成した
+- [ ] ワークフローで統合を組み合わせた
+- [ ] **Milestone 2B達成**
 
-### Challenge 4: "Concepts seem to overlap"
-**Solution**: Review the [Feature Comparison](README.md#feature-comparison) table to understand differences.
-
-### Challenge 5: "Hard to remember everything"
-**Solution**: Create your own cheat sheet. Use checkpoints to experiment safely.
-
-### Challenge 6: "I'm experienced but not sure where to start"
-**Solution**: Take the [Self-Assessment Quiz](#-find-your-level) above. Skip to your level and use the prerequisites check to identify any gaps.
+### 🔴 Level 3: 上級者
+- [ ] [09-advanced-features](09-advanced-features/) 完了
+- [ ] 複雑な機能にPlanning modeを使用した
+- [ ] パーミッションモードを設定した (autoを含む6モード)
+- [ ] 安全分類器でAuto modeを使用した
+- [ ] Extended thinkingトグルを使用した
+- [ ] ChannelsとVoice Dictationを探索した
+- [ ] **Milestone 3A達成**
+- [ ] [07-plugins](07-plugins/) 完了
+- [ ] [10-cli](10-cli/) 上級使用法完了
+- [ ] プリントモード (`claude -p`) CI/CDをセットアップした
+- [ ] 自動化用JSON出力を作成した
+- [ ] CI/CDワークフローにClaudeを統合した
+- [ ] チームpluginを作成した
+- [ ] **Milestone 3B達成**
 
 ---
 
-## 🎯 What's Next After Completion?
+## 🆘 よくある学習の課題
 
-Once you've completed all milestones:
+### 課題1: 「一度に覚えることが多すぎる」
+**解決策**: 1つのマイルストーンに集中する。次に進む前にすべての演習を完了させる。
 
-1. **Create team documentation** - Document your team's Claude Code setup
-2. **Build custom plugins** - Package your team's workflows
-3. **Explore Remote Control** - Control Claude Code sessions programmatically from external tools
-4. **Try Web Sessions** - Use Claude Code through browser-based interfaces for remote development
-5. **Use the Desktop App** - Access Claude Code features through the native desktop application
-6. **Use Auto Mode** - Let Claude work autonomously with a background safety classifier
-7. **Leverage Auto Memory** - Let Claude learn your preferences automatically over time
-8. **Set up Agent Teams** - Coordinate multiple agents on complex, multi-faceted tasks
-9. **Use Channels** - Organize work across structured multi-session workflows
-10. **Try Voice Dictation** - Use hands-free voice input for interaction with Claude Code
-11. **Use Scheduled Tasks** - Automate recurring checks with `/loop` and cron tools
-12. **Contribute examples** - Share with the community
-13. **Mentor others** - Help teammates learn
-14. **Optimize workflows** - Continuously improve based on usage
-15. **Stay updated** - Follow Claude Code releases and new features
+### 課題2: 「どの機能をいつ使えばいいかわからない」
+**解決策**: メインREADMEの[ユースケースマトリクス](README.md#何を作れるか)を参照する。
+
+### 課題3: 「設定が動かない」
+**解決策**: [トラブルシューティング](README.md#トラブルシューティング)セクションを確認してファイルの場所を検証する。
+
+### 課題4: 「概念が重複して見える」
+**解決策**: [機能比較](README.md#機能比較)表を確認して違いを理解する。
+
+### 課題5: 「すべてを覚えるのが難しい」
+**解決策**: 自分のチートシートを作成する。checkpointsを使って安全に実験する。
+
+### 課題6: 「経験はあるがどこから始めるかわからない」
+**解決策**: 上記の[自己評価クイズ](#-自分のレベルを確認する)を受ける。自分のレベルまでスキップして前提条件チェックでギャップを特定する。
 
 ---
 
-## 📚 Additional Resources
+## 🎯 完了後の次のステップ
 
-### Official Documentation
-- [Claude Code Documentation](https://code.claude.com/docs/en/overview)
-- [Anthropic Documentation](https://docs.anthropic.com)
-- [MCP Protocol Specification](https://modelcontextprotocol.io)
+すべてのマイルストーンを完了したら:
 
-### Blog Posts
-- [Discovering Claude Code Slash Commands](https://medium.com/@luongnv89/discovering-claude-code-slash-commands-cdc17f0dfb29)
+1. **チームドキュメントを作成する** — チームのClaude Codeセットアップを文書化する
+2. **カスタムpluginsを構築する** — チームのワークフローをパッケージ化する
+3. **Remote Controlを探索する** — 外部ツールからプログラムでClaude Codeセッションを制御する
+4. **Webセッションを試す** — リモート開発のためにブラウザベースのインターフェースでClaude Codeを使用する
+5. **Desktop Appを使用する** — ネイティブデスクトップアプリケーションでClaude Code機能にアクセスする
+6. **Auto Modeを使用する** — バックグラウンド安全分類器でClaudeに自律的に作業させる
+7. **Auto Memoryを活用する** — Claudeに時間とともに自動的に設定を学習させる
+8. **Agent Teamsをセットアップする** — 複雑な多面的なタスクで複数のエージェントを調整する
+9. **Channelsを使用する** — 構造化されたマルチセッションワークフローで作業を整理する
+10. **Voice Dictationを試す** — Claude Codeのインタラクションにハンズフリーの音声入力を使用する
+11. **スケジュールタスクを使用する** — `/loop` とcronツールで繰り返しチェックを自動化する
+12. **サンプルをコントリビュートする** — コミュニティと共有する
+13. **他の人をメンターする** — チームメイトの学習を支援する
+14. **ワークフローを最適化する** — 使用状況に基づいて継続的に改善する
+15. **最新情報をフォローする** — Claude Codeのリリースと新機能をフォローする
 
-### Community
+---
+
+## 📚 追加リソース
+
+### 公式ドキュメント
+- [Claude Code ドキュメント](https://code.claude.com/docs/en/overview)
+- [Anthropic ドキュメント](https://docs.anthropic.com)
+- [MCPプロトコル仕様](https://modelcontextprotocol.io)
+
+### ブログ記事
+- [Claude Code Slash Commandsの発見](https://medium.com/@luongnv89/discovering-claude-code-slash-commands-cdc17f0dfb29)
+
+### コミュニティ
 - [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-- [MCP Servers Repository](https://github.com/modelcontextprotocol/servers)
+- [MCPサーバーリポジトリ](https://github.com/modelcontextprotocol/servers)
 
 ---
 
-## 💬 Feedback & Support
+## 💬 フィードバック＆サポート
 
-- **Found an issue?** Create an issue in the repository
-- **Have a suggestion?** Submit a pull request
-- **Need help?** Check the documentation or ask the community
-
----
-
-**Last Updated**: March 2026
-**Maintained by**: Claude How-To Contributors
-**License**: Educational purposes, free to use and adapt
+- **問題を見つけた？** リポジトリにIssueを作成する
+- **提案がある？** プルリクエストを提出する
+- **助けが必要？** ドキュメントを確認するかコミュニティに聞く
 
 ---
 
-[← Back to Main README](README.md)
+**最終更新**: 2026年3月
+**メンテナンス**: Claude How-Toコントリビューター
+**ライセンス**: 教育目的、自由に使用・改変可能
+
+---
+
+[← メインREADMEに戻る](README.md)

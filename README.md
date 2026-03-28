@@ -9,258 +9,258 @@
 [![Version](https://img.shields.io/badge/version-2.2.0-brightgreen)](CHANGELOG.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-2.1+-purple)](https://code.claude.com)
 
-# Master Claude Code in a Weekend
+# 週末でClaude Codeをマスターする
 
-Go from typing `claude` to orchestrating agents, hooks, skills, and MCP servers — with visual tutorials, copy-paste templates, and a guided learning path.
+`claude` と入力するところから、エージェント・hooks・skills・MCPサーバーのオーケストレーションまで — ビジュアルチュートリアル、コピペ用テンプレート、ガイド付き学習パスで一気に習得。
 
-**[Get Started in 15 Minutes](#-get-started-in-15-minutes)** | **[Find Your Level](#-not-sure-where-to-start)** | **[Browse the Feature Catalog](CATALOG.md)**
-
----
-
-## Table of Contents
-
-- [The Problem](#the-problem)
-- [How Claude How To Fixes This](#how-claude-how-to-fixes-this)
-- [How It Works](#how-it-works)
-- [Not Sure Where to Start?](#-not-sure-where-to-start)
-- [Get Started in 15 Minutes](#-get-started-in-15-minutes)
-- [What Can You Build With This?](#what-can-you-build-with-this)
-- [FAQ](#faq)
-- [Contributing](#contributing)
-- [License](#license)
+**[15分で始める](#-15分で始める)** | **[自分のレベルを確認する](#-どこから始めるかわからない方へ)** | **[機能カタログを見る](CATALOG.md)**
 
 ---
 
-## The Problem
+## 目次
 
-You installed Claude Code. You ran a few prompts. Now what?
-
-- **The official docs describe features — but don't show you how to combine them.** You know slash commands exist, but not how to chain them with hooks, memory, and subagents into a workflow that actually saves hours.
-- **There's no clear learning path.** Should you learn MCP before hooks? Skills before subagents? You end up skimming everything and mastering nothing.
-- **Examples are too basic.** A "hello world" slash command doesn't help you build a production code review pipeline that uses memory, delegates to specialized agents, and runs security scans automatically.
-
-You're leaving 90% of Claude Code's power on the table — and you don't know what you don't know.
+- [問題点](#問題点)
+- [このガイドが解決すること](#このガイドが解決すること)
+- [使い方](#使い方)
+- [どこから始めるかわからない方へ](#-どこから始めるかわからない方へ)
+- [15分で始める](#-15分で始める)
+- [何を作れるか](#何を作れるか)
+- [よくある質問](#よくある質問)
+- [コントリビュート](#コントリビュート)
+- [ライセンス](#ライセンス)
 
 ---
 
-## How Claude How To Fixes This
+## 問題点
 
-This isn't another feature reference. It's a **structured, visual, example-driven guide** that teaches you to use every Claude Code feature with real-world templates you can copy into your project today.
+Claude Codeをインストールした。いくつかプロンプトを試した。次は？
 
-| | Official Docs | This Guide |
+- **公式ドキュメントは機能を説明しているが、組み合わせ方は教えてくれない。** slash commandsの存在は知っていても、それをhooks・memory・subagentsと連携させて、実際に何時間もの作業を省けるワークフローを組む方法はわからない。
+- **明確な学習パスがない。** hooksより先にMCPを学ぶべき？subagentsより先にskillsを？結局すべてを浅くかじっただけで、何も習得できない。
+- **サンプルが単純すぎる。** 「Hello World」のslash commandでは、memory・専門エージェントへの委任・自動セキュリティスキャンを組み合わせた本番品質のコードレビューパイプラインは作れない。
+
+Claude Codeのパワーの90%を使いこなせていない — しかも、自分が何を知らないかもわかっていない。
+
+---
+
+## このガイドが解決すること
+
+これは単なる機能リファレンスではない。**構造化されたビジュアル・サンプル駆動のガイド**であり、すべてのClaude Code機能を実際のプロジェクトにすぐコピーして使えるテンプレートで学べる。
+
+| | 公式ドキュメント | このガイド |
 |--|---------------|------------|
-| **Format** | Reference documentation | Visual tutorials with Mermaid diagrams |
-| **Depth** | Feature descriptions | How it works under the hood |
-| **Examples** | Basic snippets | Production-ready templates you use immediately |
-| **Structure** | Feature-organized | Progressive learning path (beginner to advanced) |
-| **Onboarding** | Self-directed | Guided roadmap with time estimates |
-| **Self-Assessment** | None | Interactive quizzes to find your gaps and build a personalized path |
+| **形式** | リファレンス文書 | Mermaidダイアグラム付きビジュアルチュートリアル |
+| **深さ** | 機能の説明 | 内部動作まで理解できる |
+| **サンプル** | 基本的なスニペット | 即使える本番対応テンプレート |
+| **構成** | 機能別 | 段階的学習パス（初心者〜上級者） |
+| **オンボーディング** | 自主学習 | 所要時間付きガイド付きロードマップ |
+| **自己評価** | なし | インタラクティブクイズで弱点を特定し個人化パスを生成 |
 
-### What you get:
+### 得られるもの:
 
-- **10 tutorial modules** covering every Claude Code feature — from slash commands to custom agent teams
-- **Copy-paste configs** — slash commands, CLAUDE.md templates, hook scripts, MCP configs, subagent definitions, and full plugin bundles
-- **Mermaid diagrams** showing how each feature works internally, so you understand *why*, not just *how*
-- **A guided learning path** that takes you from beginner to power user in 11-13 hours
-- **Built-in self-assessment** — run `/self-assessment` or `/lesson-quiz hooks` directly in Claude Code to identify gaps
+- **10のチュートリアルモジュール** — slash commandsからカスタムエージェントチームまで、すべてのClaude Code機能を網羅
+- **コピペ用設定ファイル** — slash commands・CLAUDE.mdテンプレート・hookスクリプト・MCP設定・subagent定義・完全なpluginバンドル
+- **Mermaidダイアグラム** — 各機能の内部動作を図解。「どうやるか」ではなく「なぜそうなるか」まで理解できる
+- **ガイド付き学習パス** — 11〜13時間で初心者からパワーユーザーへ
+- **組み込み自己評価** — Claude Codeで `/self-assessment` または `/lesson-quiz hooks` を実行して弱点を把握
 
-**[Start the Learning Path  ->](LEARNING-ROADMAP.md)**
-
----
-
-## How It Works
-
-### 1. Find your level
-
-Take the [self-assessment quiz](LEARNING-ROADMAP.md#-find-your-level) or run `/self-assessment` in Claude Code. Get a personalized roadmap based on what you already know.
-
-### 2. Follow the guided path
-
-Work through 10 modules in order — each builds on the last. Copy templates directly into your project as you learn.
-
-### 3. Combine features into workflows
-
-The real power is in combining features. Learn to wire slash commands + memory + subagents + hooks into automated pipelines that handle code reviews, deployments, and documentation generation.
-
-### 4. Test your understanding
-
-Run `/lesson-quiz [topic]` after each module. The quiz pinpoints what you missed so you can fill gaps fast.
-
-**[Get Started in 15 Minutes](#-get-started-in-15-minutes)**
+**[学習パスを始める ->](LEARNING-ROADMAP.md)**
 
 ---
 
-## Trusted by 1,100+ Developers
+## 使い方
 
-- **1,100+ GitHub stars** from developers who use Claude Code daily
-- **78 forks** — teams adapting this guide for their own workflows
-- **Actively maintained** — synced with every Claude Code release (latest: v2.2.0, March 2026)
-- **Community-driven** — contributions from developers who share their real-world configurations
+### 1. 自分のレベルを確認する
+
+[自己評価クイズ](LEARNING-ROADMAP.md#-自分のレベルを確認する)を受けるか、Claude Codeで `/self-assessment` を実行。現在の知識に基づいたパーソナライズされたロードマップを取得する。
+
+### 2. ガイド付きパスを進む
+
+10モジュールを順番にこなす — 各モジュールは前のものを土台にしている。学習しながらテンプレートをプロジェクトに直接コピーする。
+
+### 3. 機能を組み合わせてワークフローを作る
+
+本当の力は機能の組み合わせにある。slash commands + memory + subagents + hooksを連携させ、コードレビュー・デプロイ・ドキュメント生成を自動化するパイプラインの構築を学ぶ。
+
+### 4. 理解度を確認する
+
+各モジュール後に `/lesson-quiz [topic]` を実行。クイズが見落としを特定し、素早くギャップを埋められる。
+
+**[15分で始める](#-15分で始める)**
+
+---
+
+## 1,100人以上の開発者に信頼されている
+
+- **1,100以上のGitHub stars** — 毎日Claude Codeを使う開発者から
+- **78フォーク** — 自分たちのワークフローに合わせてカスタマイズしているチーム
+- **アクティブにメンテナンス中** — すべてのClaude Codeリリースに同期（最新: v2.2.0, 2026年3月）
+- **コミュニティ主導** — 実際の設定を共有する開発者によるコントリビューション
 
 [![Star History Chart](https://api.star-history.com/svg?repos=luongnv89/claude-howto&type=Date)](https://star-history.com/#luongnv89/claude-howto&Date)
 
 ---
 
-## Not Sure Where to Start?
+## どこから始めるかわからない方へ
 
-Take the self-assessment or pick your level:
+自己評価を受けるか、レベルを選んで始める:
 
-| Level | You can... | Start here | Time |
+| レベル | できること | 始める場所 | 時間 |
 |-------|-----------|------------|------|
-| **Beginner** | Start Claude Code and chat | [Slash Commands](01-slash-commands/) | ~2.5 hours |
-| **Intermediate** | Use CLAUDE.md and custom commands | [Skills](03-skills/) | ~3.5 hours |
-| **Advanced** | Configure MCP servers and hooks | [Advanced Features](09-advanced-features/) | ~5 hours |
+| **初心者** | Claude Codeを起動してチャットできる | [Slash Commands](01-slash-commands/) | 約2.5時間 |
+| **中級者** | CLAUDE.mdとカスタムコマンドを使える | [Skills](03-skills/) | 約3.5時間 |
+| **上級者** | MCPサーバーとhooksを設定できる | [Advanced Features](09-advanced-features/) | 約5時間 |
 
-**Full learning path with all 10 modules:**
+**全10モジュールの学習パス:**
 
-| Order | Module | Level | Time |
+| 順番 | モジュール | レベル | 時間 |
 |-------|--------|-------|------|
-| 1 | [Slash Commands](01-slash-commands/) | Beginner | 30 min |
-| 2 | [Memory](02-memory/) | Beginner+ | 45 min |
-| 3 | [Checkpoints](08-checkpoints/) | Intermediate | 45 min |
-| 4 | [CLI Basics](10-cli/) | Beginner+ | 30 min |
-| 5 | [Skills](03-skills/) | Intermediate | 1 hour |
-| 6 | [Hooks](06-hooks/) | Intermediate | 1 hour |
-| 7 | [MCP](05-mcp/) | Intermediate+ | 1 hour |
-| 8 | [Subagents](04-subagents/) | Intermediate+ | 1.5 hours |
-| 9 | [Advanced Features](09-advanced-features/) | Advanced | 2-3 hours |
-| 10 | [Plugins](07-plugins/) | Advanced | 2 hours |
+| 1 | [Slash Commands](01-slash-commands/) | 初心者 | 30分 |
+| 2 | [Memory](02-memory/) | 初心者+ | 45分 |
+| 3 | [Checkpoints](08-checkpoints/) | 中級者 | 45分 |
+| 4 | [CLI Basics](10-cli/) | 初心者+ | 30分 |
+| 5 | [Skills](03-skills/) | 中級者 | 1時間 |
+| 6 | [Hooks](06-hooks/) | 中級者 | 1時間 |
+| 7 | [MCP](05-mcp/) | 中級者+ | 1時間 |
+| 8 | [Subagents](04-subagents/) | 中級者+ | 1.5時間 |
+| 9 | [Advanced Features](09-advanced-features/) | 上級者 | 2〜3時間 |
+| 10 | [Plugins](07-plugins/) | 上級者 | 2時間 |
 
-**[Complete Learning Roadmap ->](LEARNING-ROADMAP.md)**
+**[完全な学習ロードマップ ->](LEARNING-ROADMAP.md)**
 
 ---
 
-## Get Started in 15 Minutes
+## 15分で始める
 
 ```bash
-# 1. Clone the guide
+# 1. ガイドをクローン
 git clone https://github.com/luongnv89/claude-howto.git
 cd claude-howto
 
-# 2. Copy your first slash command
+# 2. 最初のslash commandをコピー
 mkdir -p /path/to/your-project/.claude/commands
 cp 01-slash-commands/optimize.md /path/to/your-project/.claude/commands/
 
-# 3. Try it — in Claude Code, type:
+# 3. 試してみる — Claude Codeで以下を入力:
 # /optimize
 
-# 4. Ready for more? Set up project memory:
+# 4. もっと試したい？プロジェクトmemoryをセットアップ:
 cp 02-memory/project-CLAUDE.md /path/to/your-project/CLAUDE.md
 
-# 5. Install a skill:
+# 5. skillをインストール:
 cp -r 03-skills/code-review ~/.claude/skills/
 ```
 
-Want the full setup? Here's the **1-hour essential setup**:
+フルセットアップは？**1時間の必須セットアップ**:
 
 ```bash
-# Slash commands (15 min)
+# Slash commands (15分)
 cp 01-slash-commands/*.md .claude/commands/
 
-# Project memory (15 min)
+# プロジェクトmemory (15分)
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 
-# Install a skill (15 min)
+# skillをインストール (15分)
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# Weekend goal: add hooks, subagents, MCP, and plugins
-# Follow the learning path for guided setup
+# 週末の目標: hooks・subagents・MCP・pluginsを追加
+# 学習パスに従ってガイド付きセットアップを進める
 ```
 
-**[View the Full Installation Reference](#installation-quick-reference)**
+**[インストールクイックリファレンスを見る](#インストールクイックリファレンス)**
 
 ---
 
-## What Can You Build With This?
+## 何を作れるか
 
-| Use Case | Features You'll Combine |
+| ユースケース | 組み合わせる機能 |
 |----------|------------------------|
-| **Automated Code Review** | Slash Commands + Subagents + Memory + MCP |
-| **Team Onboarding** | Memory + Slash Commands + Plugins |
-| **CI/CD Automation** | CLI Reference + Hooks + Background Tasks |
-| **Documentation Generation** | Skills + Subagents + Plugins |
-| **Security Audits** | Subagents + Skills + Hooks (read-only mode) |
-| **DevOps Pipelines** | Plugins + MCP + Hooks + Background Tasks |
-| **Complex Refactoring** | Checkpoints + Planning Mode + Hooks |
+| **自動コードレビュー** | Slash Commands + Subagents + Memory + MCP |
+| **チームオンボーディング** | Memory + Slash Commands + Plugins |
+| **CI/CD自動化** | CLI Reference + Hooks + Background Tasks |
+| **ドキュメント生成** | Skills + Subagents + Plugins |
+| **セキュリティ監査** | Subagents + Skills + Hooks (read-onlyモード) |
+| **DevOpsパイプライン** | Plugins + MCP + Hooks + Background Tasks |
+| **大規模リファクタリング** | Checkpoints + Planning Mode + Hooks |
 
 ---
 
-## FAQ
+## よくある質問
 
-**Is this free?**
-Yes. MIT licensed, free forever. Use it in personal projects, at work, in your team — no restrictions beyond including the license notice.
+**無料ですか？**
+はい。MITライセンスで永久無料。個人プロジェクト・職場・チームでご利用いただけます — ライセンス表記を含めること以外に制限はありません。
 
-**Is this maintained?**
-Actively. The guide is synced with every Claude Code release. Current version: v2.2.0 (March 2026), compatible with Claude Code 2.1+.
+**メンテナンスはされていますか？**
+アクティブにメンテナンス中。すべてのClaude Codeリリースに合わせて更新。現在のバージョン: v2.2.0 (2026年3月)、Claude Code 2.1+対応。
 
-**How is this different from the official docs?**
-The official docs are a feature reference. This guide is a tutorial with diagrams, production-ready templates, and a progressive learning path. They complement each other — start here to learn, reference the docs when you need specifics.
+**公式ドキュメントとの違いは？**
+公式ドキュメントは機能リファレンス。このガイドはダイアグラム・本番対応テンプレート・段階的学習パスを備えたチュートリアル。両方を補完的に使うのがベスト — まずここで学び、詳細が必要な時に公式ドキュメントを参照。
 
-**How long does it take to go through everything?**
-11-13 hours for the full path. But you'll get immediate value in 15 minutes — just copy a slash command template and try it.
+**全部やるのにどのくらいかかりますか？**
+フルパスで11〜13時間。ただし15分で即効果を得られます — slash commandテンプレートをコピーして試すだけでOK。
 
-**Can I use this with Claude Sonnet / Haiku / Opus?**
-Yes. All templates work with Claude Sonnet 4.6, Claude Opus 4.6, and Claude Haiku 4.5.
+**Claude Sonnet / Haiku / Opusでも使えますか？**
+はい。すべてのテンプレートはClaude Sonnet 4.6、Claude Opus 4.6、Claude Haiku 4.5で動作します。
 
-**Can I contribute?**
-Absolutely. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. We welcome new examples, bug fixes, documentation improvements, and community templates.
+**コントリビュートできますか？**
+もちろん。開始方法については [CONTRIBUTING.md](CONTRIBUTING.md) をご覧ください。新しいサンプル・バグ修正・ドキュメント改善・コミュニティテンプレートを歓迎します。
 
-**Can I read this offline?**
-Yes. Run `uv run scripts/build_epub.py` to generate an EPUB ebook with all content and rendered diagrams.
+**オフラインで読めますか？**
+はい。`uv run scripts/build_epub.py` を実行して、全コンテンツとレンダリングされたMermaidダイアグラムを含むEPUB電子書籍を生成できます。
 
 ---
 
-## Start Mastering Claude Code Today
+## 今すぐClaude Codeをマスターしよう
 
-You already have Claude Code installed. The only thing between you and 10x productivity is knowing how to use it. This guide gives you the structured path, the visual explanations, and the copy-paste templates to get there.
+Claude Codeはすでにインストールされている。あなたと10倍の生産性の間にあるのは、使いこなし方を知ることだけ。このガイドは構造化されたパス・ビジュアル解説・コピペ用テンプレートを提供する。
 
-MIT licensed. Free forever. Clone it, fork it, make it yours.
+MITライセンス。永久無料。クローンして、フォークして、あなたのものにしよう。
 
-**[Start the Learning Path ->](LEARNING-ROADMAP.md)** | **[Browse the Feature Catalog](CATALOG.md)** | **[Get Started in 15 Minutes](#-get-started-in-15-minutes)**
+**[学習パスを始める ->](LEARNING-ROADMAP.md)** | **[機能カタログを見る](CATALOG.md)** | **[15分で始める](#-15分で始める)**
 
 ---
 
 <details>
-<summary>Quick Navigation — All Features</summary>
+<summary>クイックナビゲーション — 全機能</summary>
 
-| Feature | Description | Folder |
+| 機能 | 説明 | フォルダ |
 |---------|-------------|--------|
-| **Feature Catalog** | Complete reference with installation commands | [CATALOG.md](CATALOG.md) |
-| **Slash Commands** | User-invoked shortcuts | [01-slash-commands/](01-slash-commands/) |
-| **Memory** | Persistent context | [02-memory/](02-memory/) |
-| **Skills** | Reusable capabilities | [03-skills/](03-skills/) |
-| **Subagents** | Specialized AI assistants | [04-subagents/](04-subagents/) |
-| **MCP Protocol** | External tool access | [05-mcp/](05-mcp/) |
-| **Hooks** | Event-driven automation | [06-hooks/](06-hooks/) |
-| **Plugins** | Bundled features | [07-plugins/](07-plugins/) |
-| **Checkpoints** | Session snapshots & rewind | [08-checkpoints/](08-checkpoints/) |
-| **Advanced Features** | Planning, thinking, background tasks | [09-advanced-features/](09-advanced-features/) |
-| **CLI Reference** | Commands, flags, and options | [10-cli/](10-cli/) |
-| **Blog Posts** | Real-world usage examples | [Blog Posts](https://medium.com/@luongnv89) |
+| **機能カタログ** | インストールコマンド付き完全リファレンス | [CATALOG.md](CATALOG.md) |
+| **Slash Commands** | ユーザーが呼び出すショートカット | [01-slash-commands/](01-slash-commands/) |
+| **Memory** | セッションを跨ぐ永続的なコンテキスト | [02-memory/](02-memory/) |
+| **Skills** | 再利用可能な機能 | [03-skills/](03-skills/) |
+| **Subagents** | 専門AIアシスタント | [04-subagents/](04-subagents/) |
+| **MCPプロトコル** | 外部ツールへのアクセス | [05-mcp/](05-mcp/) |
+| **Hooks** | イベント駆動の自動化 | [06-hooks/](06-hooks/) |
+| **Plugins** | 機能のバンドル | [07-plugins/](07-plugins/) |
+| **Checkpoints** | セッションのスナップショットと巻き戻し | [08-checkpoints/](08-checkpoints/) |
+| **Advanced Features** | Planning・thinking・バックグラウンドタスク | [09-advanced-features/](09-advanced-features/) |
+| **CLIリファレンス** | コマンド・フラグ・オプション | [10-cli/](10-cli/) |
+| **ブログ記事** | 実際の使用例 | [ブログ記事](https://medium.com/@luongnv89) |
 
 </details>
 
 <details>
-<summary>Feature Comparison</summary>
+<summary>機能比較</summary>
 
-| Feature | Invocation | Persistence | Best For |
+| 機能 | 呼び出し方 | 永続性 | 最適な用途 |
 |---------|-----------|------------|----------|
-| **Slash Commands** | Manual (`/cmd`) | Session only | Quick shortcuts |
-| **Memory** | Auto-loaded | Cross-session | Long-term learning |
-| **Skills** | Auto-invoked | Filesystem | Automated workflows |
-| **Subagents** | Auto-delegated | Isolated context | Task distribution |
-| **MCP Protocol** | Auto-queried | Real-time | Live data access |
-| **Hooks** | Event-triggered | Configured | Automation & validation |
-| **Plugins** | One command | All features | Complete solutions |
-| **Checkpoints** | Manual/Auto | Session-based | Safe experimentation |
-| **Planning Mode** | Manual/Auto | Plan phase | Complex implementations |
-| **Background Tasks** | Manual | Task duration | Long-running operations |
-| **CLI Reference** | Terminal commands | Session/Script | Automation & scripting |
+| **Slash Commands** | 手動 (`/cmd`) | セッション内のみ | クイックショートカット |
+| **Memory** | 自動読み込み | セッション間 | 長期的な学習 |
+| **Skills** | 自動呼び出し | ファイルシステム | 自動化ワークフロー |
+| **Subagents** | 自動委任 | 独立したコンテキスト | タスク分散 |
+| **MCPプロトコル** | 自動クエリ | リアルタイム | ライブデータアクセス |
+| **Hooks** | イベントトリガー | 設定済み | 自動化とバリデーション |
+| **Plugins** | ワンコマンド | 全機能 | 完全なソリューション |
+| **Checkpoints** | 手動/自動 | セッションベース | 安全な実験 |
+| **Planning Mode** | 手動/自動 | 計画フェーズ | 複雑な実装 |
+| **Background Tasks** | 手動 | タスク期間中 | 長時間実行処理 |
+| **CLIリファレンス** | ターミナルコマンド | セッション/スクリプト | 自動化とスクリプト |
 
 </details>
 
 <details>
-<summary>Installation Quick Reference</summary>
+<summary>インストールクイックリファレンス</summary>
 
 ```bash
 # Slash Commands
@@ -287,14 +287,14 @@ chmod +x ~/.claude/hooks/*.sh
 # Plugins
 /plugin install pr-review
 
-# Checkpoints (auto-enabled, configure in settings)
-# See 08-checkpoints/README.md
+# Checkpoints (自動有効化、settingsで設定)
+# 08-checkpoints/README.md を参照
 
-# Advanced Features (configure in settings)
-# See 09-advanced-features/config-examples.json
+# Advanced Features (settingsで設定)
+# 09-advanced-features/config-examples.json を参照
 
-# CLI Reference (no installation needed)
-# See 10-cli/README.md for usage examples
+# CLIリファレンス (インストール不要)
+# 使用例は 10-cli/README.md を参照
 ```
 
 </details>
@@ -302,159 +302,159 @@ chmod +x ~/.claude/hooks/*.sh
 <details>
 <summary>01. Slash Commands</summary>
 
-**Location**: [01-slash-commands/](01-slash-commands/)
+**場所**: [01-slash-commands/](01-slash-commands/)
 
-**What**: User-invoked shortcuts stored as Markdown files
+**概要**: Markdownファイルとして保存されたユーザー呼び出しショートカット
 
-**Examples**:
-- `optimize.md` - Code optimization analysis
-- `pr.md` - Pull request preparation
-- `generate-api-docs.md` - API documentation generator
+**サンプル**:
+- `optimize.md` - コード最適化分析
+- `pr.md` - プルリクエスト準備
+- `generate-api-docs.md` - APIドキュメント生成
 
-**Installation**:
+**インストール**:
 ```bash
 cp 01-slash-commands/*.md /path/to/project/.claude/commands/
 ```
 
-**Usage**:
+**使い方**:
 ```
 /optimize
 /pr
 /generate-api-docs
 ```
 
-**Learn More**: [Discovering Claude Code Slash Commands](https://medium.com/@luongnv89/discovering-claude-code-slash-commands-cdc17f0dfb29)
+**詳細**: [Claude Code Slash Commandsの発見](https://medium.com/@luongnv89/discovering-claude-code-slash-commands-cdc17f0dfb29)
 
 </details>
 
 <details>
 <summary>02. Memory</summary>
 
-**Location**: [02-memory/](02-memory/)
+**場所**: [02-memory/](02-memory/)
 
-**What**: Persistent context across sessions
+**概要**: セッションを跨ぐ永続的なコンテキスト
 
-**Examples**:
-- `project-CLAUDE.md` - Team-wide project standards
-- `directory-api-CLAUDE.md` - Directory-specific rules
-- `personal-CLAUDE.md` - Personal preferences
+**サンプル**:
+- `project-CLAUDE.md` - チーム全体のプロジェクト標準
+- `directory-api-CLAUDE.md` - ディレクトリ固有のルール
+- `personal-CLAUDE.md` - 個人の設定
 
-**Installation**:
+**インストール**:
 ```bash
-# Project memory
+# プロジェクトmemory
 cp 02-memory/project-CLAUDE.md /path/to/project/CLAUDE.md
 
-# Directory memory
+# ディレクトリmemory
 cp 02-memory/directory-api-CLAUDE.md /path/to/project/src/api/CLAUDE.md
 
-# Personal memory
+# 個人memory
 cp 02-memory/personal-CLAUDE.md ~/.claude/CLAUDE.md
 ```
 
-**Usage**: Automatically loaded by Claude
+**使い方**: Claudeによって自動的に読み込まれる
 
 </details>
 
 <details>
 <summary>03. Skills</summary>
 
-**Location**: [03-skills/](03-skills/)
+**場所**: [03-skills/](03-skills/)
 
-**What**: Reusable, auto-invoked capabilities with instructions and scripts
+**概要**: 指示とスクリプトを持つ再利用可能な自動呼び出し機能
 
-**Examples**:
-- `code-review/` - Comprehensive code review with scripts
-- `brand-voice/` - Brand voice consistency checker
-- `doc-generator/` - API documentation generator
+**サンプル**:
+- `code-review/` - スクリプト付き包括的コードレビュー
+- `brand-voice/` - ブランドボイスの一貫性チェッカー
+- `doc-generator/` - APIドキュメント生成
 
-**Installation**:
+**インストール**:
 ```bash
-# Personal skills
+# 個人スキル
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# Project skills
+# プロジェクトスキル
 cp -r 03-skills/code-review /path/to/project/.claude/skills/
 ```
 
-**Usage**: Automatically invoked when relevant
+**使い方**: 関連する場合に自動的に呼び出される
 
 </details>
 
 <details>
 <summary>04. Subagents</summary>
 
-**Location**: [04-subagents/](04-subagents/)
+**場所**: [04-subagents/](04-subagents/)
 
-**What**: Specialized AI assistants with isolated contexts and custom prompts
+**概要**: 独立したコンテキストとカスタムプロンプトを持つ専門AIアシスタント
 
-**Examples**:
-- `code-reviewer.md` - Comprehensive code quality analysis
-- `test-engineer.md` - Test strategy and coverage
-- `documentation-writer.md` - Technical documentation
-- `secure-reviewer.md` - Security-focused review (read-only)
-- `implementation-agent.md` - Full feature implementation
+**サンプル**:
+- `code-reviewer.md` - 包括的なコード品質分析
+- `test-engineer.md` - テスト戦略とカバレッジ
+- `documentation-writer.md` - 技術ドキュメント
+- `secure-reviewer.md` - セキュリティ重視のレビュー (read-only)
+- `implementation-agent.md` - フル機能実装
 
-**Installation**:
+**インストール**:
 ```bash
 cp 04-subagents/*.md /path/to/project/.claude/agents/
 ```
 
-**Usage**: Automatically delegated by main agent
+**使い方**: メインエージェントによって自動的に委任される
 
 </details>
 
 <details>
-<summary>05. MCP Protocol</summary>
+<summary>05. MCPプロトコル</summary>
 
-**Location**: [05-mcp/](05-mcp/)
+**場所**: [05-mcp/](05-mcp/)
 
-**What**: Model Context Protocol for accessing external tools and APIs
+**概要**: 外部ツールとAPIにアクセスするためのModel Context Protocol
 
-**Examples**:
-- `github-mcp.json` - GitHub integration
-- `database-mcp.json` - Database queries
-- `filesystem-mcp.json` - File operations
-- `multi-mcp.json` - Multiple MCP servers
+**サンプル**:
+- `github-mcp.json` - GitHub連携
+- `database-mcp.json` - データベースクエリ
+- `filesystem-mcp.json` - ファイル操作
+- `multi-mcp.json` - 複数MCPサーバー
 
-**Installation**:
+**インストール**:
 ```bash
-# Set environment variables
+# 環境変数を設定
 export GITHUB_TOKEN="your_token"
 export DATABASE_URL="postgresql://..."
 
-# Add MCP server via CLI
+# CLIでMCPサーバーを追加
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
-# Or add to project .mcp.json manually (see 05-mcp/ for examples)
+# またはプロジェクトの .mcp.json に手動で追加 (05-mcp/ のサンプルを参照)
 ```
 
-**Usage**: MCP tools are automatically available to Claude once configured
+**使い方**: 設定後、MCPツールはClaudeで自動的に利用可能になる
 
 </details>
 
 <details>
 <summary>06. Hooks</summary>
 
-**Location**: [06-hooks/](06-hooks/)
+**場所**: [06-hooks/](06-hooks/)
 
-**What**: Event-driven shell commands that execute automatically in response to Claude Code events
+**概要**: Claude Codeのイベントに応じて自動実行されるイベント駆動シェルコマンド
 
-**Examples**:
-- `format-code.sh` - Auto-format code before writing
-- `pre-commit.sh` - Run tests before commits
-- `security-scan.sh` - Scan for security issues
-- `log-bash.sh` - Log all bash commands
-- `validate-prompt.sh` - Validate user prompts
-- `notify-team.sh` - Send notifications on events
+**サンプル**:
+- `format-code.sh` - 書き込み前にコードを自動フォーマット
+- `pre-commit.sh` - コミット前にテストを実行
+- `security-scan.sh` - セキュリティ問題をスキャン
+- `log-bash.sh` - すべてのbashコマンドをログ
+- `validate-prompt.sh` - ユーザープロンプトを検証
+- `notify-team.sh` - イベント時にチームへ通知
 
-**Installation**:
+**インストール**:
 ```bash
 mkdir -p ~/.claude/hooks
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 ```
 
-Configure hooks in `~/.claude/settings.json`:
+`~/.claude/settings.json` にhooksを設定:
 ```json
 {
   "hooks": {
@@ -470,9 +470,9 @@ Configure hooks in `~/.claude/settings.json`:
 }
 ```
 
-**Usage**: Hooks execute automatically on events
+**使い方**: Hooksはイベント発生時に自動実行される
 
-**Hook Types** (4 types, 25 events):
+**Hookの種類** (4種類、25イベント):
 - **Tool Hooks**: `PreToolUse`, `PostToolUse`, `PostToolUseFailure`, `PermissionRequest`
 - **Session Hooks**: `SessionStart`, `SessionEnd`, `Stop`, `StopFailure`, `SubagentStart`, `SubagentStop`
 - **Task Hooks**: `UserPromptSubmit`, `TaskCompleted`, `TaskCreated`, `TeammateIdle`
@@ -483,164 +483,164 @@ Configure hooks in `~/.claude/settings.json`:
 <details>
 <summary>07. Plugins</summary>
 
-**Location**: [07-plugins/](07-plugins/)
+**場所**: [07-plugins/](07-plugins/)
 
-**What**: Bundled collections of commands, agents, MCP, and hooks
+**概要**: コマンド・エージェント・MCP・hooksをまとめたバンドルコレクション
 
-**Examples**:
-- `pr-review/` - Complete PR review workflow
-- `devops-automation/` - Deployment and monitoring
-- `documentation/` - Documentation generation
+**サンプル**:
+- `pr-review/` - 完全なPRレビューワークフロー
+- `devops-automation/` - デプロイとモニタリング
+- `documentation/` - ドキュメント生成
 
-**Installation**:
+**インストール**:
 ```bash
 /plugin install pr-review
 /plugin install devops-automation
 /plugin install documentation
 ```
 
-**Usage**: Use bundled slash commands and features
+**使い方**: バンドルされたslash commandsと機能を使用
 
 </details>
 
 <details>
-<summary>08. Checkpoints and Rewind</summary>
+<summary>08. Checkpointsと巻き戻し</summary>
 
-**Location**: [08-checkpoints/](08-checkpoints/)
+**場所**: [08-checkpoints/](08-checkpoints/)
 
-**What**: Save conversation state and rewind to previous points to explore different approaches
+**概要**: 会話の状態を保存し、以前のポイントに巻き戻して別のアプローチを探る
 
-**Key Concepts**:
-- **Checkpoint**: Snapshot of conversation state
-- **Rewind**: Return to previous checkpoint
-- **Branch Point**: Explore multiple approaches from same checkpoint
+**主要概念**:
+- **Checkpoint**: 会話状態のスナップショット
+- **Rewind**: 以前のcheckpointに戻る
+- **Branch Point**: 同じcheckpointから複数のアプローチを探る
 
-**Usage**:
+**使い方**:
 ```
-# Checkpoints are created automatically with every user prompt
-# To rewind, press Esc twice or use:
+# Checkpointはユーザーの各プロンプトで自動作成される
+# 巻き戻すには Esc を2回押すか以下を使用:
 /rewind
 
-# Then choose from five options:
-# 1. Restore code and conversation
-# 2. Restore conversation
-# 3. Restore code
-# 4. Summarize from here
-# 5. Never mind
+# 5つのオプションから選択:
+# 1. コードと会話を復元
+# 2. 会話を復元
+# 3. コードを復元
+# 4. ここからまとめる
+# 5. キャンセル
 ```
 
-**Use Cases**:
-- Try different implementation approaches
-- Recover from mistakes
-- Safe experimentation
-- Compare alternative solutions
-- A/B testing different designs
+**ユースケース**:
+- 異なる実装アプローチを試す
+- ミスからの回復
+- 安全な実験
+- 代替ソリューションの比較
+- 異なる設計のA/Bテスト
 
 </details>
 
 <details>
 <summary>09. Advanced Features</summary>
 
-**Location**: [09-advanced-features/](09-advanced-features/)
+**場所**: [09-advanced-features/](09-advanced-features/)
 
-**What**: Advanced capabilities for complex workflows and automation
+**概要**: 複雑なワークフローと自動化のための高度な機能
 
-**Includes**:
-- **Planning Mode** — Create detailed implementation plans before coding
-- **Extended Thinking** — Deep reasoning for complex problems (toggle with `Alt+T` / `Option+T`)
-- **Background Tasks** — Run long operations without blocking
+**内容**:
+- **Planning Mode** — コーディング前に詳細な実装計画を作成
+- **Extended Thinking** — 複雑な問題への深い推論 (`Alt+T` / `Option+T` で切り替え)
+- **Background Tasks** — ブロックせずに長時間処理を実行
 - **Permission Modes** — `default`, `acceptEdits`, `plan`, `dontAsk`, `bypassPermissions`
-- **Headless Mode** — Run Claude Code in CI/CD: `claude -p "Run tests and generate report"`
+- **Headless Mode** — CI/CDでClaude Codeを実行: `claude -p "テストを実行してレポートを生成"`
 - **Session Management** — `/resume`, `/rename`, `/fork`, `claude -c`, `claude -r`
-- **Configuration** — Customize behavior in `~/.claude/settings.json`
+- **設定** — `~/.claude/settings.json` で動作をカスタマイズ
 
-See [config-examples.json](09-advanced-features/config-examples.json) for complete configurations.
+完全な設定例は [config-examples.json](09-advanced-features/config-examples.json) を参照。
 
 </details>
 
 <details>
-<summary>10. CLI Reference</summary>
+<summary>10. CLIリファレンス</summary>
 
-**Location**: [10-cli/](10-cli/)
+**場所**: [10-cli/](10-cli/)
 
-**What**: Complete command-line interface reference for Claude Code
+**概要**: Claude Codeの完全なコマンドラインインターフェースリファレンス
 
-**Quick Examples**:
+**クイックサンプル**:
 ```bash
-# Interactive mode
-claude "explain this project"
+# インタラクティブモード
+claude "このプロジェクトを説明して"
 
-# Print mode (non-interactive)
-claude -p "review this code"
+# プリントモード (非インタラクティブ)
+claude -p "このコードをレビューして"
 
-# Process file content
-cat error.log | claude -p "explain this error"
+# ファイル内容を処理
+cat error.log | claude -p "このエラーを説明して"
 
-# JSON output for scripts
-claude -p --output-format json "list functions"
+# スクリプト用JSON出力
+claude -p --output-format json "関数を一覧表示"
 
-# Resume session
-claude -r "feature-auth" "continue implementation"
+# セッションを再開
+claude -r "feature-auth" "実装を続ける"
 ```
 
-**Use Cases**: CI/CD pipeline integration, script automation, batch processing, multi-session workflows, custom agent configurations
+**ユースケース**: CI/CDパイプライン統合・スクリプト自動化・バッチ処理・マルチセッションワークフロー・カスタムエージェント設定
 
 </details>
 
 <details>
-<summary>Example Workflows</summary>
+<summary>ワークフロー例</summary>
 
-### Complete Code Review Workflow
+### 完全なコードレビューワークフロー
 
 ```markdown
-# Uses: Slash Commands + Subagents + Memory + MCP
+# 使用機能: Slash Commands + Subagents + Memory + MCP
 
-User: /review-pr
+ユーザー: /review-pr
 
 Claude:
-1. Loads project memory (coding standards)
-2. Fetches PR via GitHub MCP
-3. Delegates to code-reviewer subagent
-4. Delegates to test-engineer subagent
-5. Synthesizes findings
-6. Provides comprehensive review
+1. プロジェクトmemoryを読み込む（コーディング標準）
+2. GitHub MCPでPRを取得
+3. code-reviewer subagentに委任
+4. test-engineer subagentに委任
+5. 結果を統合
+6. 包括的なレビューを提供
 ```
 
-### Automated Documentation
+### 自動ドキュメント生成
 
 ```markdown
-# Uses: Skills + Subagents + Memory
+# 使用機能: Skills + Subagents + Memory
 
-User: "Generate API documentation for the auth module"
+ユーザー: "authモジュールのAPIドキュメントを生成して"
 
 Claude:
-1. Loads project memory (doc standards)
-2. Detects doc generation request
-3. Auto-invokes doc-generator skill
-4. Delegates to api-documenter subagent
-5. Creates comprehensive docs with examples
+1. プロジェクトmemoryを読み込む（ドキュメント標準）
+2. ドキュメント生成リクエストを検出
+3. doc-generator skillを自動呼び出し
+4. api-documenter subagentに委任
+5. サンプル付き包括的なドキュメントを作成
 ```
 
-### DevOps Deployment
+### DevOpsデプロイ
 
 ```markdown
-# Uses: Plugins + MCP + Hooks
+# 使用機能: Plugins + MCP + Hooks
 
-User: /deploy production
+ユーザー: /deploy production
 
 Claude:
-1. Runs pre-deploy hook (validates environment)
-2. Delegates to deployment-specialist subagent
-3. Executes deployment via Kubernetes MCP
-4. Monitors progress
-5. Runs post-deploy hook (health checks)
-6. Reports status
+1. pre-deploy hookを実行（環境を検証）
+2. deployment-specialist subagentに委任
+3. Kubernetes MCPでデプロイを実行
+4. 進捗を監視
+5. post-deploy hookを実行（ヘルスチェック）
+6. 状態を報告
 ```
 
 </details>
 
 <details>
-<summary>Directory Structure</summary>
+<summary>ディレクトリ構造</summary>
 
 ```
 ├── 01-slash-commands/
@@ -700,176 +700,176 @@ Claude:
 │   └── README.md
 ├── 10-cli/
 │   └── README.md
-└── README.md (this file)
+└── README.md (このファイル)
 ```
 
 </details>
 
 <details>
-<summary>Best Practices</summary>
+<summary>ベストプラクティス</summary>
 
-### Do's
-- Start simple with slash commands
-- Add features incrementally
-- Use memory for team standards
-- Test configurations locally first
-- Document custom implementations
-- Version control project configurations
-- Share plugins with team
+### やること
+- slash commandsからシンプルに始める
+- 機能を段階的に追加する
+- チーム標準にmemoryを使う
+- まずローカルで設定をテストする
+- カスタム実装をドキュメント化する
+- プロジェクト設定をバージョン管理する
+- pluginsをチームで共有する
 
-### Don'ts
-- Don't create redundant features
-- Don't hardcode credentials
-- Don't skip documentation
-- Don't over-complicate simple tasks
-- Don't ignore security best practices
-- Don't commit sensitive data
-
-</details>
-
-<details>
-<summary>Troubleshooting</summary>
-
-### Feature Not Loading
-1. Check file location and naming
-2. Verify YAML frontmatter syntax
-3. Check file permissions
-4. Review Claude Code version compatibility
-
-### MCP Connection Failed
-1. Verify environment variables
-2. Check MCP server installation
-3. Test credentials
-4. Review network connectivity
-
-### Subagent Not Delegating
-1. Check tool permissions
-2. Verify agent description clarity
-3. Review task complexity
-4. Test agent independently
+### やってはいけないこと
+- 冗長な機能を作らない
+- 認証情報をハードコードしない
+- ドキュメントを省かない
+- シンプルなタスクを複雑にしすぎない
+- セキュリティのベストプラクティスを無視しない
+- 機密データをコミットしない
 
 </details>
 
 <details>
-<summary>Testing</summary>
+<summary>トラブルシューティング</summary>
 
-This project includes comprehensive automated testing:
+### 機能が読み込まれない
+1. ファイルの場所と名前を確認
+2. YAMLフロントマターの構文を確認
+3. ファイルのパーミッションを確認
+4. Claude Codeのバージョン互換性を確認
 
-- **Unit Tests**: Python tests using pytest (Python 3.10, 3.11, 3.12)
-- **Code Quality**: Linting and formatting with Ruff
-- **Security**: Vulnerability scanning with Bandit
-- **Type Checking**: Static type analysis with mypy
-- **Build Verification**: EPUB generation testing
-- **Coverage Tracking**: Codecov integration
+### MCP接続失敗
+1. 環境変数を確認
+2. MCPサーバーのインストールを確認
+3. 認証情報をテスト
+4. ネットワーク接続を確認
+
+### Subagentが委任しない
+1. ツールのパーミッションを確認
+2. エージェントの説明が明確か確認
+3. タスクの複雑さを確認
+4. エージェントを独立してテスト
+
+</details>
+
+<details>
+<summary>テスト</summary>
+
+このプロジェクトには包括的な自動テストが含まれている:
+
+- **ユニットテスト**: pytestを使用したPythonテスト (Python 3.10, 3.11, 3.12)
+- **コード品質**: Ruffによるリンティングとフォーマット
+- **セキュリティ**: Banditによる脆弱性スキャン
+- **型チェック**: mypyによる静的型解析
+- **ビルド検証**: EPUB生成テスト
+- **カバレッジ追跡**: Codecov連携
 
 ```bash
-# Install development dependencies
+# 開発用依存関係をインストール
 uv pip install -r requirements-dev.txt
 
-# Run all unit tests
+# 全ユニットテストを実行
 pytest scripts/tests/ -v
 
-# Run tests with coverage report
+# カバレッジレポート付きでテストを実行
 pytest scripts/tests/ -v --cov=scripts --cov-report=html
 
-# Run code quality checks
+# コード品質チェックを実行
 ruff check scripts/
 ruff format --check scripts/
 
-# Run security scan
+# セキュリティスキャンを実行
 bandit -c pyproject.toml -r scripts/ --exclude scripts/tests/
 
-# Run type checking
+# 型チェックを実行
 mypy scripts/ --ignore-missing-imports
 ```
 
-Tests run automatically on every push to `main`/`develop` and every PR to `main`. See [TESTING.md](.github/TESTING.md) for detailed information.
+テストは `main`/`develop` へのすべてのpushと `main` へのすべてのPRで自動実行される。詳細は [TESTING.md](.github/TESTING.md) を参照。
 
 </details>
 
 <details>
-<summary>EPUB Generation</summary>
+<summary>EPUB生成</summary>
 
-Want to read this guide offline? Generate an EPUB ebook:
+オフラインでこのガイドを読みたい？EPUBを生成:
 
 ```bash
 uv run scripts/build_epub.py
 ```
 
-This creates `claude-howto-guide.epub` with all content, including rendered Mermaid diagrams.
+これにより全コンテンツとレンダリングされたMermaidダイアグラムを含む `claude-howto-guide.epub` が作成される。
 
-See [scripts/README.md](scripts/README.md) for more options.
-
-</details>
-
-<details>
-<summary>Contributing</summary>
-
-Found an issue or want to contribute an example? We'd love your help!
-
-**Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:**
-- Types of contributions (examples, docs, features, bugs, feedback)
-- How to set up your development environment
-- Directory structure and how to add content
-- Writing guidelines and best practices
-- Commit and PR process
-
-**Our Community Standards:**
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) - How we treat each other
-- [SECURITY.md](SECURITY.md) - Security policy and vulnerability reporting
-
-### Reporting Security Issues
-
-If you discover a security vulnerability, please report it responsibly:
-
-1. **Use GitHub Private Vulnerability Reporting**: https://github.com/luongnv89/claude-howto/security/advisories
-2. **Or read** [.github/SECURITY_REPORTING.md](.github/SECURITY_REPORTING.md) for detailed instructions
-3. **Do NOT** open a public issue for security vulnerabilities
-
-Quick start:
-1. Fork and clone the repository
-2. Create a descriptive branch (`add/feature-name`, `fix/bug`, `docs/improvement`)
-3. Make your changes following the guidelines
-4. Submit a pull request with a clear description
-
-**Need help?** Open an issue or discussion, and we'll guide you through the process.
+その他のオプションは [scripts/README.md](scripts/README.md) を参照。
 
 </details>
 
 <details>
-<summary>Additional Resources</summary>
+<summary>コントリビュート</summary>
 
-- [Claude Code Documentation](https://code.claude.com/docs/en/overview)
-- [MCP Protocol Specification](https://modelcontextprotocol.io)
-- [Skills Repository](https://github.com/luongnv89/skills) - Collection of ready-to-use skills
+問題を見つけた、またはサンプルを追加したい？ぜひご協力ください！
+
+**詳細なガイドラインは [CONTRIBUTING.md](CONTRIBUTING.md) を参照:**
+- コントリビュートの種類（サンプル・ドキュメント・機能・バグ・フィードバック）
+- 開発環境のセットアップ方法
+- ディレクトリ構造とコンテンツの追加方法
+- 執筆ガイドラインとベストプラクティス
+- コミットとPRのプロセス
+
+**コミュニティ基準:**
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) - メンバー間の行動規範
+- [SECURITY.md](SECURITY.md) - セキュリティポリシーと脆弱性報告
+
+### セキュリティ問題の報告
+
+セキュリティの脆弱性を発見した場合、責任を持って報告してください:
+
+1. **GitHub プライベート脆弱性報告を使用**: https://github.com/luongnv89/claude-howto/security/advisories
+2. **または** [.github/SECURITY_REPORTING.md](.github/SECURITY_REPORTING.md) の詳細な手順を参照
+3. **公開Issueにセキュリティ脆弱性を投稿しないでください**
+
+クイックスタート:
+1. リポジトリをフォークしてクローン
+2. 説明的なブランチを作成 (`add/feature-name`, `fix/bug`, `docs/improvement`)
+3. ガイドラインに従って変更を加える
+4. 明確な説明でプルリクエストを提出
+
+**困ったら？** Issueまたはディスカッションを開いてください。プロセスをガイドします。
+
+</details>
+
+<details>
+<summary>追加リソース</summary>
+
+- [Claude Code ドキュメント](https://code.claude.com/docs/en/overview)
+- [MCPプロトコル仕様](https://modelcontextprotocol.io)
+- [Skills リポジトリ](https://github.com/luongnv89/skills) - すぐに使えるskillsのコレクション
 - [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
-- [Boris Cherny's Claude Code Workflow](https://x.com/bcherny/status/2007179832300581177) - The creator of Claude Code shares his systematized workflow: parallel agents, shared CLAUDE.md, Plan mode, slash commands, subagents, and verification hooks for autonomous long-running sessions.
+- [Boris ChernyのClaude Codeワークフロー](https://x.com/bcherny/status/2007179832300581177) - Claude Codeの作者が体系化されたワークフローを共有: 並列エージェント・共有CLAUDE.md・Plan mode・slash commands・subagents・自律長時間セッションのための検証hooks。
 
 </details>
 
 ---
 
-## Contributing
+## コントリビュート
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
+コントリビュートを歓迎します！始め方の詳細は [コントリビュートガイド](CONTRIBUTING.md) をご覧ください。
 
-## Contributors
+## コントリビューター
 
-Thanks to everyone who has contributed to this project!
+このプロジェクトに貢献してくれた方々に感謝します！
 
-| Contributor | PRs |
+| コントリビューター | PR |
 |-------------|-----|
-| [wjhrdy](https://github.com/wjhrdy) | [#1 - add a tool to create an epub](https://github.com/luongnv89/claude-howto/pull/1) |
-| [VikalpP](https://github.com/VikalpP) | [#7 - fix(docs): Use tilde fences for nested code blocks in concepts guide](https://github.com/luongnv89/claude-howto/pull/7) |
+| [wjhrdy](https://github.com/wjhrdy) | [#1 - EPUBを作成するツールを追加](https://github.com/luongnv89/claude-howto/pull/1) |
+| [VikalpP](https://github.com/VikalpP) | [#7 - fix(docs): コンセプトガイドのネストされたコードブロックにチルダフェンスを使用](https://github.com/luongnv89/claude-howto/pull/7) |
 
 ---
 
-## License
+## ライセンス
 
-MIT License - see [LICENSE](LICENSE). Free to use, modify, and distribute. The only requirement is including the license notice.
+MITライセンス - [LICENSE](LICENSE) を参照。使用・改変・配布は自由。ライセンス表記を含めることが唯一の条件。
 
 ---
 
-**Last Updated**: March 2026
-**Claude Code Version**: 2.1+
-**Compatible Models**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5
+**最終更新**: 2026年3月
+**Claude Codeバージョン**: 2.1+
+**対応モデル**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5

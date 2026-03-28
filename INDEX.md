@@ -3,222 +3,222 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code Examples - Complete Index
+# Claude Code サンプル集 - 完全インデックス
 
-This document provides a complete index of all example files organized by feature type.
+このドキュメントは機能タイプ別に整理されたすべてのサンプルファイルの完全インデックスです。
 
-## Summary Statistics
+## サマリー統計
 
-- **Total Files**: 100+ files
-- **Categories**: 10 feature categories
-- **Plugins**: 3 complete plugins
-- **Skills**: 6 complete skills
-- **Hooks**: 8 example hooks
-- **Ready to Use**: All examples
+- **総ファイル数**: 100以上のファイル
+- **カテゴリ**: 10の機能カテゴリ
+- **Plugins**: 3つの完全なplugin
+- **Skills**: 6つの完全なskill
+- **Hooks**: 8つのサンプルhook
+- **すぐに使えるもの**: すべてのサンプル
 
 ---
 
-## 01. Slash Commands (10 files)
+## 01. Slash Commands (10ファイル)
 
-User-invoked shortcuts for common workflows.
+一般的なワークフロー用のユーザー呼び出しショートカット。
 
-| File | Description | Use Case |
+| ファイル | 説明 | ユースケース |
 |------|-------------|----------|
-| `optimize.md` | Code optimization analyzer | Find performance issues |
-| `pr.md` | Pull request preparation | PR workflow automation |
-| `generate-api-docs.md` | API documentation generator | Generate API docs |
-| `commit.md` | Commit message helper | Standardized commits |
-| `setup-ci-cd.md` | CI/CD pipeline setup | DevOps automation |
-| `push-all.md` | Push all changes | Quick push workflow |
-| `unit-test-expand.md` | Expand unit test coverage | Test automation |
-| `doc-refactor.md` | Documentation refactoring | Doc improvements |
-| `pr-slash-command.png` | Screenshot example | Visual reference |
-| `README.md` | Documentation | Setup and usage guide |
+| `optimize.md` | コード最適化分析 | パフォーマンス問題の発見 |
+| `pr.md` | プルリクエスト準備 | PRワークフローの自動化 |
+| `generate-api-docs.md` | APIドキュメント生成 | APIドキュメントの生成 |
+| `commit.md` | コミットメッセージヘルパー | 標準化されたコミット |
+| `setup-ci-cd.md` | CI/CDパイプラインのセットアップ | DevOps自動化 |
+| `push-all.md` | すべての変更をプッシュ | クイックプッシュワークフロー |
+| `unit-test-expand.md` | ユニットテストカバレッジを拡張 | テスト自動化 |
+| `doc-refactor.md` | ドキュメントのリファクタリング | ドキュメント改善 |
+| `pr-slash-command.png` | スクリーンショットサンプル | ビジュアルリファレンス |
+| `README.md` | ドキュメント | セットアップと使用ガイド |
 
-**Installation Path**: `.claude/commands/`
+**インストールパス**: `.claude/commands/`
 
-**Usage**: `/optimize`, `/pr`, `/generate-api-docs`, `/commit`, `/setup-ci-cd`, `/push-all`, `/unit-test-expand`, `/doc-refactor`
+**使い方**: `/optimize`, `/pr`, `/generate-api-docs`, `/commit`, `/setup-ci-cd`, `/push-all`, `/unit-test-expand`, `/doc-refactor`
 
 ---
 
-## 02. Memory (6 files)
+## 02. Memory (6ファイル)
 
-Persistent context and project standards.
+永続的なコンテキストとプロジェクト標準。
 
-| File | Description | Scope | Location |
+| ファイル | 説明 | スコープ | 場所 |
 |------|-------------|-------|----------|
-| `project-CLAUDE.md` | Team project standards | Project-wide | `./CLAUDE.md` |
-| `directory-api-CLAUDE.md` | API-specific rules | Directory | `./src/api/CLAUDE.md` |
-| `personal-CLAUDE.md` | Personal preferences | User | `~/.claude/CLAUDE.md` |
-| `memory-saved.png` | Screenshot: memory saved | - | Visual reference |
-| `memory-ask-claude.png` | Screenshot: ask Claude | - | Visual reference |
-| `README.md` | Documentation | - | Reference |
+| `project-CLAUDE.md` | チームプロジェクト標準 | プロジェクト全体 | `./CLAUDE.md` |
+| `directory-api-CLAUDE.md` | API固有のルール | ディレクトリ | `./src/api/CLAUDE.md` |
+| `personal-CLAUDE.md` | 個人の設定 | ユーザー | `~/.claude/CLAUDE.md` |
+| `memory-saved.png` | スクリーンショット: memory保存 | - | ビジュアルリファレンス |
+| `memory-ask-claude.png` | スクリーンショット: Claudeに聞く | - | ビジュアルリファレンス |
+| `README.md` | ドキュメント | - | リファレンス |
 
-**Installation**: Copy to appropriate location
+**インストール**: 適切な場所にコピー
 
-**Usage**: Automatically loaded by Claude
+**使い方**: Claudeによって自動的に読み込まれる
 
 ---
 
-## 03. Skills (28 files)
+## 03. Skills (28ファイル)
 
-Auto-invoked capabilities with scripts and templates.
+スクリプトとテンプレートを持つ自動呼び出し機能。
 
-### Code Review Skill (5 files)
+### コードレビューSkill (5ファイル)
 ```
 code-review/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # Skill定義
 ├── scripts/
-│   ├── analyze-metrics.py            # Code metrics analyzer
-│   └── compare-complexity.py         # Complexity comparison
+│   ├── analyze-metrics.py            # コードメトリクス分析
+│   └── compare-complexity.py         # 複雑度比較
 └── templates/
-    ├── review-checklist.md           # Review checklist
-    └── finding-template.md           # Finding documentation
+    ├── review-checklist.md           # レビューチェックリスト
+    └── finding-template.md           # 発見事項ドキュメント
 ```
 
-**Purpose**: Comprehensive code review with security, performance, and quality analysis
+**目的**: セキュリティ・パフォーマンス・品質分析を含む包括的なコードレビュー
 
-**Auto-invoked**: When reviewing code
+**自動呼び出し**: コードレビュー時
 
 ---
 
-### Brand Voice Skill (4 files)
+### ブランドボイスSkill (4ファイル)
 ```
 brand-voice/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # Skill定義
 ├── templates/
-│   ├── email-template.txt            # Email format
-│   └── social-post-template.txt      # Social media format
-└── tone-examples.md                  # Example messages
+│   ├── email-template.txt            # メール形式
+│   └── social-post-template.txt      # ソーシャルメディア形式
+└── tone-examples.md                  # メッセージの例
 ```
 
-**Purpose**: Ensure consistent brand voice in communications
+**目的**: コミュニケーションにおける一貫したブランドボイスを確保
 
-**Auto-invoked**: When creating marketing copy
+**自動呼び出し**: マーケティングコピー作成時
 
 ---
 
-### Documentation Generator Skill (2 files)
+### ドキュメント生成Skill (2ファイル)
 ```
 doc-generator/
-├── SKILL.md                          # Skill definition
-└── generate-docs.py                  # Python doc extractor
+├── SKILL.md                          # Skill定義
+└── generate-docs.py                  # Python ドキュメント抽出ツール
 ```
 
-**Purpose**: Generate comprehensive API documentation from source code
+**目的**: ソースコードから包括的なAPIドキュメントを生成
 
-**Auto-invoked**: When creating/updating API documentation
+**自動呼び出し**: APIドキュメントの作成/更新時
 
 ---
 
-### Refactor Skill (5 files)
+### リファクタリングSkill (5ファイル)
 ```
 refactor/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # Skill定義
 ├── scripts/
-│   ├── analyze-complexity.py         # Complexity analyzer
-│   └── detect-smells.py              # Code smell detector
+│   ├── analyze-complexity.py         # 複雑度分析
+│   └── detect-smells.py              # コードスメル検出
 ├── references/
-│   ├── code-smells.md                # Code smells catalog
-│   └── refactoring-catalog.md        # Refactoring patterns
+│   ├── code-smells.md                # コードスメルカタログ
+│   └── refactoring-catalog.md        # リファクタリングパターン
 └── templates/
-    └── refactoring-plan.md           # Refactoring plan template
+    └── refactoring-plan.md           # リファクタリング計画テンプレート
 ```
 
-**Purpose**: Systematic code refactoring with complexity analysis
+**目的**: 複雑度分析を使った体系的なコードリファクタリング
 
-**Auto-invoked**: When refactoring code
+**自動呼び出し**: コードリファクタリング時
 
 ---
 
-### Claude MD Skill (1 file)
+### Claude MD Skill (1ファイル)
 ```
 claude-md/
-└── SKILL.md                          # Skill definition
+└── SKILL.md                          # Skill定義
 ```
 
-**Purpose**: Manage and optimize CLAUDE.md files
+**目的**: CLAUDE.mdファイルの管理と最適化
 
 ---
 
-### Blog Draft Skill (3 files)
+### ブログ下書きSkill (3ファイル)
 ```
 blog-draft/
-├── SKILL.md                          # Skill definition
+├── SKILL.md                          # Skill定義
 └── templates/
-    ├── draft-template.md             # Blog draft template
-    └── outline-template.md           # Blog outline template
+    ├── draft-template.md             # ブログ下書きテンプレート
+    └── outline-template.md           # ブログアウトラインテンプレート
 ```
 
-**Purpose**: Draft blog posts with consistent structure
+**目的**: 一貫した構造でブログ記事を下書き
 
-**Plus**: `README.md` - Skills overview and usage guide
+**その他**: `README.md` - Skillsの概要と使用ガイド
 
-**Installation Path**: `~/.claude/skills/` or `.claude/skills/`
+**インストールパス**: `~/.claude/skills/` または `.claude/skills/`
 
 ---
 
-## 04. Subagents (9 files)
+## 04. Subagents (9ファイル)
 
-Specialized AI assistants with custom capabilities.
+カスタム機能を持つ専門AIアシスタント。
 
-| File | Description | Tools | Use Case |
+| ファイル | 説明 | ツール | ユースケース |
 |------|-------------|-------|----------|
-| `code-reviewer.md` | Code quality analysis | read, grep, diff, lint_runner | Comprehensive reviews |
-| `test-engineer.md` | Test coverage analysis | read, write, bash, grep | Test automation |
-| `documentation-writer.md` | Documentation creation | read, write, grep | Doc generation |
-| `secure-reviewer.md` | Security review (read-only) | read, grep | Security audits |
-| `implementation-agent.md` | Full implementation | read, write, bash, grep, edit, glob | Feature development |
-| `debugger.md` | Debugging specialist | read, bash, grep | Bug investigation |
-| `data-scientist.md` | Data analysis specialist | read, write, bash | Data workflows |
-| `clean-code-reviewer.md` | Clean code standards | read, grep | Code quality |
-| `README.md` | Documentation | - | Setup and usage guide |
+| `code-reviewer.md` | コード品質分析 | read, grep, diff, lint_runner | 包括的レビュー |
+| `test-engineer.md` | テストカバレッジ分析 | read, write, bash, grep | テスト自動化 |
+| `documentation-writer.md` | ドキュメント作成 | read, write, grep | ドキュメント生成 |
+| `secure-reviewer.md` | セキュリティレビュー (read-only) | read, grep | セキュリティ監査 |
+| `implementation-agent.md` | フル実装 | read, write, bash, grep, edit, glob | 機能開発 |
+| `debugger.md` | デバッグ専門家 | read, bash, grep | バグ調査 |
+| `data-scientist.md` | データ分析専門家 | read, write, bash | データワークフロー |
+| `clean-code-reviewer.md` | Clean Code標準 | read, grep | コード品質 |
+| `README.md` | ドキュメント | - | セットアップと使用ガイド |
 
-**Installation Path**: `.claude/agents/`
+**インストールパス**: `.claude/agents/`
 
-**Usage**: Automatically delegated by main agent
+**使い方**: メインエージェントによって自動的に委任される
 
 ---
 
-## 05. MCP Protocol (5 files)
+## 05. MCPプロトコル (5ファイル)
 
-External tool and API integrations.
+外部ツールとAPI連携。
 
-| File | Description | Integrates With | Use Case |
+| ファイル | 説明 | 連携先 | ユースケース |
 |------|-------------|-----------------|----------|
-| `github-mcp.json` | GitHub integration | GitHub API | PR/issue management |
-| `database-mcp.json` | Database queries | PostgreSQL/MySQL | Live data queries |
-| `filesystem-mcp.json` | File operations | Local filesystem | File management |
-| `multi-mcp.json` | Multiple servers | GitHub + DB + Slack | Complete integration |
-| `README.md` | Documentation | - | Setup and usage guide |
+| `github-mcp.json` | GitHub連携 | GitHub API | PR/issue管理 |
+| `database-mcp.json` | データベースクエリ | PostgreSQL/MySQL | ライブデータクエリ |
+| `filesystem-mcp.json` | ファイル操作 | ローカルファイルシステム | ファイル管理 |
+| `multi-mcp.json` | 複数サーバー | GitHub + DB + Slack | 完全統合 |
+| `README.md` | ドキュメント | - | セットアップと使用ガイド |
 
-**Installation Path**: `.mcp.json` (project scope) or `~/.claude.json` (user scope)
+**インストールパス**: `.mcp.json` (プロジェクトスコープ) または `~/.claude.json` (ユーザースコープ)
 
-**Usage**: `/mcp__github__list_prs`, etc.
+**使い方**: `/mcp__github__list_prs` など
 
 ---
 
-## 06. Hooks (9 files)
+## 06. Hooks (9ファイル)
 
-Event-driven automation scripts that execute automatically.
+自動実行されるイベント駆動自動化スクリプト。
 
-| File | Description | Event | Use Case |
+| ファイル | 説明 | イベント | ユースケース |
 |------|-------------|-------|----------|
-| `format-code.sh` | Auto-format code | PreToolUse:Write | Code formatting |
-| `pre-commit.sh` | Run tests before commit | PreToolUse:Bash | Test automation |
-| `security-scan.sh` | Security scanning | PostToolUse:Write | Security checks |
-| `log-bash.sh` | Log bash commands | PostToolUse:Bash | Command logging |
-| `validate-prompt.sh` | Validate prompts | PreToolUse | Input validation |
-| `notify-team.sh` | Send notifications | Notification | Team notifications |
-| `context-tracker.py` | Track context window usage | PostToolUse | Context monitoring |
-| `context-tracker-tiktoken.py` | Token-based context tracking | PostToolUse | Precise token counting |
-| `README.md` | Documentation | - | Setup and usage guide |
+| `format-code.sh` | コードの自動フォーマット | PreToolUse:Write | コードフォーマット |
+| `pre-commit.sh` | コミット前にテストを実行 | PreToolUse:Bash | テスト自動化 |
+| `security-scan.sh` | セキュリティスキャン | PostToolUse:Write | セキュリティチェック |
+| `log-bash.sh` | bashコマンドをログ | PostToolUse:Bash | コマンドログ記録 |
+| `validate-prompt.sh` | プロンプトを検証 | PreToolUse | 入力バリデーション |
+| `notify-team.sh` | 通知を送信 | Notification | チーム通知 |
+| `context-tracker.py` | コンテキストウィンドウ使用量を追跡 | PostToolUse | コンテキスト監視 |
+| `context-tracker-tiktoken.py` | トークンベースのコンテキスト追跡 | PostToolUse | 正確なトークンカウント |
+| `README.md` | ドキュメント | - | セットアップと使用ガイド |
 
-**Installation Path**: Configure in `~/.claude/settings.json`
+**インストールパス**: `~/.claude/settings.json` で設定
 
-**Usage**: Configured in settings, executed automatically
+**使い方**: settingsで設定され、自動的に実行される
 
-**Hook Types** (4 types, 25 events):
+**Hookタイプ** (4タイプ、25イベント):
 - Tool Hooks: PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest
 - Session Hooks: SessionStart, SessionEnd, Stop, StopFailure, SubagentStart, SubagentStop
 - Task Hooks: UserPromptSubmit, TaskCompleted, TaskCreated, TeammateIdle
@@ -226,273 +226,271 @@ Event-driven automation scripts that execute automatically.
 
 ---
 
-## 07. Plugins (3 complete plugins, 40 files)
+## 07. Plugins (3つの完全なplugin、40ファイル)
 
-Bundled collections of features.
+機能のバンドルコレクション。
 
-### PR Review Plugin (10 files)
+### PRレビューPlugin (10ファイル)
 ```
 pr-review/
 ├── .claude-plugin/
-│   └── plugin.json                   # Plugin manifest
+│   └── plugin.json                   # Pluginマニフェスト
 ├── commands/
-│   ├── review-pr.md                  # Comprehensive review
-│   ├── check-security.md             # Security check
-│   └── check-tests.md                # Test coverage check
+│   ├── review-pr.md                  # 包括的レビュー
+│   ├── check-security.md             # セキュリティチェック
+│   └── check-tests.md                # テストカバレッジチェック
 ├── agents/
-│   ├── security-reviewer.md          # Security specialist
-│   ├── test-checker.md               # Test specialist
-│   └── performance-analyzer.md       # Performance specialist
+│   ├── security-reviewer.md          # セキュリティ専門家
+│   ├── test-checker.md               # テスト専門家
+│   └── performance-analyzer.md       # パフォーマンス専門家
 ├── mcp/
-│   └── github-config.json            # GitHub integration
+│   └── github-config.json            # GitHub連携
 ├── hooks/
-│   └── pre-review.js                 # Pre-review validation
-└── README.md                         # Plugin documentation
+│   └── pre-review.js                 # レビュー前バリデーション
+└── README.md                         # Pluginドキュメント
 ```
 
-**Features**: Security analysis, test coverage, performance impact
+**機能**: セキュリティ分析、テストカバレッジ、パフォーマンス影響
 
-**Commands**: `/review-pr`, `/check-security`, `/check-tests`
+**コマンド**: `/review-pr`, `/check-security`, `/check-tests`
 
-**Installation**: `/plugin install pr-review`
+**インストール**: `/plugin install pr-review`
 
 ---
 
-### DevOps Automation Plugin (15 files)
+### DevOps自動化Plugin (15ファイル)
 ```
 devops-automation/
 ├── .claude-plugin/
-│   └── plugin.json                   # Plugin manifest
+│   └── plugin.json                   # Pluginマニフェスト
 ├── commands/
-│   ├── deploy.md                     # Deployment
-│   ├── rollback.md                   # Rollback
-│   ├── status.md                     # System status
-│   └── incident.md                   # Incident response
+│   ├── deploy.md                     # デプロイ
+│   ├── rollback.md                   # ロールバック
+│   ├── status.md                     # システム状態
+│   └── incident.md                   # インシデント対応
 ├── agents/
-│   ├── deployment-specialist.md      # Deployment expert
-│   ├── incident-commander.md         # Incident coordinator
-│   └── alert-analyzer.md             # Alert analyzer
+│   ├── deployment-specialist.md      # デプロイ専門家
+│   ├── incident-commander.md         # インシデント調整役
+│   └── alert-analyzer.md             # アラート分析
 ├── mcp/
-│   └── kubernetes-config.json        # Kubernetes integration
+│   └── kubernetes-config.json        # Kubernetes連携
 ├── hooks/
-│   ├── pre-deploy.js                 # Pre-deployment checks
-│   └── post-deploy.js                # Post-deployment tasks
+│   ├── pre-deploy.js                 # デプロイ前チェック
+│   └── post-deploy.js                # デプロイ後タスク
 ├── scripts/
-│   ├── deploy.sh                     # Deployment automation
-│   ├── rollback.sh                   # Rollback automation
-│   └── health-check.sh               # Health checks
-└── README.md                         # Plugin documentation
+│   ├── deploy.sh                     # デプロイ自動化
+│   ├── rollback.sh                   # ロールバック自動化
+│   └── health-check.sh               # ヘルスチェック
+└── README.md                         # Pluginドキュメント
 ```
 
-**Features**: Kubernetes deployment, rollback, monitoring, incident response
+**機能**: Kubernetesデプロイ、ロールバック、モニタリング、インシデント対応
 
-**Commands**: `/deploy`, `/rollback`, `/status`, `/incident`
+**コマンド**: `/deploy`, `/rollback`, `/status`, `/incident`
 
-**Installation**: `/plugin install devops-automation`
+**インストール**: `/plugin install devops-automation`
 
 ---
 
-### Documentation Plugin (14 files)
+### ドキュメントPlugin (14ファイル)
 ```
 documentation/
 ├── .claude-plugin/
-│   └── plugin.json                   # Plugin manifest
+│   └── plugin.json                   # Pluginマニフェスト
 ├── commands/
-│   ├── generate-api-docs.md          # API docs generation
-│   ├── generate-readme.md            # README creation
-│   ├── sync-docs.md                  # Doc synchronization
-│   └── validate-docs.md              # Doc validation
+│   ├── generate-api-docs.md          # APIドキュメント生成
+│   ├── generate-readme.md            # README作成
+│   ├── sync-docs.md                  # ドキュメント同期
+│   └── validate-docs.md              # ドキュメント検証
 ├── agents/
-│   ├── api-documenter.md             # API doc specialist
-│   ├── code-commentator.md           # Code comment specialist
-│   └── example-generator.md          # Example creator
+│   ├── api-documenter.md             # APIドキュメント専門家
+│   ├── code-commentator.md           # コードコメント専門家
+│   └── example-generator.md          # サンプル作成
 ├── mcp/
-│   └── github-docs-config.json       # GitHub integration
+│   └── github-docs-config.json       # GitHub連携
 ├── templates/
-│   ├── api-endpoint.md               # API endpoint template
-│   ├── function-docs.md              # Function doc template
-│   └── adr-template.md               # ADR template
-└── README.md                         # Plugin documentation
+│   ├── api-endpoint.md               # APIエンドポイントテンプレート
+│   ├── function-docs.md              # 関数ドキュメントテンプレート
+│   └── adr-template.md               # ADRテンプレート
+└── README.md                         # Pluginドキュメント
 ```
 
-**Features**: API docs, README generation, doc sync, validation
+**機能**: APIドキュメント、README生成、ドキュメント同期、検証
 
-**Commands**: `/generate-api-docs`, `/generate-readme`, `/sync-docs`, `/validate-docs`
+**コマンド**: `/generate-api-docs`, `/generate-readme`, `/sync-docs`, `/validate-docs`
 
-**Installation**: `/plugin install documentation`
+**インストール**: `/plugin install documentation`
 
-**Plus**: `README.md` - Plugins overview and usage guide
+**その他**: `README.md` - Pluginsの概要と使用ガイド
 
 ---
 
-## 08. Checkpoints and Rewind (2 files)
+## 08. CheckpointsとRewind (2ファイル)
 
-Save conversation state and explore alternative approaches.
+会話の状態を保存して代替アプローチを探る。
 
-| File | Description | Content |
+| ファイル | 説明 | 内容 |
 |------|-------------|---------|
-| `README.md` | Documentation | Comprehensive checkpoint guide |
-| `checkpoint-examples.md` | Real-world examples | Database migration, performance optimization, UI iteration, debugging |
-| | | |
+| `README.md` | ドキュメント | 包括的なcheckpointガイド |
+| `checkpoint-examples.md` | 実際のサンプル | データベース移行、パフォーマンス最適化、UIイテレーション、デバッグ |
 
-**Key Concepts**:
-- **Checkpoint**: Snapshot of conversation state
-- **Rewind**: Return to previous checkpoint
-- **Branch Point**: Explore multiple approaches
+**主要概念**:
+- **Checkpoint**: 会話状態のスナップショット
+- **Rewind**: 以前のcheckpointに戻る
+- **Branch Point**: 複数のアプローチを探る
 
-**Usage**:
+**使い方**:
 ```
-# Checkpoints are created automatically with every user prompt
-# To rewind, press Esc twice or use:
+# Checkpointはユーザーの各プロンプトで自動作成される
+# 巻き戻すには Esc を2回押すか以下を使用:
 /rewind
-# Then choose: Restore code and conversation, Restore conversation,
-# Restore code, Summarize from here, or Never mind
+# 選択: コードと会話を復元、会話を復元、
+# コードを復元、ここからまとめる、キャンセル
 ```
 
-**Use Cases**:
-- Try different implementations
-- Recover from mistakes
-- Safe experimentation
-- Compare solutions
-- A/B testing
+**ユースケース**:
+- 異なる実装を試す
+- ミスからの回復
+- 安全な実験
+- ソリューションの比較
+- A/Bテスト
 
 ---
 
-## 09. Advanced Features (3 files)
+## 09. Advanced Features (3ファイル)
 
-Advanced capabilities for complex workflows.
+複雑なワークフローのための高度な機能。
 
-| File | Description | Features |
+| ファイル | 説明 | 機能 |
 |------|-------------|----------|
-| `README.md` | Complete guide | All advanced features documentation |
-| `config-examples.json` | Configuration examples | 10+ use-case-specific configurations |
-| `planning-mode-examples.md` | Planning examples | REST API, database migration, refactoring |
-| Scheduled Tasks | Recurring tasks with `/loop` and cron tools | Automated recurring workflows |
-| Chrome Integration | Browser automation via headless Chromium | Web testing and scraping |
-| Remote Control (expanded) | Connection methods, security, comparison table | Remote session management |
-| Keyboard Customization | Custom keybindings, chord support, contexts | Personalized shortcuts |
-| Desktop App (expanded) | Connectors, launch.json, enterprise features | Desktop integration |
-| | | |
+| `README.md` | 完全ガイド | すべての高度な機能のドキュメント |
+| `config-examples.json` | 設定サンプル | 10以上のユースケース固有設定 |
+| `planning-mode-examples.md` | Planning modeサンプル | REST API、データベース移行、リファクタリング |
+| スケジュールタスク | `/loop` とcronツールで繰り返しタスク | 自動化された繰り返しワークフロー |
+| Chrome連携 | ヘッドレスChromiumによるブラウザ自動化 | Webテストとスクレイピング |
+| Remote Control (拡張) | 接続方法、セキュリティ、比較表 | リモートセッション管理 |
+| キーボードカスタマイズ | カスタムキーバインディング、コード入力サポート、コンテキスト | パーソナライズされたショートカット |
+| Desktop App (拡張) | コネクタ、launch.json、エンタープライズ機能 | デスクトップ連携 |
 
-**Advanced Features Covered**:
+**カバーされている高度な機能**:
 
 ### Planning Mode
-- Create detailed implementation plans
-- Time estimates and risk assessment
-- Systematic task breakdown
+- 詳細な実装計画を作成
+- 時間見積もりとリスク評価
+- 体系的なタスク分解
 
 ### Extended Thinking
-- Deep reasoning for complex problems
-- Architectural decision analysis
-- Trade-off evaluation
+- 複雑な問題への深い推論
+- アーキテクチャ決定の分析
+- トレードオフの評価
 
 ### Background Tasks
-- Long-running operations without blocking
-- Parallel development workflows
-- Task management and monitoring
+- ブロックせずに長時間処理を実行
+- 並列開発ワークフロー
+- タスク管理と監視
 
-### Permission Modes
-- **default**: Ask for approval on risky actions
-- **acceptEdits**: Auto-accept file edits, ask for others
-- **plan**: Read-only analysis, no modifications
-- **auto**: Automatically approve safe actions, prompt for risky ones
-- **dontAsk**: Accept all actions except risky ones
-- **bypassPermissions**: Accept all (requires `--dangerously-skip-permissions`)
+### パーミッションモード
+- **default**: リスクのある操作に承認を求める
+- **acceptEdits**: ファイル編集を自動承認、その他はプロンプト
+- **plan**: 読み取り専用分析、変更なし
+- **auto**: 安全なアクションを自動承認、リスクのあるものはプロンプト
+- **dontAsk**: リスクの高いもの以外はすべての操作を承認
+- **bypassPermissions**: すべてを承認 (`--dangerously-skip-permissions` が必要)
 
-### Headless Mode (`claude -p`)
-- CI/CD integration
-- Automated task execution
-- Batch processing
+### ヘッドレスモード (`claude -p`)
+- CI/CD統合
+- 自動タスク実行
+- バッチ処理
 
-### Session Management
-- Multiple work sessions
-- Session switching and saving
-- Session persistence
+### セッション管理
+- 複数の作業セッション
+- セッションの切り替えと保存
+- セッション永続化
 
-### Interactive Features
-- Keyboard shortcuts
-- Command history
-- Tab completion
-- Multi-line input
+### インタラクティブ機能
+- キーボードショートカット
+- コマンド履歴
+- タブ補完
+- マルチライン入力
 
-### Configuration
-- Comprehensive settings management
-- Environment-specific configs
-- Per-project customization
+### 設定
+- 包括的な設定管理
+- 環境固有の設定
+- プロジェクトごとのカスタマイズ
 
-### Scheduled Tasks
-- Recurring tasks with `/loop` command
-- Cron tools: CronCreate, CronList, CronDelete
-- Automated recurring workflows
+### スケジュールタスク
+- `/loop` コマンドによる繰り返しタスク
+- Cronツール: CronCreate、CronList、CronDelete
+- 自動化された繰り返しワークフロー
 
-### Chrome Integration
-- Browser automation via headless Chromium
-- Web testing and scraping capabilities
-- Page interaction and data extraction
+### Chrome連携
+- ヘッドレスChromiumによるブラウザ自動化
+- Webテストとスクレイピング機能
+- ページ操作とデータ抽出
 
-### Remote Control (expanded)
-- Connection methods and protocols
-- Security considerations and best practices
-- Comparison table of remote access options
+### Remote Control (拡張)
+- 接続方法とプロトコル
+- セキュリティの考慮事項とベストプラクティス
+- リモートアクセスオプションの比較表
 
-### Keyboard Customization
-- Custom keybindings configuration
-- Chord support for multi-key shortcuts
-- Context-aware keybinding activation
+### キーボードカスタマイズ
+- カスタムキーバインディング設定
+- マルチキーショートカットのコード入力サポート
+- コンテキスト対応キーバインディングの有効化
 
-### Desktop App (expanded)
-- Connectors for IDE integration
-- launch.json configuration
-- Enterprise features and deployment
+### Desktop App (拡張)
+- IDE連携のコネクタ
+- launch.json設定
+- エンタープライズ機能とデプロイ
 
 ---
 
-## 10. CLI Usage (1 file)
+## 10. CLI使用法 (1ファイル)
 
-Command-line interface usage patterns and reference.
+コマンドラインインターフェースの使用パターンとリファレンス。
 
-| File | Description | Content |
+| ファイル | 説明 | 内容 |
 |------|-------------|---------|
-| `README.md` | CLI documentation | Flags, options, and usage patterns |
+| `README.md` | CLIドキュメント | フラグ、オプション、使用パターン |
 
-**Key CLI Features**:
-- `claude` - Start interactive session
-- `claude -p "prompt"` - Headless/non-interactive mode
-- `claude web` - Launch web session
-- `claude --model` - Select model (Sonnet 4.6, Opus 4.6)
-- `claude --permission-mode` - Set permission mode
-- `claude --remote` - Enable remote control via WebSocket
+**主要CLI機能**:
+- `claude` - インタラクティブセッションを開始
+- `claude -p "prompt"` - ヘッドレス/非インタラクティブモード
+- `claude web` - Webセッションを起動
+- `claude --model` - モデルを選択 (Sonnet 4.6、Opus 4.6)
+- `claude --permission-mode` - パーミッションモードを設定
+- `claude --remote` - WebSocket経由のリモートコントロールを有効化
 
 ---
 
-## Documentation Files (13 files)
+## ドキュメントファイル (13ファイル)
 
-| File | Location | Description |
+| ファイル | 場所 | 説明 |
 |------|----------|-------------|
-| `README.md` | `/` | Main examples overview |
-| `INDEX.md` | `/` | This complete index |
-| `QUICK_REFERENCE.md` | `/` | Quick reference card |
-| `README.md` | `/01-slash-commands/` | Slash commands guide |
-| `README.md` | `/02-memory/` | Memory guide |
-| `README.md` | `/03-skills/` | Skills guide |
-| `README.md` | `/04-subagents/` | Subagents guide |
-| `README.md` | `/05-mcp/` | MCP guide |
-| `README.md` | `/06-hooks/` | Hooks guide |
-| `README.md` | `/07-plugins/` | Plugins guide |
-| `README.md` | `/08-checkpoints/` | Checkpoints guide |
-| `README.md` | `/09-advanced-features/` | Advanced features guide |
-| `README.md` | `/10-cli/` | CLI guide |
+| `README.md` | `/` | メインサンプル概要 |
+| `INDEX.md` | `/` | この完全インデックス |
+| `QUICK_REFERENCE.md` | `/` | クイックリファレンスカード |
+| `README.md` | `/01-slash-commands/` | Slash commandsガイド |
+| `README.md` | `/02-memory/` | Memoryガイド |
+| `README.md` | `/03-skills/` | Skillsガイド |
+| `README.md` | `/04-subagents/` | Subagentsガイド |
+| `README.md` | `/05-mcp/` | MCPガイド |
+| `README.md` | `/06-hooks/` | Hooksガイド |
+| `README.md` | `/07-plugins/` | Pluginsガイド |
+| `README.md` | `/08-checkpoints/` | Checkpointsガイド |
+| `README.md` | `/09-advanced-features/` | Advanced featuresガイド |
+| `README.md` | `/10-cli/` | CLIガイド |
 
 ---
 
-## Complete File Tree
+## 完全ファイルツリー
 
 ```
 claude-howto/
-├── README.md                                    # Main overview
-├── INDEX.md                                     # This file
-├── QUICK_REFERENCE.md                           # Quick reference card
-├── claude_concepts_guide.md                     # Original guide
+├── README.md                                    # メイン概要
+├── INDEX.md                                     # このファイル
+├── QUICK_REFERENCE.md                           # クイックリファレンスカード
+├── claude_concepts_guide.md                     # オリジナルガイド
 │
 ├── 01-slash-commands/                           # Slash Commands
 │   ├── optimize.md
@@ -562,7 +560,7 @@ claude-howto/
 │   ├── clean-code-reviewer.md
 │   └── README.md
 │
-├── 05-mcp/                                      # MCP Protocol
+├── 05-mcp/                                      # MCPプロトコル
 │   ├── github-mcp.json
 │   ├── database-mcp.json
 │   ├── filesystem-mcp.json
@@ -649,115 +647,115 @@ claude-howto/
 │   ├── planning-mode-examples.md
 │   └── README.md
 │
-└── 10-cli/                                      # CLI Usage
+└── 10-cli/                                      # CLI使用法
     └── README.md
 ```
 
 ---
 
-## Quick Start by Use Case
+## ユースケース別クイックスタート
 
-### Code Quality & Reviews
+### コード品質とレビュー
 ```bash
-# Install slash command
+# slash commandをインストール
 cp 01-slash-commands/optimize.md .claude/commands/
 
-# Install subagent
+# subagentをインストール
 cp 04-subagents/code-reviewer.md .claude/agents/
 
-# Install skill
+# skillをインストール
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# Or install complete plugin
+# または完全なpluginをインストール
 /plugin install pr-review
 ```
 
-### DevOps & Deployment
+### DevOpsとデプロイ
 ```bash
-# Install plugin (includes everything)
+# pluginをインストール (すべてを含む)
 /plugin install devops-automation
 ```
 
-### Documentation
+### ドキュメント
 ```bash
-# Install slash command
+# slash commandをインストール
 cp 01-slash-commands/generate-api-docs.md .claude/commands/
 
-# Install subagent
+# subagentをインストール
 cp 04-subagents/documentation-writer.md .claude/agents/
 
-# Install skill
+# skillをインストール
 cp -r 03-skills/doc-generator ~/.claude/skills/
 
-# Or install complete plugin
+# または完全なpluginをインストール
 /plugin install documentation
 ```
 
-### Team Standards
+### チーム標準
 ```bash
-# Set up project memory
+# プロジェクトmemoryをセットアップ
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 
-# Edit to match your team's standards
+# チームの標準に合わせて編集
 ```
 
-### External Integrations
+### 外部連携
 ```bash
-# Set environment variables
+# 環境変数を設定
 export GITHUB_TOKEN="your_token"
 export DATABASE_URL="postgresql://..."
 
-# Install MCP config (project scope)
+# MCP設定をインストール (プロジェクトスコープ)
 cp 05-mcp/multi-mcp.json .mcp.json
 ```
 
-### Automation & Validation
+### 自動化とバリデーション
 ```bash
-# Install hooks
+# hooksをインストール
 mkdir -p ~/.claude/hooks
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 
-# Configure hooks in settings (~/.claude/settings.json)
-# See 06-hooks/README.md
+# settingsでhooksを設定 (~/.claude/settings.json)
+# 06-hooks/README.md を参照
 ```
 
-### Safe Experimentation
+### 安全な実験
 ```bash
-# Checkpoints are created automatically with every user prompt
-# To rewind: press Esc+Esc or use /rewind
-# Then choose what to restore from the rewind menu
+# Checkpointはユーザーの各プロンプトで自動作成される
+# 巻き戻すには: Esc+Esc を押すか /rewind を使用
+# 巻き戻しメニューから復元するものを選択
 
-# See 08-checkpoints/README.md for examples
+# 08-checkpoints/README.md のサンプルを参照
 ```
 
-### Advanced Workflows
+### 高度なワークフロー
 ```bash
-# Configure advanced features
-# See 09-advanced-features/config-examples.json
+# 高度な機能を設定
+# 09-advanced-features/config-examples.json を参照
 
-# Use planning mode
-/plan Implement feature X
+# Planning modeを使用
+/plan 機能Xを実装
 
-# Use permission modes
-claude --permission-mode plan          # For code review (read-only)
-claude --permission-mode acceptEdits   # Auto-accept edits
-claude --permission-mode auto          # Auto-approve safe actions
+# パーミッションモードを使用
+claude --permission-mode plan          # コードレビュー用 (read-only)
+claude --permission-mode acceptEdits   # 編集を自動承認
+claude --permission-mode auto          # 安全なアクションを自動承認
 
-# Run in headless mode for CI/CD
-claude -p "Run tests and report results"
+# CI/CDにヘッドレスモードで実行
+claude -p "テストを実行して結果を報告して"
 
-# Run background tasks
-Run tests in background
+# バックグラウンドタスクを実行
+バックグラウンドでテストを実行
 
-# See 09-advanced-features/README.md for complete guide
+# 09-advanced-features/README.md で完全ガイドを参照
 ```
 
 ---
 
-## Feature Coverage Matrix
+## 機能カバレッジマトリクス
 
-| Category | Commands | Agents | MCP | Hooks | Scripts | Templates | Docs | Images | Total |
+| カテゴリ | コマンド | エージェント | MCP | Hooks | スクリプト | テンプレート | ドキュメント | 画像 | 合計 |
 |----------|----------|--------|-----|-------|---------|-----------|------|--------|-------|
 | **01 Slash Commands** | 8 | - | - | - | - | - | 1 | 1 | **10** |
 | **02 Memory** | - | - | - | - | - | 3 | 1 | 2 | **6** |
@@ -772,111 +770,111 @@ Run tests in background
 
 ---
 
-## Learning Path
+## 学習パス
 
-### Beginner (Week 1)
-1. ✅ Read `README.md`
-2. ✅ Install 1-2 slash commands
-3. ✅ Create project memory file
-4. ✅ Try basic commands
+### 初心者 (1週目)
+1. ✅ `README.md` を読む
+2. ✅ slash commandを1〜2個インストール
+3. ✅ プロジェクトmemoryファイルを作成
+4. ✅ 基本コマンドを試す
 
-### Intermediate (Week 2-3)
-1. ✅ Set up GitHub MCP
-2. ✅ Install a subagent
-3. ✅ Try delegating tasks
-4. ✅ Install a skill
+### 中級者 (2〜3週目)
+1. ✅ GitHub MCPをセットアップ
+2. ✅ subagentをインストール
+3. ✅ タスクの委任を試す
+4. ✅ skillをインストール
 
-### Advanced (Week 4+)
-1. ✅ Install complete plugin
-2. ✅ Create custom slash commands
-3. ✅ Create custom subagent
-4. ✅ Create custom skill
-5. ✅ Build your own plugin
+### 上級者 (4週目以降)
+1. ✅ 完全なpluginをインストール
+2. ✅ カスタムslash commandsを作成
+3. ✅ カスタムsubagentを作成
+4. ✅ カスタムskillを作成
+5. ✅ 独自のpluginを構築
 
-### Expert (Week 5+)
-1. ✅ Set up hooks for automation
-2. ✅ Use checkpoints for experimentation
-3. ✅ Configure planning mode
-4. ✅ Use permission modes effectively
-5. ✅ Set up headless mode for CI/CD
-6. ✅ Master session management
+### エキスパート (5週目以降)
+1. ✅ 自動化のためにhooksをセットアップ
+2. ✅ 実験のためにcheckpointsを使用
+3. ✅ Planning modeを設定
+4. ✅ パーミッションモードを効果的に使用
+5. ✅ CI/CDのためにヘッドレスモードをセットアップ
+6. ✅ セッション管理をマスター
 
 ---
 
-## Search by Keyword
+## キーワードで検索
 
-### Performance
-- `01-slash-commands/optimize.md` - Performance analysis
-- `04-subagents/code-reviewer.md` - Performance review
-- `03-skills/code-review/` - Performance metrics
-- `07-plugins/pr-review/agents/performance-analyzer.md` - Performance specialist
+### パフォーマンス
+- `01-slash-commands/optimize.md` - パフォーマンス分析
+- `04-subagents/code-reviewer.md` - パフォーマンスレビュー
+- `03-skills/code-review/` - パフォーマンスメトリクス
+- `07-plugins/pr-review/agents/performance-analyzer.md` - パフォーマンス専門家
 
-### Security
-- `04-subagents/secure-reviewer.md` - Security review
-- `03-skills/code-review/` - Security analysis
-- `07-plugins/pr-review/` - Security checks
+### セキュリティ
+- `04-subagents/secure-reviewer.md` - セキュリティレビュー
+- `03-skills/code-review/` - セキュリティ分析
+- `07-plugins/pr-review/` - セキュリティチェック
 
-### Testing
-- `04-subagents/test-engineer.md` - Test engineer
-- `07-plugins/pr-review/commands/check-tests.md` - Test coverage
+### テスト
+- `04-subagents/test-engineer.md` - テストエンジニア
+- `07-plugins/pr-review/commands/check-tests.md` - テストカバレッジ
 
-### Documentation
-- `01-slash-commands/generate-api-docs.md` - API docs command
-- `04-subagents/documentation-writer.md` - Doc writer agent
-- `03-skills/doc-generator/` - Doc generator skill
-- `07-plugins/documentation/` - Complete doc plugin
+### ドキュメント
+- `01-slash-commands/generate-api-docs.md` - APIドキュメントコマンド
+- `04-subagents/documentation-writer.md` - ドキュメントライターエージェント
+- `03-skills/doc-generator/` - ドキュメント生成skill
+- `07-plugins/documentation/` - 完全なドキュメントplugin
 
-### Deployment
-- `07-plugins/devops-automation/` - Complete DevOps solution
+### デプロイ
+- `07-plugins/devops-automation/` - 完全なDevOpsソリューション
 
-### Automation
-- `06-hooks/` - Event-driven automation
-- `06-hooks/pre-commit.sh` - Pre-commit automation
-- `06-hooks/format-code.sh` - Auto-formatting
-- `09-advanced-features/` - Headless mode for CI/CD
+### 自動化
+- `06-hooks/` - イベント駆動自動化
+- `06-hooks/pre-commit.sh` - コミット前自動化
+- `06-hooks/format-code.sh` - 自動フォーマット
+- `09-advanced-features/` - CI/CDのヘッドレスモード
 
-### Validation
-- `06-hooks/security-scan.sh` - Security validation
-- `06-hooks/validate-prompt.sh` - Prompt validation
+### バリデーション
+- `06-hooks/security-scan.sh` - セキュリティバリデーション
+- `06-hooks/validate-prompt.sh` - プロンプトバリデーション
 
-### Experimentation
-- `08-checkpoints/` - Safe experimentation with rewind
-- `08-checkpoints/checkpoint-examples.md` - Real-world examples
+### 実験
+- `08-checkpoints/` - rewindを使った安全な実験
+- `08-checkpoints/checkpoint-examples.md` - 実際のサンプル
 
-### Planning
-- `09-advanced-features/planning-mode-examples.md` - Planning mode examples
+### 計画
+- `09-advanced-features/planning-mode-examples.md` - Planning modeサンプル
 - `09-advanced-features/README.md` - Extended thinking
 
-### Configuration
-- `09-advanced-features/config-examples.json` - Configuration examples
+### 設定
+- `09-advanced-features/config-examples.json` - 設定サンプル
 
 ---
 
-## Notes
+## 注意事項
 
-- All examples are ready to use
-- Modify to fit your specific needs
-- Examples follow Claude Code best practices
-- Each category has its own README with detailed instructions
-- Scripts include proper error handling
-- Templates are customizable
-
----
-
-## Contributing
-
-Want to add more examples? Follow the structure:
-1. Create appropriate subdirectory
-2. Include README.md with usage
-3. Follow naming conventions
-4. Test thoroughly
-5. Update this index
+- すべてのサンプルはすぐに使える状態です
+- 自分のニーズに合わせて変更してください
+- サンプルはClaude Codeのベストプラクティスに従っています
+- 各カテゴリには詳細な指示を含む独自のREADMEがあります
+- スクリプトには適切なエラー処理が含まれています
+- テンプレートはカスタマイズ可能です
 
 ---
 
-**Last Updated**: March 2026
-**Total Examples**: 100+ files
-**Categories**: 10 features
-**Hooks**: 8 automation scripts
-**Configuration Examples**: 10+ scenarios
-**Ready to Use**: All examples
+## コントリビュート
+
+さらにサンプルを追加したい？以下の構造に従ってください:
+1. 適切なサブディレクトリを作成
+2. 使用方法を含むREADME.mdを含める
+3. 命名規則に従う
+4. 十分にテストする
+5. このインデックスを更新する
+
+---
+
+**最終更新**: 2026年3月
+**総サンプル数**: 100以上のファイル
+**カテゴリ**: 10機能
+**Hooks**: 8つの自動化スクリプト
+**設定サンプル**: 10以上のシナリオ
+**すぐに使えるもの**: すべてのサンプル

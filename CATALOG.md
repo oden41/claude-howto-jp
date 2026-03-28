@@ -3,180 +3,180 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code Feature Catalog
+# Claude Code 機能カタログ
 
-> Quick reference guide to all Claude Code features: commands, agents, skills, plugins, and hooks.
+> すべてのClaude Code機能のクイックリファレンス: コマンド、エージェント、skills、plugins、hooksを網羅。
 
-**Navigation**: [Commands](#slash-commands) | [Permission Modes](#permission-modes) | [Subagents](#subagents) | [Skills](#skills) | [Plugins](#plugins) | [MCP Servers](#mcp-servers) | [Hooks](#hooks) | [Memory](#memory-files) | [New Features](#new-features-march-2026)
+**ナビゲーション**: [コマンド](#slash-commands) | [パーミッションモード](#パーミッションモード) | [Subagents](#subagents) | [Skills](#skills) | [Plugins](#plugins) | [MCPサーバー](#mcpサーバー) | [Hooks](#hooks) | [Memory](#memoryファイル) | [新機能](#新機能-2026年3月)
 
 ---
 
-## Summary
+## サマリー
 
-| Feature | Built-in | Examples | Total | Reference |
+| 機能 | 組み込み | サンプル | 合計 | リファレンス |
 |---------|----------|----------|-------|-----------|
-| **Slash Commands** | 55+ | 8 | 63+ | [01-slash-commands/](01-slash-commands/) |
+| **Slash Commands** | 55以上 | 8 | 63以上 | [01-slash-commands/](01-slash-commands/) |
 | **Subagents** | 6 | 10 | 16 | [04-subagents/](04-subagents/) |
-| **Skills** | 5 bundled | 4 | 9 | [03-skills/](03-skills/) |
+| **Skills** | 5バンドル | 4 | 9 | [03-skills/](03-skills/) |
 | **Plugins** | - | 3 | 3 | [07-plugins/](07-plugins/) |
-| **MCP Servers** | 1 | 8 | 9 | [05-mcp/](05-mcp/) |
-| **Hooks** | 25 events | 7 | 7 | [06-hooks/](06-hooks/) |
-| **Memory** | 7 types | 3 | 3 | [02-memory/](02-memory/) |
-| **Total** | **99** | **43** | **117** | |
+| **MCPサーバー** | 1 | 8 | 9 | [05-mcp/](05-mcp/) |
+| **Hooks** | 25イベント | 7 | 7 | [06-hooks/](06-hooks/) |
+| **Memory** | 7タイプ | 3 | 3 | [02-memory/](02-memory/) |
+| **合計** | **99** | **43** | **117** | |
 
 ---
 
 ## Slash Commands
 
-Commands are user-invoked shortcuts that execute specific actions.
+コマンドは特定のアクションを実行するユーザー呼び出しショートカットです。
 
-### Built-in Commands
+### 組み込みコマンド
 
-| Command | Description | When to Use |
+| コマンド | 説明 | 使う場面 |
 |---------|-------------|-------------|
-| `/help` | Show help information | Get started, learn commands |
-| `/btw` | Side question without adding to context | Quick tangent questions |
-| `/chrome` | Configure Chrome integration | Browser automation |
-| `/clear` | Clear conversation history | Start fresh, reduce context |
-| `/diff` | Interactive diff viewer | Review changes |
-| `/config` | View/edit configuration | Customize behavior |
-| `/status` | Show session status | Check current state |
-| `/agents` | List available agents | See delegation options |
-| `/skills` | List available skills | See auto-invoke capabilities |
-| `/hooks` | List configured hooks | Debug automation |
-| `/insights` | Analyze session patterns | Session optimization |
-| `/install-slack-app` | Install Claude Slack app | Slack integration |
-| `/keybindings` | Customize keyboard shortcuts | Key customization |
-| `/mcp` | List MCP servers | Check external integrations |
-| `/memory` | View loaded memory files | Debug context loading |
-| `/mobile` | Generate mobile QR code | Mobile access |
-| `/passes` | View usage passes | Subscription info |
-| `/plugin` | Manage plugins | Install/remove extensions |
-| `/plan` | Enter planning mode | Complex implementations |
-| `/rewind` | Rewind to checkpoint | Undo changes, explore alternatives |
-| `/checkpoint` | Manage checkpoints | Save/restore states |
-| `/cost` | Show token usage costs | Monitor spending |
-| `/context` | Show context window usage | Manage conversation length |
-| `/export` | Export conversation | Save for reference |
-| `/extra-usage` | Configure extra usage limits | Rate limit management |
-| `/feedback` | Submit feedback or bug report | Report issues |
-| `/login` | Authenticate with Anthropic | Access features |
-| `/logout` | Sign out | Switch accounts |
-| `/sandbox` | Toggle sandbox mode | Safe command execution |
-| `/vim` | Toggle vim mode | Vim-style editing |
-| `/doctor` | Run diagnostics | Troubleshoot issues |
-| `/reload-plugins` | Reload installed plugins | Plugin management |
-| `/release-notes` | Show release notes | Check new features |
-| `/remote-control` | Enable remote control | Remote access |
-| `/permissions` | Manage permissions | Control access |
-| `/session` | Manage sessions | Multi-session workflows |
-| `/rename` | Rename current session | Organize sessions |
-| `/resume` | Resume previous session | Continue work |
-| `/todo` | View/manage todo list | Track tasks |
-| `/tasks` | View background tasks | Monitor async operations |
-| `/copy` | Copy last response to clipboard | Share output quickly |
-| `/teleport` | Transfer session to another machine | Continue work remotely |
-| `/desktop` | Open Claude Desktop app | Switch to desktop interface |
-| `/theme` | Change color theme | Customize appearance |
-| `/usage` | Show API usage statistics | Monitor quota and costs |
-| `/fork` | Fork current conversation | Explore alternatives |
-| `/stats` | Show session statistics | Review session metrics |
-| `/statusline` | Configure status line | Customize status display |
-| `/stickers` | View session stickers | Fun rewards |
-| `/fast` | Toggle fast output mode | Speed up responses |
-| `/terminal-setup` | Configure terminal integration | Setup terminal features |
-| `/upgrade` | Check for updates | Version management |
+| `/help` | ヘルプ情報を表示 | 始め方・コマンドを学ぶ |
+| `/btw` | コンテキストに追加せずに質問 | クイックな脱線質問 |
+| `/chrome` | Chrome連携を設定 | ブラウザ自動化 |
+| `/clear` | 会話履歴をクリア | 新鮮なスタート、コンテキスト削減 |
+| `/diff` | インタラクティブdiffビューア | 変更をレビュー |
+| `/config` | 設定を表示/編集 | 動作をカスタマイズ |
+| `/status` | セッション状態を表示 | 現在の状態を確認 |
+| `/agents` | 利用可能なエージェントを一覧 | 委任オプションを確認 |
+| `/skills` | 利用可能なskillsを一覧 | 自動呼び出し機能を確認 |
+| `/hooks` | 設定済みhooksを一覧 | 自動化をデバッグ |
+| `/insights` | セッションパターンを分析 | セッション最適化 |
+| `/install-slack-app` | Claude Slackアプリをインストール | Slack連携 |
+| `/keybindings` | キーボードショートカットをカスタマイズ | キーカスタマイズ |
+| `/mcp` | MCPサーバーを一覧 | 外部統合を確認 |
+| `/memory` | 読み込まれたmemoryファイルを表示 | コンテキスト読み込みのデバッグ |
+| `/mobile` | モバイルQRコードを生成 | モバイルアクセス |
+| `/passes` | 使用パスを表示 | サブスクリプション情報 |
+| `/plugin` | pluginsを管理 | 拡張機能のインストール/削除 |
+| `/plan` | Planning modeに入る | 複雑な実装 |
+| `/rewind` | checkpointに巻き戻す | 変更を元に戻す・代替案を探る |
+| `/checkpoint` | checkpointsを管理 | 状態の保存/復元 |
+| `/cost` | トークン使用コストを表示 | 支出を監視 |
+| `/context` | コンテキストウィンドウの使用量を表示 | 会話の長さを管理 |
+| `/export` | 会話をエクスポート | 参照用に保存 |
+| `/extra-usage` | 追加使用制限を設定 | レート制限管理 |
+| `/feedback` | フィードバックやバグレポートを送信 | 問題を報告 |
+| `/login` | Anthropicで認証 | 機能にアクセス |
+| `/logout` | サインアウト | アカウントを切り替え |
+| `/sandbox` | サンドボックスモードを切り替え | 安全なコマンド実行 |
+| `/vim` | vimモードを切り替え | Vimスタイルの編集 |
+| `/doctor` | 診断を実行 | 問題のトラブルシューティング |
+| `/reload-plugins` | インストール済みpluginsを再読み込み | plugin管理 |
+| `/release-notes` | リリースノートを表示 | 新機能を確認 |
+| `/remote-control` | リモートコントロールを有効化 | リモートアクセス |
+| `/permissions` | パーミッションを管理 | アクセス制御 |
+| `/session` | セッションを管理 | マルチセッションワークフロー |
+| `/rename` | 現在のセッションを名前変更 | セッションを整理 |
+| `/resume` | 以前のセッションを再開 | 作業を続ける |
+| `/todo` | TODOリストを表示/管理 | タスクを追跡 |
+| `/tasks` | バックグラウンドタスクを表示 | 非同期処理を監視 |
+| `/copy` | 最後の応答をクリップボードにコピー | 出力をすばやく共有 |
+| `/teleport` | セッションを別のマシンに転送 | リモートで作業を続ける |
+| `/desktop` | Claude Desktopアプリを開く | デスクトップインターフェースに切り替え |
+| `/theme` | カラーテーマを変更 | 外観をカスタマイズ |
+| `/usage` | API使用統計を表示 | クォータとコストを監視 |
+| `/fork` | 現在の会話をフォーク | 代替案を探る |
+| `/stats` | セッション統計を表示 | セッションメトリクスを確認 |
+| `/statusline` | ステータスラインを設定 | ステータス表示をカスタマイズ |
+| `/stickers` | セッションステッカーを表示 | 楽しい報酬 |
+| `/fast` | 高速出力モードを切り替え | 応答を高速化 |
+| `/terminal-setup` | ターミナル連携を設定 | ターミナル機能をセットアップ |
+| `/upgrade` | アップデートを確認 | バージョン管理 |
 
-### Custom Commands (Examples)
+### カスタムコマンド (サンプル)
 
-| Command | Description | When to Use | Scope | Installation |
+| コマンド | 説明 | 使う場面 | スコープ | インストール |
 |---------|-------------|-------------|-------|--------------|
-| `/optimize` | Analyze code for optimization | Performance improvement | Project | `cp 01-slash-commands/optimize.md .claude/commands/` |
-| `/pr` | Prepare pull request | Before submitting PRs | Project | `cp 01-slash-commands/pr.md .claude/commands/` |
-| `/generate-api-docs` | Generate API documentation | Document APIs | Project | `cp 01-slash-commands/generate-api-docs.md .claude/commands/` |
-| `/commit` | Create git commit with context | Commit changes | User | `cp 01-slash-commands/commit.md .claude/commands/` |
-| `/push-all` | Stage, commit, and push | Quick deployment | User | `cp 01-slash-commands/push-all.md .claude/commands/` |
-| `/doc-refactor` | Restructure documentation | Improve docs | Project | `cp 01-slash-commands/doc-refactor.md .claude/commands/` |
-| `/setup-ci-cd` | Setup CI/CD pipeline | New projects | Project | `cp 01-slash-commands/setup-ci-cd.md .claude/commands/` |
-| `/unit-test-expand` | Expand test coverage | Improve testing | Project | `cp 01-slash-commands/unit-test-expand.md .claude/commands/` |
+| `/optimize` | 最適化のためのコード分析 | パフォーマンス改善 | プロジェクト | `cp 01-slash-commands/optimize.md .claude/commands/` |
+| `/pr` | プルリクエストの準備 | PR提出前 | プロジェクト | `cp 01-slash-commands/pr.md .claude/commands/` |
+| `/generate-api-docs` | APIドキュメント生成 | APIのドキュメント化 | プロジェクト | `cp 01-slash-commands/generate-api-docs.md .claude/commands/` |
+| `/commit` | コンテキスト付きgitコミット作成 | 変更をコミット | ユーザー | `cp 01-slash-commands/commit.md .claude/commands/` |
+| `/push-all` | ステージ・コミット・プッシュ | クイックデプロイ | ユーザー | `cp 01-slash-commands/push-all.md .claude/commands/` |
+| `/doc-refactor` | ドキュメントの再構成 | ドキュメント改善 | プロジェクト | `cp 01-slash-commands/doc-refactor.md .claude/commands/` |
+| `/setup-ci-cd` | CI/CDパイプラインのセットアップ | 新規プロジェクト | プロジェクト | `cp 01-slash-commands/setup-ci-cd.md .claude/commands/` |
+| `/unit-test-expand` | テストカバレッジを拡張 | テスト改善 | プロジェクト | `cp 01-slash-commands/unit-test-expand.md .claude/commands/` |
 
-> **Scope**: `User` = personal workflows (`~/.claude/commands/`), `Project` = team-shared (`.claude/commands/`)
+> **スコープ**: `ユーザー` = 個人ワークフロー (`~/.claude/commands/`)、`プロジェクト` = チーム共有 (`.claude/commands/`)
 
-**Reference**: [01-slash-commands/](01-slash-commands/) | [Official Docs](https://code.claude.com/docs/en/interactive-mode)
+**リファレンス**: [01-slash-commands/](01-slash-commands/) | [公式ドキュメント](https://code.claude.com/docs/en/interactive-mode)
 
-**Quick Install (All Custom Commands)**:
+**クイックインストール (すべてのカスタムコマンド)**:
 ```bash
 cp 01-slash-commands/*.md .claude/commands/
 ```
 
 ---
 
-## Permission Modes
+## パーミッションモード
 
-Claude Code supports 6 permission modes that control how tool use is authorized.
+Claude Codeはツール使用の承認方法を制御する6つのパーミッションモードをサポートしています。
 
-| Mode | Description | When to Use |
+| モード | 説明 | 使う場面 |
 |------|-------------|-------------|
-| `default` | Prompt for each tool call | Standard interactive use |
-| `acceptEdits` | Auto-accept file edits, prompt for others | Trusted editing workflows |
-| `plan` | Read-only tools only, no writes | Planning and exploration |
-| `auto` | Accept all tools without prompting | Fully autonomous operation (Research Preview) |
-| `bypassPermissions` | Skip all permission checks | CI/CD, headless environments |
-| `dontAsk` | Skip tools that would require permission | Non-interactive scripting |
+| `default` | 各ツール呼び出しでプロンプト | 標準的なインタラクティブ使用 |
+| `acceptEdits` | ファイル編集を自動承認、その他はプロンプト | 信頼できる編集ワークフロー |
+| `plan` | 読み取り専用ツールのみ、書き込みなし | 計画と探索 |
+| `auto` | プロンプトなしですべてのツールを承認 | 完全自律操作 (Research Preview) |
+| `bypassPermissions` | すべてのパーミッションチェックをスキップ | CI/CD、ヘッドレス環境 |
+| `dontAsk` | パーミッションが必要なツールをスキップ | 非インタラクティブスクリプティング |
 
-> **Note**: `auto` mode is a Research Preview feature (March 2026). Use `bypassPermissions` only in trusted, sandboxed environments.
+> **注**: `auto` モードは Research Preview 機能 (2026年3月)。`bypassPermissions` は信頼された・サンドボックス化された環境でのみ使用すること。
 
-**Reference**: [Official Docs](https://code.claude.com/docs/en/permissions)
+**リファレンス**: [公式ドキュメント](https://code.claude.com/docs/en/permissions)
 
 ---
 
 ## Subagents
 
-Specialized AI assistants with isolated contexts for specific tasks.
+特定のタスクのために独立したコンテキストを持つ専門AIアシスタント。
 
-### Built-in Subagents
+### 組み込みSubagents
 
-| Agent | Description | Tools | Model | When to Use |
+| エージェント | 説明 | ツール | モデル | 使う場面 |
 |-------|-------------|-------|-------|-------------|
-| **general-purpose** | Multi-step tasks, research | All tools | Inherits model | Complex research, multi-file tasks |
-| **Plan** | Implementation planning | Read, Glob, Grep, Bash | Inherits model | Architecture design, planning |
-| **Explore** | Codebase exploration | Read, Glob, Grep | Haiku 4.5 | Quick searches, understanding code |
-| **Bash** | Command execution | Bash | Inherits model | Git operations, terminal tasks |
-| **statusline-setup** | Status line configuration | Bash, Read, Write | Sonnet 4.6 | Configure status line display |
-| **Claude Code Guide** | Help and documentation | Read, Glob, Grep | Haiku 4.5 | Getting help, learning features |
+| **general-purpose** | マルチステップタスク、調査 | すべてのツール | 継承 | 複雑な調査、マルチファイルタスク |
+| **Plan** | 実装計画 | Read, Glob, Grep, Bash | 継承 | アーキテクチャ設計、計画 |
+| **Explore** | コードベース探索 | Read, Glob, Grep | Haiku 4.5 | クイック検索、コード理解 |
+| **Bash** | コマンド実行 | Bash | 継承 | Git操作、ターミナルタスク |
+| **statusline-setup** | ステータスライン設定 | Bash, Read, Write | Sonnet 4.6 | ステータスライン表示の設定 |
+| **Claude Code Guide** | ヘルプとドキュメント | Read, Glob, Grep | Haiku 4.5 | ヘルプを得る・機能を学ぶ |
 
-### Subagent Configuration Fields
+### Subagent設定フィールド
 
-| Field | Type | Description |
+| フィールド | 型 | 説明 |
 |-------|------|-------------|
-| `name` | string | Agent identifier |
-| `description` | string | What the agent does |
-| `model` | string | Model override (e.g., `haiku-4.5`) |
-| `tools` | array | Allowed tools list |
-| `effort` | string | Reasoning effort level (`low`, `medium`, `high`) |
-| `initialPrompt` | string | System prompt injected at agent start |
-| `disallowedTools` | array | Tools explicitly denied to this agent |
+| `name` | string | エージェントの識別子 |
+| `description` | string | エージェントの機能 |
+| `model` | string | モデルのオーバーライド (例: `haiku-4.5`) |
+| `tools` | array | 許可されたツールリスト |
+| `effort` | string | 推論の努力レベル (`low`, `medium`, `high`) |
+| `initialPrompt` | string | エージェント開始時に注入されるシステムプロンプト |
+| `disallowedTools` | array | このエージェントに明示的に拒否されたツール |
 
-### Custom Subagents (Examples)
+### カスタムSubagents (サンプル)
 
-| Agent | Description | When to Use | Scope | Installation |
+| エージェント | 説明 | 使う場面 | スコープ | インストール |
 |-------|-------------|-------------|-------|--------------|
-| `code-reviewer` | Comprehensive code quality | Code review sessions | Project | `cp 04-subagents/code-reviewer.md .claude/agents/` |
-| `code-architect` | Feature architecture design | New feature planning | Project | `cp 04-subagents/code-architect.md .claude/agents/` |
-| `code-explorer` | Deep codebase analysis | Understanding existing features | Project | `cp 04-subagents/code-explorer.md .claude/agents/` |
-| `clean-code-reviewer` | Clean Code principles review | Maintainability review | Project | `cp 04-subagents/clean-code-reviewer.md .claude/agents/` |
-| `test-engineer` | Test strategy & coverage | Test planning | Project | `cp 04-subagents/test-engineer.md .claude/agents/` |
-| `documentation-writer` | Technical documentation | API docs, guides | Project | `cp 04-subagents/documentation-writer.md .claude/agents/` |
-| `secure-reviewer` | Security-focused review | Security audits | Project | `cp 04-subagents/secure-reviewer.md .claude/agents/` |
-| `implementation-agent` | Full feature implementation | Feature development | Project | `cp 04-subagents/implementation-agent.md .claude/agents/` |
-| `debugger` | Root cause analysis | Bug investigation | User | `cp 04-subagents/debugger.md .claude/agents/` |
-| `data-scientist` | SQL queries, data analysis | Data tasks | User | `cp 04-subagents/data-scientist.md .claude/agents/` |
+| `code-reviewer` | 包括的なコード品質 | コードレビューセッション | プロジェクト | `cp 04-subagents/code-reviewer.md .claude/agents/` |
+| `code-architect` | 機能アーキテクチャ設計 | 新機能の計画 | プロジェクト | `cp 04-subagents/code-architect.md .claude/agents/` |
+| `code-explorer` | 深いコードベース分析 | 既存機能の理解 | プロジェクト | `cp 04-subagents/code-explorer.md .claude/agents/` |
+| `clean-code-reviewer` | Clean Code原則のレビュー | 保守性レビュー | プロジェクト | `cp 04-subagents/clean-code-reviewer.md .claude/agents/` |
+| `test-engineer` | テスト戦略とカバレッジ | テスト計画 | プロジェクト | `cp 04-subagents/test-engineer.md .claude/agents/` |
+| `documentation-writer` | 技術ドキュメント | APIドキュメント、ガイド | プロジェクト | `cp 04-subagents/documentation-writer.md .claude/agents/` |
+| `secure-reviewer` | セキュリティ重視のレビュー | セキュリティ監査 | プロジェクト | `cp 04-subagents/secure-reviewer.md .claude/agents/` |
+| `implementation-agent` | フル機能実装 | 機能開発 | プロジェクト | `cp 04-subagents/implementation-agent.md .claude/agents/` |
+| `debugger` | 根本原因分析 | バグ調査 | ユーザー | `cp 04-subagents/debugger.md .claude/agents/` |
+| `data-scientist` | SQLクエリ、データ分析 | データタスク | ユーザー | `cp 04-subagents/data-scientist.md .claude/agents/` |
 
-> **Scope**: `User` = personal (`~/.claude/agents/`), `Project` = team-shared (`.claude/agents/`)
+> **スコープ**: `ユーザー` = 個人 (`~/.claude/agents/`)、`プロジェクト` = チーム共有 (`.claude/agents/`)
 
-**Reference**: [04-subagents/](04-subagents/) | [Official Docs](https://code.claude.com/docs/en/sub-agents)
+**リファレンス**: [04-subagents/](04-subagents/) | [公式ドキュメント](https://code.claude.com/docs/en/sub-agents)
 
-**Quick Install (All Custom Agents)**:
+**クイックインストール (すべてのカスタムエージェント)**:
 ```bash
 cp 04-subagents/*.md .claude/agents/
 ```
@@ -185,119 +185,119 @@ cp 04-subagents/*.md .claude/agents/
 
 ## Skills
 
-Auto-invoked capabilities with instructions, scripts, and templates.
+指示・スクリプト・テンプレートを持つ自動呼び出し機能。
 
-### Example Skills
+### サンプルSkills
 
-| Skill | Description | When Auto-Invoked | Scope | Installation |
+| Skill | 説明 | 自動呼び出しのタイミング | スコープ | インストール |
 |-------|-------------|-------------------|-------|--------------|
-| `code-review` | Comprehensive code review | "Review this code", "Check quality" | Project | `cp -r 03-skills/code-review .claude/skills/` |
-| `brand-voice` | Brand consistency checker | Writing marketing copy | Project | `cp -r 03-skills/brand-voice .claude/skills/` |
-| `doc-generator` | API documentation generator | "Generate docs", "Document API" | Project | `cp -r 03-skills/doc-generator .claude/skills/` |
-| `refactor` | Systematic code refactoring (Martin Fowler) | "Refactor this", "Clean up code" | User | `cp -r 03-skills/refactor ~/.claude/skills/` |
+| `code-review` | 包括的なコードレビュー | 「このコードをレビューして」「品質を確認して」 | プロジェクト | `cp -r 03-skills/code-review .claude/skills/` |
+| `brand-voice` | ブランド一貫性チェッカー | マーケティングコピーの作成 | プロジェクト | `cp -r 03-skills/brand-voice .claude/skills/` |
+| `doc-generator` | APIドキュメント生成 | 「ドキュメントを生成して」「APIをドキュメント化して」 | プロジェクト | `cp -r 03-skills/doc-generator .claude/skills/` |
+| `refactor` | 体系的なコードリファクタリング (Martin Fowler流) | 「リファクタリングして」「コードをきれいにして」 | ユーザー | `cp -r 03-skills/refactor ~/.claude/skills/` |
 
-> **Scope**: `User` = personal (`~/.claude/skills/`), `Project` = team-shared (`.claude/skills/`)
+> **スコープ**: `ユーザー` = 個人 (`~/.claude/skills/`)、`プロジェクト` = チーム共有 (`.claude/skills/`)
 
-### Skill Structure
+### Skill構造
 
 ```
 ~/.claude/skills/skill-name/
-├── SKILL.md          # Skill definition & instructions
-├── scripts/          # Helper scripts
-└── templates/        # Output templates
+├── SKILL.md          # Skill定義と指示
+├── scripts/          # ヘルパースクリプト
+└── templates/        # 出力テンプレート
 ```
 
-### Skill Frontmatter Fields
+### SKILLフロントマターフィールド
 
-Skills support YAML frontmatter in `SKILL.md` for configuration:
+`SKILL.md` のYAMLフロントマターで設定をサポート:
 
-| Field | Type | Description |
+| フィールド | 型 | 説明 |
 |-------|------|-------------|
-| `name` | string | Skill display name |
-| `description` | string | What the skill does |
-| `autoInvoke` | array | Trigger phrases for auto-invocation |
-| `effort` | string | Reasoning effort level (`low`, `medium`, `high`) |
-| `shell` | string | Shell to use for scripts (`bash`, `zsh`, `sh`) |
+| `name` | string | Skillの表示名 |
+| `description` | string | Skillの機能 |
+| `autoInvoke` | array | 自動呼び出しのトリガーフレーズ |
+| `effort` | string | 推論の努力レベル (`low`, `medium`, `high`) |
+| `shell` | string | スクリプトに使用するシェル (`bash`, `zsh`, `sh`) |
 
-**Reference**: [03-skills/](03-skills/) | [Official Docs](https://code.claude.com/docs/en/skills)
+**リファレンス**: [03-skills/](03-skills/) | [公式ドキュメント](https://code.claude.com/docs/en/skills)
 
-**Quick Install (All Skills)**:
+**クイックインストール (すべてのSkills)**:
 ```bash
 cp -r 03-skills/* ~/.claude/skills/
 ```
 
-### Bundled Skills
+### バンドルSkills
 
-| Skill | Description | When Auto-Invoked |
+| Skill | 説明 | 自動呼び出しのタイミング |
 |-------|-------------|-------------------|
-| `/simplify` | Review code for quality | After writing code |
-| `/batch` | Run prompts on multiple files | Batch operations |
-| `/debug` | Debug failing tests/errors | Debugging sessions |
-| `/loop` | Run prompts on interval | Recurring tasks |
-| `/claude-api` | Build apps with Claude API | API development |
+| `/simplify` | コード品質のレビュー | コード作成後 |
+| `/batch` | 複数ファイルにプロンプトを実行 | バッチ操作 |
+| `/debug` | テスト失敗/エラーのデバッグ | デバッグセッション |
+| `/loop` | 一定間隔でプロンプトを実行 | 繰り返しタスク |
+| `/claude-api` | Claude APIを使ったアプリ構築 | API開発 |
 
 ---
 
 ## Plugins
 
-Bundled collections of commands, agents, MCP servers, and hooks.
+コマンド・エージェント・MCPサーバー・hooksのバンドルコレクション。
 
-### Example Plugins
+### サンプルPlugins
 
-| Plugin | Description | Components | When to Use | Scope | Installation |
+| Plugin | 説明 | コンポーネント | 使う場面 | スコープ | インストール |
 |--------|-------------|------------|-------------|-------|--------------|
-| `pr-review` | PR review workflow | 3 commands, 3 agents, GitHub MCP | Code reviews | Project | `/plugin install pr-review` |
-| `devops-automation` | Deployment & monitoring | 4 commands, 3 agents, K8s MCP | DevOps tasks | Project | `/plugin install devops-automation` |
-| `documentation` | Doc generation suite | 4 commands, 3 agents, templates | Documentation | Project | `/plugin install documentation` |
+| `pr-review` | PRレビューワークフロー | 3コマンド、3エージェント、GitHub MCP | コードレビュー | プロジェクト | `/plugin install pr-review` |
+| `devops-automation` | デプロイとモニタリング | 4コマンド、3エージェント、K8s MCP | DevOpsタスク | プロジェクト | `/plugin install devops-automation` |
+| `documentation` | ドキュメント生成スイート | 4コマンド、3エージェント、テンプレート | ドキュメント作成 | プロジェクト | `/plugin install documentation` |
 
-> **Scope**: `Project` = team-shared, `User` = personal workflows
+> **スコープ**: `プロジェクト` = チーム共有、`ユーザー` = 個人ワークフロー
 
-### Plugin Structure
+### Plugin構造
 
 ```
 .claude-plugin/
-├── plugin.json       # Manifest file
+├── plugin.json       # マニフェストファイル
 ├── commands/         # Slash commands
 ├── agents/           # Subagents
 ├── skills/           # Skills
-├── mcp/              # MCP configurations
-├── hooks/            # Hook scripts
-└── scripts/          # Utility scripts
+├── mcp/              # MCP設定
+├── hooks/            # Hookスクリプト
+└── scripts/          # ユーティリティスクリプト
 ```
 
-**Reference**: [07-plugins/](07-plugins/) | [Official Docs](https://code.claude.com/docs/en/plugins)
+**リファレンス**: [07-plugins/](07-plugins/) | [公式ドキュメント](https://code.claude.com/docs/en/plugins)
 
-**Plugin Management Commands**:
+**Plugin管理コマンド**:
 ```bash
-/plugin list              # List installed plugins
-/plugin install <name>    # Install plugin
-/plugin remove <name>     # Remove plugin
-/plugin update <name>     # Update plugin
+/plugin list              # インストール済みpluginsを一覧
+/plugin install <name>    # pluginをインストール
+/plugin remove <name>     # pluginを削除
+/plugin update <name>     # pluginをアップデート
 ```
 
 ---
 
-## MCP Servers
+## MCPサーバー
 
-Model Context Protocol servers for external tool and API access.
+外部ツールとAPIアクセスのためのModel Context Protocolサーバー。
 
-### Common MCP Servers
+### 一般的なMCPサーバー
 
-| Server | Description | When to Use | Scope | Installation |
+| サーバー | 説明 | 使う場面 | スコープ | インストール |
 |--------|-------------|-------------|-------|--------------|
-| **GitHub** | PR management, issues, code | GitHub workflows | Project | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
-| **Database** | SQL queries, data access | Database operations | Project | `claude mcp add db -- npx -y @modelcontextprotocol/server-postgres` |
-| **Filesystem** | Advanced file operations | Complex file tasks | User | `claude mcp add fs -- npx -y @modelcontextprotocol/server-filesystem` |
-| **Slack** | Team communication | Notifications, updates | Project | Configure in settings |
-| **Google Docs** | Document access | Doc editing, review | Project | Configure in settings |
-| **Asana** | Project management | Task tracking | Project | Configure in settings |
-| **Stripe** | Payment data | Financial analysis | Project | Configure in settings |
-| **Memory** | Persistent memory | Cross-session recall | User | Configure in settings |
-| **Context7** | Library documentation | Up-to-date docs lookup | Built-in | Built-in |
+| **GitHub** | PR管理、issues、コード | GitHubワークフロー | プロジェクト | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
+| **Database** | SQLクエリ、データアクセス | データベース操作 | プロジェクト | `claude mcp add db -- npx -y @modelcontextprotocol/server-postgres` |
+| **Filesystem** | 高度なファイル操作 | 複雑なファイルタスク | ユーザー | `claude mcp add fs -- npx -y @modelcontextprotocol/server-filesystem` |
+| **Slack** | チームコミュニケーション | 通知、更新 | プロジェクト | settingsで設定 |
+| **Google Docs** | ドキュメントアクセス | ドキュメント編集・レビュー | プロジェクト | settingsで設定 |
+| **Asana** | プロジェクト管理 | タスク追跡 | プロジェクト | settingsで設定 |
+| **Stripe** | 支払いデータ | 財務分析 | プロジェクト | settingsで設定 |
+| **Memory** | 永続的なmemory | セッション間の記憶 | ユーザー | settingsで設定 |
+| **Context7** | ライブラリドキュメント | 最新ドキュメントの参照 | 組み込み | 組み込み |
 
-> **Scope**: `Project` = team (`.mcp.json`), `User` = personal (`~/.claude.json`), `Built-in` = pre-installed
+> **スコープ**: `プロジェクト` = チーム (`.mcp.json`)、`ユーザー` = 個人 (`~/.claude.json`)、`組み込み` = プリインストール済み
 
-### MCP Configuration Example
+### MCP設定例
 
 ```json
 {
@@ -313,9 +313,9 @@ Model Context Protocol servers for external tool and API access.
 }
 ```
 
-**Reference**: [05-mcp/](05-mcp/) | [MCP Protocol Docs](https://modelcontextprotocol.io)
+**リファレンス**: [05-mcp/](05-mcp/) | [MCPプロトコルドキュメント](https://modelcontextprotocol.io)
 
-**Quick Install (GitHub MCP)**:
+**クイックインストール (GitHub MCP)**:
 ```bash
 export GITHUB_TOKEN="your_token" && claude mcp add github -- npx -y @modelcontextprotocol/server-github
 ```
@@ -324,53 +324,53 @@ export GITHUB_TOKEN="your_token" && claude mcp add github -- npx -y @modelcontex
 
 ## Hooks
 
-Event-driven automation that executes shell commands on Claude Code events.
+Claude Codeのイベントに応じてシェルコマンドを実行するイベント駆動自動化。
 
-### Hook Events
+### Hookイベント
 
-| Event | Description | When Triggered | Use Cases |
+| イベント | 説明 | トリガーのタイミング | ユースケース |
 |-------|-------------|----------------|-----------|
-| `SessionStart` | Session begins/resumes | Session initialization | Setup tasks |
-| `InstructionsLoaded` | Instructions loaded | CLAUDE.md or rules file loaded | Custom instruction handling |
-| `UserPromptSubmit` | Before prompt processing | User sends message | Input validation |
-| `PreToolUse` | Before tool execution | Before any tool runs | Validation, logging |
-| `PermissionRequest` | Permission dialog shown | Before sensitive actions | Custom approval flows |
-| `PostToolUse` | After tool succeeds | After any tool completes | Formatting, notifications |
-| `PostToolUseFailure` | Tool execution fails | After tool error | Error handling, logging |
-| `Notification` | Notification sent | Claude sends notification | External alerts |
-| `SubagentStart` | Subagent spawned | Subagent task starts | Initialize subagent context |
-| `SubagentStop` | Subagent finishes | Subagent task complete | Chain actions |
-| `Stop` | Claude finishes responding | Response complete | Cleanup, reporting |
-| `StopFailure` | API error ends turn | API error occurs | Error recovery, logging |
-| `TeammateIdle` | Teammate agent idle | Agent team coordination | Distribute work |
-| `TaskCompleted` | Task marked complete | Task done | Post-task processing |
-| `TaskCreated` | Task created via TaskCreate | New task created | Task tracking, logging |
-| `ConfigChange` | Configuration updated | Settings modified | React to config changes |
-| `CwdChanged` | Working directory changes | Directory changed | Directory-specific setup |
-| `FileChanged` | Watched file changes | File modified | File monitoring, rebuild |
-| `PreCompact` | Before compact operation | Context compression | State preservation |
-| `PostCompact` | After compaction completes | Compaction done | Post-compact actions |
-| `WorktreeCreate` | Worktree being created | Git worktree created | Setup worktree environment |
-| `WorktreeRemove` | Worktree being removed | Git worktree removed | Cleanup worktree resources |
-| `Elicitation` | MCP server requests input | MCP elicitation | Input validation |
-| `ElicitationResult` | User responds to elicitation | User responds | Response processing |
-| `SessionEnd` | Session terminates | Session termination | Cleanup, save state |
+| `SessionStart` | セッション開始/再開 | セッション初期化 | セットアップタスク |
+| `InstructionsLoaded` | 指示が読み込まれた | CLAUDE.mdまたはルールファイルが読み込まれた | カスタム指示処理 |
+| `UserPromptSubmit` | プロンプト処理前 | ユーザーがメッセージを送信 | 入力バリデーション |
+| `PreToolUse` | ツール実行前 | 任意のツール実行前 | バリデーション、ログ記録 |
+| `PermissionRequest` | パーミッションダイアログ表示 | 機密性の高い操作の前 | カスタム承認フロー |
+| `PostToolUse` | ツール成功後 | 任意のツール完了後 | フォーマット、通知 |
+| `PostToolUseFailure` | ツール実行失敗 | ツールエラー後 | エラー処理、ログ記録 |
+| `Notification` | 通知送信 | Claudeが通知を送信 | 外部アラート |
+| `SubagentStart` | Subagentが起動 | Subagentタスク開始 | Subagentコンテキストを初期化 |
+| `SubagentStop` | Subagentが終了 | Subagentタスク完了 | アクションの連鎖 |
+| `Stop` | Claudeが応答を終了 | 応答完了 | クリーンアップ、レポート |
+| `StopFailure` | APIエラーでターン終了 | APIエラー発生 | エラー回復、ログ記録 |
+| `TeammateIdle` | チームメイトエージェントがアイドル | エージェントチーム調整 | 作業を分散 |
+| `TaskCompleted` | タスクが完了としてマーク | タスク完了 | タスク後処理 |
+| `TaskCreated` | TaskCreateでタスクが作成 | 新しいタスクが作成された | タスク追跡、ログ記録 |
+| `ConfigChange` | 設定が更新 | settingsが変更 | 設定変更に反応 |
+| `CwdChanged` | 作業ディレクトリが変更 | ディレクトリ変更 | ディレクトリ固有のセットアップ |
+| `FileChanged` | 監視ファイルが変更 | ファイル変更 | ファイル監視、再ビルド |
+| `PreCompact` | compact操作前 | コンテキスト圧縮 | 状態保存 |
+| `PostCompact` | compaction完了後 | Compaction完了 | compact後のアクション |
+| `WorktreeCreate` | Worktreeが作成される | Git worktree作成 | Worktree環境のセットアップ |
+| `WorktreeRemove` | Worktreeが削除される | Git worktree削除 | Worktreeリソースのクリーンアップ |
+| `Elicitation` | MCPサーバーが入力を要求 | MCP elicitation | 入力バリデーション |
+| `ElicitationResult` | ユーザーがelicitationに応答 | ユーザーが応答 | 応答処理 |
+| `SessionEnd` | セッション終了 | セッション終了 | クリーンアップ、状態保存 |
 
-### Example Hooks
+### サンプルHooks
 
-| Hook | Description | Event | Scope | Installation |
+| Hook | 説明 | イベント | スコープ | インストール |
 |------|-------------|-------|-------|--------------|
-| `validate-bash.py` | Command validation | PreToolUse:Bash | Project | `cp 06-hooks/validate-bash.py .claude/hooks/` |
-| `security-scan.py` | Security scanning | PostToolUse:Write | Project | `cp 06-hooks/security-scan.py .claude/hooks/` |
-| `format-code.sh` | Auto-formatting | PostToolUse:Write | User | `cp 06-hooks/format-code.sh ~/.claude/hooks/` |
-| `validate-prompt.py` | Prompt validation | UserPromptSubmit | Project | `cp 06-hooks/validate-prompt.py .claude/hooks/` |
-| `context-tracker.py` | Token usage tracking | Stop | User | `cp 06-hooks/context-tracker.py ~/.claude/hooks/` |
-| `pre-commit.sh` | Pre-commit validation | PreToolUse:Bash | Project | `cp 06-hooks/pre-commit.sh .claude/hooks/` |
-| `log-bash.sh` | Command logging | PostToolUse:Bash | User | `cp 06-hooks/log-bash.sh ~/.claude/hooks/` |
+| `validate-bash.py` | コマンドバリデーション | PreToolUse:Bash | プロジェクト | `cp 06-hooks/validate-bash.py .claude/hooks/` |
+| `security-scan.py` | セキュリティスキャン | PostToolUse:Write | プロジェクト | `cp 06-hooks/security-scan.py .claude/hooks/` |
+| `format-code.sh` | 自動フォーマット | PostToolUse:Write | ユーザー | `cp 06-hooks/format-code.sh ~/.claude/hooks/` |
+| `validate-prompt.py` | プロンプトバリデーション | UserPromptSubmit | プロジェクト | `cp 06-hooks/validate-prompt.py .claude/hooks/` |
+| `context-tracker.py` | トークン使用量追跡 | Stop | ユーザー | `cp 06-hooks/context-tracker.py ~/.claude/hooks/` |
+| `pre-commit.sh` | コミット前バリデーション | PreToolUse:Bash | プロジェクト | `cp 06-hooks/pre-commit.sh .claude/hooks/` |
+| `log-bash.sh` | コマンドログ記録 | PostToolUse:Bash | ユーザー | `cp 06-hooks/log-bash.sh ~/.claude/hooks/` |
 
-> **Scope**: `Project` = team (`.claude/settings.json`), `User` = personal (`~/.claude/settings.json`)
+> **スコープ**: `プロジェクト` = チーム (`.claude/settings.json`)、`ユーザー` = 個人 (`~/.claude/settings.json`)
 
-### Hook Configuration
+### Hook設定
 
 ```json
 {
@@ -391,36 +391,36 @@ Event-driven automation that executes shell commands on Claude Code events.
 }
 ```
 
-**Reference**: [06-hooks/](06-hooks/) | [Official Docs](https://code.claude.com/docs/en/hooks)
+**リファレンス**: [06-hooks/](06-hooks/) | [公式ドキュメント](https://code.claude.com/docs/en/hooks)
 
-**Quick Install (All Hooks)**:
+**クイックインストール (すべてのHooks)**:
 ```bash
 mkdir -p ~/.claude/hooks && cp 06-hooks/*.sh ~/.claude/hooks/ && chmod +x ~/.claude/hooks/*.sh
 ```
 
 ---
 
-## Memory Files
+## Memoryファイル
 
-Persistent context loaded automatically across sessions.
+セッション間で自動的に読み込まれる永続的なコンテキスト。
 
-### Memory Types
+### Memoryタイプ
 
-| Type | Location | Scope | When to Use |
+| タイプ | 場所 | スコープ | 使う場面 |
 |------|----------|-------|-------------|
-| **Managed Policy** | Org-managed policies | Organization | Enforce org-wide standards |
-| **Project** | `./CLAUDE.md` | Project (team) | Team standards, project context |
-| **Project Rules** | `.claude/rules/` | Project (team) | Modular project rules |
-| **User** | `~/.claude/CLAUDE.md` | User (personal) | Personal preferences |
-| **User Rules** | `~/.claude/rules/` | User (personal) | Modular personal rules |
-| **Local** | `./CLAUDE.local.md` | Local (git-ignored) | Machine-specific overrides (not in official docs as of March 2026; may be legacy) |
-| **Auto Memory** | Automatic | Session | Auto-captured insights and corrections |
+| **管理ポリシー** | 組織管理ポリシー | 組織 | 組織全体の標準を強制 |
+| **プロジェクト** | `./CLAUDE.md` | プロジェクト (チーム) | チーム標準、プロジェクトコンテキスト |
+| **プロジェクトルール** | `.claude/rules/` | プロジェクト (チーム) | モジュール式プロジェクトルール |
+| **ユーザー** | `~/.claude/CLAUDE.md` | ユーザー (個人) | 個人の設定 |
+| **ユーザールール** | `~/.claude/rules/` | ユーザー (個人) | モジュール式個人ルール |
+| **ローカル** | `./CLAUDE.local.md` | ローカル (git無視) | マシン固有のオーバーライド (2026年3月時点で公式ドキュメントには未記載; レガシーの可能性あり) |
+| **Auto Memory** | 自動 | セッション | 自動キャプチャされた知見と修正 |
 
-> **Scope**: `Organization` = managed by admins, `Project` = shared with team via git, `User` = personal preferences, `Local` = not committed, `Session` = auto-managed
+> **スコープ**: `組織` = 管理者管理、`プロジェクト` = gitでチーム共有、`ユーザー` = 個人設定、`ローカル` = コミットなし、`セッション` = 自動管理
 
-**Reference**: [02-memory/](02-memory/) | [Official Docs](https://code.claude.com/docs/en/memory)
+**リファレンス**: [02-memory/](02-memory/) | [公式ドキュメント](https://code.claude.com/docs/en/memory)
 
-**Quick Install**:
+**クイックインストール**:
 ```bash
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 cp 02-memory/personal-CLAUDE.md ~/.claude/CLAUDE.md
@@ -428,72 +428,72 @@ cp 02-memory/personal-CLAUDE.md ~/.claude/CLAUDE.md
 
 ---
 
-## New Features (March 2026)
+## 新機能 (2026年3月)
 
-| Feature | Description | How to Use |
+| 機能 | 説明 | 使い方 |
 |---------|-------------|------------|
-| **Remote Control** | Control Claude Code sessions remotely via API | Use the remote control API to send prompts and receive responses programmatically |
-| **Web Sessions** | Run Claude Code in a browser-based environment | Access via `claude web` or through the Anthropic Console |
-| **Desktop App** | Native desktop application for Claude Code | Use `/desktop` or download from Anthropic website |
-| **Agent Teams** | Coordinate multiple agents working on related tasks | Configure teammate agents that collaborate and share context |
-| **Task List** | Background task management and monitoring | Use `/tasks` to view and manage background operations |
-| **Prompt Suggestions** | Context-aware command suggestions | Suggestions appear automatically based on current context |
-| **Git Worktrees** | Isolated git worktrees for parallel development | Use worktree commands for safe parallel branch work |
-| **Sandboxing** | Isolated execution environments for safety | Use `/sandbox` to toggle; runs commands in restricted environments |
-| **MCP OAuth** | OAuth authentication for MCP servers | Configure OAuth credentials in MCP server settings for secure access |
-| **MCP Tool Search** | Search and discover MCP tools dynamically | Use tool search to find available MCP tools across connected servers |
-| **Scheduled Tasks** | Set up recurring tasks with `/loop` and cron tools | Use `/loop 5m /command` or CronCreate tool |
-| **Chrome Integration** | Browser automation with headless Chromium | Use `--chrome` flag or `/chrome` command |
-| **Keyboard Customization** | Customize keybindings including chord support | Use `/keybindings` or edit `~/.claude/keybindings.json` |
-| **Auto Mode** | Fully autonomous operation without permission prompts (Research Preview) | Use `--mode auto` or `/permissions auto`; March 2026 |
-| **Channels** | Multi-channel communication (Telegram, Slack, etc.) (Research Preview) | Configure channel plugins; March 2026 |
-| **Voice Dictation** | Voice input for prompts | Use microphone icon or voice keybinding |
-| **Agent Hook Type** | Hooks that spawn a subagent instead of running a shell command | Set `"type": "agent"` in hook configuration |
-| **Prompt Hook Type** | Hooks that inject prompt text into the conversation | Set `"type": "prompt"` in hook configuration |
-| **MCP Elicitation** | MCP servers can request user input during tool execution | Handle via `Elicitation` and `ElicitationResult` hook events |
-| **WebSocket MCP Transport** | WebSocket-based transport for MCP server connections | Use `"transport": "websocket"` in MCP server config |
-| **Plugin LSP Support** | Language Server Protocol integration via plugins | Configure LSP servers in `plugin.json` for editor features |
-| **Managed Drop-ins** | Organization-managed drop-in configurations (v2.1.83) | Admin-configured via managed policies; auto-applied to all users |
+| **Remote Control** | APIでClaude Codeセッションをリモート制御 | remote control APIを使ってプログラムでプロンプトを送信・応答を受信 |
+| **Web Sessions** | ブラウザベース環境でClaude Codeを実行 | `claude web` またはAnthropic Consoleからアクセス |
+| **Desktop App** | Claude Codeのネイティブデスクトップアプリ | `/desktop` またはAnthropic Webサイトからダウンロード |
+| **Agent Teams** | 関連タスクで複数エージェントを調整 | チームメイトエージェントを設定してコンテキストを共有・協力 |
+| **Task List** | バックグラウンドタスクの管理と監視 | `/tasks` でバックグラウンド操作を表示・管理 |
+| **プロンプト提案** | コンテキスト対応のコマンド提案 | 現在のコンテキストに基づいて自動表示 |
+| **Git Worktrees** | 並列開発のための独立したgit worktrees | 安全な並列ブランチ作業にworktreeコマンドを使用 |
+| **サンドボックス化** | 安全のための独立した実行環境 | `/sandbox` で切り替え; 制限された環境でコマンドを実行 |
+| **MCP OAuth** | MCPサーバーのOAuth認証 | セキュアなアクセスのためにMCPサーバー設定でOAuth認証情報を設定 |
+| **MCPツール検索** | MCPツールを動的に検索・発見 | ツール検索を使って接続されたサーバー全体の利用可能なMCPツールを検索 |
+| **スケジュールタスク** | `/loop` とcronツールで繰り返しタスクを設定 | `/loop 5m /command` またはCronCreateツールを使用 |
+| **Chrome連携** | ヘッドレスChromiumによるブラウザ自動化 | `--chrome` フラグまたは `/chrome` コマンドを使用 |
+| **キーボードカスタマイズ** | コード入力サポートを含むキーバインディングのカスタマイズ | `/keybindings` または `~/.claude/keybindings.json` を編集 |
+| **Auto Mode** | パーミッションプロンプトなしの完全自律操作 (Research Preview) | `--mode auto` または `/permissions auto`; 2026年3月 |
+| **Channels** | マルチチャンネルコミュニケーション (Telegram、Slackなど) (Research Preview) | チャンネルpluginsを設定; 2026年3月 |
+| **Voice Dictation** | プロンプトの音声入力 | マイクアイコンまたは音声キーバインディングを使用 |
+| **Agent Hookタイプ** | シェルコマンドの代わりにsubagentを起動するhooks | hook設定で `"type": "agent"` を設定 |
+| **Prompt Hookタイプ** | 会話にプロンプトテキストを注入するhooks | hook設定で `"type": "prompt"` を設定 |
+| **MCP Elicitation** | MCPサーバーがツール実行中にユーザー入力を要求できる | `Elicitation` と `ElicitationResult` hookイベントで処理 |
+| **WebSocket MCPトランスポート** | MCPサーバー接続のWebSocketベーストランスポート | MCP サーバー設定で `"transport": "websocket"` を使用 |
+| **Plugin LSPサポート** | pluginsを通じたLanguage Server Protocol連携 | エディタ機能のために `plugin.json` でLSPサーバーを設定 |
+| **Managed Drop-ins** | 組織管理のドロップイン設定 (v2.1.83) | 管理者が管理ポリシー経由で設定; すべてのユーザーに自動適用 |
 
 ---
 
-## Quick Reference Matrix
+## クイックリファレンスマトリクス
 
-### Feature Selection Guide
+### 機能選択ガイド
 
-| Need | Recommended Feature | Why |
+| ニーズ | 推奨機能 | 理由 |
 |------|---------------------|-----|
-| Quick shortcut | Slash Command | Manual, immediate |
-| Persistent context | Memory | Auto-loaded |
-| Complex automation | Skill | Auto-invoked |
-| Specialized task | Subagent | Isolated context |
-| External data | MCP Server | Real-time access |
-| Event automation | Hook | Event-triggered |
-| Complete solution | Plugin | All-in-one bundle |
+| クイックショートカット | Slash Command | 手動、即時 |
+| 永続的コンテキスト | Memory | 自動読み込み |
+| 複雑な自動化 | Skill | 自動呼び出し |
+| 専門的タスク | Subagent | 独立したコンテキスト |
+| 外部データ | MCPサーバー | リアルタイムアクセス |
+| イベント自動化 | Hook | イベントトリガー |
+| 完全なソリューション | Plugin | オールインワンバンドル |
 
-### Installation Priority
+### インストール優先順位
 
-| Priority | Feature | Command |
+| 優先度 | 機能 | コマンド |
 |----------|---------|---------|
-| 1. Essential | Memory | `cp 02-memory/project-CLAUDE.md ./CLAUDE.md` |
-| 2. Daily Use | Slash Commands | `cp 01-slash-commands/*.md .claude/commands/` |
-| 3. Quality | Subagents | `cp 04-subagents/*.md .claude/agents/` |
-| 4. Automation | Hooks | `cp 06-hooks/*.sh ~/.claude/hooks/ && chmod +x ~/.claude/hooks/*.sh` |
-| 5. External | MCP | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
-| 6. Advanced | Skills | `cp -r 03-skills/* ~/.claude/skills/` |
-| 7. Complete | Plugins | `/plugin install pr-review` |
+| 1. 必須 | Memory | `cp 02-memory/project-CLAUDE.md ./CLAUDE.md` |
+| 2. 日常使用 | Slash Commands | `cp 01-slash-commands/*.md .claude/commands/` |
+| 3. 品質 | Subagents | `cp 04-subagents/*.md .claude/agents/` |
+| 4. 自動化 | Hooks | `cp 06-hooks/*.sh ~/.claude/hooks/ && chmod +x ~/.claude/hooks/*.sh` |
+| 5. 外部連携 | MCP | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
+| 6. 高度 | Skills | `cp -r 03-skills/* ~/.claude/skills/` |
+| 7. 完全 | Plugins | `/plugin install pr-review` |
 
 ---
 
-## Complete One-Command Installation
+## 一括インストールコマンド
 
-Install all examples from this repository:
+このリポジトリのすべてのサンプルをインストール:
 
 ```bash
-# Create directories
+# ディレクトリを作成
 mkdir -p .claude/{commands,agents,skills} ~/.claude/{hooks,skills}
 
-# Install all features
+# すべての機能をインストール
 cp 01-slash-commands/*.md .claude/commands/ && \
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md && \
 cp -r 03-skills/* ~/.claude/skills/ && \
@@ -504,13 +504,13 @@ chmod +x ~/.claude/hooks/*.sh
 
 ---
 
-## Additional Resources
+## 追加リソース
 
-- [Official Claude Code Documentation](https://code.claude.com/docs/en/overview)
-- [MCP Protocol Specification](https://modelcontextprotocol.io)
-- [Learning Roadmap](LEARNING-ROADMAP.md)
-- [Main README](README.md)
+- [公式 Claude Code ドキュメント](https://code.claude.com/docs/en/overview)
+- [MCPプロトコル仕様](https://modelcontextprotocol.io)
+- [学習ロードマップ](LEARNING-ROADMAP.md)
+- [メイン README](README.md)
 
 ---
 
-**Last Updated**: March 2026
+**最終更新**: 2026年3月
