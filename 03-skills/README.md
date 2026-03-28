@@ -3,157 +3,157 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Agent Skills Guide
+# エージェントスキルガイド
 
-Agent Skills are reusable, filesystem-based capabilities that extend Claude's functionality. They package domain-specific expertise, workflows, and best practices into discoverable components that Claude automatically uses when relevant.
+エージェントスキルは、Claudeの機能を拡張するファイルシステムベースの再利用可能な機能です。ドメイン固有の専門知識、ワークフロー、ベストプラクティスを、Claudeが関連するときに自動的に使用できる探索可能なコンポーネントにパッケージ化します。
 
-## Overview
+## 概要
 
-**Agent Skills** are modular capabilities that transform general-purpose agents into specialists. Unlike prompts (conversation-level instructions for one-off tasks), Skills load on-demand and eliminate the need to repeatedly provide the same guidance across multiple conversations.
+**エージェントスキル**は、汎用エージェントをスペシャリストに変えるモジュラーな機能です。プロンプト（1回限りのタスクのための会話レベルの指示）とは異なり、スキルはオンデマンドで読み込まれ、複数の会話にわたって同じガイダンスを繰り返し提供する必要をなくします。
 
-### Key Benefits
+### 主なメリット
 
-- **Specialize Claude**: Tailor capabilities for domain-specific tasks
-- **Reduce repetition**: Create once, use automatically across conversations
-- **Compose capabilities**: Combine Skills to build complex workflows
-- **Scale workflows**: Reuse skills across multiple projects and teams
-- **Maintain quality**: Embed best practices directly into your workflow
+- **Claudeを専門化**: ドメイン固有タスクのための機能をカスタマイズ
+- **繰り返しを削減**: 一度作成すれば、会話全体で自動的に使用
+- **機能を組み合わせる**: スキルを組み合わせて複雑なワークフローを構築
+- **ワークフローをスケール**: 複数のプロジェクトやチームでスキルを再利用
+- **品質を維持**: ベストプラクティスをワークフローに直接組み込む
 
-Skills follow the [Agent Skills](https://agentskills.io) open standard, which works across multiple AI tools. Claude Code extends the standard with additional features like invocation control, subagent execution, and dynamic context injection.
+スキルは [Agent Skills](https://agentskills.io) オープン標準に従い、複数のAIツールで機能します。Claude Codeは呼び出し制御、サブエージェント実行、動的コンテキストインジェクションなどの追加機能で標準を拡張しています。
 
-> **Note**: Custom slash commands have been merged into skills. `.claude/commands/` files still work and support the same frontmatter fields. Skills are recommended for new development. When both exist at the same path (e.g., `.claude/commands/review.md` and `.claude/skills/review/SKILL.md`), the skill takes precedence.
+> **注意**: カスタムスラッシュコマンドはスキルにマージされました。`.claude/commands/` ファイルは引き続き動作し、同じフロントマターフィールドをサポートします。スキルは新規開発に推奨されます。同じパスに両方が存在する場合（例: `.claude/commands/review.md` と `.claude/skills/review/SKILL.md`）、スキルが優先されます。
 
-## How Skills Work: Progressive Disclosure
+## スキルの仕組み: プログレッシブディスクロージャー
 
-Skills leverage a **progressive disclosure** architecture—Claude loads information in stages as needed, rather than consuming context upfront. This enables efficient context management while maintaining unlimited scalability.
+スキルは**プログレッシブディスクロージャー**アーキテクチャを活用しています。Claudeはコンテキストを事前に消費するのではなく、必要に応じて段階的に情報を読み込みます。これにより、無制限のスケーラビリティを維持しながら効率的なコンテキスト管理が可能になります。
 
-### Three Levels of Loading
+### 3段階の読み込み
 
 ```mermaid
 graph TB
-    subgraph "Level 1: Metadata (Always Loaded)"
-        A["YAML Frontmatter"]
-        A1["~100 tokens per skill"]
+    subgraph "レベル1: メタデータ（常に読み込み）"
+        A["YAMLフロントマター"]
+        A1["スキルあたり約100トークン"]
         A2["name + description"]
     end
 
-    subgraph "Level 2: Instructions (When Triggered)"
-        B["SKILL.md Body"]
-        B1["Under 5k tokens"]
-        B2["Workflows & guidance"]
+    subgraph "レベル2: 指示（トリガー時）"
+        B["SKILL.mdの本文"]
+        B1["5000トークン未満"]
+        B2["ワークフローとガイダンス"]
     end
 
-    subgraph "Level 3: Resources (As Needed)"
-        C["Bundled Files"]
-        C1["Effectively unlimited"]
-        C2["Scripts, templates, docs"]
+    subgraph "レベル3: リソース（必要時）"
+        C["バンドルファイル"]
+        C1["実質的に無制限"]
+        C2["スクリプト、テンプレート、ドキュメント"]
     end
 
     A --> B
     B --> C
 ```
 
-| Level | When Loaded | Token Cost | Content |
-|-------|------------|------------|---------|
-| **Level 1: Metadata** | Always (at startup) | ~100 tokens per Skill | `name` and `description` from YAML frontmatter |
-| **Level 2: Instructions** | When Skill is triggered | Under 5k tokens | SKILL.md body with instructions and guidance |
-| **Level 3+: Resources** | As needed | Effectively unlimited | Bundled files executed via bash without loading contents into context |
+| レベル | 読み込みタイミング | トークンコスト | コンテンツ |
+|--------|-----------------|--------------|----------|
+| **レベル1: メタデータ** | 常に（起動時） | スキルあたり約100トークン | YAMLフロントマターの `name` と `description` |
+| **レベル2: 指示** | スキルがトリガーされた時 | 5000トークン未満 | 指示とガイダンスを含むSKILL.mdの本文 |
+| **レベル3+: リソース** | 必要に応じて | 実質的に無制限 | コンテンツをコンテキストに読み込まずbashで実行するバンドルファイル |
 
-This means you can install many Skills without context penalty—Claude only knows each Skill exists and when to use it until actually triggered.
+多くのスキルをインストールしてもコンテキストペナルティなし。Claudeは実際にトリガーされるまで、各スキルが存在することとその使いどころのみを把握しています。
 
-## Skill Loading Process
+## スキルの読み込みプロセス
 
 ```mermaid
 sequenceDiagram
-    participant User
+    participant User as ユーザー
     participant Claude as Claude
-    participant System as System
-    participant Skill as Skill
+    participant System as システム
+    participant Skill as スキル
 
-    User->>Claude: "Review this code for security issues"
-    Claude->>System: Check available skills (metadata)
-    System-->>Claude: Skill descriptions loaded at startup
-    Claude->>Claude: Match request to skill description
-    Claude->>Skill: bash: read code-review/SKILL.md
-    Skill-->>Claude: Instructions loaded into context
-    Claude->>Claude: Determine: Need templates?
-    Claude->>Skill: bash: read templates/checklist.md
-    Skill-->>Claude: Template loaded
-    Claude->>Claude: Execute skill instructions
-    Claude->>User: Comprehensive code review
+    User->>Claude: "このコードのセキュリティ問題をレビューして"
+    Claude->>System: 利用可能なスキルを確認（メタデータ）
+    System-->>Claude: 起動時に読み込まれたスキルの説明
+    Claude->>Claude: リクエストをスキルの説明に対応付け
+    Claude->>Skill: bash: code-review/SKILL.md を読む
+    Skill-->>Claude: 指示をコンテキストに読み込む
+    Claude->>Claude: 判断: テンプレートが必要か？
+    Claude->>Skill: bash: templates/checklist.md を読む
+    Skill-->>Claude: テンプレートを読み込む
+    Claude->>Claude: スキルの指示を実行
+    Claude->>User: 包括的なコードレビュー
 ```
 
-## Skill Types & Locations
+## スキルの種類と場所
 
-| Type | Location | Scope | Shared | Best For |
-|------|----------|-------|--------|----------|
-| **Enterprise** | Managed settings | All org users | Yes | Organization-wide standards |
-| **Personal** | `~/.claude/skills/<skill-name>/SKILL.md` | Individual | No | Personal workflows |
-| **Project** | `.claude/skills/<skill-name>/SKILL.md` | Team | Yes (via git) | Team standards |
-| **Plugin** | `<plugin>/skills/<skill-name>/SKILL.md` | Where enabled | Depends | Bundled with plugins |
+| 種類 | 場所 | スコープ | 共有 | 最適な用途 |
+|------|------|----------|------|-----------|
+| **エンタープライズ** | マネージド設定 | 全組織ユーザー | あり | 組織全体の標準 |
+| **個人** | `~/.claude/skills/<skill-name>/SKILL.md` | 個人 | なし | 個人のワークフロー |
+| **プロジェクト** | `.claude/skills/<skill-name>/SKILL.md` | チーム | あり（git経由） | チーム標準 |
+| **プラグイン** | `<plugin>/skills/<skill-name>/SKILL.md` | 有効化された場所 | 依存 | プラグインにバンドル |
 
-When skills share the same name across levels, higher-priority locations win: **enterprise > personal > project**. Plugin skills use a `plugin-name:skill-name` namespace, so they cannot conflict.
+スキルが複数のレベルで同じ名前を共有する場合、優先度の高い場所が勝ちます：**エンタープライズ > 個人 > プロジェクト**。プラグインスキルは `plugin-name:skill-name` という名前空間を使うため競合しません。
 
-### Automatic Discovery
+### 自動探索
 
-**Nested directories**: When you work with files in subdirectories, Claude Code automatically discovers skills from nested `.claude/skills/` directories. For example, if you're editing a file in `packages/frontend/`, Claude Code also looks for skills in `packages/frontend/.claude/skills/`. This supports monorepo setups where packages have their own skills.
+**ネストされたディレクトリ**: サブディレクトリ内のファイルを操作する際、Claude Codeはネストされた `.claude/skills/` ディレクトリからスキルを自動探索します。例えば、`packages/frontend/` のファイルを編集している場合、`packages/frontend/.claude/skills/` のスキルも探索します。これによりパッケージ固有のスキルを持つモノレポをサポートします。
 
-**`--add-dir` directories**: Skills from directories added via `--add-dir` are loaded automatically with live change detection. Any edits to skill files in those directories take effect immediately without restarting Claude Code.
+**`--add-dir` ディレクトリ**: `--add-dir` で追加されたディレクトリのスキルは、ライブ変更検出付きで自動読み込みされます。それらのディレクトリのスキルファイルへの変更は、Claude Codeを再起動せずに即座に反映されます。
 
-**Description budget**: Skill descriptions (Level 1 metadata) are capped at **2% of the context window** (fallback: **16,000 characters**). If you have many skills installed, some may be excluded. Run `/context` to check for warnings. Override the budget with the `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable.
+**説明バジェット**: スキルの説明（レベル1メタデータ）はコンテキストウィンドウの**2%**に制限されます（フォールバック: **16,000文字**）。多くのスキルをインストールしている場合、一部が除外されることがあります。`/context` を実行して警告を確認してください。`SLASH_COMMAND_TOOL_CHAR_BUDGET` 環境変数でバジェットを上書きできます。
 
-## Creating Custom Skills
+## カスタムスキルの作成
 
-### Basic Directory Structure
+### 基本ディレクトリ構造
 
 ```
 my-skill/
-├── SKILL.md           # Main instructions (required)
-├── template.md        # Template for Claude to fill in
+├── SKILL.md           # メイン指示（必須）
+├── template.md        # Claudeが記入するテンプレート
 ├── examples/
-│   └── sample.md      # Example output showing expected format
+│   └── sample.md      # 期待される形式を示すサンプル出力
 └── scripts/
-    └── validate.sh    # Script Claude can execute
+    └── validate.sh    # Claudeが実行できるスクリプト
 ```
 
-### SKILL.md Format
+### SKILL.mdの形式
 
 ```yaml
 ---
 name: your-skill-name
-description: Brief description of what this Skill does and when to use it
+description: このスキルの機能と使うタイミングの簡単な説明
 ---
 
-# Your Skill Name
+# スキル名
 
-## Instructions
-Provide clear, step-by-step guidance for Claude.
+## 指示
+Claudeへの明確なステップバイステップのガイダンスを提供する。
 
-## Examples
-Show concrete examples of using this Skill.
+## 例
+このスキルの使い方の具体例を示す。
 ```
 
-### Required Fields
+### 必須フィールド
 
-- **name**: lowercase letters, numbers, hyphens only (max 64 characters). Cannot contain "anthropic" or "claude".
-- **description**: what the Skill does AND when to use it (max 1024 characters). This is critical for Claude to know when to activate the skill.
+- **name**: 小文字、数字、ハイフンのみ（最大64文字）。"anthropic"または"claude"を含めることはできない。
+- **description**: スキルの機能とそれを使うタイミング（最大1024文字）。Claudeがいつスキルをアクティブ化するかを知るために重要。
 
-### Optional Frontmatter Fields
+### オプションのフロントマターフィールド
 
 ```yaml
 ---
 name: my-skill
-description: What this skill does and when to use it
-argument-hint: "[filename] [format]"        # Hint for autocomplete
-disable-model-invocation: true              # Only user can invoke
-user-invocable: false                       # Hide from slash menu
-allowed-tools: Read, Grep, Glob             # Restrict tool access
-model: opus                                 # Specific model to use
-effort: high                                # Effort level override (low, medium, high, max)
-context: fork                               # Run in isolated subagent
-agent: Explore                              # Which agent type (with context: fork)
-shell: bash                                 # Shell for commands: bash (default) or powershell
-hooks:                                      # Skill-scoped hooks
+description: このスキルの機能と使うタイミング
+argument-hint: "[filename] [format]"        # オートコンプリートのヒント
+disable-model-invocation: true              # ユーザーのみが呼び出し可能
+user-invocable: false                       # スラッシュメニューから非表示
+allowed-tools: Read, Grep, Glob             # ツールアクセスを制限
+model: opus                                 # 使用する特定モデル
+effort: high                                # 努力レベルの上書き (low, medium, high, max)
+context: fork                               # 隔離されたサブエージェントで実行
+agent: Explore                              # エージェントの種類（context: fork使用時）
+shell: bash                                 # コマンド用シェル: bash（デフォルト）またはpowershell
+hooks:                                      # スキルスコープのhooks
   PreToolUse:
     - matcher: "Bash"
       hooks:
@@ -162,139 +162,139 @@ hooks:                                      # Skill-scoped hooks
 ---
 ```
 
-| Field | Description |
-|-------|-------------|
-| `name` | Lowercase letters, numbers, hyphens only (max 64 chars). Cannot contain "anthropic" or "claude". |
-| `description` | What the Skill does AND when to use it (max 1024 chars). Critical for auto-invocation matching. |
-| `argument-hint` | Hint shown in the `/` autocomplete menu (e.g., `"[filename] [format]"`). |
-| `disable-model-invocation` | `true` = only the user can invoke via `/name`. Claude will never auto-invoke. |
-| `user-invocable` | `false` = hidden from the `/` menu. Only Claude can invoke it automatically. |
-| `allowed-tools` | Comma-separated list of tools the skill may use without permission prompts. |
-| `model` | Model override while the skill is active (e.g., `opus`, `sonnet`). |
-| `effort` | Effort level override while the skill is active: `low`, `medium`, `high`, or `max`. |
-| `context` | `fork` to run the skill in a forked subagent context with its own context window. |
-| `agent` | Subagent type when `context: fork` (e.g., `Explore`, `Plan`, `general-purpose`). |
-| `shell` | Shell used for `!`command`` substitutions and scripts: `bash` (default) or `powershell`. |
-| `hooks` | Hooks scoped to this skill's lifecycle (same format as global hooks). |
+| フィールド | 説明 |
+|-----------|------|
+| `name` | 小文字、数字、ハイフンのみ（最大64文字）。"anthropic"または"claude"を含めることはできない。 |
+| `description` | スキルの機能とそれを使うタイミング（最大1024文字）。自動呼び出しマッチングに重要。 |
+| `argument-hint` | `/` オートコンプリートメニューに表示されるヒント（例: `"[filename] [format]"`）。 |
+| `disable-model-invocation` | `true` = ユーザーのみが `/name` で呼び出し可能。Claudeが自動呼び出しすることはない。 |
+| `user-invocable` | `false` = `/` メニューから非表示。Claudeのみが自動的に呼び出し可能。 |
+| `allowed-tools` | パーミッションプロンプトなしでスキルが使用できるツールのカンマ区切りリスト。 |
+| `model` | スキルがアクティブな間のモデル上書き（例: `opus`、`sonnet`）。 |
+| `effort` | スキルがアクティブな間の努力レベル上書き: `low`、`medium`、`high`、`max`。 |
+| `context` | `fork` でスキルを独自のコンテキストウィンドウを持つフォークされたサブエージェントコンテキストで実行。 |
+| `agent` | `context: fork` 使用時のサブエージェント種類（例: `Explore`、`Plan`、`general-purpose`）。 |
+| `shell` | `` !`command` `` 置換とスクリプト用のシェル: `bash`（デフォルト）または `powershell`。 |
+| `hooks` | このスキルのライフサイクルにスコープされたhooks（グローバルhooksと同じ形式）。 |
 
-## Skill Content Types
+## スキルのコンテンツ種類
 
-Skills can contain two types of content, each suited for different purposes:
+スキルには2種類のコンテンツがあり、それぞれ異なる目的に適しています：
 
-### Reference Content
+### 参照コンテンツ
 
-Adds knowledge Claude applies to your current work—conventions, patterns, style guides, domain knowledge. Runs inline with your conversation context.
+現在の作業に適用する知識をClaudeに追加します。規約、パターン、スタイルガイド、ドメイン知識。会話コンテキストとインラインで実行されます。
 
 ```yaml
 ---
 name: api-conventions
-description: API design patterns for this codebase
+description: このコードベースのAPI設計パターン
 ---
 
-When writing API endpoints:
-- Use RESTful naming conventions
-- Return consistent error formats
-- Include request validation
+APIエンドポイントを書く際:
+- RESTfulの命名規則を使用する
+- 一貫したエラー形式を返す
+- リクエストバリデーションを含める
 ```
 
-### Task Content
+### タスクコンテンツ
 
-Step-by-step instructions for specific actions. Often invoked directly with `/skill-name`.
+特定のアクションのためのステップバイステップの指示。多くの場合、`/skill-name` で直接呼び出します。
 
 ```yaml
 ---
 name: deploy
-description: Deploy the application to production
+description: アプリケーションを本番環境にデプロイする
 context: fork
 disable-model-invocation: true
 ---
 
-Deploy the application:
-1. Run the test suite
-2. Build the application
-3. Push to the deployment target
+アプリケーションをデプロイする:
+1. テストスイートを実行する
+2. アプリケーションをビルドする
+3. デプロイ先にプッシュする
 ```
 
-## Controlling Skill Invocation
+## スキル呼び出しの制御
 
-By default, both you and Claude can invoke any skill. Two frontmatter fields control the three invocation modes:
+デフォルトでは、あなたとClaudeの両方が任意のスキルを呼び出せます。2つのフロントマターフィールドで3つの呼び出しモードを制御できます：
 
-| Frontmatter | You can invoke | Claude can invoke |
+| フロントマター | ユーザーが呼び出せる | Claudeが呼び出せる |
 |---|---|---|
-| (default) | Yes | Yes |
-| `disable-model-invocation: true` | Yes | No |
-| `user-invocable: false` | No | Yes |
+| （デフォルト） | はい | はい |
+| `disable-model-invocation: true` | はい | いいえ |
+| `user-invocable: false` | いいえ | はい |
 
-**Use `disable-model-invocation: true`** for workflows with side effects: `/commit`, `/deploy`, `/send-slack-message`. You don't want Claude deciding to deploy because your code looks ready.
+**`disable-model-invocation: true` を使う場面**: 副作用のあるワークフロー: `/commit`、`/deploy`、`/send-slack-message`。コードが準備できているように見えるからといってClaudeに自動デプロイさせたくない場合。
 
-**Use `user-invocable: false`** for background knowledge that isn't actionable as a command. A `legacy-system-context` skill explains how an old system works—useful for Claude, but not a meaningful action for users.
+**`user-invocable: false` を使う場面**: アクションとして実行可能ではないバックグラウンドの知識。`legacy-system-context` スキルが古いシステムの仕組みを説明する場合、Claudeには役立つがユーザーには意味のあるアクションではない。
 
-## String Substitutions
+## 文字列置換
 
-Skills support dynamic values that are resolved before the skill content reaches Claude:
+スキルはスキルコンテンツがClaudeに渡される前に解決される動的な値をサポートします：
 
-| Variable | Description |
-|----------|-------------|
-| `$ARGUMENTS` | All arguments passed when invoking the skill |
-| `$ARGUMENTS[N]` or `$N` | Access specific argument by index (0-based) |
-| `${CLAUDE_SESSION_ID}` | Current session ID |
-| `${CLAUDE_SKILL_DIR}` | Directory containing the skill's SKILL.md file |
-| `` !`command` `` | Dynamic context injection — runs a shell command and inlines the output |
+| 変数 | 説明 |
+|------|------|
+| `$ARGUMENTS` | スキル呼び出し時に渡されたすべての引数 |
+| `$ARGUMENTS[N]` または `$N` | インデックスによる特定の引数へのアクセス（0ベース） |
+| `${CLAUDE_SESSION_ID}` | 現在のセッションID |
+| `${CLAUDE_SKILL_DIR}` | スキルのSKILL.mdファイルが含まれるディレクトリ |
+| `` !`command` `` | 動的コンテキストインジェクション — シェルコマンドを実行して出力をインライン展開 |
 
-**Example:**
+**例:**
 
 ```yaml
 ---
 name: fix-issue
-description: Fix a GitHub issue
+description: GitHubのissueを修正する
 ---
 
-Fix GitHub issue $ARGUMENTS following our coding standards.
-1. Read the issue description
-2. Implement the fix
-3. Write tests
-4. Create a commit
+コーディング標準に従ってGitHub issue $ARGUMENTS を修正する。
+1. issueの説明を読む
+2. 修正を実装する
+3. テストを書く
+4. コミットを作成する
 ```
 
-Running `/fix-issue 123` replaces `$ARGUMENTS` with `123`.
+`/fix-issue 123` を実行すると `$ARGUMENTS` が `123` に置換されます。
 
-## Injecting Dynamic Context
+## 動的コンテキストのインジェクション
 
-The `!`command`` syntax runs shell commands before the skill content is sent to Claude:
+`` !`command` `` 構文はスキルコンテンツがClaudeに送信される前にシェルコマンドを実行します：
 
 ```yaml
 ---
 name: pr-summary
-description: Summarize changes in a pull request
+description: プルリクエストの変更をまとめる
 context: fork
 agent: Explore
 ---
 
-## Pull request context
-- PR diff: !`gh pr diff`
-- PR comments: !`gh pr view --comments`
-- Changed files: !`gh pr diff --name-only`
+## プルリクエストのコンテキスト
+- PRの差分: !`gh pr diff`
+- PRのコメント: !`gh pr view --comments`
+- 変更ファイル: !`gh pr diff --name-only`
 
-## Your task
-Summarize this pull request...
+## タスク
+このプルリクエストをまとめる...
 ```
 
-Commands execute immediately; Claude only sees the final output. By default, commands run in `bash`. Set `shell: powershell` in frontmatter to use PowerShell instead.
+コマンドは即座に実行されます。Claudeは最終的な出力のみを見ます。デフォルトでは `bash` でコマンドが実行されます。フロントマターで `shell: powershell` を設定するとPowerShellを使用します。
 
-## Running Skills in Subagents
+## サブエージェントでスキルを実行する
 
-Add `context: fork` to run a skill in an isolated subagent context. The skill content becomes the task for a dedicated subagent with its own context window, keeping the main conversation uncluttered.
+`context: fork` を追加すると、スキルを隔離されたサブエージェントコンテキストで実行します。スキルのコンテンツは、独自のコンテキストウィンドウを持つ専用サブエージェントのタスクになり、メインの会話をクリーンに保ちます。
 
-The `agent` field specifies which agent type to use:
+`agent` フィールドで使用するエージェントの種類を指定します：
 
-| Agent Type | Best For |
+| エージェントの種類 | 最適な用途 |
 |---|---|
-| `Explore` | Read-only research, codebase analysis |
-| `Plan` | Creating implementation plans |
-| `general-purpose` | Broad tasks requiring all tools |
-| Custom agents | Specialized agents defined in your configuration |
+| `Explore` | 読み取り専用の調査、コードベース分析 |
+| `Plan` | 実装計画の作成 |
+| `general-purpose` | すべてのツールが必要な広範なタスク |
+| カスタムエージェント | 設定で定義された専門エージェント |
 
-**Example frontmatter:**
+**フロントマター例:**
 
 ```yaml
 ---
@@ -303,27 +303,27 @@ agent: Explore
 ---
 ```
 
-**Full skill example:**
+**完全なスキル例:**
 
 ```yaml
 ---
 name: deep-research
-description: Research a topic thoroughly
+description: トピックを徹底的に調査する
 context: fork
 agent: Explore
 ---
 
-Research $ARGUMENTS thoroughly:
-1. Find relevant files using Glob and Grep
-2. Read and analyze the code
-3. Summarize findings with specific file references
+$ARGUMENTS を徹底的に調査する:
+1. GlobとGrepを使って関連ファイルを見つける
+2. コードを読んで分析する
+3. 具体的なファイル参照付きで調査結果をまとめる
 ```
 
-## Practical Examples
+## 実践例
 
-### Example 1: Code Review Skill
+### 例1: コードレビュースキル
 
-**Directory Structure:**
+**ディレクトリ構造:**
 
 ```
 ~/.claude/skills/code-review/
@@ -336,66 +336,66 @@ Research $ARGUMENTS thoroughly:
     └── compare-complexity.py
 ```
 
-**File:** `~/.claude/skills/code-review/SKILL.md`
+**ファイル:** `~/.claude/skills/code-review/SKILL.md`
 
 ```yaml
 ---
 name: code-review-specialist
-description: Comprehensive code review with security, performance, and quality analysis. Use when users ask to review code, analyze code quality, evaluate pull requests, or mention code review, security analysis, or performance optimization.
+description: セキュリティ、パフォーマンス、品質分析を含む包括的なコードレビュー。コードのレビュー、コード品質の分析、プルリクエストの評価、またはコードレビュー、セキュリティ分析、パフォーマンス最適化の言及があった場合に使用する。
 ---
 
-# Code Review Skill
+# コードレビュースキル
 
-This skill provides comprehensive code review capabilities focusing on:
+このスキルは以下に注力した包括的なコードレビュー機能を提供します：
 
-1. **Security Analysis**
-   - Authentication/authorization issues
-   - Data exposure risks
-   - Injection vulnerabilities
-   - Cryptographic weaknesses
+1. **セキュリティ分析**
+   - 認証/認可の問題
+   - データ露出リスク
+   - インジェクション脆弱性
+   - 暗号化の弱点
 
-2. **Performance Review**
-   - Algorithm efficiency (Big O analysis)
-   - Memory optimization
-   - Database query optimization
-   - Caching opportunities
+2. **パフォーマンスレビュー**
+   - アルゴリズム効率（Big O分析）
+   - メモリ最適化
+   - データベースクエリ最適化
+   - キャッシングの機会
 
-3. **Code Quality**
-   - SOLID principles
-   - Design patterns
-   - Naming conventions
-   - Test coverage
+3. **コード品質**
+   - SOLIDの原則
+   - デザインパターン
+   - 命名規則
+   - テストカバレッジ
 
-4. **Maintainability**
-   - Code readability
-   - Function size (should be < 50 lines)
-   - Cyclomatic complexity
-   - Type safety
+4. **保守性**
+   - コードの読みやすさ
+   - 関数のサイズ（50行未満であるべき）
+   - サイクロマティック複雑度
+   - 型安全性
 
-## Review Template
+## レビューテンプレート
 
-For each piece of code reviewed, provide:
+レビューするコードの各部分について提供する内容:
 
-### Summary
-- Overall quality assessment (1-5)
-- Key findings count
-- Recommended priority areas
+### サマリー
+- 全体的な品質評価（1-5）
+- 主要な発見の数
+- 推奨される優先エリア
 
-### Critical Issues (if any)
-- **Issue**: Clear description
-- **Location**: File and line number
-- **Impact**: Why this matters
-- **Severity**: Critical/High/Medium
-- **Fix**: Code example
+### クリティカルな問題（あれば）
+- **問題**: 明確な説明
+- **場所**: ファイルと行番号
+- **影響**: これが重要な理由
+- **深刻度**: Critical/High/Medium
+- **修正方法**: コード例
 
-For detailed checklists, see [templates/review-checklist.md](templates/review-checklist.md).
+詳細なチェックリストは [templates/review-checklist.md](templates/review-checklist.md) を参照。
 ```
 
-### Example 2: Codebase Visualizer Skill
+### 例2: コードベースビジュアライザースキル
 
-A skill that generates interactive HTML visualizations:
+インタラクティブなHTMLビジュアライゼーションを生成するスキル：
 
-**Directory Structure:**
+**ディレクトリ構造:**
 
 ```
 ~/.claude/skills/codebase-visualizer/
@@ -404,113 +404,113 @@ A skill that generates interactive HTML visualizations:
     └── visualize.py
 ```
 
-**File:** `~/.claude/skills/codebase-visualizer/SKILL.md`
+**ファイル:** `~/.claude/skills/codebase-visualizer/SKILL.md`
 
 ```yaml
 ---
 name: codebase-visualizer
-description: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.
+description: コードベースのインタラクティブな折りたたみ可能なツリービジュアライゼーションを生成する。新しいリポジトリを探索したり、プロジェクト構造を理解したり、大きなファイルを特定したりする場合に使用する。
 allowed-tools: Bash(python *)
 ---
 
-# Codebase Visualizer
+# コードベースビジュアライザー
 
-Generate an interactive HTML tree view showing your project's file structure.
+プロジェクトのファイル構造を示すインタラクティブなHTMLツリービューを生成します。
 
-## Usage
+## 使い方
 
-Run the visualization script from your project root:
+プロジェクトルートからビジュアライゼーションスクリプトを実行:
 
 ```bash
 python ~/.claude/skills/codebase-visualizer/scripts/visualize.py .
 ```
 
-This creates `codebase-map.html` and opens it in your default browser.
+`codebase-map.html` が作成され、デフォルトブラウザで開かれます。
 
-## What the visualization shows
+## ビジュアライゼーションの内容
 
-- **Collapsible directories**: Click folders to expand/collapse
-- **File sizes**: Displayed next to each file
-- **Colors**: Different colors for different file types
-- **Directory totals**: Shows aggregate size of each folder
+- **折りたたみ可能なディレクトリ**: フォルダをクリックして展開/折りたたみ
+- **ファイルサイズ**: 各ファイルの隣に表示
+- **カラー**: ファイルタイプによって異なる色
+- **ディレクトリ合計**: 各フォルダの合計サイズを表示
 ```
 
-The bundled Python script does the heavy lifting while Claude handles orchestration.
+バンドルされたPythonスクリプトが重い処理を担い、Claudeがオーケストレーションを処理します。
 
-### Example 3: Deploy Skill (User-Invoked Only)
+### 例3: デプロイスキル（ユーザー呼び出しのみ）
 
 ```yaml
 ---
 name: deploy
-description: Deploy the application to production
+description: アプリケーションを本番環境にデプロイする
 disable-model-invocation: true
 allowed-tools: Bash(npm *), Bash(git *)
 ---
 
-Deploy $ARGUMENTS to production:
+$ARGUMENTS を本番環境にデプロイする:
 
-1. Run the test suite: `npm test`
-2. Build the application: `npm run build`
-3. Push to the deployment target
-4. Verify the deployment succeeded
-5. Report deployment status
+1. テストスイートを実行: `npm test`
+2. アプリケーションをビルド: `npm run build`
+3. デプロイ先にプッシュ
+4. デプロイが成功したことを確認
+5. デプロイのステータスを報告
 ```
 
-### Example 4: Brand Voice Skill (Background Knowledge)
+### 例4: ブランドボイススキル（バックグラウンド知識）
 
 ```yaml
 ---
 name: brand-voice
-description: Ensure all communication matches brand voice and tone guidelines. Use when creating marketing copy, customer communications, or public-facing content.
+description: すべてのコミュニケーションがブランドのボイスとトーンガイドラインに合致していることを確認する。マーケティングコピー、顧客コミュニケーション、または公開向けコンテンツを作成する際に使用する。
 user-invocable: false
 ---
 
-## Tone of Voice
-- **Friendly but professional** - approachable without being casual
-- **Clear and concise** - avoid jargon
-- **Confident** - we know what we're doing
-- **Empathetic** - understand user needs
+## トーンオブボイス
+- **親しみやすくプロフェッショナル** - カジュアルにならずに親しみやすく
+- **明確で簡潔** - 専門用語を避ける
+- **自信がある** - 自分たちが何をしているか分かっている
+- **共感的** - ユーザーのニーズを理解する
 
-## Writing Guidelines
-- Use "you" when addressing readers
-- Use active voice
-- Keep sentences under 20 words
-- Start with value proposition
+## ライティングガイドライン
+- 読者に話しかける際は "you" を使用
+- 能動態を使用
+- 文章は20語以内に抑える
+- 価値提案から始める
 
-For templates, see [templates/](templates/).
+テンプレートは [templates/](templates/) を参照。
 ```
 
-### Example 5: CLAUDE.md Generator Skill
+### 例5: CLAUDE.mdジェネレータースキル
 
 ```yaml
 ---
 name: claude-md
-description: Create or update CLAUDE.md files following best practices for optimal AI agent onboarding. Use when users mention CLAUDE.md, project documentation, or AI onboarding.
+description: 最適なAIエージェントオンボーディングのためのベストプラクティスに従ってCLAUDE.mdファイルを作成または更新する。CLAUDE.md、プロジェクトドキュメント、またはAIオンボーディングの言及があった場合に使用する。
 ---
 
-## Core Principles
+## コア原則
 
-**LLMs are stateless**: CLAUDE.md is the only file automatically included in every conversation.
+**LLMはステートレス**: CLAUDE.mdはすべての会話に自動的にインクルードされる唯一のファイルです。
 
-### The Golden Rules
+### ゴールデンルール
 
-1. **Less is More**: Keep under 300 lines (ideally under 100)
-2. **Universal Applicability**: Only include information relevant to EVERY session
-3. **Don't Use Claude as a Linter**: Use deterministic tools instead
-4. **Never Auto-Generate**: Craft it manually with careful consideration
+1. **Less is More**: 300行以内に抑える（理想は100行以内）
+2. **普遍的な適用可能性**: すべてのセッションに関連する情報のみを含める
+3. **ClaudeをLinterとして使わない**: 代わりに決定論的なツールを使用
+4. **自動生成しない**: 慎重に検討して手動で作成する
 
-## Essential Sections
+## 必須セクション
 
-- **Project Name**: Brief one-line description
-- **Tech Stack**: Primary language, frameworks, database
-- **Development Commands**: Install, test, build commands
-- **Critical Conventions**: Only non-obvious, high-impact conventions
-- **Known Issues / Gotchas**: Things that trip up developers
+- **プロジェクト名**: 1行の簡単な説明
+- **Tech Stack**: 主要言語、フレームワーク、データベース
+- **開発コマンド**: インストール、テスト、ビルドコマンド
+- **重要な規約**: 明らかでない、影響の大きい規約のみ
+- **既知の問題/注意点**: 開発者がつまずきやすいこと
 ```
 
-### Example 6: Refactoring Skill with Scripts
+### 例6: スクリプト付きリファクタリングスキル
 
-**Directory Structure:**
+**ディレクトリ構造:**
 
 ```
 refactor/
@@ -525,272 +525,272 @@ refactor/
     └── detect-smells.py
 ```
 
-**File:** `refactor/SKILL.md`
+**ファイル:** `refactor/SKILL.md`
 
 ```yaml
 ---
 name: code-refactor
-description: Systematic code refactoring based on Martin Fowler's methodology. Use when users ask to refactor code, improve code structure, reduce technical debt, or eliminate code smells.
+description: Martin Fowlerの方法論に基づく体系的なコードリファクタリング。コードのリファクタリング、コード構造の改善、技術的負債の削減、またはコードスメルの解消の依頼があった場合に使用する。
 ---
 
-# Code Refactoring Skill
+# コードリファクタリングスキル
 
-A phased approach emphasizing safe, incremental changes backed by tests.
+テストに裏打ちされた安全で段階的な変更を重視したフェーズドアプローチ。
 
-## Workflow
+## ワークフロー
 
-Phase 1: Research & Analysis → Phase 2: Test Coverage Assessment →
-Phase 3: Code Smell Identification → Phase 4: Refactoring Plan Creation →
-Phase 5: Incremental Implementation → Phase 6: Review & Iteration
+フェーズ1: 調査・分析 → フェーズ2: テストカバレッジ評価 →
+フェーズ3: コードスメルの特定 → フェーズ4: リファクタリング計画の作成 →
+フェーズ5: 段階的な実装 → フェーズ6: レビューと反復
 
-## Core Principles
+## コア原則
 
-1. **Behavior Preservation**: External behavior must remain unchanged
-2. **Small Steps**: Make tiny, testable changes
-3. **Test-Driven**: Tests are the safety net
-4. **Continuous**: Refactoring is ongoing, not a one-time event
+1. **動作の保持**: 外部の動作は変わらないようにする
+2. **小さな変更**: 小さくテスト可能な変更を行う
+3. **テスト駆動**: テストがセーフティネット
+4. **継続的**: リファクタリングは継続的なプロセス、一回限りのイベントではない
 
-For code smell catalog, see [references/code-smells.md](references/code-smells.md).
-For refactoring techniques, see [references/refactoring-catalog.md](references/refactoring-catalog.md).
+コードスメルのカタログは [references/code-smells.md](references/code-smells.md) を参照。
+リファクタリング技法は [references/refactoring-catalog.md](references/refactoring-catalog.md) を参照。
 ```
 
-## Supporting Files
+## サポートファイル
 
-Skills can include multiple files in their directory beyond `SKILL.md`. These supporting files (templates, examples, scripts, reference documents) let you keep the main skill file focused while providing Claude with additional resources it can load as needed.
+スキルには `SKILL.md` 以外の複数のファイルをディレクトリに含めることができます。これらのサポートファイル（テンプレート、例、スクリプト、参照ドキュメント）により、メインのスキルファイルをフォーカスした状態に保ちながら、Claudeが必要に応じて読み込める追加リソースを提供できます。
 
 ```
 my-skill/
-├── SKILL.md              # Main instructions (required, keep under 500 lines)
-├── templates/            # Templates for Claude to fill in
+├── SKILL.md              # メイン指示（必須、500行以内に抑える）
+├── templates/            # Claudeが記入するテンプレート
 │   └── output-format.md
-├── examples/             # Example outputs showing expected format
+├── examples/             # 期待される形式を示すサンプル出力
 │   └── sample-output.md
-├── references/           # Domain knowledge and specifications
+├── references/           # ドメイン知識と仕様
 │   └── api-spec.md
-└── scripts/              # Scripts Claude can execute
+└── scripts/              # Claudeが実行できるスクリプト
     └── validate.sh
 ```
 
-Guidelines for supporting files:
+サポートファイルのガイドライン:
 
-- Keep `SKILL.md` under **500 lines**. Move detailed reference material, large examples, and specifications to separate files.
-- Reference additional files from `SKILL.md` using **relative paths** (e.g., `[API reference](references/api-spec.md)`).
-- Supporting files are loaded at Level 3 (as needed), so they do not consume context until Claude actually reads them.
+- `SKILL.md` は**500行以内**に抑える。詳細な参照資料、大きな例、仕様は別ファイルに移す。
+- `SKILL.md` から追加ファイルを**相対パス**で参照する（例: `[APIリファレンス](references/api-spec.md)`）。
+- サポートファイルはレベル3（必要に応じて）で読み込まれるため、Claudeが実際に読むまでコンテキストを消費しない。
 
-## Managing Skills
+## スキルの管理
 
-### Viewing Available Skills
+### 利用可能なスキルの確認
 
-Ask Claude directly:
+Claudeに直接確認:
 ```
-What Skills are available?
+利用可能なスキルは何ですか？
 ```
 
-Or check the filesystem:
+またはファイルシステムを確認:
 ```bash
-# List personal Skills
+# 個人スキルの一覧
 ls ~/.claude/skills/
 
-# List project Skills
+# プロジェクトスキルの一覧
 ls .claude/skills/
 ```
 
-### Testing a Skill
+### スキルのテスト
 
-Two ways to test:
+2つのテスト方法:
 
-**Let Claude invoke it automatically** by asking something that matches the description:
+**Claudeに自動呼び出しさせる** には、説明にマッチするリクエストをする:
 ```
-Can you help me review this code for security issues?
+このコードのセキュリティ問題のレビューをお願いできますか？
 ```
 
-**Or invoke it directly** with the skill name:
+**または直接呼び出す** には、スキル名を使用:
 ```
 /code-review src/auth/login.ts
 ```
 
-### Updating a Skill
+### スキルの更新
 
-Edit the `SKILL.md` file directly. Changes take effect on next Claude Code startup.
+`SKILL.md` ファイルを直接編集します。変更は次回のClaude Code起動時に有効になります。
 
 ```bash
-# Personal Skill
+# 個人スキル
 code ~/.claude/skills/my-skill/SKILL.md
 
-# Project Skill
+# プロジェクトスキル
 code .claude/skills/my-skill/SKILL.md
 ```
 
-### Restricting Claude's Skill Access
+### ClaudeのスキルアクセスIを制限する
 
-Three ways to control which skills Claude can invoke:
+スキルを呼び出せるスキルを制御する3つの方法:
 
-**Disable all skills** in `/permissions`:
+**`/permissions` ですべてのスキルを無効化**:
 ```
-# Add to deny rules:
+# 拒否ルールに追加:
 Skill
 ```
 
-**Allow or deny specific skills**:
+**特定のスキルを許可または拒否**:
 ```
-# Allow only specific skills
+# 特定のスキルのみ許可
 Skill(commit)
 Skill(review-pr *)
 
-# Deny specific skills
+# 特定のスキルを拒否
 Skill(deploy *)
 ```
 
-**Hide individual skills** by adding `disable-model-invocation: true` to their frontmatter.
+**個別のスキルを非表示にする** には、フロントマターに `disable-model-invocation: true` を追加。
 
-## Best Practices
+## ベストプラクティス
 
-### 1. Make Descriptions Specific
+### 1. 説明を具体的にする
 
-- **Bad (Vague)**: "Helps with documents"
-- **Good (Specific)**: "Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction."
+- **悪い例（曖昧）**: "ドキュメントを助ける"
+- **良い例（具体的）**: "PDFファイルからテキストとテーブルを抽出し、フォームに記入し、ドキュメントをマージする。PDFファイルを扱う場合や、ユーザーがPDF、フォーム、ドキュメント抽出を言及した場合に使用する。"
 
-### 2. Keep Skills Focused
+### 2. スキルをフォーカスした状態に保つ
 
-- One Skill = one capability
-- ✅ "PDF form filling"
-- ❌ "Document processing" (too broad)
+- 1スキル = 1機能
+- ✅ "PDFフォームへの記入"
+- ❌ "ドキュメント処理"（広すぎる）
 
-### 3. Include Trigger Terms
+### 3. トリガーキーワードを含める
 
-Add keywords in descriptions that match user requests:
+ユーザーのリクエストにマッチするキーワードを説明に追加:
 ```yaml
-description: Analyze Excel spreadsheets, generate pivot tables, create charts. Use when working with Excel files, spreadsheets, or .xlsx files.
+description: Excelスプレッドシートを分析し、ピボットテーブルを生成し、チャートを作成する。Excelファイル、スプレッドシート、または.xlsxファイルを扱う場合に使用する。
 ```
 
-### 4. Keep SKILL.md Under 500 Lines
+### 4. SKILL.mdを500行以内に保つ
 
-Move detailed reference material to separate files that Claude loads as needed.
+詳細な参照資料は、Claudeが必要に応じて読み込む別ファイルに移す。
 
-### 5. Reference Supporting Files
+### 5. サポートファイルを参照する
 
 ```markdown
-## Additional resources
+## 追加リソース
 
-- For complete API details, see [reference.md](reference.md)
-- For usage examples, see [examples.md](examples.md)
+- 完全なAPI詳細は [reference.md](reference.md) を参照
+- 使用例は [examples.md](examples.md) を参照
 ```
 
-### Do's
+### やること
 
-- Use clear, descriptive names
-- Include comprehensive instructions
-- Add concrete examples
-- Package related scripts and templates
-- Test with real scenarios
-- Document dependencies
+- 明確で説明的な名前を使用する
+- 包括的な指示を含める
+- 具体的な例を追加する
+- 関連するスクリプトとテンプレートをパッケージ化する
+- 実際のシナリオでテストする
+- 依存関係をドキュメント化する
 
-### Don'ts
+### やってはいけないこと
 
-- Don't create skills for one-time tasks
-- Don't duplicate existing functionality
-- Don't make skills too broad
-- Don't skip the description field
-- Don't install skills from untrusted sources without auditing
+- 1回限りのタスクのためにスキルを作らない
+- 既存の機能を重複させない
+- スキルを広くしすぎない
+- descriptionフィールドをスキップしない
+- 信頼できないソースからのスキルを監査せずにインストールしない
 
-## Troubleshooting
+## トラブルシューティング
 
-### Quick Reference
+### クイックリファレンス
 
-| Issue | Solution |
-|-------|----------|
-| Claude doesn't use Skill | Make description more specific with trigger terms |
-| Skill file not found | Verify path: `~/.claude/skills/name/SKILL.md` |
-| YAML errors | Check `---` markers, indentation, no tabs |
-| Skills conflict | Use distinct trigger terms in descriptions |
-| Scripts not running | Check permissions: `chmod +x scripts/*.py` |
-| Claude doesn't see all skills | Too many skills; check `/context` for warnings |
+| 問題 | 解決策 |
+|------|--------|
+| Claudeがスキルを使わない | トリガーキーワードで説明をより具体的にする |
+| スキルファイルが見つからない | パスを確認: `~/.claude/skills/name/SKILL.md` |
+| YAMLエラー | `---` マーカー、インデント、タブがないことを確認 |
+| スキルが競合する | 説明に明確なトリガーキーワードを使用する |
+| スクリプトが実行されない | パーミッションを確認: `chmod +x scripts/*.py` |
+| Claudeがすべてのスキルを見えない | スキルが多すぎる。`/context` で警告を確認 |
 
-### Skill Not Triggering
+### スキルがトリガーされない
 
-If Claude doesn't use your skill when expected:
+期待通りにスキルが使われない場合:
 
-1. Check the description includes keywords users would naturally say
-2. Verify the skill appears when asking "What skills are available?"
-3. Try rephrasing your request to match the description
-4. Invoke directly with `/skill-name` to test
+1. 説明にユーザーが自然に言いそうなキーワードが含まれているか確認
+2. "利用可能なスキルは何ですか？"と聞いた時にスキルが表示されるか確認
+3. 説明にマッチするようにリクエストを言い換えてみる
+4. `/skill-name` で直接呼び出してテストする
 
-### Skill Triggers Too Often
+### スキルが頻繁にトリガーされすぎる
 
-If Claude uses your skill when you don't want it:
+意図しない時にスキルが使われる場合:
 
-1. Make the description more specific
-2. Add `disable-model-invocation: true` for manual-only invocation
+1. 説明をより具体的にする
+2. 手動呼び出しのみにするために `disable-model-invocation: true` を追加
 
-### Claude Doesn't See All Skills
+### Claudeがすべてのスキルを見えない
 
-Skill descriptions are loaded at **2% of the context window** (fallback: **16,000 characters**). Run `/context` to check for warnings about excluded skills. Override the budget with the `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable.
+スキルの説明はコンテキストウィンドウの**2%**（フォールバック: **16,000文字**）で読み込まれます。`/context` を実行して除外されたスキルの警告を確認してください。`SLASH_COMMAND_TOOL_CHAR_BUDGET` 環境変数でバジェットを上書きできます。
 
-## Security Considerations
+## セキュリティに関する考慮事項
 
-**Only use Skills from trusted sources.** Skills provide Claude with capabilities through instructions and code—a malicious Skill can direct Claude to invoke tools or execute code in harmful ways.
+**信頼できるソースのスキルのみ使用してください。** スキルは指示やコードを通じてClaudeに機能を提供します。悪意のあるスキルはClaudeに有害な方法でツールを呼び出したりコードを実行させたりする可能性があります。
 
-**Key security considerations:**
+**主なセキュリティ上の考慮事項:**
 
-- **Audit thoroughly**: Review all files in the Skill directory
-- **External sources are risky**: Skills that fetch from external URLs can be compromised
-- **Tool misuse**: Malicious Skills can invoke tools in harmful ways
-- **Treat like installing software**: Only use Skills from trusted sources
+- **徹底的に監査する**: スキルディレクトリ内のすべてのファイルをレビューする
+- **外部ソースはリスクがある**: 外部URLからフェッチするスキルは侵害される可能性がある
+- **ツールの悪用**: 悪意のあるスキルは有害な方法でツールを呼び出す可能性がある
+- **ソフトウェアのインストールと同様に扱う**: 信頼できるソースのスキルのみ使用する
 
-## Skills vs Other Features
+## スキルと他の機能の比較
 
-| Feature | Invocation | Best For |
-|---------|------------|----------|
-| **Skills** | Auto or `/name` | Reusable expertise, workflows |
-| **Slash Commands** | User-initiated `/name` | Quick shortcuts (merged into skills) |
-| **Subagents** | Auto-delegated | Isolated task execution |
-| **Memory (CLAUDE.md)** | Always loaded | Persistent project context |
-| **MCP** | Real-time | External data/service access |
-| **Hooks** | Event-driven | Automated side effects |
+| 機能 | 呼び出し方法 | 最適な用途 |
+|------|------------|-----------|
+| **スキル** | 自動または `/name` | 再利用可能な専門知識、ワークフロー |
+| **スラッシュコマンド** | ユーザーによる `/name` | クイックショートカット（スキルにマージ済み） |
+| **サブエージェント** | 自動委譲 | 隔離されたタスク実行 |
+| **メモリ (CLAUDE.md)** | 常に読み込み | 永続的なプロジェクトコンテキスト |
+| **MCP** | リアルタイム | 外部データ/サービスへのアクセス |
+| **Hooks** | イベント駆動 | 自動化された副作用 |
 
-## Bundled Skills
+## バンドルスキル
 
-Claude Code ships with several built-in skills that are always available without installation:
+Claude Codeにはインストール不要で常に利用可能ないくつかの組み込みスキルが含まれています：
 
-| Skill | Description |
-|-------|-------------|
-| `/simplify` | Review changed files for reuse, quality, and efficiency; spawns 3 parallel review agents |
-| `/batch <instruction>` | Orchestrate large-scale parallel changes across codebase using git worktrees |
-| `/debug [description]` | Troubleshoot current session by reading debug log |
-| `/loop [interval] <prompt>` | Run prompt repeatedly on interval (e.g., `/loop 5m check the deploy`) |
-| `/claude-api` | Load Claude API/SDK reference; auto-activates on `anthropic`/`@anthropic-ai/sdk` imports |
+| スキル | 説明 |
+|--------|------|
+| `/simplify` | 変更されたファイルを再利用性、品質、効率の観点でレビュー。3つの並列レビューエージェントを生成 |
+| `/batch <instruction>` | git worktreeを使ってコードベース全体に大規模な並列変更をオーケストレート |
+| `/debug [description]` | デバッグログを読んで現在のセッションのトラブルシューティング |
+| `/loop [interval] <prompt>` | 一定間隔でプロンプトを繰り返し実行（例: `/loop 5m check the deploy`） |
+| `/claude-api` | Claude API/SDKリファレンスを読み込む。`anthropic`/`@anthropic-ai/sdk`のインポート時に自動アクティブ化 |
 
-These skills are available out-of-the-box and do not need to be installed or configured. They follow the same SKILL.md format as custom skills.
+これらのスキルはすぐに使用でき、設定不要です。カスタムスキルと同じSKILL.md形式に従っています。
 
-## Sharing Skills
+## スキルの共有
 
-### Project Skills (Team Sharing)
+### プロジェクトスキル（チームでの共有）
 
-1. Create Skill in `.claude/skills/`
-2. Commit to git
-3. Team members pull changes — Skills available immediately
+1. `.claude/skills/` にスキルを作成
+2. gitにコミット
+3. チームメンバーが変更をプル — スキルがすぐに利用可能
 
-### Personal Skills
+### 個人スキル
 
 ```bash
-# Copy to personal directory
+# 個人ディレクトリにコピー
 cp -r my-skill ~/.claude/skills/
 
-# Make scripts executable
+# スクリプトを実行可能にする
 chmod +x ~/.claude/skills/my-skill/scripts/*.py
 ```
 
-### Plugin Distribution
+### プラグイン配布
 
-Package skills in a plugin's `skills/` directory for broader distribution.
+スキルをプラグインの `skills/` ディレクトリにパッケージ化して広く配布できます。
 
-## Additional Resources
+## 追加リソース
 
-- [Official Skills Documentation](https://code.claude.com/docs/en/skills)
-- [Agent Skills Architecture Blog](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills)
-- [Skills Repository](https://github.com/luongnv89/skills) - Collection of ready-to-use skills
-- [Slash Commands Guide](../01-slash-commands/) - User-initiated shortcuts
-- [Subagents Guide](../04-subagents/) - Delegated AI agents
-- [Memory Guide](../02-memory/) - Persistent context
-- [MCP (Model Context Protocol)](../05-mcp/) - Real-time external data
-- [Hooks Guide](../06-hooks/) - Event-driven automation
+- [公式スキルドキュメント](https://code.claude.com/docs/en/skills)
+- [エージェントスキルアーキテクチャブログ](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills)
+- [スキルリポジトリ](https://github.com/luongnv89/skills) - すぐに使えるスキルのコレクション
+- [スラッシュコマンドガイド](../01-slash-commands/) - ユーザー起動のショートカット
+- [サブエージェントガイド](../04-subagents/) - 委譲されたAIエージェント
+- [メモリガイド](../02-memory/) - 永続コンテキスト
+- [MCP（モデルコンテキストプロトコル）](../05-mcp/) - リアルタイム外部データ
+- [Hooksガイド](../06-hooks/) - イベント駆動自動化

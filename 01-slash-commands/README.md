@@ -5,548 +5,548 @@
 
 # Slash Commands
 
-## Overview
+## 概要
 
-Slash commands are shortcuts that control Claude's behavior during an interactive session. They come in several types:
+Slash commandsはインタラクティブセッション中のClaudeの動作を制御するショートカットです。いくつかの種類があります:
 
-- **Built-in commands**: Provided by Claude Code (`/help`, `/clear`, `/model`)
-- **Skills**: User-defined commands created as `SKILL.md` files (`/optimize`, `/pr`)
-- **Plugin commands**: Commands from installed plugins (`/frontend-design:frontend-design`)
-- **MCP prompts**: Commands from MCP servers (`/mcp__github__list_prs`)
+- **組み込みコマンド**: Claude Codeが提供するもの (`/help`, `/clear`, `/model`)
+- **Skills**: `SKILL.md` ファイルとして作成されたユーザー定義コマンド (`/optimize`, `/pr`)
+- **Pluginコマンド**: インストール済みpluginsからのコマンド (`/frontend-design:frontend-design`)
+- **MCPプロンプト**: MCPサーバーからのコマンド (`/mcp__github__list_prs`)
 
-> **Note**: Custom slash commands have been merged into skills. Files in `.claude/commands/` still work, but skills (`.claude/skills/`) are now the recommended approach. Both create `/command-name` shortcuts. See the [Skills Guide](../03-skills/) for the full reference.
+> **注意**: カスタムslash commandsはskillsに統合されました。`.claude/commands/` のファイルは引き続き動作しますが、skills (`.claude/skills/`) が現在推奨されるアプローチです。どちらも `/command-name` ショートカットを作成します。完全なリファレンスは [Skillsガイド](../03-skills/) を参照してください。
 
-## Built-in Commands Reference
+## 組み込みコマンドリファレンス
 
-Built-in commands are shortcuts for common actions. There are **55+ built-in commands** and **5 bundled skills** available. Type `/` in Claude Code to see the full list, or type `/` followed by any letters to filter.
+組み込みコマンドは一般的なアクションのショートカットです。**55以上の組み込みコマンド**と**5つのバンドルskills**が利用可能です。Claude Codeで `/` を入力して全リストを確認するか、`/` に続けて文字を入力してフィルタリングします。
 
-| Command | Purpose |
+| コマンド | 目的 |
 |---------|---------|
-| `/add-dir <path>` | Add working directory |
-| `/agents` | Manage agent configurations |
-| `/branch [name]` | Branch conversation into a new session (alias: `/fork`). Note: `/fork` renamed to `/branch` in v2.1.77 |
-| `/btw <question>` | Side question without adding to history |
-| `/chrome` | Configure Chrome browser integration |
-| `/clear` | Clear conversation (aliases: `/reset`, `/new`) |
-| `/color [color\|default]` | Set prompt bar color |
-| `/compact [instructions]` | Compact conversation with optional focus instructions |
-| `/config` | Open Settings (alias: `/settings`) |
-| `/context` | Visualize context usage as colored grid |
-| `/copy [N]` | Copy assistant response to clipboard; `w` writes to file |
-| `/cost` | Show token usage statistics |
-| `/desktop` | Continue in Desktop app (alias: `/app`) |
-| `/diff` | Interactive diff viewer for uncommitted changes |
-| `/doctor` | Diagnose installation health |
-| `/effort [low\|medium\|high\|max\|auto]` | Set effort level. `max` requires Opus 4.6 |
-| `/exit` | Exit the REPL (alias: `/quit`) |
-| `/export [filename]` | Export the current conversation to a file or clipboard |
-| `/extra-usage` | Configure extra usage for rate limits |
-| `/fast [on\|off]` | Toggle fast mode |
-| `/feedback` | Submit feedback (alias: `/bug`) |
-| `/help` | Show help |
-| `/hooks` | View hook configurations |
-| `/ide` | Manage IDE integrations |
-| `/init` | Initialize `CLAUDE.md`. Set `CLAUDE_CODE_NEW_INIT=true` for interactive flow |
-| `/insights` | Generate session analysis report |
-| `/install-github-app` | Set up GitHub Actions app |
-| `/install-slack-app` | Install Slack app |
-| `/keybindings` | Open keybindings configuration |
-| `/login` | Switch Anthropic accounts |
-| `/logout` | Sign out from your Anthropic account |
-| `/mcp` | Manage MCP servers and OAuth |
-| `/memory` | Edit `CLAUDE.md`, toggle auto-memory |
-| `/mobile` | QR code for mobile app (aliases: `/ios`, `/android`) |
-| `/model [model]` | Select model with left/right arrows for effort |
-| `/passes` | Share free week of Claude Code |
-| `/permissions` | View/update permissions (alias: `/allowed-tools`) |
-| `/plan [description]` | Enter plan mode |
-| `/plugin` | Manage plugins |
-| `/pr-comments [PR]` | Fetch GitHub PR comments |
-| `/privacy-settings` | Privacy settings (Pro/Max only) |
-| `/release-notes` | View changelog |
-| `/reload-plugins` | Reload active plugins |
-| `/remote-control` | Remote control from claude.ai (alias: `/rc`) |
-| `/remote-env` | Configure default remote environment |
-| `/rename [name]` | Rename session |
-| `/resume [session]` | Resume conversation (alias: `/continue`) |
-| `/review` | **Deprecated** — install the `code-review` plugin instead |
-| `/rewind` | Rewind conversation and/or code (alias: `/checkpoint`) |
-| `/sandbox` | Toggle sandbox mode |
-| `/schedule [description]` | Create/manage scheduled tasks |
-| `/security-review` | Analyze branch for security vulnerabilities |
-| `/skills` | List available skills |
-| `/stats` | Visualize daily usage, sessions, streaks |
-| `/status` | Show version, model, account |
-| `/statusline` | Configure status line |
-| `/tasks` | List/manage background tasks |
-| `/terminal-setup` | Configure terminal keybindings |
-| `/theme` | Change color theme |
-| `/vim` | Toggle Vim/Normal modes |
-| `/voice` | Toggle push-to-talk voice dictation |
+| `/add-dir <path>` | 作業ディレクトリを追加 |
+| `/agents` | エージェント設定を管理 |
+| `/branch [name]` | 会話を新しいセッションに分岐 (エイリアス: `/fork`)。注: v2.1.77で `/fork` から `/branch` に改名 |
+| `/btw <question>` | 履歴に追加せずに質問 |
+| `/chrome` | Chromeブラウザ連携を設定 |
+| `/clear` | 会話をクリア (エイリアス: `/reset`, `/new`) |
+| `/color [color\|default]` | プロンプトバーの色を設定 |
+| `/compact [instructions]` | オプションのフォーカス指示付きで会話をコンパクト化 |
+| `/config` | 設定を開く (エイリアス: `/settings`) |
+| `/context` | コンテキスト使用量をカラーグリッドで可視化 |
+| `/copy [N]` | アシスタントの応答をクリップボードにコピー; `w` でファイルに書き込み |
+| `/cost` | トークン使用統計を表示 |
+| `/desktop` | Desktopアプリで続ける (エイリアス: `/app`) |
+| `/diff` | コミットされていない変更のインタラクティブdiffビューア |
+| `/doctor` | インストールの健全性を診断 |
+| `/effort [low\|medium\|high\|max\|auto]` | 努力レベルを設定。`max` はOpus 4.6が必要 |
+| `/exit` | REPLを終了 (エイリアス: `/quit`) |
+| `/export [filename]` | 現在の会話をファイルまたはクリップボードにエクスポート |
+| `/extra-usage` | レート制限の追加使用を設定 |
+| `/fast [on\|off]` | 高速モードを切り替え |
+| `/feedback` | フィードバックを送信 (エイリアス: `/bug`) |
+| `/help` | ヘルプを表示 |
+| `/hooks` | hook設定を表示 |
+| `/ide` | IDE連携を管理 |
+| `/init` | `CLAUDE.md` を初期化。インタラクティブフローには `CLAUDE_CODE_NEW_INIT=true` を設定 |
+| `/insights` | セッション分析レポートを生成 |
+| `/install-github-app` | GitHub Actionsアプリをセットアップ |
+| `/install-slack-app` | Slackアプリをインストール |
+| `/keybindings` | キーバインディング設定を開く |
+| `/login` | Anthropicアカウントを切り替え |
+| `/logout` | Anthropicアカウントからサインアウト |
+| `/mcp` | MCPサーバーとOAuthを管理 |
+| `/memory` | `CLAUDE.md` を編集、auto-memoryを切り替え |
+| `/mobile` | モバイルアプリ用QRコード (エイリアス: `/ios`, `/android`) |
+| `/model [model]` | 努力度調整のために左右矢印でモデルを選択 |
+| `/passes` | Claude Codeの無料1週間を共有 |
+| `/permissions` | パーミッションを表示/更新 (エイリアス: `/allowed-tools`) |
+| `/plan [description]` | Plan modeに入る |
+| `/plugin` | Pluginsを管理 |
+| `/pr-comments [PR]` | GitHub PRのコメントを取得 |
+| `/privacy-settings` | プライバシー設定 (Pro/Maxのみ) |
+| `/release-notes` | changelogを表示 |
+| `/reload-plugins` | アクティブなpluginsを再読み込み |
+| `/remote-control` | claude.aiからリモートコントロール (エイリアス: `/rc`) |
+| `/remote-env` | デフォルトのリモート環境を設定 |
+| `/rename [name]` | セッションを名前変更 |
+| `/resume [session]` | 会話を再開 (エイリアス: `/continue`) |
+| `/review` | **非推奨** — 代わりに `code-review` pluginをインストールする |
+| `/rewind` | 会話やコードを巻き戻す (エイリアス: `/checkpoint`) |
+| `/sandbox` | サンドボックスモードを切り替え |
+| `/schedule [description]` | スケジュールタスクを作成/管理 |
+| `/security-review` | ブランチのセキュリティ脆弱性を分析 |
+| `/skills` | 利用可能なskillsを一覧 |
+| `/stats` | 日次使用量・セッション・ストリークを可視化 |
+| `/status` | バージョン・モデル・アカウントを表示 |
+| `/statusline` | ステータスラインを設定 |
+| `/tasks` | バックグラウンドタスクを一覧/管理 |
+| `/terminal-setup` | ターミナルキーバインディングを設定 |
+| `/theme` | カラーテーマを変更 |
+| `/vim` | Vim/Normalモードを切り替え |
+| `/voice` | プッシュトゥトーク音声入力を切り替え |
 
-### Bundled Skills
+### バンドルSkills
 
-These skills ship with Claude Code and are invoked like slash commands:
+これらのskillsはClaude Codeに付属し、slash commandsとして呼び出せます:
 
-| Skill | Purpose |
+| Skill | 目的 |
 |-------|---------|
-| `/batch <instruction>` | Orchestrate large-scale parallel changes using worktrees |
-| `/claude-api` | Load Claude API reference for project language |
-| `/debug [description]` | Enable debug logging |
-| `/loop [interval] <prompt>` | Run prompt repeatedly on interval |
-| `/simplify [focus]` | Review changed files for code quality |
+| `/batch <instruction>` | worktreesを使って大規模な並列変更を調整 |
+| `/claude-api` | プロジェクト言語のClaude APIリファレンスを読み込む |
+| `/debug [description]` | デバッグログを有効化 |
+| `/loop [interval] <prompt>` | プロンプトを一定間隔で繰り返し実行 |
+| `/simplify [focus]` | 変更されたファイルのコード品質をレビュー |
 
-### Deprecated Commands
+### 非推奨コマンド
 
-| Command | Status |
+| コマンド | 状態 |
 |---------|--------|
-| `/review` | Deprecated — replaced by `code-review` plugin |
-| `/output-style` | Deprecated since v2.1.73 |
-| `/fork` | Renamed to `/branch` (alias still works, v2.1.77) |
+| `/review` | 非推奨 — `code-review` pluginで置き換え |
+| `/output-style` | v2.1.73から非推奨 |
+| `/fork` | `/branch` に改名 (エイリアスは引き続き動作、v2.1.77) |
 
-### Recent Changes
+### 最近の変更
 
-- `/fork` renamed to `/branch` with `/fork` kept as alias (v2.1.77)
-- `/output-style` deprecated (v2.1.73)
-- `/review` deprecated in favor of the `code-review` plugin
-- `/effort` command added with `max` level requiring Opus 4.6
-- `/voice` command added for push-to-talk voice dictation
-- `/schedule` command added for creating/managing scheduled tasks
-- `/color` command added for prompt bar customization
-- `/model` picker now shows human-readable labels (e.g., "Sonnet 4.6") instead of raw model IDs
-- `/resume` supports `/continue` alias
-- MCP prompts are available as `/mcp__<server>__<prompt>` commands (see [MCP Prompts as Commands](#mcp-prompts-as-commands))
+- `/fork` を `/branch` に改名、`/fork` はエイリアスとして維持 (v2.1.77)
+- `/output-style` を非推奨 (v2.1.73)
+- `/review` を `code-review` pluginに置き換えるため非推奨
+- `/effort` コマンドを追加。`max` レベルにはOpus 4.6が必要
+- `/voice` コマンドをプッシュトゥトーク音声入力として追加
+- `/schedule` コマンドをスケジュールタスクの作成/管理として追加
+- `/color` コマンドをプロンプトバーカスタマイズとして追加
+- `/model` ピッカーが生のモデルIDの代わりに人間が読みやすいラベル (例: "Sonnet 4.6") を表示
+- `/resume` が `/continue` エイリアスをサポート
+- MCPプロンプトが `/mcp__<server>__<prompt>` コマンドとして利用可能 ([MCPプロンプトをコマンドとして使う](#mcpプロンプトをコマンドとして使う)を参照)
 
-## Custom Commands (Now Skills)
+## カスタムコマンド (現在はSkills)
 
-Custom slash commands have been **merged into skills**. Both approaches create commands you can invoke with `/command-name`:
+カスタムslash commandsは**skillsに統合**されました。どちらのアプローチも `/command-name` で呼び出せるコマンドを作成します:
 
-| Approach | Location | Status |
+| アプローチ | 場所 | 状態 |
 |----------|----------|--------|
-| **Skills (Recommended)** | `.claude/skills/<name>/SKILL.md` | Current standard |
-| **Legacy Commands** | `.claude/commands/<name>.md` | Still works |
+| **Skills (推奨)** | `.claude/skills/<name>/SKILL.md` | 現在の標準 |
+| **レガシーコマンド** | `.claude/commands/<name>.md` | 引き続き動作 |
 
-If a skill and a command share the same name, the **skill takes precedence**. For example, when both `.claude/commands/review.md` and `.claude/skills/review/SKILL.md` exist, the skill version is used.
+SkillとCommandが同じ名前を共有する場合、**skillが優先**されます。例えば、`.claude/commands/review.md` と `.claude/skills/review/SKILL.md` の両方が存在する場合、skillバージョンが使用されます。
 
-### Migration Path
+### 移行パス
 
-Your existing `.claude/commands/` files continue to work without changes. To migrate to skills:
+既存の `.claude/commands/` ファイルは変更なしで引き続き動作します。Skillsへの移行:
 
-**Before (Command):**
+**移行前 (Command):**
 ```
 .claude/commands/optimize.md
 ```
 
-**After (Skill):**
+**移行後 (Skill):**
 ```
 .claude/skills/optimize/SKILL.md
 ```
 
-### Why Skills?
+### なぜSkillsか?
 
-Skills offer additional features over legacy commands:
+Skillsはレガシーコマンドより追加機能を提供します:
 
-- **Directory structure**: Bundle scripts, templates, and reference files
-- **Auto-invocation**: Claude can trigger skills automatically when relevant
-- **Invocation control**: Choose whether users, Claude, or both can invoke
-- **Subagent execution**: Run skills in isolated contexts with `context: fork`
-- **Progressive disclosure**: Load additional files only when needed
+- **ディレクトリ構造**: スクリプト・テンプレート・参照ファイルをバンドル
+- **自動呼び出し**: Claudeが関連する場合に自動でskillsをトリガーできる
+- **呼び出し制御**: ユーザー・Claude・または両方が呼び出せるかを選択
+- **Subagent実行**: `context: fork` で独立したコンテキストでskillsを実行
+- **段階的開示**: 必要な時のみ追加ファイルを読み込む
 
-### Creating a Custom Command as a Skill
+### Skillとしてカスタムコマンドを作成する
 
-Create a directory with a `SKILL.md` file:
+`SKILL.md` ファイルを含むディレクトリを作成:
 
 ```bash
 mkdir -p .claude/skills/my-command
 ```
 
-**File:** `.claude/skills/my-command/SKILL.md`
+**ファイル:** `.claude/skills/my-command/SKILL.md`
 
 ```yaml
 ---
 name: my-command
-description: What this command does and when to use it
+description: このコマンドの機能と使用タイミング
 ---
 
-# My Command
+# マイコマンド
 
-Instructions for Claude to follow when this command is invoked.
+このコマンドが呼び出された時にClaudeが従う指示。
 
-1. First step
-2. Second step
-3. Third step
+1. 最初のステップ
+2. 2番目のステップ
+3. 3番目のステップ
 ```
 
-### Frontmatter Reference
+### フロントマターリファレンス
 
-| Field | Purpose | Default |
+| フィールド | 目的 | デフォルト |
 |-------|---------|---------|
-| `name` | Command name (becomes `/name`) | Directory name |
-| `description` | Brief description (helps Claude know when to use it) | First paragraph |
-| `argument-hint` | Expected arguments for auto-completion | None |
-| `allowed-tools` | Tools the command can use without permission | Inherits |
-| `model` | Specific model to use | Inherits |
-| `disable-model-invocation` | If `true`, only user can invoke (not Claude) | `false` |
-| `user-invocable` | If `false`, hide from `/` menu | `true` |
-| `context` | Set to `fork` to run in isolated subagent | None |
-| `agent` | Agent type when using `context: fork` | `general-purpose` |
-| `hooks` | Skill-scoped hooks (PreToolUse, PostToolUse, Stop) | None |
+| `name` | コマンド名 (`/name` になる) | ディレクトリ名 |
+| `description` | 簡単な説明 (Claudeがいつ使うかを理解するのに役立つ) | 最初の段落 |
+| `argument-hint` | オートコンプリート用の期待される引数 | なし |
+| `allowed-tools` | パーミッションなしでコマンドが使用できるツール | 継承 |
+| `model` | 使用する特定のモデル | 継承 |
+| `disable-model-invocation` | `true` の場合、ユーザーのみ呼び出し可 (Claudeは不可) | `false` |
+| `user-invocable` | `false` の場合、`/` メニューから非表示 | `true` |
+| `context` | 独立したsubagentで実行するには `fork` に設定 | なし |
+| `agent` | `context: fork` 使用時のエージェントタイプ | `general-purpose` |
+| `hooks` | Skill固有のhooks (PreToolUse, PostToolUse, Stop) | なし |
 
-### Arguments
+### 引数
 
-Commands can receive arguments:
+コマンドは引数を受け取れます:
 
-**All arguments with `$ARGUMENTS`:**
+**`$ARGUMENTS` ですべての引数:**
 
 ```yaml
 ---
 name: fix-issue
-description: Fix a GitHub issue by number
+description: 番号でGitHub Issueを修正
 ---
 
-Fix issue #$ARGUMENTS following our coding standards
+私たちのコーディング標準に従ってIssue #$ARGUMENTS を修正して
 ```
 
-Usage: `/fix-issue 123` → `$ARGUMENTS` becomes "123"
+使い方: `/fix-issue 123` → `$ARGUMENTS` が "123" になる
 
-**Individual arguments with `$0`, `$1`, etc.:**
+**`$0`, `$1` などで個別の引数:**
 
 ```yaml
 ---
 name: review-pr
-description: Review a PR with priority
+description: 優先度付きでPRをレビュー
 ---
 
-Review PR #$0 with priority $1
+PR #$0 を優先度 $1 でレビューして
 ```
 
-Usage: `/review-pr 456 high` → `$0`="456", `$1`="high"
+使い方: `/review-pr 456 high` → `$0`="456", `$1`="high"
 
-### Dynamic Context with Shell Commands
+### シェルコマンドによる動的コンテキスト
 
-Execute bash commands before the prompt using `!`command``:
+`` !`command` `` を使ってプロンプト前にbashコマンドを実行:
 
 ```yaml
 ---
 name: commit
-description: Create a git commit with context
+description: コンテキスト付きでgitコミットを作成
 allowed-tools: Bash(git *)
 ---
 
-## Context
+## コンテキスト
 
-- Current git status: !`git status`
-- Current git diff: !`git diff HEAD`
-- Current branch: !`git branch --show-current`
-- Recent commits: !`git log --oneline -5`
+- 現在のgit status: !`git status`
+- 現在のgit diff: !`git diff HEAD`
+- 現在のブランチ: !`git branch --show-current`
+- 最近のコミット: !`git log --oneline -5`
 
-## Your task
+## タスク
 
-Based on the above changes, create a single git commit.
+上記の変更をもとに、単一のgitコミットを作成してください。
 ```
 
-### File References
+### ファイル参照
 
-Include file contents using `@`:
+`@` を使ってファイルの内容を含める:
 
 ```markdown
-Review the implementation in @src/utils/helpers.js
-Compare @src/old-version.js with @src/new-version.js
+@src/utils/helpers.js の実装をレビューして
+@src/old-version.js と @src/new-version.js を比較して
 ```
 
-## Plugin Commands
+## Pluginコマンド
 
-Plugins can provide custom commands:
+Pluginsはカスタムコマンドを提供できます:
 
 ```
 /plugin-name:command-name
 ```
 
-Or simply `/command-name` when there are no naming conflicts.
+または命名の競合がない場合は単純に `/command-name`。
 
-**Examples:**
+**サンプル:**
 ```bash
 /frontend-design:frontend-design
 /commit-commands:commit
 ```
 
-## MCP Prompts as Commands
+## MCPプロンプトをコマンドとして使う
 
-MCP servers can expose prompts as slash commands:
+MCPサーバーはプロンプトをslash commandsとして公開できます:
 
 ```
 /mcp__<server-name>__<prompt-name> [arguments]
 ```
 
-**Examples:**
+**サンプル:**
 ```bash
 /mcp__github__list_prs
 /mcp__github__pr_review 456
-/mcp__jira__create_issue "Bug title" high
+/mcp__jira__create_issue "バグのタイトル" high
 ```
 
-### MCP Permission Syntax
+### MCPパーミッション構文
 
-Control MCP server access in permissions:
+パーミッションでMCPサーバーアクセスを制御:
 
-- `mcp__github` - Access entire GitHub MCP server
-- `mcp__github__*` - Wildcard access to all tools
-- `mcp__github__get_issue` - Specific tool access
+- `mcp__github` - GitHub MCPサーバー全体へのアクセス
+- `mcp__github__*` - すべてのツールへのワイルドカードアクセス
+- `mcp__github__get_issue` - 特定のツールアクセス
 
-## Command Architecture
+## コマンドアーキテクチャ
 
 ```mermaid
 graph TD
-    A["User Input: /command-name"] --> B{"Command Type?"}
-    B -->|Built-in| C["Execute Built-in"]
-    B -->|Skill| D["Load SKILL.md"]
-    B -->|Plugin| E["Load Plugin Command"]
-    B -->|MCP| F["Execute MCP Prompt"]
+    A["ユーザー入力: /command-name"] --> B{"コマンドタイプ?"}
+    B -->|組み込み| C["組み込みを実行"]
+    B -->|Skill| D["SKILL.mdを読み込む"]
+    B -->|Plugin| E["Pluginコマンドを読み込む"]
+    B -->|MCP| F["MCPプロンプトを実行"]
 
-    D --> G["Parse Frontmatter"]
-    G --> H["Substitute Variables"]
-    H --> I["Execute Shell Commands"]
-    I --> J["Send to Claude"]
-    J --> K["Return Results"]
+    D --> G["フロントマターを解析"]
+    G --> H["変数を置換"]
+    H --> I["シェルコマンドを実行"]
+    I --> J["Claudeに送信"]
+    J --> K["結果を返す"]
 ```
 
-## Command Lifecycle
+## コマンドライフサイクル
 
 ```mermaid
 sequenceDiagram
-    participant User
+    participant User as ユーザー
     participant Claude as Claude Code
-    participant FS as File System
-    participant CLI as Shell/Bash
+    participant FS as ファイルシステム
+    participant CLI as シェル/Bash
 
-    User->>Claude: Types /optimize
-    Claude->>FS: Searches .claude/skills/ and .claude/commands/
-    FS-->>Claude: Returns optimize/SKILL.md
-    Claude->>Claude: Parses frontmatter
-    Claude->>CLI: Executes !`command` substitutions
-    CLI-->>Claude: Command outputs
-    Claude->>Claude: Substitutes $ARGUMENTS
-    Claude->>User: Processes prompt
-    Claude->>User: Returns results
+    User->>Claude: /optimize を入力
+    Claude->>FS: .claude/skills/ と .claude/commands/ を検索
+    FS-->>Claude: optimize/SKILL.md を返す
+    Claude->>Claude: フロントマターを解析
+    Claude->>CLI: !`command` 置換を実行
+    CLI-->>Claude: コマンド出力
+    Claude->>Claude: $ARGUMENTS を置換
+    Claude->>User: プロンプトを処理
+    Claude->>User: 結果を返す
 ```
 
-## Available Commands in This Folder
+## このフォルダで利用可能なコマンド
 
-These example commands can be installed as skills or legacy commands.
+これらのサンプルコマンドはskillsまたはレガシーコマンドとしてインストールできます。
 
-### 1. `/optimize` - Code Optimization
+### 1. `/optimize` - コード最適化
 
-Analyzes code for performance issues, memory leaks, and optimization opportunities.
+コードのパフォーマンス問題・メモリリーク・最適化の機会を分析します。
 
-**Usage:**
+**使い方:**
 ```
 /optimize
-[Paste your code]
+[コードを貼り付ける]
 ```
 
-### 2. `/pr` - Pull Request Preparation
+### 2. `/pr` - プルリクエスト準備
 
-Guides through PR preparation checklist including linting, testing, and commit formatting.
+リンティング・テスト・コミットフォーマットを含むPR準備チェックリストをガイドします。
 
-**Usage:**
+**使い方:**
 ```
 /pr
 ```
 
-**Screenshot:**
+**スクリーンショット:**
 ![/pr](pr-slash-command.png)
 
-### 3. `/generate-api-docs` - API Documentation Generator
+### 3. `/generate-api-docs` - APIドキュメント生成
 
-Generates comprehensive API documentation from source code.
+ソースコードから包括的なAPIドキュメントを生成します。
 
-**Usage:**
+**使い方:**
 ```
 /generate-api-docs
 ```
 
-### 4. `/commit` - Git Commit with Context
+### 4. `/commit` - コンテキスト付きGitコミット
 
-Creates a git commit with dynamic context from your repository.
+リポジトリからの動的コンテキスト付きでgitコミットを作成します。
 
-**Usage:**
+**使い方:**
 ```
-/commit [optional message]
+/commit [任意のメッセージ]
 ```
 
-### 5. `/push-all` - Stage, Commit, and Push
+### 5. `/push-all` - ステージ・コミット・プッシュ
 
-Stages all changes, creates a commit, and pushes to remote with safety checks.
+安全チェックを実施しながらすべての変更をステージし、コミットを作成してリモートにプッシュします。
 
-**Usage:**
+**使い方:**
 ```
 /push-all
 ```
 
-**Safety Checks:**
-- Secrets: `.env*`, `*.key`, `*.pem`, `credentials.json`
-- API Keys: Detects real keys vs. placeholders
-- Large files: `>10MB` without Git LFS
-- Build artifacts: `node_modules/`, `dist/`, `__pycache__/`
+**安全チェック:**
+- シークレット: `.env*`, `*.key`, `*.pem`, `credentials.json`
+- APIキー: 実際のキーとプレースホルダーを検出
+- 大きなファイル: Git LFSなしで `>10MB`
+- ビルド成果物: `node_modules/`, `dist/`, `__pycache__/`
 
-### 6. `/doc-refactor` - Documentation Restructuring
+### 6. `/doc-refactor` - ドキュメント再構成
 
-Restructures project documentation for clarity and accessibility.
+プロジェクトドキュメントを明確さとアクセスしやすさのために再構成します。
 
-**Usage:**
+**使い方:**
 ```
 /doc-refactor
 ```
 
-### 7. `/setup-ci-cd` - CI/CD Pipeline Setup
+### 7. `/setup-ci-cd` - CI/CDパイプラインセットアップ
 
-Implements pre-commit hooks and GitHub Actions for quality assurance.
+品質保証のためのpre-commitフックとGitHub Actionsを実装します。
 
-**Usage:**
+**使い方:**
 ```
 /setup-ci-cd
 ```
 
-### 8. `/unit-test-expand` - Test Coverage Expansion
+### 8. `/unit-test-expand` - テストカバレッジ拡張
 
-Increases test coverage by targeting untested branches and edge cases.
+未テストのブランチとエッジケースを対象にしてテストカバレッジを向上させます。
 
-**Usage:**
+**使い方:**
 ```
 /unit-test-expand
 ```
 
-## Installation
+## インストール
 
-### As Skills (Recommended)
+### Skillsとして (推奨)
 
-Copy to your skills directory:
+skillsディレクトリにコピー:
 
 ```bash
-# Create skills directory
+# skillsディレクトリを作成
 mkdir -p .claude/skills
 
-# For each command file, create a skill directory
+# 各コマンドファイルのskillディレクトリを作成
 for cmd in optimize pr commit; do
   mkdir -p .claude/skills/$cmd
   cp 01-slash-commands/$cmd.md .claude/skills/$cmd/SKILL.md
 done
 ```
 
-### As Legacy Commands
+### レガシーコマンドとして
 
-Copy to your commands directory:
+commandsディレクトリにコピー:
 
 ```bash
-# Project-wide (team)
+# プロジェクト全体 (チーム)
 mkdir -p .claude/commands
 cp 01-slash-commands/*.md .claude/commands/
 
-# Personal use
+# 個人使用
 mkdir -p ~/.claude/commands
 cp 01-slash-commands/*.md ~/.claude/commands/
 ```
 
-## Creating Your Own Commands
+## 独自コマンドの作成
 
-### Skill Template (Recommended)
+### Skillテンプレート (推奨)
 
-Create `.claude/skills/my-command/SKILL.md`:
+`.claude/skills/my-command/SKILL.md` を作成:
 
 ```yaml
 ---
 name: my-command
-description: What this command does. Use when [trigger conditions].
+description: このコマンドの機能。[トリガー条件] の時に使用。
 argument-hint: [optional-args]
 allowed-tools: Bash(npm *), Read, Grep
 ---
 
-# Command Title
+# コマンドタイトル
 
-## Context
+## コンテキスト
 
-- Current branch: !`git branch --show-current`
-- Related files: @package.json
+- 現在のブランチ: !`git branch --show-current`
+- 関連ファイル: @package.json
 
-## Instructions
+## 指示
 
-1. First step
-2. Second step with argument: $ARGUMENTS
-3. Third step
+1. 最初のステップ
+2. 引数付きの2番目のステップ: $ARGUMENTS
+3. 3番目のステップ
 
-## Output Format
+## 出力フォーマット
 
-- How to format the response
-- What to include
+- 応答のフォーマット方法
+- 含めるもの
 ```
 
-### User-Only Command (No Auto-Invocation)
+### ユーザー専用コマンド (自動呼び出しなし)
 
-For commands with side effects that Claude shouldn't trigger automatically:
+Claudeが自動的にトリガーすべきでない副作用のあるコマンド:
 
 ```yaml
 ---
 name: deploy
-description: Deploy to production
+description: 本番環境にデプロイ
 disable-model-invocation: true
 allowed-tools: Bash(npm *), Bash(git *)
 ---
 
-Deploy the application to production:
+アプリケーションを本番環境にデプロイする:
 
-1. Run tests
-2. Build application
-3. Push to deployment target
-4. Verify deployment
+1. テストを実行
+2. アプリケーションをビルド
+3. デプロイ先にプッシュ
+4. デプロイを確認
 ```
 
-## Best Practices
+## ベストプラクティス
 
-| Do | Don't |
+| やること | やってはいけないこと |
 |------|---------|
-| Use clear, action-oriented names | Create commands for one-time tasks |
-| Include `description` with trigger conditions | Build complex logic in commands |
-| Keep commands focused on single task | Hardcode sensitive information |
-| Use `disable-model-invocation` for side effects | Skip the description field |
-| Use `!` prefix for dynamic context | Assume Claude knows current state |
-| Organize related files in skill directories | Put everything in one file |
+| 明確でアクション指向の名前を使う | 1回限りのタスクにコマンドを作らない |
+| トリガー条件付きの `description` を含める | コマンドに複雑なロジックを組み込まない |
+| コマンドを単一タスクに集中させる | 機密情報をハードコードしない |
+| 副作用に `disable-model-invocation` を使う | descriptionフィールドをスキップしない |
+| 動的コンテキストに `!` プレフィックスを使う | Claudeが現在の状態を知っていると仮定しない |
+| 関連ファイルをskillディレクトリに整理する | すべてを1つのファイルに入れない |
 
-## Troubleshooting
+## トラブルシューティング
 
-### Command Not Found
+### コマンドが見つからない
 
-**Solutions:**
-- Check file is in `.claude/skills/<name>/SKILL.md` or `.claude/commands/<name>.md`
-- Verify the `name` field in frontmatter matches expected command name
-- Restart Claude Code session
-- Run `/help` to see available commands
+**解決策:**
+- ファイルが `.claude/skills/<name>/SKILL.md` または `.claude/commands/<name>.md` にあるか確認する
+- フロントマターの `name` フィールドが期待するコマンド名と一致しているか確認する
+- Claude Codeセッションを再起動する
+- `/help` を実行して利用可能なコマンドを確認する
 
-### Command Not Executing as Expected
+### コマンドが期待通りに実行されない
 
-**Solutions:**
-- Add more specific instructions
-- Include examples in the skill file
-- Check `allowed-tools` if using bash commands
-- Test with simple inputs first
+**解決策:**
+- より具体的な指示を追加する
+- skillファイルにサンプルを含める
+- bashコマンドを使用している場合は `allowed-tools` を確認する
+- まずシンプルな入力でテストする
 
-### Skill vs Command Conflict
+### SkillとCommandの競合
 
-If both exist with the same name, the **skill takes precedence**. Remove one or rename it.
+同じ名前で両方が存在する場合、**skillが優先**されます。どちらかを削除するか名前を変更してください。
 
-## Related Guides
+## 関連ガイド
 
-- **[Skills](../03-skills/)** - Full reference for skills (auto-invoked capabilities)
-- **[Memory](../02-memory/)** - Persistent context with CLAUDE.md
-- **[Subagents](../04-subagents/)** - Delegated AI agents
-- **[Plugins](../07-plugins/)** - Bundled command collections
-- **[Hooks](../06-hooks/)** - Event-driven automation
+- **[Skills](../03-skills/)** - Skillsの完全リファレンス (自動呼び出し機能)
+- **[Memory](../02-memory/)** - CLAUDE.mdによる永続的コンテキスト
+- **[Subagents](../04-subagents/)** - 委任されたAIエージェント
+- **[Plugins](../07-plugins/)** - バンドルされたコマンドコレクション
+- **[Hooks](../06-hooks/)** - イベント駆動自動化
 
-## Additional Resources
+## 追加リソース
 
-- [Official Interactive Mode Documentation](https://code.claude.com/docs/en/interactive-mode) - Built-in commands reference
-- [Official Skills Documentation](https://code.claude.com/docs/en/skills) - Complete skills reference
-- [CLI Reference](https://code.claude.com/docs/en/cli-reference) - Command-line options
+- [公式 Interactive Mode ドキュメント](https://code.claude.com/docs/en/interactive-mode) - 組み込みコマンドリファレンス
+- [公式 Skills ドキュメント](https://code.claude.com/docs/en/skills) - 完全なSkillsリファレンス
+- [CLIリファレンス](https://code.claude.com/docs/en/cli-reference) - コマンドラインオプション
 
 ---
 
-*Part of the [Claude How To](../) guide series*
+*[Claude How To](../) ガイドシリーズの一部*

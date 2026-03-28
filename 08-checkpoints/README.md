@@ -3,211 +3,211 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Checkpoints and Rewind
+# CheckpointsとRewind
 
-Checkpoints allow you to save conversation state and rewind to previous points in your Claude Code session. This is invaluable for exploring different approaches, recovering from mistakes, or comparing alternative solutions.
+CheckpointsはClaude Codeセッションの会話状態を保存し、以前のポイントに巻き戻すことができます。これは異なるアプローチを探ったり、ミスから回復したり、代替ソリューションを比較したりするのに非常に役立ちます。
 
-## Overview
+## 概要
 
-Checkpoints allow you to save conversation state and rewind to previous points, enabling safe experimentation and exploration of multiple approaches. They are snapshots of your conversation state, including:
-- All messages exchanged
-- File modifications made
-- Tool usage history
-- Session context
+Checkpointsは会話の状態を保存して以前のポイントに巻き戻すことができ、安全な実験と複数のアプローチの探索を可能にします。以下を含む会話状態のスナップショットです:
+- すべてのやり取りメッセージ
+- 行われたファイルの変更
+- ツール使用履歴
+- セッションコンテキスト
 
-Checkpoints are invaluable when exploring different approaches, recovering from mistakes, or comparing alternative solutions.
+Checkpointsは、異なるアプローチを探ったり、ミスから回復したり、代替ソリューションを比較したりする際に非常に役立ちます。
 
-## Key Concepts
+## 主要概念
 
-| Concept | Description |
+| 概念 | 説明 |
 |---------|-------------|
-| **Checkpoint** | Snapshot of conversation state including messages, files, and context |
-| **Rewind** | Return to a previous checkpoint, discarding subsequent changes |
-| **Branch Point** | Checkpoint from which multiple approaches are explored |
+| **Checkpoint** | メッセージ・ファイル・コンテキストを含む会話状態のスナップショット |
+| **Rewind** | 以前のcheckpointに戻り、その後の変更を破棄する |
+| **Branch Point** | 複数のアプローチを探るためのcheckpoint |
 
-## Accessing Checkpoints
+## Checkpointsへのアクセス
 
-You can access and manage checkpoints in two primary ways:
+Checkpointsは2つの主要な方法でアクセス・管理できます:
 
-### Using Keyboard Shortcut
-Press `Esc` twice (`Esc` + `Esc`) to open the checkpoint interface and browse saved checkpoints.
+### キーボードショートカットを使用
+`Esc` を2回 (`Esc` + `Esc`) 押してcheckpointインターフェースを開き、保存されたcheckpointsを閲覧します。
 
-### Using Slash Command
-Use the `/rewind` command (alias: `/checkpoint`) for quick access:
+### Slash Commandを使用
+クイックアクセスには `/rewind` コマンド (エイリアス: `/checkpoint`) を使用:
 
 ```bash
-# Open rewind interface
+# rewindインターフェースを開く
 /rewind
 
-# Or use the alias
+# またはエイリアスを使用
 /checkpoint
 ```
 
-## Rewind Options
+## Rewindオプション
 
-When you rewind, you are presented with a menu of five options:
+巻き戻す際には5つのオプションのメニューが表示されます:
 
-1. **Restore code and conversation** -- Revert both files and messages to that checkpoint
-2. **Restore conversation** -- Rewind messages only, keep your current code as-is
-3. **Restore code** -- Revert file changes only, keep the full conversation history
-4. **Summarize from here** -- Compress the conversation from this point forward into an AI-generated summary instead of discarding it. The original messages are preserved in the transcript. You can optionally provide instructions to focus the summary on specific topics.
-5. **Never mind** -- Cancel and return to the current state
+1. **コードと会話を復元** -- ファイルとメッセージの両方をそのcheckpointに戻す
+2. **会話を復元** -- メッセージのみ巻き戻す、現在のコードはそのまま維持
+3. **コードを復元** -- ファイルの変更のみ戻す、会話履歴はそのまま維持
+4. **ここからまとめる** -- この時点以降の会話を破棄する代わりにAI生成サマリーに圧縮する。元のメッセージはトランスクリプトに保存される。特定のトピックに焦点を絞るための指示を任意で指定できる。
+5. **キャンセル** -- キャンセルして現在の状態に戻る
 
-## Automatic Checkpoints
+## 自動Checkpoints
 
-Claude Code automatically creates checkpoints for you:
+Claude Codeは自動的にcheckpointsを作成します:
 
-- **Every user prompt** - A new checkpoint is created with each user input
-- **Persistent** - Checkpoints persist across sessions
-- **Auto-cleaned** - Checkpoints are automatically cleaned up after 30 days
+- **ユーザーの各プロンプト** - 各ユーザー入力で新しいcheckpointが作成される
+- **永続的** - checkpointsはセッションを跨いで持続する
+- **自動クリーンアップ** - checkpointsは30日後に自動的にクリーンアップされる
 
-This means you can always rewind to any previous point in your conversation, from a few minutes ago to days before.
+つまり、数分前から数日前まで、会話の任意の以前のポイントにいつでも巻き戻せます。
 
-## Use Cases
+## ユースケース
 
-| Scenario | Workflow |
+| シナリオ | ワークフロー |
 |----------|----------|
-| **Exploring Approaches** | Save → Try A → Save → Rewind → Try B → Compare |
-| **Safe Refactoring** | Save → Refactor → Test → If fail: Rewind |
-| **A/B Testing** | Save → Design A → Save → Rewind → Design B → Compare |
-| **Mistake Recovery** | Notice issue → Rewind to last good state |
+| **アプローチの探索** | 保存 → Aを試す → 保存 → 巻き戻し → Bを試す → 比較 |
+| **安全なリファクタリング** | 保存 → リファクタリング → テスト → 失敗時: 巻き戻し |
+| **A/Bテスト** | 保存 → デザインA → 保存 → 巻き戻し → デザインB → 比較 |
+| **ミスからの回復** | 問題を発見 → 最後の良い状態に巻き戻し |
 
-## Using Checkpoints
+## Checkpointsの使い方
 
-### Viewing and Rewinding
+### 表示と巻き戻し
 
-Press `Esc` twice or use `/rewind` to open the checkpoint browser. You'll see a list of all available checkpoints with timestamps. Select any checkpoint to rewind to that state.
+`Esc` を2回押すか `/rewind` を使用してcheckpointブラウザを開きます。タイムスタンプ付きの利用可能なすべてのcheckpointsのリストが表示されます。任意のcheckpointを選択してその状態に巻き戻します。
 
-### Checkpoint Details
+### Checkpointの詳細
 
-Each checkpoint shows:
-- Timestamp of when it was created
-- Files that were modified
-- Number of messages in the conversation
-- Tools that were used
+各checkpointには以下が表示されます:
+- 作成されたときのタイムスタンプ
+- 変更されたファイル
+- 会話のメッセージ数
+- 使用されたツール
 
-## Practical Examples
+## 実践サンプル
 
-### Example 1: Exploring Different Approaches
-
-```
-User: Let's add a caching layer to the API
-
-Claude: I'll add Redis caching to your API endpoints...
-[Makes changes at checkpoint A]
-
-User: Actually, let's try in-memory caching instead
-
-Claude: I'll rewind to explore a different approach...
-[User presses Esc+Esc and rewinds to checkpoint A]
-[Implements in-memory caching at checkpoint B]
-
-User: Now I can compare both approaches
-```
-
-### Example 2: Recovering from Mistakes
+### サンプル1: 異なるアプローチの探索
 
 ```
-User: Refactor the authentication module to use JWT
+ユーザー: APIにキャッシュレイヤーを追加しよう
 
-Claude: I'll refactor the authentication module...
-[Makes extensive changes]
+Claude: APIエンドポイントにRedisキャッシュを追加します...
+[Checkpoint Aで変更を加える]
 
-User: Wait, that broke the OAuth integration. Let's go back.
+ユーザー: やっぱりインメモリキャッシュを試してみたい
 
-Claude: I'll help you rewind to before the refactoring...
-[User presses Esc+Esc and selects the checkpoint before the refactor]
+Claude: 別のアプローチを探るために巻き戻します...
+[ユーザーがEsc+Escを押してCheckpoint Aに巻き戻す]
+[Checkpoint Bでインメモリキャッシュを実装]
 
-User: Let's try a more conservative approach this time
+ユーザー: 両方のアプローチを比較できるようになった
 ```
 
-### Example 3: Safe Experimentation
+### サンプル2: ミスからの回復
 
 ```
-User: Let's try rewriting this in a functional style
-[Creates checkpoint before experiment]
+ユーザー: 認証モジュールをJWTを使うようにリファクタリングして
 
-Claude: [Makes experimental changes]
+Claude: 認証モジュールをリファクタリングします...
+[大規模な変更を加える]
 
-User: The tests are failing. Let's rewind.
-[User presses Esc+Esc and rewinds to the checkpoint]
+ユーザー: あ、OAuth連携が壊れてしまった。元に戻そう。
 
-Claude: I've rewound the changes. Let's try a different approach.
+Claude: リファクタリング前に巻き戻すのをお手伝いします...
+[ユーザーがEsc+Escを押してリファクタリング前のcheckpointを選択]
+
+ユーザー: 今度はもっと保守的なアプローチを試そう
 ```
 
-### Example 4: Branching Approaches
+### サンプル3: 安全な実験
 
 ```
-User: I want to compare two database designs
-[Takes note of checkpoint - call it "Start"]
+ユーザー: これを関数型スタイルで書き直してみよう
+[実験前にcheckpointを作成]
 
-Claude: I'll create the first design...
-[Implements Schema A]
+Claude: [実験的な変更を加える]
 
-User: Now let me go back and try the second approach
-[User presses Esc+Esc and rewinds to "Start"]
+ユーザー: テストが失敗している。巻き戻そう。
+[ユーザーがEsc+Escを押してcheckpointに巻き戻す]
 
-Claude: Now I'll implement Schema B...
-[Implements Schema B]
-
-User: Great! Now I have both schemas to choose from
+Claude: 変更を巻き戻しました。別のアプローチを試みましょう。
 ```
 
-## Checkpoint Retention
-
-Claude Code automatically manages your checkpoints:
-
-- Checkpoints are created automatically with every user prompt
-- Old checkpoints are retained for up to 30 days
-- Checkpoints are cleaned up automatically to prevent unlimited storage growth
-
-## Workflow Patterns
-
-### Branching Strategy for Exploration
-
-When exploring multiple approaches:
+### サンプル4: アプローチの分岐
 
 ```
-1. Start with initial implementation → Checkpoint A
-2. Try Approach 1 → Checkpoint B
-3. Rewind to Checkpoint A
-4. Try Approach 2 → Checkpoint C
-5. Compare results from B and C
-6. Choose best approach and continue
+ユーザー: 2つのデータベース設計を比較したい
+[checkpointをメモ - 「スタート」と呼ぶ]
+
+Claude: 最初の設計を作成します...
+[スキーマAを実装]
+
+ユーザー: 戻って2つ目のアプローチを試してみよう
+[ユーザーがEsc+Escを押して「スタート」に巻き戻す]
+
+Claude: スキーマBを実装します...
+[スキーマBを実装]
+
+ユーザー: 素晴らしい！両方のスキーマから選べるようになった
 ```
 
-### Safe Refactoring Pattern
+## Checkpointの保持
 
-When making significant changes:
+Claude Codeはcheckpointsを自動的に管理します:
+
+- Checkpointsはユーザーの各プロンプトで自動的に作成される
+- 古いcheckpointsは最長30日間保持される
+- 無制限のストレージ増加を防ぐためにcheckpointsは自動的にクリーンアップされる
+
+## ワークフローパターン
+
+### 探索のための分岐戦略
+
+複数のアプローチを探る場合:
 
 ```
-1. Current state → Checkpoint (auto)
-2. Start refactoring
-3. Run tests
-4. If tests pass → Continue working
-5. If tests fail → Rewind and try different approach
+1. 最初の実装から始める → Checkpoint A
+2. アプローチ1を試す → Checkpoint B
+3. Checkpoint Aに巻き戻す
+4. アプローチ2を試す → Checkpoint C
+5. BとCの結果を比較する
+6. 最善のアプローチを選んで続ける
 ```
 
-## Best Practices
+### 安全なリファクタリングパターン
 
-Since checkpoints are created automatically, you can focus on your work without worrying about manually saving state. However, keep these practices in mind:
+大規模な変更を加える場合:
 
-### Using Checkpoints Effectively
+```
+1. 現在の状態 → Checkpoint (自動)
+2. リファクタリング開始
+3. テストを実行
+4. テストが通れば → 作業を続ける
+5. テストが失敗すれば → 巻き戻して別のアプローチを試す
+```
 
-✅ **Do:**
-- Review available checkpoints before rewinding
-- Use rewind when you want to explore different directions
-- Keep checkpoints to compare different approaches
-- Understand what each rewind option does (restore code and conversation, restore conversation, restore code, or summarize)
+## ベストプラクティス
 
-❌ **Don't:**
-- Rely on checkpoints alone for code preservation
-- Expect checkpoints to track external file system changes
-- Use checkpoints as a substitute for git commits
+Checkpointsは自動的に作成されるため、手動で状態を保存することを心配せず作業に集中できます。ただし、以下の点を心がけてください:
 
-## Configuration
+### Checkpointsを効果的に使う
 
-You can toggle automatic checkpoints in your settings:
+✅ **やること:**
+- 巻き戻す前に利用可能なcheckpointsを確認する
+- 別の方向を探りたい時にrewindを使用する
+- 異なるアプローチを比較するためにcheckpointsを保持する
+- 各rewindオプションの機能を理解する (コードと会話を復元、会話を復元、コードを復元、またはまとめる)
+
+❌ **やってはいけないこと:**
+- コードの保存をcheckpointsだけに頼る
+- Checkpointsが外部ファイルシステムの変更を追跡することを期待する
+- Gitコミットの代替としてcheckpointsを使う
+
+## 設定
+
+settingsで自動checkpointsを切り替えられます:
 
 ```json
 {
@@ -215,91 +215,91 @@ You can toggle automatic checkpoints in your settings:
 }
 ```
 
-- `autoCheckpoint`: Enable or disable automatic checkpoint creation on every user prompt (default: `true`)
+- `autoCheckpoint`: ユーザーの各プロンプトで自動checkpoint作成を有効/無効にする (デフォルト: `true`)
 
-## Limitations
+## 制限事項
 
-Checkpoints have the following limitations:
+Checkpointsには以下の制限があります:
 
-- **Bash command changes NOT tracked** - Operations like `rm`, `mv`, `cp` on the filesystem are not captured in checkpoints
-- **External changes NOT tracked** - Changes made outside Claude Code (in your editor, terminal, etc.) are not captured
-- **Not a replacement for version control** - Use git for permanent, auditable changes to your codebase
+- **Bashコマンドの変更は追跡されない** - ファイルシステム上の `rm`、`mv`、`cp` などの操作はcheckpointsに記録されない
+- **外部の変更は追跡されない** - Claude Code外部 (エディタ、ターミナルなど) で行われた変更は記録されない
+- **バージョン管理の代替ではない** - コードベースへの永続的・監査可能な変更にはgitを使用すること
 
-## Troubleshooting
+## トラブルシューティング
 
-### Missing Checkpoints
+### Checkpointが見つからない
 
-**Problem**: Expected checkpoint not found
+**問題**: 期待したcheckpointが見つからない
 
-**Solution**:
-- Check if checkpoints were cleared
-- Verify that `autoCheckpoint` is enabled in your settings
-- Check disk space
+**解決策**:
+- checkpointsがクリアされていないか確認する
+- settingsで `autoCheckpoint` が有効になっているか確認する
+- ディスク容量を確認する
 
-### Rewind Failed
+### Rewindが失敗する
 
-**Problem**: Cannot rewind to checkpoint
+**問題**: Checkpointに巻き戻せない
 
-**Solution**:
-- Ensure no uncommitted changes conflict
-- Check if checkpoint is corrupted
-- Try rewinding to a different checkpoint
+**解決策**:
+- コミットされていない変更が競合していないか確認する
+- Checkpointが破損していないか確認する
+- 別のcheckpointへの巻き戻しを試みる
 
-## Integration with Git
+## Gitとの連携
 
-Checkpoints complement (but don't replace) git:
+CheckpointsはGitを補完します (置き換えるものではありません):
 
-| Feature | Git | Checkpoints |
+| 機能 | Git | Checkpoints |
 |---------|-----|-------------|
-| Scope | File system | Conversation + files |
-| Persistence | Permanent | Session-based |
-| Granularity | Commits | Any point |
-| Speed | Slower | Instant |
-| Sharing | Yes | Limited |
+| スコープ | ファイルシステム | 会話＋ファイル |
+| 永続性 | 永続的 | セッションベース |
+| 粒度 | コミット | 任意のポイント |
+| 速度 | 遅め | 即時 |
+| 共有 | あり | 制限あり |
 
-Use both together:
-1. Use checkpoints for rapid experimentation
-2. Use git commits for finalized changes
-3. Create checkpoint before git operations
-4. Commit successful checkpoint states to git
+両方を組み合わせて使う:
+1. 素早い実験にはcheckpointsを使う
+2. 最終的な変更にはgitコミットを使う
+3. git操作の前にcheckpointを作成する
+4. 成功したcheckpointの状態をgitにコミットする
 
-## Quick Start Guide
+## クイックスタートガイド
 
-### Basic Workflow
+### 基本ワークフロー
 
-1. **Work normally** - Claude Code creates checkpoints automatically
-2. **Want to go back?** - Press `Esc` twice or use `/rewind`
-3. **Choose checkpoint** - Select from the list to rewind
-4. **Select what to restore** - Choose from restore code and conversation, restore conversation, restore code, summarize from here, or cancel
-5. **Continue working** - You're back at that point
+1. **普通に作業する** - Claude Codeが自動的にcheckpointsを作成する
+2. **戻りたい？** - `Esc` を2回押すか `/rewind` を使用する
+3. **Checkpointを選ぶ** - リストから巻き戻すものを選択する
+4. **何を復元するか選ぶ** - コードと会話を復元・会話を復元・コードを復元・ここからまとめる・キャンセルから選ぶ
+5. **作業を続ける** - そのポイントに戻っている
 
-### Keyboard Shortcuts
+### キーボードショートカット
 
-- **`Esc` + `Esc`** - Open checkpoint browser
-- **`/rewind`** - Alternative way to access checkpoints
-- **`/checkpoint`** - Alias for `/rewind`
+- **`Esc` + `Esc`** - Checkpointブラウザを開く
+- **`/rewind`** - Checkpointsにアクセスする別の方法
+- **`/checkpoint`** - `/rewind` のエイリアス
 
-## Related Concepts
+## 関連概念
 
-- **[Advanced Features](../09-advanced-features/)** - Planning mode and other advanced capabilities
-- **[Memory Management](../02-memory/)** - Managing conversation history and context
-- **[Slash Commands](../01-slash-commands/)** - User-invoked shortcuts
-- **[Hooks](../06-hooks/)** - Event-driven automation
-- **[Plugins](../07-plugins/)** - Bundled extension packages
+- **[Advanced Features](../09-advanced-features/)** - Planning modeとその他の高度な機能
+- **[Memory Management](../02-memory/)** - 会話履歴とコンテキストの管理
+- **[Slash Commands](../01-slash-commands/)** - ユーザー呼び出しショートカット
+- **[Hooks](../06-hooks/)** - イベント駆動自動化
+- **[Plugins](../07-plugins/)** - バンドルされた拡張パッケージ
 
-## Additional Resources
+## 追加リソース
 
-- [Official Checkpointing Documentation](https://code.claude.com/docs/en/checkpointing)
-- [Advanced Features Guide](../09-advanced-features/) - Extended thinking and other capabilities
+- [公式 Checkpointing ドキュメント](https://code.claude.com/docs/en/checkpointing)
+- [Advanced Featuresガイド](../09-advanced-features/) - Extended thinkingとその他の機能
 
-## Summary
+## まとめ
 
-Checkpoints are an automatic feature in Claude Code that lets you safely explore different approaches without fear of losing work. Every user prompt creates a new checkpoint automatically, so you can rewind to any previous point in your session.
+CheckpointsはClaude Codeの自動機能であり、作業を失う心配なく安全に異なるアプローチを探ることができます。ユーザーの各プロンプトで自動的に新しいcheckpointが作成されるため、セッションの任意の以前のポイントに巻き戻すことができます。
 
-Key benefits:
-- Experiment fearlessly with multiple approaches
-- Quickly recover from mistakes
-- Compare different solutions side-by-side
-- Integrate safely with version control systems
+主なメリット:
+- 複数のアプローチを恐れずに実験できる
+- ミスから素早く回復できる
+- 異なるソリューションを並べて比較できる
+- バージョン管理システムと安全に連携できる
 
-Remember: checkpoints are not a replacement for git. Use checkpoints for rapid experimentation and git for permanent code changes.
+注意: checkpointsはgitの代替ではありません。素早い実験にはcheckpointsを、永続的なコード変更にはgitを使いましょう。
