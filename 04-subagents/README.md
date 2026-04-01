@@ -3,104 +3,104 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Subagents - Complete Reference Guide
+# サブエージェント 完全リファレンスガイド
 
-Subagents are specialized AI assistants that Claude Code can delegate tasks to. Each subagent has a specific purpose, uses its own context window separate from the main conversation, and can be configured with specific tools and a custom system prompt.
+サブエージェントは、Claude Codeがタスクを委譲できる専門化されたAIアシスタントです。各サブエージェントは特定の目的を持ち、メインの会話とは別の独自のコンテキストウィンドウを使用し、特定のツールとカスタムシステムプロンプトで設定できます。
 
-## Table of Contents
+## 目次
 
-1. [Overview](#overview)
-2. [Key Benefits](#key-benefits)
-3. [File Locations](#file-locations)
-4. [Configuration](#configuration)
-5. [Built-in Subagents](#built-in-subagents)
-6. [Managing Subagents](#managing-subagents)
-7. [Using Subagents](#using-subagents)
-8. [Resumable Agents](#resumable-agents)
-9. [Chaining Subagents](#chaining-subagents)
-10. [Persistent Memory for Subagents](#persistent-memory-for-subagents)
-11. [Background Subagents](#background-subagents)
-12. [Worktree Isolation](#worktree-isolation)
-13. [Restrict Spawnable Subagents](#restrict-spawnable-subagents)
-14. [`claude agents` CLI Command](#claude-agents-cli-command)
-15. [Agent Teams (Experimental)](#agent-teams-experimental)
-16. [Plugin Subagent Security](#plugin-subagent-security)
-17. [Architecture](#architecture)
-18. [Context Management](#context-management)
-19. [When to Use Subagents](#when-to-use-subagents)
-20. [Best Practices](#best-practices)
-21. [Example Subagents in This Folder](#example-subagents-in-this-folder)
-22. [Installation Instructions](#installation-instructions)
-23. [Related Concepts](#related-concepts)
-
----
-
-## Overview
-
-Subagents enable delegated task execution in Claude Code by:
-
-- Creating **isolated AI assistants** with separate context windows
-- Providing **customized system prompts** for specialized expertise
-- Enforcing **tool access control** to limit capabilities
-- Preventing **context pollution** from complex tasks
-- Enabling **parallel execution** of multiple specialized tasks
-
-Each subagent operates independently with a clean slate, receiving only the specific context necessary for their task, then returning results to the main agent for synthesis.
-
-**Quick Start**: Use the `/agents` command to create, view, edit, and manage your subagents interactively.
+1. [概要](#概要)
+2. [主なメリット](#主なメリット)
+3. [ファイルの場所](#ファイルの場所)
+4. [設定](#設定)
+5. [組み込みサブエージェント](#組み込みサブエージェント)
+6. [サブエージェントの管理](#サブエージェントの管理)
+7. [サブエージェントの使い方](#サブエージェントの使い方)
+8. [再開可能なエージェント](#再開可能なエージェント)
+9. [サブエージェントのチェーン](#サブエージェントのチェーン)
+10. [サブエージェントの永続メモリ](#サブエージェントの永続メモリ)
+11. [バックグラウンドサブエージェント](#バックグラウンドサブエージェント)
+12. [Worktreeの隔離](#worktreeの隔離)
+13. [生成可能なサブエージェントの制限](#生成可能なサブエージェントの制限)
+14. [`claude agents` CLIコマンド](#claude-agents-cliコマンド)
+15. [エージェントチーム（実験的）](#エージェントチーム実験的)
+16. [プラグインサブエージェントのセキュリティ](#プラグインサブエージェントのセキュリティ)
+17. [アーキテクチャ](#アーキテクチャ)
+18. [コンテキスト管理](#コンテキスト管理)
+19. [サブエージェントを使うタイミング](#サブエージェントを使うタイミング)
+20. [ベストプラクティス](#ベストプラクティス)
+21. [このフォルダのサブエージェント例](#このフォルダのサブエージェント例)
+22. [インストール手順](#インストール手順)
+23. [関連概念](#関連概念)
 
 ---
 
-## Key Benefits
+## 概要
 
-| Benefit | Description |
-|---------|-------------|
-| **Context preservation** | Operates in separate context, preventing pollution of main conversation |
-| **Specialized expertise** | Fine-tuned for specific domains with higher success rates |
-| **Reusability** | Use across different projects and share with teams |
-| **Flexible permissions** | Different tool access levels for different subagent types |
-| **Scalability** | Multiple agents work on different aspects simultaneously |
+サブエージェントはClaude Codeにおける委譲タスク実行を可能にします：
 
----
+- **隔離されたAIアシスタント**を独立したコンテキストウィンドウで作成
+- **カスタマイズされたシステムプロンプト**で専門的な知識を提供
+- **ツールアクセス制御**で機能を制限
+- 複雑なタスクによる**コンテキスト汚染を防止**
+- 複数の専門化されたタスクの**並列実行**を実現
 
-## File Locations
+各サブエージェントはクリーンな状態で独立して動作し、自分のタスクに必要な特定のコンテキストのみを受け取り、結果をメインエージェントに返して統合させます。
 
-Subagent files can be stored in multiple locations with different scopes:
-
-| Priority | Type | Location | Scope |
-|----------|------|----------|-------|
-| 1 (highest) | **CLI-defined** | Via `--agents` flag (JSON) | Session only |
-| 2 | **Project subagents** | `.claude/agents/` | Current project |
-| 3 | **User subagents** | `~/.claude/agents/` | All projects |
-| 4 (lowest) | **Plugin agents** | Plugin `agents/` directory | Via plugins |
-
-When duplicate names exist, higher-priority sources take precedence.
+**クイックスタート**: `/agents` コマンドを使ってサブエージェントをインタラクティブに作成、表示、編集、管理できます。
 
 ---
 
-## Configuration
+## 主なメリット
 
-### File Format
+| メリット | 説明 |
+|---------|------|
+| **コンテキスト保護** | 別のコンテキストで動作し、メインの会話の汚染を防ぐ |
+| **専門的な知識** | 特定のドメインに特化し、より高い成功率を実現 |
+| **再利用性** | 異なるプロジェクト間で使用し、チームと共有可能 |
+| **柔軟なパーミッション** | サブエージェントの種類によって異なるツールアクセスレベル |
+| **スケーラビリティ** | 複数のエージェントが異なる側面を同時に処理 |
 
-Subagents are defined in YAML frontmatter followed by the system prompt in markdown:
+---
+
+## ファイルの場所
+
+サブエージェントファイルは、異なるスコープを持つ複数の場所に保存できます：
+
+| 優先度 | 種類 | 場所 | スコープ |
+|--------|------|------|----------|
+| 1（最高） | **CLI定義** | `--agents` フラグ（JSON） | セッションのみ |
+| 2 | **プロジェクトサブエージェント** | `.claude/agents/` | 現在のプロジェクト |
+| 3 | **ユーザーサブエージェント** | `~/.claude/agents/` | すべてのプロジェクト |
+| 4（最低） | **プラグインエージェント** | プラグインの `agents/` ディレクトリ | プラグイン経由 |
+
+重複する名前が存在する場合、優先度の高いソースが優先されます。
+
+---
+
+## 設定
+
+### ファイル形式
+
+サブエージェントはYAMLフロントマターとmarkdownのシステムプロンプトで定義されます：
 
 ```yaml
 ---
 name: your-sub-agent-name
-description: Description of when this subagent should be invoked
-tools: tool1, tool2, tool3  # Optional - inherits all tools if omitted
-disallowedTools: tool4  # Optional - explicitly disallowed tools
-model: sonnet  # Optional - sonnet, opus, haiku, or inherit
-permissionMode: default  # Optional - permission mode
-maxTurns: 20  # Optional - limit agentic turns
-skills: skill1, skill2  # Optional - skills to preload into context
-mcpServers: server1  # Optional - MCP servers to make available
-memory: user  # Optional - persistent memory scope (user, project, local)
-background: false  # Optional - run as background task
-effort: high  # Optional - reasoning effort (low, medium, high, max)
-isolation: worktree  # Optional - git worktree isolation
-initialPrompt: "Start by analyzing the codebase"  # Optional - auto-submitted first turn
-hooks:  # Optional - component-scoped hooks
+description: このサブエージェントを呼び出すタイミングの説明
+tools: tool1, tool2, tool3  # 省略可 - 省略時はすべてのツールを継承
+disallowedTools: tool4  # 省略可 - 明示的に禁止するツール
+model: sonnet  # 省略可 - sonnet, opus, haiku, または inherit
+permissionMode: default  # 省略可 - パーミッションモード
+maxTurns: 20  # 省略可 - エージェントのターン数上限
+skills: skill1, skill2  # 省略可 - コンテキストにプリロードするスキル
+mcpServers: server1  # 省略可 - 利用可能にするMCPサーバー
+memory: user  # 省略可 - 永続メモリスコープ (user, project, local)
+background: false  # 省略可 - バックグラウンドタスクとして実行
+effort: high  # 省略可 - 推論の努力レベル (low, medium, high, max)
+isolation: worktree  # 省略可 - git worktreeの隔離
+initialPrompt: "Start by analyzing the codebase"  # 省略可 - メインエージェント起動時に自動送信される最初のターン
+hooks:  # 省略可 - コンポーネントスコープのhooks
   PreToolUse:
     - matcher: "Bash"
       hooks:
@@ -108,270 +108,268 @@ hooks:  # Optional - component-scoped hooks
           command: "./scripts/security-check.sh"
 ---
 
-Your subagent's system prompt goes here. This can be multiple paragraphs
-and should clearly define the subagent's role, capabilities, and approach
-to solving problems.
+サブエージェントのシステムプロンプトをここに記述します。複数段落にわたることができ、
+サブエージェントの役割、能力、問題解決のアプローチを明確に定義するべきです。
 ```
 
-### Configuration Fields
+### 設定フィールド
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `name` | Yes | Unique identifier (lowercase letters and hyphens) |
-| `description` | Yes | Natural language description of purpose. Include "use PROACTIVELY" to encourage automatic invocation |
-| `tools` | No | Comma-separated list of specific tools. Omit to inherit all tools. Supports `Agent(agent_name)` syntax to restrict spawnable subagents |
-| `disallowedTools` | No | Comma-separated list of tools the subagent must not use |
-| `model` | No | Model to use: `sonnet`, `opus`, `haiku`, full model ID, or `inherit`. Defaults to configured subagent model |
-| `permissionMode` | No | `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, `plan` |
-| `maxTurns` | No | Maximum number of agentic turns the subagent can take |
-| `skills` | No | Comma-separated list of skills to preload. Injects full skill content into the subagent's context at startup |
-| `mcpServers` | No | MCP servers to make available to the subagent |
-| `hooks` | No | Component-scoped hooks (PreToolUse, PostToolUse, Stop) |
-| `memory` | No | Persistent memory directory scope: `user`, `project`, or `local` |
-| `background` | No | Set to `true` to always run this subagent as a background task |
-| `effort` | No | Reasoning effort level: `low`, `medium`, `high`, or `max` |
-| `isolation` | No | Set to `worktree` to give the subagent its own git worktree |
-| `initialPrompt` | No | Auto-submitted first turn when the subagent runs as the main agent |
+| フィールド | 必須 | 説明 |
+|-----------|------|------|
+| `name` | はい | 一意な識別子（小文字とハイフンのみ） |
+| `description` | はい | 目的の自然言語による説明。自動呼び出しを促すには "use PROACTIVELY" を含める |
+| `tools` | いいえ | 特定のツールのカンマ区切りリスト。省略するとすべてのツールを継承。生成可能なサブエージェントを制限する `Agent(agent_name)` 構文をサポート |
+| `disallowedTools` | いいえ | サブエージェントが使ってはいけないツールのカンマ区切りリスト |
+| `model` | いいえ | 使用するモデル: `sonnet`、`opus`、`haiku`、フルモデルID、または `inherit`。デフォルトは設定済みのサブエージェントモデル |
+| `permissionMode` | いいえ | `default`、`acceptEdits`、`dontAsk`、`bypassPermissions`、`plan` |
+| `maxTurns` | いいえ | サブエージェントが実行できるエージェントターンの最大数 |
+| `skills` | いいえ | プリロードするスキルのカンマ区切りリスト。起動時にサブエージェントのコンテキストにスキルの全内容をインジェクト |
+| `mcpServers` | いいえ | サブエージェントで利用可能にするMCPサーバー |
+| `hooks` | いいえ | コンポーネントスコープのhooks（PreToolUse、PostToolUse、Stop） |
+| `memory` | いいえ | 永続メモリディレクトリのスコープ: `user`、`project`、または `local` |
+| `background` | いいえ | `true` に設定するとこのサブエージェントを常にバックグラウンドタスクとして実行 |
+| `effort` | いいえ | 推論の努力レベル: `low`、`medium`、`high`、または `max` |
+| `isolation` | いいえ | `worktree` に設定するとサブエージェントに独自のgit worktreeを与える |
+| `initialPrompt` | いいえ | サブエージェントがメインエージェントとして実行された時に自動送信される最初のターン |
 
-### Tool Configuration Options
+### ツール設定オプション
 
-**Option 1: Inherit All Tools (omit the field)**
+**オプション1: すべてのツールを継承（フィールドを省略）**
 ```yaml
 ---
 name: full-access-agent
-description: Agent with all available tools
+description: すべての利用可能なツールを持つエージェント
 ---
 ```
 
-**Option 2: Specify Individual Tools**
+**オプション2: 個別のツールを指定**
 ```yaml
 ---
 name: limited-agent
-description: Agent with specific tools only
+description: 特定のツールのみを持つエージェント
 tools: Read, Grep, Glob, Bash
 ---
 ```
 
-**Option 3: Conditional Tool Access**
+**オプション3: 条件付きツールアクセス**
 ```yaml
 ---
 name: conditional-agent
-description: Agent with filtered tool access
+description: フィルタリングされたツールアクセスを持つエージェント
 tools: Read, Bash(npm:*), Bash(test:*)
 ---
 ```
 
-### CLI-Based Configuration
+### CLIベースの設定
 
-Define subagents for a single session using the `--agents` flag with JSON format:
+`--agents` フラグとJSON形式を使って1回のセッション用にサブエージェントを定義：
 
 ```bash
 claude --agents '{
   "code-reviewer": {
-    "description": "Expert code reviewer. Use proactively after code changes.",
-    "prompt": "You are a senior code reviewer. Focus on code quality, security, and best practices.",
+    "description": "エキスパートコードレビュアー。コード変更後に積極的に使用。",
+    "prompt": "あなたはシニアコードレビュアーです。コード品質、セキュリティ、ベストプラクティスに注力してください。",
     "tools": ["Read", "Grep", "Glob", "Bash"],
     "model": "sonnet"
   }
 }'
 ```
 
-**JSON Format for `--agents` flag:**
+**`--agents` フラグのJSON形式:**
 
 ```json
 {
   "agent-name": {
-    "description": "Required: when to invoke this agent",
-    "prompt": "Required: system prompt for the agent",
-    "tools": ["Optional", "array", "of", "tools"],
-    "model": "optional: sonnet|opus|haiku"
+    "description": "必須: このエージェントを呼び出すタイミング",
+    "prompt": "必須: エージェントのシステムプロンプト",
+    "tools": ["省略可", "ツールの", "配列"],
+    "model": "省略可: sonnet|opus|haiku"
   }
 }
 ```
 
-**Priority of Agent Definitions:**
+**エージェント定義の優先順位:**
 
-Agent definitions are loaded with this priority order (first match wins):
-1. **CLI-defined** - `--agents` flag (session only, JSON)
-2. **Project-level** - `.claude/agents/` (current project)
-3. **User-level** - `~/.claude/agents/` (all projects)
-4. **Plugin-level** - Plugin `agents/` directory
+エージェント定義は以下の優先順位で読み込まれます（最初のマッチが勝ち）：
+1. **CLI定義** - `--agents` フラグ（セッションのみ、JSON）
+2. **プロジェクトレベル** - `.claude/agents/`（現在のプロジェクト）
+3. **ユーザーレベル** - `~/.claude/agents/`（すべてのプロジェクト）
+4. **プラグインレベル** - プラグインの `agents/` ディレクトリ
 
-This allows CLI definitions to override all other sources for a single session.
-
----
-
-## Built-in Subagents
-
-Claude Code includes several built-in subagents that are always available:
-
-| Agent | Model | Purpose |
-|-------|-------|---------|
-| **general-purpose** | Inherits | Complex, multi-step tasks |
-| **Plan** | Inherits | Research for plan mode |
-| **Explore** | Haiku | Read-only codebase exploration (quick/medium/very thorough) |
-| **Bash** | Inherits | Terminal commands in separate context |
-| **statusline-setup** | Sonnet | Configure status line |
-| **Claude Code Guide** | Haiku | Answer Claude Code feature questions |
-
-### General-Purpose Subagent
-
-| Property | Value |
-|----------|-------|
-| **Model** | Inherits from parent |
-| **Tools** | All tools |
-| **Purpose** | Complex research tasks, multi-step operations, code modifications |
-
-**When used**: Tasks requiring both exploration and modification with complex reasoning.
-
-### Plan Subagent
-
-| Property | Value |
-|----------|-------|
-| **Model** | Inherits from parent |
-| **Tools** | Read, Glob, Grep, Bash |
-| **Purpose** | Used automatically in plan mode to research codebase |
-
-**When used**: When Claude needs to understand the codebase before presenting a plan.
-
-### Explore Subagent
-
-| Property | Value |
-|----------|-------|
-| **Model** | Haiku (fast, low-latency) |
-| **Mode** | Strictly read-only |
-| **Tools** | Glob, Grep, Read, Bash (read-only commands only) |
-| **Purpose** | Fast codebase searching and analysis |
-
-**When used**: When searching/understanding code without making changes.
-
-**Thoroughness Levels** - Specify the depth of exploration:
-- **"quick"** - Fast searches with minimal exploration, good for finding specific patterns
-- **"medium"** - Moderate exploration, balanced speed and thoroughness, default approach
-- **"very thorough"** - Comprehensive analysis across multiple locations and naming conventions, may take longer
-
-### Bash Subagent
-
-| Property | Value |
-|----------|-------|
-| **Model** | Inherits from parent |
-| **Tools** | Bash |
-| **Purpose** | Execute terminal commands in a separate context window |
-
-**When used**: When running shell commands that benefit from isolated context.
-
-### Statusline Setup Subagent
-
-| Property | Value |
-|----------|-------|
-| **Model** | Sonnet |
-| **Tools** | Read, Write, Bash |
-| **Purpose** | Configure the Claude Code status line display |
-
-**When used**: When setting up or customizing the status line.
-
-### Claude Code Guide Subagent
-
-| Property | Value |
-|----------|-------|
-| **Model** | Haiku (fast, low-latency) |
-| **Tools** | Read-only |
-| **Purpose** | Answer questions about Claude Code features and usage |
-
-**When used**: When users ask questions about how Claude Code works or how to use specific features.
+これにより、CLIの定義が1回のセッションで他のすべてのソースを上書きできます。
 
 ---
 
-## Managing Subagents
+## 組み込みサブエージェント
 
-### Using the `/agents` Command (Recommended)
+Claude Codeには常に利用可能ないくつかの組み込みサブエージェントが含まれています：
+
+| エージェント | モデル | 目的 |
+|------------|--------|------|
+| **general-purpose** | 継承 | 複雑なマルチステップタスク |
+| **Plan** | 継承 | プランモードのリサーチ |
+| **Explore** | Haiku | 読み取り専用コードベース探索（quick/medium/very thorough） |
+| **Bash** | 継承 | 別コンテキストでのターミナルコマンド |
+| **statusline-setup** | Sonnet | ステータスラインの設定 |
+| **Claude Code Guide** | Haiku | Claude Codeの機能に関する質問への回答 |
+
+### General-Purposeサブエージェント
+
+| プロパティ | 値 |
+|-----------|-----|
+| **モデル** | 親から継承 |
+| **ツール** | すべてのツール |
+| **目的** | 複雑なリサーチタスク、マルチステップ操作、コード修正 |
+
+**使用タイミング**: 複雑な推論と探索・修正の両方が必要なタスク。
+
+### Planサブエージェント
+
+| プロパティ | 値 |
+|-----------|-----|
+| **モデル** | 親から継承 |
+| **ツール** | Read、Glob、Grep、Bash |
+| **目的** | プランモードでコードベースを調査するために自動使用 |
+
+**使用タイミング**: Claudeがプランを提示する前にコードベースを理解する必要がある時。
+
+### Exploreサブエージェント
+
+| プロパティ | 値 |
+|-----------|-----|
+| **モデル** | Haiku（高速、低レイテンシ） |
+| **モード** | 厳密に読み取り専用 |
+| **ツール** | Glob、Grep、Read、Bash（読み取り専用コマンドのみ） |
+| **目的** | 高速なコードベース検索と分析 |
+
+**使用タイミング**: 変更を加えずにコードを検索/理解する時。
+
+**詳細レベル** - 探索の深さを指定：
+- **"quick"** - 最小限の探索での高速検索。特定のパターンを見つけるのに適している
+- **"medium"** - 中程度の探索。速度と徹底さのバランス、デフォルトのアプローチ
+- **"very thorough"** - 複数の場所と命名規則にわたる包括的な分析。時間がかかる場合がある
+
+### Bashサブエージェント
+
+| プロパティ | 値 |
+|-----------|-----|
+| **モデル** | 親から継承 |
+| **ツール** | Bash |
+| **目的** | 別のコンテキストウィンドウでターミナルコマンドを実行 |
+
+**使用タイミング**: 隔離されたコンテキストが有益なシェルコマンドを実行する時。
+
+### Statusline Setupサブエージェント
+
+| プロパティ | 値 |
+|-----------|-----|
+| **モデル** | Sonnet |
+| **ツール** | Read、Write、Bash |
+| **目的** | Claude Codeのステータスライン表示を設定 |
+
+**使用タイミング**: ステータスラインをセットアップまたはカスタマイズする時。
+
+### Claude Code Guideサブエージェント
+
+| プロパティ | 値 |
+|-----------|-----|
+| **モデル** | Haiku（高速、低レイテンシ） |
+| **ツール** | 読み取り専用 |
+| **目的** | Claude Codeの機能と使い方に関する質問に回答 |
+
+**使用タイミング**: ユーザーがClaude Codeの動作や特定の機能の使い方について質問する時。
+
+---
+
+## サブエージェントの管理
+
+### `/agents` コマンドを使用（推奨）
 
 ```bash
 /agents
 ```
 
-This provides an interactive menu to:
-- View all available subagents (built-in, user, and project)
-- Create new subagents with guided setup
-- Edit existing custom subagents and tool access
-- Delete custom subagents
-- See which subagents are active when duplicates exist
+これにより、以下ができるインタラクティブメニューが提供されます：
+- 利用可能なすべてのサブエージェントを表示（組み込み、ユーザー、プロジェクト）
+- ガイド付きセットアップで新しいサブエージェントを作成
+- 既存のカスタムサブエージェントとツールアクセスを編集
+- カスタムサブエージェントを削除
+- 重複が存在する場合にアクティブなサブエージェントを確認
 
-### Direct File Management
+### ファイルの直接管理
 
 ```bash
-# Create a project subagent
+# プロジェクトサブエージェントを作成
 mkdir -p .claude/agents
 cat > .claude/agents/test-runner.md << 'EOF'
 ---
 name: test-runner
-description: Use proactively to run tests and fix failures
+description: テストを実行して失敗を修正するために積極的に使用
 ---
 
-You are a test automation expert. When you see code changes, proactively
-run the appropriate tests. If tests fail, analyze the failures and fix
-them while preserving the original test intent.
+あなたはテスト自動化の専門家です。コードの変更を見たら、積極的に適切なテストを実行してください。
+テストが失敗した場合は、失敗を分析し、元のテストの意図を保ちながら修正してください。
 EOF
 
-# Create a user subagent (available in all projects)
+# ユーザーサブエージェントを作成（すべてのプロジェクトで利用可能）
 mkdir -p ~/.claude/agents
 ```
 
 ---
 
-## Using Subagents
+## サブエージェントの使い方
 
-### Automatic Delegation
+### 自動委譲
 
-Claude proactively delegates tasks based on:
-- Task description in your request
-- The `description` field in subagent configurations
-- Current context and available tools
+Claudeは以下に基づいてタスクを積極的に委譲します：
+- リクエストのタスク説明
+- サブエージェント設定の `description` フィールド
+- 現在のコンテキストと利用可能なツール
 
-To encourage proactive use, include "use PROACTIVELY" or "MUST BE USED" in your `description` field:
+積極的な使用を促すには、`description` フィールドに "use PROACTIVELY" または "MUST BE USED" を含めます：
 
 ```yaml
 ---
 name: code-reviewer
-description: Expert code review specialist. Use PROACTIVELY after writing or modifying code.
+description: エキスパートコードレビュースペシャリスト。コードの記述または修正後に積極的に使用（use PROACTIVELY）。
 ---
 ```
 
-### Explicit Invocation
+### 明示的な呼び出し
 
-You can explicitly request a specific subagent:
-
-```
-> Use the test-runner subagent to fix failing tests
-> Have the code-reviewer subagent look at my recent changes
-> Ask the debugger subagent to investigate this error
-```
-
-### @-Mention Invocation
-
-Use the `@` prefix to guarantee a specific subagent is invoked (bypasses automatic delegation heuristics):
+特定のサブエージェントを明示的にリクエストできます：
 
 ```
-> @"code-reviewer (agent)" review the auth module
+> test-runner サブエージェントを使って失敗したテストを修正して
+> code-reviewer サブエージェントに最近の変更を見てもらって
+> debugger サブエージェントにこのエラーを調査させて
 ```
 
-### Session-Wide Agent
+### @メンション呼び出し
 
-Run an entire session using a specific agent as the main agent:
+`@` プレフィックスを使って特定のサブエージェントを確実に呼び出せます（自動委譲のヒューリスティックをバイパス）：
+
+```
+> @"code-reviewer (agent)" は認証モジュールをレビューして
+```
+
+### セッション全体のエージェント
+
+特定のエージェントをメインエージェントとして使ってセッション全体を実行：
 
 ```bash
-# Via CLI flag
+# CLIフラグ経由
 claude --agent code-reviewer
 
-# Via settings.json
+# settings.json経由
 {
   "agent": "code-reviewer"
 }
 ```
 
-### Listing Available Agents
+### 利用可能なエージェントの一覧
 
-Use the `claude agents` command to list all configured agents from all sources:
+`claude agents` コマンドを使って設定済みのすべてのエージェントを一覧表示：
 
 ```bash
 claude agents
@@ -379,58 +377,58 @@ claude agents
 
 ---
 
-## Resumable Agents
+## 再開可能なエージェント
 
-Subagents can continue previous conversations with full context preserved:
+サブエージェントは完全なコンテキストを保持したまま以前の会話を継続できます：
 
 ```bash
-# Initial invocation
-> Use the code-analyzer agent to start reviewing the authentication module
-# Returns agentId: "abc123"
+# 初回呼び出し
+> code-analyzer エージェントを使って認証モジュールのレビューを開始して
+# agentId: "abc123" が返される
 
-# Resume the agent later
-> Resume agent abc123 and now analyze the authorization logic as well
+# 後でエージェントを再開
+> エージェント abc123 を再開して、認証ロジックも分析して
 ```
 
-**Use cases**:
-- Long-running research across multiple sessions
-- Iterative refinement without losing context
-- Multi-step workflows maintaining context
+**ユースケース**:
+- 複数のセッションにわたる長期的なリサーチ
+- コンテキストを失わない反復的な改善
+- コンテキストを維持するマルチステップワークフロー
 
 ---
 
-## Chaining Subagents
+## サブエージェントのチェーン
 
-Execute multiple subagents in sequence:
+複数のサブエージェントを順番に実行：
 
 ```bash
-> First use the code-analyzer subagent to find performance issues,
-  then use the optimizer subagent to fix them
+> まず code-analyzer サブエージェントでパフォーマンスの問題を見つけて、
+  次に optimizer サブエージェントでそれを修正して
 ```
 
-This enables complex workflows where the output of one subagent feeds into another.
+これにより、あるサブエージェントの出力が別のサブエージェントに渡される複雑なワークフローが実現できます。
 
 ---
 
-## Persistent Memory for Subagents
+## サブエージェントの永続メモリ
 
-The `memory` field gives subagents a persistent directory that survives across conversations. This allows subagents to build up knowledge over time, storing notes, findings, and context that persist between sessions.
+`memory` フィールドにより、サブエージェントは会話をまたいで持続する永続ディレクトリを持てます。これにより、サブエージェントはセッション間で持続するメモ、発見、コンテキストを保存しながら時間をかけて知識を蓄積できます。
 
-### Memory Scopes
+### メモリスコープ
 
-| Scope | Directory | Use Case |
-|-------|-----------|----------|
-| `user` | `~/.claude/agent-memory/<name>/` | Personal notes and preferences across all projects |
-| `project` | `.claude/agent-memory/<name>/` | Project-specific knowledge shared with the team |
-| `local` | `.claude/agent-memory-local/<name>/` | Local project knowledge not committed to version control |
+| スコープ | ディレクトリ | ユースケース |
+|---------|-------------|------------|
+| `user` | `~/.claude/agent-memory/<name>/` | すべてのプロジェクトにわたる個人メモと設定 |
+| `project` | `.claude/agent-memory/<name>/` | チームと共有するプロジェクト固有の知識 |
+| `local` | `.claude/agent-memory-local/<name>/` | バージョン管理にコミットしないローカルプロジェクト知識 |
 
-### How It Works
+### 仕組み
 
-- The first 200 lines of `MEMORY.md` in the memory directory are automatically loaded into the subagent's system prompt
-- The `Read`, `Write`, and `Edit` tools are automatically enabled for the subagent to manage its memory files
-- The subagent can create additional files in its memory directory as needed
+- メモリディレクトリの `MEMORY.md` の最初の200行がサブエージェントのシステムプロンプトに自動読み込み
+- `Read`、`Write`、`Edit` ツールがサブエージェントのメモリファイル管理のために自動的に有効化
+- サブエージェントは必要に応じてメモリディレクトリに追加ファイルを作成可能
 
-### Example Configuration
+### 設定例
 
 ```yaml
 ---
@@ -438,18 +436,18 @@ name: researcher
 memory: user
 ---
 
-You are a research assistant. Use your memory directory to store findings,
-track progress across sessions, and build up knowledge over time.
+あなたはリサーチアシスタントです。発見を保存し、セッションをまたいで進捗を追跡し、
+時間をかけて知識を蓄積するためにメモリディレクトリを使用してください。
 
-Check your MEMORY.md file at the start of each session to recall previous context.
+各セッションの開始時にMEMORY.mdファイルを確認して以前のコンテキストを思い出してください。
 ```
 
 ```mermaid
 graph LR
-    A["Subagent<br/>Session 1"] -->|writes| M["MEMORY.md<br/>(persistent)"]
-    M -->|loads into| B["Subagent<br/>Session 2"]
-    B -->|updates| M
-    M -->|loads into| C["Subagent<br/>Session 3"]
+    A["サブエージェント<br/>セッション1"] -->|書き込む| M["MEMORY.md<br/>（永続）"]
+    M -->|読み込む| B["サブエージェント<br/>セッション2"]
+    B -->|更新する| M
+    M -->|読み込む| C["サブエージェント<br/>セッション3"]
 
     style A fill:#e1f5fe,stroke:#333,color:#333
     style B fill:#e1f5fe,stroke:#333,color:#333
@@ -459,32 +457,32 @@ graph LR
 
 ---
 
-## Background Subagents
+## バックグラウンドサブエージェント
 
-Subagents can run in the background, freeing up the main conversation for other tasks.
+サブエージェントはバックグラウンドで実行でき、メインの会話を他のタスクに使えます。
 
-### Configuration
+### 設定
 
-Set `background: true` in the frontmatter to always run the subagent as a background task:
+フロントマターに `background: true` を設定すると、常にバックグラウンドタスクとしてサブエージェントが実行されます：
 
 ```yaml
 ---
 name: long-runner
 background: true
-description: Performs long-running analysis tasks in the background
+description: バックグラウンドで長時間かかる分析タスクを実行
 ---
 ```
 
-### Keyboard Shortcuts
+### キーボードショートカット
 
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+B` | Background a currently running subagent task |
-| `Ctrl+F` | Kill all background agents (press twice to confirm) |
+| ショートカット | アクション |
+|-------------|-----------|
+| `Ctrl+B` | 現在実行中のサブエージェントタスクをバックグラウンドに移行 |
+| `Ctrl+F` | すべてのバックグラウンドエージェントを強制終了（確認のため2回押す） |
 
-### Disabling Background Tasks
+### バックグラウンドタスクの無効化
 
-Set the environment variable to disable background task support entirely:
+環境変数を設定してバックグラウンドタスクのサポートを完全に無効化：
 
 ```bash
 export CLAUDE_CODE_DISABLE_BACKGROUND_TASKS=1
@@ -492,29 +490,29 @@ export CLAUDE_CODE_DISABLE_BACKGROUND_TASKS=1
 
 ---
 
-## Worktree Isolation
+## Worktreeの隔離
 
-The `isolation: worktree` setting gives a subagent its own git worktree, allowing it to make changes independently without affecting the main working tree.
+`isolation: worktree` 設定により、サブエージェントは独自のgit worktreeを持ち、メインの作業ツリーに影響を与えずに独立して変更を加えられます。
 
-### Configuration
+### 設定
 
 ```yaml
 ---
 name: feature-builder
 isolation: worktree
-description: Implements features in an isolated git worktree
+description: 隔離されたgit worktreeで機能を実装
 tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 ```
 
-### How It Works
+### 仕組み
 
 ```mermaid
 graph TB
-    Main["Main Working Tree"] -->|spawns| Sub["Subagent with<br/>Isolated Worktree"]
-    Sub -->|makes changes in| WT["Separate Git<br/>Worktree + Branch"]
-    WT -->|no changes| Clean["Auto-cleaned"]
-    WT -->|has changes| Return["Returns worktree<br/>path and branch"]
+    Main["メイン作業ツリー"] -->|生成する| Sub["隔離されたWorktreeを持つ<br/>サブエージェント"]
+    Sub -->|変更を加える| WT["別個のGit<br/>Worktree + ブランチ"]
+    WT -->|変更なし| Clean["自動クリーンアップ"]
+    WT -->|変更あり| Return["Worktreeパスと<br/>ブランチを返す"]
 
     style Main fill:#e1f5fe,stroke:#333,color:#333
     style Sub fill:#f3e5f5,stroke:#333,color:#333
@@ -523,76 +521,76 @@ graph TB
     style Return fill:#fff3e0,stroke:#333,color:#333
 ```
 
-- The subagent operates in its own git worktree on a separate branch
-- If the subagent makes no changes, the worktree is automatically cleaned up
-- If changes exist, the worktree path and branch name are returned to the main agent for review or merging
+- サブエージェントは別のブランチの独自のgit worktreeで動作
+- サブエージェントが変更を加えない場合、worktreeは自動的にクリーンアップ
+- 変更が存在する場合、worktreeのパスとブランチ名がレビューまたはマージのためにメインエージェントに返される
 
 ---
 
-## Restrict Spawnable Subagents
+## 生成可能なサブエージェントの制限
 
-You can control which subagents a given subagent is allowed to spawn by using the `Agent(agent_type)` syntax in the `tools` field. This provides a way to allowlist specific subagents for delegation.
+`tools` フィールドの `Agent(agent_type)` 構文を使って、特定のサブエージェントが生成できるサブエージェントを制御できます。これにより、委譲用の特定のサブエージェントを許可リストに登録できます。
 
-> **Note**: In v2.1.63, the `Task` tool was renamed to `Agent`. Existing `Task(...)` references still work as aliases.
+> **注意**: v2.1.63で `Task` ツールは `Agent` にリネームされました。既存の `Task(...)` 参照はエイリアスとして引き続き動作します。
 
-### Example
+### 例
 
 ```yaml
 ---
 name: coordinator
-description: Coordinates work between specialized agents
+description: 専門化されたエージェント間の作業を調整
 tools: Agent(worker, researcher), Read, Bash
 ---
 
-You are a coordinator agent. You can delegate work to the "worker" and
-"researcher" subagents only. Use Read and Bash for your own exploration.
+あなたはコーディネーターエージェントです。"worker" と "researcher" サブエージェントにのみ
+作業を委譲できます。Read と Bash は自分自身の探索に使用してください。
 ```
 
-In this example, the `coordinator` subagent can only spawn the `worker` and `researcher` subagents. It cannot spawn any other subagents, even if they are defined elsewhere.
+この例では、`coordinator` サブエージェントは `worker` と `researcher` サブエージェントのみを生成できます。他の場所で定義されていても、他のサブエージェントを生成することはできません。
 
 ---
 
-## `claude agents` CLI Command
+## `claude agents` CLIコマンド
 
-The `claude agents` command lists all configured agents grouped by source (built-in, user-level, project-level):
+`claude agents` コマンドは、ソース（組み込み、ユーザーレベル、プロジェクトレベル）別にグループ化されたすべての設定済みエージェントを一覧表示します：
 
 ```bash
 claude agents
 ```
 
-This command:
-- Shows all available agents from all sources
-- Groups agents by their source location
-- Indicates **overrides** when an agent at a higher priority level shadows one at a lower level (e.g., a project-level agent with the same name as a user-level agent)
+このコマンドの機能：
+- すべてのソースから利用可能なすべてのエージェントを表示
+- ソースの場所別にエージェントをグループ化
+- 上位優先度レベルのエージェントが下位レベルのものをシャドウしている場合に**オーバーライド**を表示（例: ユーザーレベルのエージェントと同じ名前のプロジェクトレベルエージェント）
 
 ---
 
-## Agent Teams (Experimental)
+## エージェントチーム（実験的）
 
-Agent Teams coordinate multiple Claude Code instances working together on complex tasks. Unlike subagents (which are delegated subtasks returning results), teammates work independently with their own context and communicate directly through a shared mailbox system.
+エージェントチームは、複雑なタスクに協力して取り組む複数のClaude Codeインスタンスを調整します。サブエージェント（結果を返す委譲されたサブタスク）とは異なり、チームメイトは独自のコンテキストで独立して動作し、共有メールボックスシステムを通じて直接通信します。
 
-> **Note**: Agent Teams is experimental and requires Claude Code v2.1.32+. Enable it before use.
+> **注意**: エージェントチームは実験的で、Claude Code v2.1.32+が必要です。使用前に有効化してください。
 
-### Subagents vs Agent Teams
+### サブエージェントとエージェントチームの比較
 
-| Aspect | Subagents | Agent Teams |
-|--------|-----------|-------------|
-| **Delegation model** | Parent delegates subtask, waits for result | Team lead assigns work, teammates execute independently |
-| **Context** | Fresh context per subtask, results distilled back | Each teammate maintains its own persistent context |
-| **Coordination** | Sequential or parallel, managed by parent | Shared task list with automatic dependency management |
-| **Communication** | Return values only | Inter-agent messaging via mailbox |
-| **Session resumption** | Supported | Not supported with in-process teammates |
-| **Best for** | Focused, well-defined subtasks | Large multi-file projects requiring parallel work |
+| 観点 | サブエージェント | エージェントチーム |
+|------|--------------|----------------|
+| **委譲モデル** | 親がサブタスクを委譲し、結果を待つ | チームリードが作業を割り当て、チームメイトが独立して実行 |
+| **コンテキスト** | サブタスクごとにフレッシュなコンテキスト、結果が集約される | 各チームメイトが独自の永続コンテキストを維持 |
+| **調整** | 親が管理する順次または並列 | 自動依存関係管理を持つ共有タスクリスト |
+| **通信** | 戻り値のみ | メールボックス経由のエージェント間メッセージング |
+| **セッション再開** | サポートあり | インプロセスチームメイトはサポートなし |
+| **最適な用途** | フォーカスされた明確に定義されたサブタスク | 並列作業が必要な大規模マルチファイルプロジェクト |
 
-### Enabling Agent Teams
+### エージェントチームの有効化
 
-Set the environment variable or add it to your `settings.json`:
+環境変数を設定するか `settings.json` に追加：
 
 ```bash
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 ```
 
-Or in `settings.json`:
+または `settings.json` で：
 
 ```json
 {
@@ -602,32 +600,32 @@ Or in `settings.json`:
 }
 ```
 
-### Starting a team
+### チームの開始
 
-Once enabled, ask Claude to work with teammates in your prompt:
+有効化後、プロンプトでチームメイトと協力して作業するようClaudeに依頼：
 
 ```
-User: Build the authentication module. Use a team — one teammate for the API endpoints,
-      one for the database schema, and one for the test suite.
+ユーザー: 認証モジュールを構築して。チームを使って — 一人はAPIエンドポイント、
+          一人はデータベーススキーマ、一人はテストスイートを担当してください。
 ```
 
-Claude will create the team, assign tasks, and coordinate the work automatically.
+Claudeがチームを作成し、タスクを割り当て、作業を自動的に調整します。
 
-### Display modes
+### 表示モード
 
-Control how teammate activity is displayed:
+チームメイトのアクティビティの表示方法を制御：
 
-| Mode | Flag | Description |
-|------|------|-------------|
-| **Auto** | `--teammate-mode auto` | Automatically chooses the best display mode for your terminal |
-| **In-process** | `--teammate-mode in-process` | Shows teammate output inline in the current terminal (default) |
-| **Split-panes** | `--teammate-mode tmux` | Opens each teammate in a separate tmux or iTerm2 pane |
+| モード | フラグ | 説明 |
+|--------|--------|------|
+| **Auto** | `--teammate-mode auto` | ターミナルに最適な表示モードを自動選択 |
+| **In-process** | `--teammate-mode in-process` | チームメイトの出力を現在のターミナルにインライン表示（デフォルト） |
+| **Split-panes** | `--teammate-mode tmux` | 各チームメイトを別のtmuxまたはiTerm2ペインで開く |
 
 ```bash
 claude --teammate-mode tmux
 ```
 
-You can also set the display mode in `settings.json`:
+`settings.json` で表示モードを設定することもできます：
 
 ```json
 {
@@ -635,38 +633,38 @@ You can also set the display mode in `settings.json`:
 }
 ```
 
-> **Note**: Split-pane mode requires tmux or iTerm2. It is not available in VS Code terminal, Windows Terminal, or Ghostty.
+> **注意**: スプリットペインモードはtmuxまたはiTerm2が必要です。VS Codeターミナル、Windowsターミナル、Ghosttyでは利用できません。
 
-### Navigation
+### ナビゲーション
 
-Use `Shift+Down` to navigate between teammates in split-pane mode.
+スプリットペインモードでは `Shift+Down` でチームメイト間を移動できます。
 
-### Team Configuration
+### チーム設定
 
-Team configurations are stored at `~/.claude/teams/{team-name}/config.json`.
+チーム設定は `~/.claude/teams/{team-name}/config.json` に保存されます。
 
-### Architecture
+### アーキテクチャ
 
 ```mermaid
 graph TB
-    Lead["Team Lead<br/>(Coordinator)"]
-    TaskList["Shared Task List<br/>(Dependencies)"]
-    Mailbox["Mailbox<br/>(Messages)"]
-    T1["Teammate 1<br/>(Own Context)"]
-    T2["Teammate 2<br/>(Own Context)"]
-    T3["Teammate 3<br/>(Own Context)"]
+    Lead["チームリード<br/>（コーディネーター）"]
+    TaskList["共有タスクリスト<br/>（依存関係）"]
+    Mailbox["メールボックス<br/>（メッセージ）"]
+    T1["チームメイト1<br/>（独自コンテキスト）"]
+    T2["チームメイト2<br/>（独自コンテキスト）"]
+    T3["チームメイト3<br/>（独自コンテキスト）"]
 
-    Lead -->|assigns tasks| TaskList
-    Lead -->|sends messages| Mailbox
-    TaskList -->|picks up work| T1
-    TaskList -->|picks up work| T2
-    TaskList -->|picks up work| T3
-    T1 -->|reads/writes| Mailbox
-    T2 -->|reads/writes| Mailbox
-    T3 -->|reads/writes| Mailbox
-    T1 -->|updates status| TaskList
-    T2 -->|updates status| TaskList
-    T3 -->|updates status| TaskList
+    Lead -->|タスクを割り当てる| TaskList
+    Lead -->|メッセージを送る| Mailbox
+    TaskList -->|作業を拾う| T1
+    TaskList -->|作業を拾う| T2
+    TaskList -->|作業を拾う| T3
+    T1 -->|読み書き| Mailbox
+    T2 -->|読み書き| Mailbox
+    T3 -->|読み書き| Mailbox
+    T1 -->|ステータスを更新| TaskList
+    T2 -->|ステータスを更新| TaskList
+    T3 -->|ステータスを更新| TaskList
 
     style Lead fill:#e1f5fe,stroke:#333,color:#333
     style TaskList fill:#fff9c4,stroke:#333,color:#333
@@ -676,127 +674,127 @@ graph TB
     style T3 fill:#e8f5e9,stroke:#333,color:#333
 ```
 
-**Key components**:
+**主要コンポーネント**:
 
-- **Team Lead**: The main Claude Code session that creates the team, assigns tasks, and coordinates
-- **Shared Task List**: A synchronized list of tasks with automatic dependency tracking
-- **Mailbox**: An inter-agent messaging system for teammates to communicate status and coordinate
-- **Teammates**: Independent Claude Code instances, each with their own context window
+- **チームリード**: チームを作成し、タスクを割り当て、調整するメインのClaude Codeセッション
+- **共有タスクリスト**: 自動依存関係追跡を持つ同期されたタスクリスト
+- **メールボックス**: チームメイトがステータスを通信し調整するエージェント間メッセージングシステム
+- **チームメイト**: 各自独自のコンテキストウィンドウを持つ独立したClaude Codeインスタンス
 
-### Task assignment and messaging
+### タスク割り当てとメッセージング
 
-The team lead breaks work into tasks and assigns them to teammates. The shared task list handles:
+チームリードが作業をタスクに分解してチームメイトに割り当てます。共有タスクリストが処理するもの：
 
-- **Automatic dependency management** — tasks wait for their dependencies to complete
-- **Status tracking** — teammates update task status as they work
-- **Inter-agent messaging** — teammates send messages via the mailbox for coordination (e.g., "Database schema is ready, you can start writing queries")
+- **自動依存関係管理** — タスクは依存関係が完了するまで待機
+- **ステータス追跡** — チームメイトが作業中にタスクステータスを更新
+- **エージェント間メッセージング** — チームメイトが調整のためにメールボックスを通じてメッセージを送信（例: "データベーススキーマが準備できました、クエリを書き始めることができます"）
 
-### Plan approval workflow
+### プラン承認ワークフロー
 
-For complex tasks, the team lead creates an execution plan before teammates begin work. The user reviews and approves the plan, ensuring the team's approach aligns with expectations before any code changes are made.
+複雑なタスクでは、チームメイトが作業を開始する前にチームリードが実行計画を作成します。ユーザーが計画を確認して承認することで、コードの変更が行われる前にチームのアプローチが期待に沿っていることを確認します。
 
-### Hook events for teams
+### チームのHookイベント
 
-Agent Teams introduce two additional [hook events](../06-hooks/):
+エージェントチームには2つの追加[hookイベント](../06-hooks/)があります：
 
-| Event | Fires When | Use Case |
-|-------|-----------|----------|
-| `TeammateIdle` | A teammate finishes its current task and has no pending work | Trigger notifications, assign follow-up tasks |
-| `TaskCompleted` | A task in the shared task list is marked complete | Run validation, update dashboards, chain dependent work |
+| イベント | 発火タイミング | ユースケース |
+|--------|------------|------------|
+| `TeammateIdle` | チームメイトが現在のタスクを終えて保留中の作業がない時 | 通知をトリガー、フォローアップタスクを割り当て |
+| `TaskCompleted` | 共有タスクリストのタスクが完了としてマークされた時 | バリデーションを実行、ダッシュボードを更新、依存する作業をチェーン |
 
-### Best practices
+### ベストプラクティス
 
-- **Team size**: Keep teams at 3-5 teammates for optimal coordination
-- **Task sizing**: Break work into tasks that take 5-15 minutes each — small enough to parallelize, large enough to be meaningful
-- **Avoid file conflicts**: Assign different files or directories to different teammates to prevent merge conflicts
-- **Start simple**: Use in-process mode for your first team; switch to split-panes once comfortable
-- **Clear task descriptions**: Provide specific, actionable task descriptions so teammates can work independently
+- **チームサイズ**: 最適な調整のためチームを3〜5人に抑える
+- **タスクサイズ**: 5〜15分かかるタスクに分解する — 並列化できる程度に小さく、意味がある程度に大きく
+- **ファイル競合を避ける**: マージ競合を防ぐために異なるチームメイトに異なるファイルやディレクトリを割り当てる
+- **シンプルに始める**: 最初のチームにはインプロセスモードを使用し、慣れたらスプリットペインに切り替える
+- **明確なタスクの説明**: チームメイトが独立して作業できるように具体的でアクション可能なタスクの説明を提供する
 
-### Limitations
+### 制限事項
 
-- **Experimental**: Feature behavior may change in future releases
-- **No session resumption**: In-process teammates cannot be resumed after a session ends
-- **One team per session**: Cannot create nested teams or multiple teams in a single session
-- **Fixed leadership**: The team lead role cannot be transferred to a teammate
-- **Split-pane restrictions**: tmux/iTerm2 required; not available in VS Code terminal, Windows Terminal, or Ghostty
-- **No cross-session teams**: Teammates exist only within the current session
+- **実験的**: 機能の動作は将来のリリースで変更される可能性がある
+- **セッション再開なし**: インプロセスのチームメイトはセッション終了後に再開できない
+- **1セッション1チーム**: 1つのセッションでネストされたチームや複数のチームを作成できない
+- **固定されたリーダーシップ**: チームリードの役割はチームメイトに移譲できない
+- **スプリットペインの制限**: tmux/iTerm2が必要。VS Codeターミナル、Windowsターミナル、Ghosttyでは利用不可
+- **クロスセッションチームなし**: チームメイトは現在のセッション内にのみ存在
 
-> **Warning**: Agent Teams is experimental. Test with non-critical work first and monitor teammate coordination for unexpected behavior.
-
----
-
-## Plugin Subagent Security
-
-Plugin-provided subagents have restricted frontmatter capabilities for security. The following fields are **not allowed** in plugin subagent definitions:
-
-- `hooks` - Cannot define lifecycle hooks
-- `mcpServers` - Cannot configure MCP servers
-- `permissionMode` - Cannot override permission settings
-
-This prevents plugins from escalating privileges or executing arbitrary commands through subagent hooks.
+> **警告**: エージェントチームは実験的です。まず重要でない作業でテストし、予期しない動作についてチームメイトの調整を監視してください。
 
 ---
 
-## Architecture
+## プラグインサブエージェントのセキュリティ
 
-### High-Level Architecture
+プラグインが提供するサブエージェントは、セキュリティのためフロントマター機能が制限されています。以下のフィールドはプラグインのサブエージェント定義で**許可されていません**：
+
+- `hooks` - ライフサイクルhooksを定義できない
+- `mcpServers` - MCPサーバーを設定できない
+- `permissionMode` - パーミッション設定を上書きできない
+
+これにより、プラグインがサブエージェントhooksを通じて権限を昇格させたり任意のコマンドを実行したりすることを防ぎます。
+
+---
+
+## アーキテクチャ
+
+### 高レベルアーキテクチャ
 
 ```mermaid
 graph TB
-    User["User"]
-    Main["Main Agent<br/>(Coordinator)"]
-    Reviewer["Code Reviewer<br/>Subagent"]
-    Tester["Test Engineer<br/>Subagent"]
-    Docs["Documentation<br/>Subagent"]
+    User["ユーザー"]
+    Main["メインエージェント<br/>（コーディネーター）"]
+    Reviewer["コードレビュアー<br/>サブエージェント"]
+    Tester["テストエンジニア<br/>サブエージェント"]
+    Docs["ドキュメント<br/>サブエージェント"]
 
-    User -->|asks| Main
-    Main -->|delegates| Reviewer
-    Main -->|delegates| Tester
-    Main -->|delegates| Docs
-    Reviewer -->|returns result| Main
-    Tester -->|returns result| Main
-    Docs -->|returns result| Main
-    Main -->|synthesizes| User
+    User -->|依頼する| Main
+    Main -->|委譲する| Reviewer
+    Main -->|委譲する| Tester
+    Main -->|委譲する| Docs
+    Reviewer -->|結果を返す| Main
+    Tester -->|結果を返す| Main
+    Docs -->|結果を返す| Main
+    Main -->|統合する| User
 ```
 
-### Subagent Lifecycle
+### サブエージェントのライフサイクル
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant MainAgent as Main Agent
-    participant CodeReviewer as Code Reviewer<br/>Subagent
-    participant Context as Separate<br/>Context Window
+    participant User as ユーザー
+    participant MainAgent as メインエージェント
+    participant CodeReviewer as コードレビュアー<br/>サブエージェント
+    participant Context as 独立した<br/>コンテキストウィンドウ
 
-    User->>MainAgent: "Build new auth feature"
-    MainAgent->>MainAgent: Analyze task
-    MainAgent->>CodeReviewer: "Review this code"
-    CodeReviewer->>Context: Initialize clean context
-    Context->>CodeReviewer: Load reviewer instructions
-    CodeReviewer->>CodeReviewer: Perform review
-    CodeReviewer-->>MainAgent: Return findings
-    MainAgent->>MainAgent: Incorporate results
-    MainAgent-->>User: Provide synthesis
+    User->>MainAgent: "新しい認証機能を構築して"
+    MainAgent->>MainAgent: タスクを分析
+    MainAgent->>CodeReviewer: "このコードをレビューして"
+    CodeReviewer->>Context: クリーンなコンテキストを初期化
+    Context->>CodeReviewer: レビュアーの指示を読み込む
+    CodeReviewer->>CodeReviewer: レビューを実行
+    CodeReviewer-->>MainAgent: 発見を返す
+    MainAgent->>MainAgent: 結果を統合
+    MainAgent-->>User: 統合結果を提供
 ```
 
 ---
 
-## Context Management
+## コンテキスト管理
 
 ```mermaid
 graph TB
-    A["Main Agent Context<br/>50,000 tokens"]
-    B["Subagent 1 Context<br/>20,000 tokens"]
-    C["Subagent 2 Context<br/>20,000 tokens"]
-    D["Subagent 3 Context<br/>20,000 tokens"]
+    A["メインエージェントコンテキスト<br/>50,000トークン"]
+    B["サブエージェント1コンテキスト<br/>20,000トークン"]
+    C["サブエージェント2コンテキスト<br/>20,000トークン"]
+    D["サブエージェント3コンテキスト<br/>20,000トークン"]
 
-    A -->|Clean slate| B
-    A -->|Clean slate| C
-    A -->|Clean slate| D
+    A -->|クリーンな状態| B
+    A -->|クリーンな状態| C
+    A -->|クリーンな状態| D
 
-    B -->|Results only| A
-    C -->|Results only| A
-    D -->|Results only| A
+    B -->|結果のみ| A
+    C -->|結果のみ| A
+    D -->|結果のみ| A
 
     style A fill:#e1f5fe
     style B fill:#fff9c4
@@ -804,272 +802,272 @@ graph TB
     style D fill:#fff9c4
 ```
 
-### Key Points
+### 重要なポイント
 
-- Each subagent gets a **fresh context window** without the main conversation history
-- Only the **relevant context** is passed to the subagent for their specific task
-- Results are **distilled** back to the main agent
-- This prevents **context token exhaustion** on long projects
+- 各サブエージェントはメインの会話履歴なしに**フレッシュなコンテキストウィンドウ**を得る
+- 特定のタスクに必要な**関連コンテキストのみ**がサブエージェントに渡される
+- 結果はメインエージェントに**集約**される
+- これにより長いプロジェクトでの**コンテキストトークンの枯渇を防ぐ**
 
-### Performance Considerations
+### パフォーマンスに関する考慮事項
 
-- **Context efficiency** - Agents preserve main context, enabling longer sessions
-- **Latency** - Subagents start with clean slate and may add latency gathering initial context
+- **コンテキスト効率** - エージェントはメインコンテキストを保護し、より長いセッションを可能にする
+- **レイテンシ** - サブエージェントはクリーンな状態から始まり、初期コンテキストの収集でレイテンシが増加する可能性がある
 
-### Key Behaviors
+### 主な動作
 
-- **No nested spawning** - Subagents cannot spawn other subagents
-- **Background permissions** - Background subagents auto-deny any permissions that are not pre-approved
-- **Backgrounding** - Press `Ctrl+B` to background a currently running task
-- **Transcripts** - Subagent transcripts are stored at `~/.claude/projects/{project}/{sessionId}/subagents/agent-{agentId}.jsonl`
-- **Auto-compaction** - Subagent context auto-compacts at ~95% capacity (override with `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` environment variable)
-
----
-
-## When to Use Subagents
-
-| Scenario | Use Subagent | Why |
-|----------|--------------|-----|
-| Complex feature with many steps | Yes | Separate concerns, prevent context pollution |
-| Quick code review | No | Unnecessary overhead |
-| Parallel task execution | Yes | Each subagent has own context |
-| Specialized expertise needed | Yes | Custom system prompts |
-| Long-running analysis | Yes | Prevents main context exhaustion |
-| Single task | No | Adds latency unnecessarily |
+- **ネストした生成なし** - サブエージェントは他のサブエージェントを生成できない
+- **バックグラウンドのパーミッション** - バックグラウンドのサブエージェントは事前承認されていないパーミッションを自動拒否
+- **バックグラウンド化** - `Ctrl+B` を押すと現在実行中のタスクをバックグラウンドに移行
+- **トランスクリプト** - サブエージェントのトランスクリプトは `~/.claude/projects/{project}/{sessionId}/subagents/agent-{agentId}.jsonl` に保存
+- **自動コンパクション** - サブエージェントのコンテキストは約95%の容量で自動コンパクト（`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` 環境変数で上書き可能）
 
 ---
 
-## Best Practices
+## サブエージェントを使うタイミング
 
-### Design Principles
+| シナリオ | サブエージェントを使う | 理由 |
+|---------|------------------|------|
+| 多くのステップを持つ複雑な機能 | はい | 懸念事項を分離し、コンテキスト汚染を防ぐ |
+| 簡単なコードレビュー | いいえ | 不要なオーバーヘッド |
+| 並列タスク実行 | はい | 各サブエージェントが独自のコンテキストを持つ |
+| 専門的な知識が必要 | はい | カスタムシステムプロンプト |
+| 長時間の分析 | はい | メインコンテキストの枯渇を防ぐ |
+| 単一タスク | いいえ | 不必要にレイテンシが増加する |
 
-**Do:**
-- Start with Claude-generated agents - Generate initial subagent with Claude, then iterate to customize
-- Design focused subagents - Single, clear responsibilities rather than one doing everything
-- Write detailed prompts - Include specific instructions, examples, and constraints
-- Limit tool access - Grant only necessary tools for the subagent's purpose
-- Version control - Check project subagents into version control for team collaboration
+---
 
-**Don't:**
-- Create overlapping subagents with same roles
-- Give subagents unnecessary tool access
-- Use subagents for simple, single-step tasks
-- Mix concerns in one subagent's prompt
-- Forget to pass necessary context
+## ベストプラクティス
 
-### System Prompt Best Practices
+### 設計原則
 
-1. **Be Specific About Role**
+**やること:**
+- Claudeが生成したエージェントから始める - 最初にClaudeでサブエージェントを生成し、その後カスタマイズするために反復
+- フォーカスされたサブエージェントを設計する - 何でも1つのサブエージェントで行うのではなく、単一の明確な責任
+- 詳細なプロンプトを書く - 具体的な指示、例、制約を含める
+- ツールアクセスを制限する - サブエージェントの目的に必要なツールのみを付与
+- バージョン管理 - チームのコラボレーションのためにプロジェクトサブエージェントをバージョン管理にチェックイン
+
+**やってはいけないこと:**
+- 同じ役割を持つ重複するサブエージェントを作らない
+- サブエージェントに不要なツールアクセスを与えない
+- シンプルな単一ステップのタスクにサブエージェントを使わない
+- 1つのサブエージェントのプロンプトに複数の懸念事項を混在させない
+- 必要なコンテキストを渡すのを忘れない
+
+### システムプロンプトのベストプラクティス
+
+1. **役割を具体的に**
    ```
-   You are an expert code reviewer specializing in [specific areas]
-   ```
-
-2. **Define Priorities Clearly**
-   ```
-   Review priorities (in order):
-   1. Security Issues
-   2. Performance Problems
-   3. Code Quality
+   あなたは [特定のエリア] を専門とするエキスパートコードレビュアーです
    ```
 
-3. **Specify Output Format**
+2. **優先順位を明確に定義**
    ```
-   For each issue provide: Severity, Category, Location, Description, Fix, Impact
-   ```
-
-4. **Include Action Steps**
-   ```
-   When invoked:
-   1. Run git diff to see recent changes
-   2. Focus on modified files
-   3. Begin review immediately
+   レビューの優先順位（順序）:
+   1. セキュリティ問題
+   2. パフォーマンスの問題
+   3. コード品質
    ```
 
-### Tool Access Strategy
+3. **出力形式を指定**
+   ```
+   各問題について提供: 深刻度、カテゴリー、場所、説明、修正方法、影響
+   ```
 
-1. **Start Restrictive**: Begin with only essential tools
-2. **Expand Only When Needed**: Add tools as requirements demand
-3. **Read-Only When Possible**: Use Read/Grep for analysis agents
-4. **Sandboxed Execution**: Limit Bash commands to specific patterns
+4. **アクションステップを含める**
+   ```
+   呼び出し時:
+   1. git diff を実行して最近の変更を確認
+   2. 修正されたファイルに注力
+   3. 即座にレビューを開始
+   ```
 
----
+### ツールアクセス戦略
 
-## Example Subagents in This Folder
-
-This folder contains ready-to-use example subagents:
-
-### 1. Code Reviewer (`code-reviewer.md`)
-
-**Purpose**: Comprehensive code quality and maintainability analysis
-
-**Tools**: Read, Grep, Glob, Bash
-
-**Specialization**:
-- Security vulnerability detection
-- Performance optimization identification
-- Code maintainability assessment
-- Test coverage analysis
-
-**Use When**: You need automated code reviews with focus on quality and security
+1. **制限的から始める**: 必須ツールのみから開始
+2. **必要な時のみ拡張**: 要件が求める時のみツールを追加
+3. **可能な限り読み取り専用**: 分析エージェントにはRead/Grepを使用
+4. **サンドボックス実行**: Bashコマンドを特定のパターンに制限
 
 ---
 
-### 2. Test Engineer (`test-engineer.md`)
+## このフォルダのサブエージェント例
 
-**Purpose**: Test strategy, coverage analysis, and automated testing
+このフォルダには、すぐに使えるサブエージェントの例が含まれています：
 
-**Tools**: Read, Write, Bash, Grep
+### 1. コードレビュアー (`code-reviewer.md`)
 
-**Specialization**:
-- Unit test creation
-- Integration test design
-- Edge case identification
-- Coverage analysis (>80% target)
+**目的**: 包括的なコード品質と保守性分析
 
-**Use When**: You need comprehensive test suite creation or coverage analysis
+**ツール**: Read、Grep、Glob、Bash
 
----
+**専門分野**:
+- セキュリティ脆弱性の検出
+- パフォーマンス最適化の特定
+- コード保守性の評価
+- テストカバレッジの分析
 
-### 3. Documentation Writer (`documentation-writer.md`)
-
-**Purpose**: Technical documentation, API docs, and user guides
-
-**Tools**: Read, Write, Grep
-
-**Specialization**:
-- API endpoint documentation
-- User guide creation
-- Architecture documentation
-- Code comment improvement
-
-**Use When**: You need to create or update project documentation
+**使用タイミング**: 品質とセキュリティに注力した自動コードレビューが必要な時
 
 ---
 
-### 4. Secure Reviewer (`secure-reviewer.md`)
+### 2. テストエンジニア (`test-engineer.md`)
 
-**Purpose**: Security-focused code review with minimal permissions
+**目的**: テスト戦略、カバレッジ分析、自動テスト
 
-**Tools**: Read, Grep
+**ツール**: Read、Write、Bash、Grep
 
-**Specialization**:
-- Security vulnerability detection
-- Authentication/authorization issues
-- Data exposure risks
-- Injection attack identification
+**専門分野**:
+- ユニットテストの作成
+- インテグレーションテストの設計
+- エッジケースの特定
+- カバレッジ分析（80%以上を目標）
 
-**Use When**: You need security audits without modification capabilities
-
----
-
-### 5. Implementation Agent (`implementation-agent.md`)
-
-**Purpose**: Full implementation capabilities for feature development
-
-**Tools**: Read, Write, Edit, Bash, Grep, Glob
-
-**Specialization**:
-- Feature implementation
-- Code generation
-- Build and test execution
-- Codebase modification
-
-**Use When**: You need a subagent to implement features end-to-end
+**使用タイミング**: 包括的なテストスイートの作成またはカバレッジ分析が必要な時
 
 ---
 
-### 6. Debugger (`debugger.md`)
+### 3. ドキュメントライター (`documentation-writer.md`)
 
-**Purpose**: Debugging specialist for errors, test failures, and unexpected behavior
+**目的**: 技術ドキュメント、APIドキュメント、ユーザーガイド
 
-**Tools**: Read, Edit, Bash, Grep, Glob
+**ツール**: Read、Write、Grep
 
-**Specialization**:
-- Root cause analysis
-- Error investigation
-- Test failure resolution
-- Minimal fix implementation
+**専門分野**:
+- APIエンドポイントのドキュメント
+- ユーザーガイドの作成
+- アーキテクチャのドキュメント
+- コードコメントの改善
 
-**Use When**: You encounter bugs, errors, or unexpected behavior
-
----
-
-### 7. Data Scientist (`data-scientist.md`)
-
-**Purpose**: Data analysis expert for SQL queries and data insights
-
-**Tools**: Bash, Read, Write
-
-**Specialization**:
-- SQL query optimization
-- BigQuery operations
-- Data analysis and visualization
-- Statistical insights
-
-**Use When**: You need data analysis, SQL queries, or BigQuery operations
+**使用タイミング**: プロジェクトのドキュメントを作成または更新する必要がある時
 
 ---
 
-## Installation Instructions
+### 4. セキュアレビュアー (`secure-reviewer.md`)
 
-### Method 1: Using /agents Command (Recommended)
+**目的**: 最小限のパーミッションを持つセキュリティ重視のコードレビュー
+
+**ツール**: Read、Grep
+
+**専門分野**:
+- セキュリティ脆弱性の検出
+- 認証/認可の問題
+- データ露出リスク
+- インジェクション攻撃の特定
+
+**使用タイミング**: 修正機能なしにセキュリティ監査が必要な時
+
+---
+
+### 5. 実装エージェント (`implementation-agent.md`)
+
+**目的**: 機能開発のための完全な実装機能
+
+**ツール**: Read、Write、Edit、Bash、Grep、Glob
+
+**専門分野**:
+- 機能実装
+- コード生成
+- ビルドとテストの実行
+- コードベースの修正
+
+**使用タイミング**: サブエージェントに機能をエンドツーエンドで実装させる必要がある時
+
+---
+
+### 6. デバッガー (`debugger.md`)
+
+**目的**: エラー、テストの失敗、予期しない動作のデバッグスペシャリスト
+
+**ツール**: Read、Edit、Bash、Grep、Glob
+
+**専門分野**:
+- 根本原因分析
+- エラーの調査
+- テスト失敗の解決
+- 最小限の修正実装
+
+**使用タイミング**: バグ、エラー、または予期しない動作に遭遇した時
+
+---
+
+### 7. データサイエンティスト (`data-scientist.md`)
+
+**目的**: SQLクエリとデータインサイトのためのデータ分析エキスパート
+
+**ツール**: Bash、Read、Write
+
+**専門分野**:
+- SQLクエリの最適化
+- BigQuery操作
+- データ分析と可視化
+- 統計的インサイト
+
+**使用タイミング**: データ分析、SQLクエリ、またはBigQuery操作が必要な時
+
+---
+
+## インストール手順
+
+### 方法1: /agentsコマンドを使用（推奨）
 
 ```bash
 /agents
 ```
 
-Then:
-1. Select 'Create New Agent'
-2. Choose project-level or user-level
-3. Describe your subagent in detail
-4. Select tools to grant access (or leave blank to inherit all)
-5. Save and use
+次に：
+1. 'エージェントを新規作成' を選択
+2. プロジェクトレベルまたはユーザーレベルを選択
+3. サブエージェントを詳細に説明
+4. アクセスを許可するツールを選択（またはすべてを継承するために空白のまま）
+5. 保存して使用
 
-### Method 2: Copy to Project
+### 方法2: プロジェクトにコピー
 
-Copy the agent files to your project's `.claude/agents/` directory:
+エージェントファイルをプロジェクトの `.claude/agents/` ディレクトリにコピー：
 
 ```bash
-# Navigate to your project
+# プロジェクトに移動
 cd /path/to/your/project
 
-# Create agents directory if it doesn't exist
+# agentsディレクトリが存在しない場合は作成
 mkdir -p .claude/agents
 
-# Copy all agent files from this folder
+# このフォルダからすべてのエージェントファイルをコピー
 cp /path/to/04-subagents/*.md .claude/agents/
 
-# Remove the README (not needed in .claude/agents)
+# READMEを削除（.claude/agentsでは不要）
 rm .claude/agents/README.md
 ```
 
-### Method 3: Copy to User Directory
+### 方法3: ユーザーディレクトリにコピー
 
-For agents available in all your projects:
+すべてのプロジェクトで利用可能なエージェントの場合：
 
 ```bash
-# Create user agents directory
+# ユーザーエージェントディレクトリを作成
 mkdir -p ~/.claude/agents
 
-# Copy agents
+# エージェントをコピー
 cp /path/to/04-subagents/code-reviewer.md ~/.claude/agents/
 cp /path/to/04-subagents/debugger.md ~/.claude/agents/
-# ... copy others as needed
+# ... 必要に応じて他のものもコピー
 ```
 
-### Verification
+### 確認
 
-After installation, verify the agents are recognized:
+インストール後、エージェントが認識されているか確認：
 
 ```bash
 /agents
 ```
 
-You should see your installed agents listed alongside the built-in ones.
+インストールされたエージェントが組み込みのものと一緒に表示されるはずです。
 
 ---
 
-## File Structure
+## ファイル構造
 
 ```
 project/
@@ -1087,55 +1085,55 @@ project/
 
 ---
 
-## Related Concepts
+## 関連概念
 
-### Related Features
+### 関連機能
 
-- **[Slash Commands](../01-slash-commands/)** - Quick user-invoked shortcuts
-- **[Memory](../02-memory/)** - Persistent cross-session context
-- **[Skills](../03-skills/)** - Reusable autonomous capabilities
-- **[MCP Protocol](../05-mcp/)** - Real-time external data access
-- **[Hooks](../06-hooks/)** - Event-driven shell command automation
-- **[Plugins](../07-plugins/)** - Bundled extension packages
+- **[スラッシュコマンド](../01-slash-commands/)** - クイックなユーザー起動のショートカット
+- **[メモリ](../02-memory/)** - セッションをまたいだ永続コンテキスト
+- **[スキル](../03-skills/)** - 再利用可能な自律的な機能
+- **[MCPプロトコル](../05-mcp/)** - リアルタイムの外部データアクセス
+- **[Hooks](../06-hooks/)** - イベント駆動のシェルコマンド自動化
+- **[プラグイン](../07-plugins/)** - バンドルされた拡張パッケージ
 
-### Comparison with Other Features
+### 他の機能との比較
 
-| Feature | User-Invoked | Auto-Invoked | Persistent | External Access | Isolated Context |
-|---------|--------------|--------------|-----------|------------------|------------------|
-| **Slash Commands** | Yes | No | No | No | No |
-| **Subagents** | Yes | Yes | No | No | Yes |
-| **Memory** | Auto | Auto | Yes | No | No |
-| **MCP** | Auto | Yes | No | Yes | No |
-| **Skills** | Yes | Yes | No | No | No |
+| 機能 | ユーザー起動 | 自動起動 | 永続的 | 外部アクセス | 隔離コンテキスト |
+|------|------------|---------|------|------------|---------------|
+| **スラッシュコマンド** | はい | いいえ | いいえ | いいえ | いいえ |
+| **サブエージェント** | はい | はい | いいえ | いいえ | はい |
+| **メモリ** | 自動 | 自動 | はい | いいえ | いいえ |
+| **MCP** | 自動 | はい | いいえ | はい | いいえ |
+| **スキル** | はい | はい | いいえ | いいえ | いいえ |
 
-### Integration Pattern
+### 連携パターン
 
 ```mermaid
 graph TD
-    User["User Request"] --> Main["Main Agent"]
-    Main -->|Uses| Memory["Memory<br/>(Context)"]
-    Main -->|Queries| MCP["MCP<br/>(Live Data)"]
-    Main -->|Invokes| Skills["Skills<br/>(Auto Tools)"]
-    Main -->|Delegates| Subagents["Subagents<br/>(Specialists)"]
+    User["ユーザーリクエスト"] --> Main["メインエージェント"]
+    Main -->|使用する| Memory["メモリ<br/>（コンテキスト）"]
+    Main -->|クエリ| MCP["MCP<br/>（ライブデータ）"]
+    Main -->|呼び出す| Skills["スキル<br/>（自動ツール）"]
+    Main -->|委譲する| Subagents["サブエージェント<br/>（スペシャリスト）"]
 
-    Subagents -->|Use| Memory
-    Subagents -->|Query| MCP
-    Subagents -->|Isolated| Context["Clean Context<br/>Window"]
+    Subagents -->|使用する| Memory
+    Subagents -->|クエリ| MCP
+    Subagents -->|隔離された| Context["クリーンな<br/>コンテキストウィンドウ"]
 ```
 
 ---
 
-## Additional Resources
+## 追加リソース
 
-- [Official Subagents Documentation](https://code.claude.com/docs/en/sub-agents)
-- [CLI Reference](https://code.claude.com/docs/en/cli-reference) - `--agents` flag and other CLI options
-- [Plugins Guide](../07-plugins/) - For bundling agents with other features
-- [Skills Guide](../03-skills/) - For auto-invoked capabilities
-- [Memory Guide](../02-memory/) - For persistent context
-- [Hooks Guide](../06-hooks/) - For event-driven automation
+- [公式サブエージェントドキュメント](https://code.claude.com/docs/en/sub-agents)
+- [CLIリファレンス](https://code.claude.com/docs/en/cli-reference) - `--agents` フラグとその他のCLIオプション
+- [プラグインガイド](../07-plugins/) - エージェントを他の機能とバンドル
+- [スキルガイド](../03-skills/) - 自動起動の機能
+- [メモリガイド](../02-memory/) - 永続コンテキスト
+- [Hooksガイド](../06-hooks/) - イベント駆動の自動化
 
 ---
 
-*Last updated: March 2026*
+*最終更新: 2026年3月*
 
-*This guide covers complete subagent configuration, delegation patterns, and best practices for Claude Code.*
+*このガイドはClaude Codeの完全なサブエージェント設定、委譲パターン、ベストプラクティスをカバーしています。*

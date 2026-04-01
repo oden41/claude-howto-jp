@@ -5,30 +5,30 @@
 
 # Hooks
 
-Hooks are automated scripts that execute in response to specific events during Claude Code sessions. They enable automation, validation, permission management, and custom workflows.
+Hooksは、Claude Codeセッション中に特定のイベントが発生した際に実行される自動化スクリプトです。自動化、バリデーション、パーミッション管理、カスタムワークフローを実現します。
 
-## Overview
+## 概要
 
-Hooks are automated actions (shell commands, HTTP webhooks, LLM prompts, or subagent evaluations) that execute automatically when specific events occur in Claude Code. They receive JSON input and communicate results via exit codes and JSON output.
+Hooksは、Claude Codeで特定のイベントが発生した際に自動的に実行される自動アクション（シェルコマンド、HTTPウェブフック、LLMプロンプト、またはサブエージェント評価）です。JSON入力を受け取り、終了コードとJSON出力を通じて結果を通知します。
 
-**Key features:**
-- Event-driven automation
-- JSON-based input/output
-- Support for command, prompt, HTTP, and agent hook types
-- Pattern matching for tool-specific hooks
+**主な特徴:**
+- イベント駆動の自動化
+- JSONベースの入出力
+- command、prompt、HTTP、agentの4つのhookタイプをサポート
+- ツール固有のhookのためのパターンマッチング
 
-## Configuration
+## 設定
 
-Hooks are configured in settings files with a specific structure:
+Hooksは設定ファイルで特定の構造で設定されます：
 
-- `~/.claude/settings.json` - User settings (all projects)
-- `.claude/settings.json` - Project settings (shareable, committed)
-- `.claude/settings.local.json` - Local project settings (not committed)
-- Managed policy - Organization-wide settings
-- Plugin `hooks/hooks.json` - Plugin-scoped hooks
-- Skill/Agent frontmatter - Component lifetime hooks
+- `~/.claude/settings.json` - ユーザー設定（すべてのプロジェクト）
+- `.claude/settings.json` - プロジェクト設定（共有可能、コミット対象）
+- `.claude/settings.local.json` - ローカルプロジェクト設定（コミット対象外）
+- マネージドポリシー - 組織全体の設定
+- プラグイン `hooks/hooks.json` - プラグインスコープのhooks
+- スキル/エージェントフロントマター - コンポーネントライフタイムのhooks
 
-### Basic Configuration Structure
+### 基本設定構造
 
 ```json
 {
@@ -49,33 +49,33 @@ Hooks are configured in settings files with a specific structure:
 }
 ```
 
-**Key fields:**
+**主要フィールド:**
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `matcher` | Pattern to match tool names (case-sensitive) | `"Write"`, `"Edit\|Write"`, `"*"` |
-| `hooks` | Array of hook definitions | `[{ "type": "command", ... }]` |
-| `type` | Hook type: `"command"` (bash), `"prompt"` (LLM), `"http"` (webhook), or `"agent"` (subagent) | `"command"` |
-| `command` | Shell command to execute | `"$CLAUDE_PROJECT_DIR/.claude/hooks/format.sh"` |
-| `timeout` | Optional timeout in seconds (default 60) | `30` |
-| `once` | If `true`, run the hook only once per session | `true` |
+| フィールド | 説明 | 例 |
+|-----------|------|-----|
+| `matcher` | ツール名にマッチするパターン（大文字小文字区別） | `"Write"`、`"Edit\|Write"`、`"*"` |
+| `hooks` | hookの定義の配列 | `[{ "type": "command", ... }]` |
+| `type` | hookの種類: `"command"`（bash）、`"prompt"`（LLM）、`"http"`（ウェブフック）、`"agent"`（サブエージェント） | `"command"` |
+| `command` | 実行するシェルコマンド | `"$CLAUDE_PROJECT_DIR/.claude/hooks/format.sh"` |
+| `timeout` | 省略可のタイムアウト（秒、デフォルト60） | `30` |
+| `once` | `true` の場合、セッションにつき1回だけhookを実行 | `true` |
 
-### Matcher Patterns
+### マッチャーパターン
 
-| Pattern | Description | Example |
-|---------|-------------|---------|
-| Exact string | Matches specific tool | `"Write"` |
-| Regex pattern | Matches multiple tools | `"Edit\|Write"` |
-| Wildcard | Matches all tools | `"*"` or `""` |
-| MCP tools | Server and tool pattern | `"mcp__memory__.*"` |
+| パターン | 説明 | 例 |
+|---------|------|-----|
+| 完全一致文字列 | 特定のツールにマッチ | `"Write"` |
+| 正規表現パターン | 複数のツールにマッチ | `"Edit\|Write"` |
+| ワイルドカード | すべてのツールにマッチ | `"*"` または `""` |
+| MCPツール | サーバーとツールのパターン | `"mcp__memory__.*"` |
 
-## Hook Types
+## Hookの種類
 
-Claude Code supports four hook types:
+Claude Codeは4つのhookの種類をサポートしています：
 
-### Command Hooks
+### Commandフック
 
-The default hook type. Executes a shell command and communicates via JSON stdin/stdout and exit codes.
+デフォルトのhookの種類。シェルコマンドを実行し、JSON stdin/stdoutと終了コードを通じて通信します。
 
 ```json
 {
@@ -85,11 +85,11 @@ The default hook type. Executes a shell command and communicates via JSON stdin/
 }
 ```
 
-### HTTP Hooks
+### HTTPフック
 
-> Added in v2.1.63.
+> v2.1.63で追加。
 
-Remote webhook endpoints that receive the same JSON input as command hooks. HTTP hooks POST JSON to the URL and receive a JSON response. HTTP hooks are routed through the sandbox when sandboxing is enabled. Environment variable interpolation in URLs requires an explicit `allowedEnvVars` list for security.
+commandフックと同じJSON入力を受け取るリモートウェブフックエンドポイント。HTTPフックはURLにJSONをPOSTしてJSONレスポンスを受け取ります。HTTPフックはサンドボックスが有効な場合にサンドボックスを通じてルーティングされます。URLでの環境変数インターポレーションにはセキュリティのために明示的な `allowedEnvVars` リストが必要です。
 
 ```json
 {
@@ -103,81 +103,81 @@ Remote webhook endpoints that receive the same JSON input as command hooks. HTTP
 }
 ```
 
-**Key properties:**
-- `"type": "http"` -- identifies this as an HTTP hook
-- `"url"` -- the webhook endpoint URL
-- Routed through sandbox when sandbox is enabled
-- Requires explicit `allowedEnvVars` list for any environment variable interpolation in the URL
+**主要プロパティ:**
+- `"type": "http"` -- HTTPフックとして識別
+- `"url"` -- ウェブフックエンドポイントのURL
+- サンドボックスが有効な場合にサンドボックスを通じてルーティング
+- URLでの環境変数インターポレーションには明示的な `allowedEnvVars` リストが必要
 
-### Prompt Hooks
+### Promptフック
 
-LLM-evaluated prompts where the hook content is a prompt that Claude evaluates. Primarily used with `Stop` and `SubagentStop` events for intelligent task completion checking.
+hookコンテンツがClaudeが評価するプロンプトであるLLM評価プロンプト。主に `Stop` と `SubagentStop` イベントでインテリジェントなタスク完了チェックに使用されます。
 
 ```json
 {
   "type": "prompt",
-  "prompt": "Evaluate if Claude completed all requested tasks.",
+  "prompt": "Claudeがリクエストされたすべてのタスクを完了したか評価してください。",
   "timeout": 30
 }
 ```
 
-The LLM evaluates the prompt and returns a structured decision (see [Prompt-Based Hooks](#prompt-based-hooks) for details).
+LLMはプロンプトを評価し、構造化された決定を返します（詳細は[プロンプトベースのHooks](#プロンプトベースのhooks)を参照）。
 
-### Agent Hooks
+### Agentフック
 
-Subagent-based verification hooks that spawn a dedicated agent to evaluate conditions or perform complex checks. Unlike prompt hooks (single-turn LLM evaluation), agent hooks can use tools and perform multi-step reasoning.
+条件を評価または複雑なチェックを実行するために専用エージェントを生成するサブエージェントベースの検証フック。promptフック（単一ターンのLLM評価）とは異なり、agentフックはツールを使用してマルチステップの推論を実行できます。
 
 ```json
 {
   "type": "agent",
-  "prompt": "Verify the code changes follow our architecture guidelines. Check the relevant design docs and compare.",
+  "prompt": "コードの変更がアーキテクチャガイドラインに従っているか確認してください。関連する設計ドキュメントを確認して比較してください。",
   "timeout": 120
 }
 ```
 
-**Key properties:**
-- `"type": "agent"` -- identifies this as an agent hook
-- `"prompt"` -- the task description for the subagent
-- The agent can use tools (Read, Grep, Bash, etc.) to perform its evaluation
-- Returns a structured decision similar to prompt hooks
+**主要プロパティ:**
+- `"type": "agent"` -- agentフックとして識別
+- `"prompt"` -- サブエージェントのタスク説明
+- エージェントはツール（Read、Grep、Bashなど）を使用して評価を実行できる
+- promptフックと同様の構造化された決定を返す
 
-## Hook Events
+## Hookイベント
 
-Claude Code supports **25 hook events**:
+Claude Codeは**25のhookイベント**をサポートしています：
 
-| Event | When Triggered | Matcher Input | Can Block | Common Use |
-|-------|---------------|---------------|-----------|------------|
-| **SessionStart** | Session begins/resumes/clear/compact | startup/resume/clear/compact | No | Environment setup |
-| **InstructionsLoaded** | After CLAUDE.md or rules file loaded | (none) | No | Modify/filter instructions |
-| **UserPromptSubmit** | User submits prompt | (none) | Yes | Validate prompts |
-| **PreToolUse** | Before tool execution | Tool name | Yes (allow/deny/ask) | Validate, modify inputs |
-| **PermissionRequest** | Permission dialog shown | Tool name | Yes | Auto-approve/deny |
-| **PostToolUse** | After tool succeeds | Tool name | No | Add context, feedback |
-| **PostToolUseFailure** | Tool execution fails | Tool name | No | Error handling, logging |
-| **Notification** | Notification sent | Notification type | No | Custom notifications |
-| **SubagentStart** | Subagent spawned | Agent type name | No | Subagent setup |
-| **SubagentStop** | Subagent finishes | Agent type name | Yes | Subagent validation |
-| **Stop** | Claude finishes responding | (none) | Yes | Task completion check |
-| **StopFailure** | API error ends turn | (none) | No | Error recovery, logging |
-| **TeammateIdle** | Agent team teammate idle | (none) | Yes | Teammate coordination |
-| **TaskCompleted** | Task marked complete | (none) | Yes | Post-task actions |
-| **TaskCreated** | Task created via TaskCreate | (none) | No | Task tracking, logging |
-| **ConfigChange** | Config file changes | (none) | Yes (except policy) | React to config updates |
-| **CwdChanged** | Working directory changes | (none) | No | Directory-specific setup |
-| **FileChanged** | Watched file changes | (none) | No | File monitoring, rebuild |
-| **PreCompact** | Before context compaction | manual/auto | No | Pre-compact actions |
-| **PostCompact** | After compaction completes | (none) | No | Post-compact actions |
-| **WorktreeCreate** | Worktree being created | (none) | Yes (path return) | Worktree initialization |
-| **WorktreeRemove** | Worktree being removed | (none) | No | Worktree cleanup |
-| **Elicitation** | MCP server requests user input | (none) | Yes | Input validation |
-| **ElicitationResult** | User responds to elicitation | (none) | Yes | Response processing |
-| **SessionEnd** | Session terminates | (none) | No | Cleanup, final logging |
+| イベント | トリガーのタイミング | マッチャー入力 | ブロック可能 | 主な用途 |
+|--------|----------------|-------------|-----------|---------|
+| **SessionStart** | セッション開始/再開/クリア/コンパクト | startup/resume/clear/compact | いいえ | 環境のセットアップ |
+| **InstructionsLoaded** | CLAUDE.mdまたはルールファイルが読み込まれた後 | （なし） | いいえ | 指示の修正/フィルタリング |
+| **UserPromptSubmit** | ユーザーがプロンプトを送信した時 | （なし） | はい | プロンプトのバリデーション |
+| **PreToolUse** | ツール実行の前 | ツール名 | はい（allow/deny/ask） | 入力のバリデーション・修正 |
+| **PermissionRequest** | パーミッションダイアログが表示された時 | ツール名 | はい | 自動承認/拒否 |
+| **PostToolUse** | ツールが成功した後 | ツール名 | いいえ | コンテキスト追加、フィードバック |
+| **PostToolUseFailure** | ツール実行が失敗した時 | ツール名 | いいえ | エラーハンドリング、ログ |
+| **Notification** | 通知が送信された時 | 通知の種類 | いいえ | カスタム通知 |
+| **SubagentStart** | サブエージェントが生成された時 | エージェントタイプ名 | いいえ | サブエージェントのセットアップ |
+| **SubagentStop** | サブエージェントが完了した時 | エージェントタイプ名 | はい | サブエージェントのバリデーション |
+| **Stop** | Claudeが応答を完了した時 | （なし） | はい | タスク完了チェック |
+| **StopFailure** | APIエラーでターンが終了した時 | （なし） | いいえ | エラー回復、ログ |
+| **TeammateIdle** | エージェントチームのチームメイトがアイドル | （なし） | はい | チームメイトの調整 |
+| **TaskCompleted** | タスクが完了とマークされた時 | （なし） | はい | タスク後のアクション |
+| **TaskCreated** | TaskCreateでタスクが作成された時 | （なし） | いいえ | タスク追跡、ログ |
+| **ConfigChange** | 設定ファイルが変更された時 | （なし） | はい（ポリシー除く） | 設定更新への対応 |
+| **CwdChanged** | 作業ディレクトリが変更された時 | （なし） | いいえ | ディレクトリ固有のセットアップ |
+| **FileChanged** | 監視ファイルが変更された時 | （なし） | いいえ | ファイル監視、リビルド |
+| **PreCompact** | コンテキストコンパクション前 | manual/auto | いいえ | コンパクション前のアクション |
+| **PostCompact** | コンパクション完了後 | （なし） | いいえ | コンパクション後のアクション |
+| **WorktreeCreate** | Worktreeが作成される時 | （なし） | はい（パス返却） | Worktreeの初期化 |
+| **WorktreeRemove** | Worktreeが削除される時 | （なし） | いいえ | Worktreeのクリーンアップ |
+| **Elicitation** | MCPサーバーがユーザー入力を要求した時 | （なし） | はい | 入力バリデーション |
+| **ElicitationResult** | ユーザーがelicitationに応答した時 | （なし） | はい | レスポンス処理 |
+| **SessionEnd** | セッションが終了する時 | （なし） | いいえ | クリーンアップ、最終ログ |
 
 ### PreToolUse
 
-Runs after Claude creates tool parameters and before processing. Use this to validate or modify tool inputs.
+Claudeがツールパラメーターを作成した後、処理の前に実行されます。ツール入力のバリデーションや修正に使用します。
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -196,18 +196,18 @@ Runs after Claude creates tool parameters and before processing. Use this to val
 }
 ```
 
-**Common matchers:** `Task`, `Bash`, `Glob`, `Grep`, `Read`, `Edit`, `Write`, `WebFetch`, `WebSearch`
+**よく使うマッチャー:** `Task`、`Bash`、`Glob`、`Grep`、`Read`、`Edit`、`Write`、`WebFetch`、`WebSearch`
 
-**Output control:**
-- `permissionDecision`: `"allow"`, `"deny"`, or `"ask"`
-- `permissionDecisionReason`: Explanation for decision
-- `updatedInput`: Modified tool input parameters
+**出力制御:**
+- `permissionDecision`: `"allow"`、`"deny"`、または `"ask"`
+- `permissionDecisionReason`: 決定の説明
+- `updatedInput`: 修正されたツール入力パラメーター
 
 ### PostToolUse
 
-Runs immediately after tool completion. Use for verification, logging, or providing context back to Claude.
+ツール完了直後に実行されます。バリデーション、ログ、またはClaudeへのコンテキスト提供に使用します。
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -226,15 +226,15 @@ Runs immediately after tool completion. Use for verification, logging, or provid
 }
 ```
 
-**Output control:**
-- `"block"` decision prompts Claude with feedback
-- `additionalContext`: Context added for Claude
+**出力制御:**
+- `"block"` 決定でClaudeにフィードバックとともにプロンプト
+- `additionalContext`: Claudeに追加するコンテキスト
 
 ### UserPromptSubmit
 
-Runs when user submits a prompt, before Claude processes it.
+ユーザーがプロンプトを送信した時、Claudeが処理する前に実行されます。
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -252,18 +252,18 @@ Runs when user submits a prompt, before Claude processes it.
 }
 ```
 
-**Output control:**
-- `decision`: `"block"` to prevent processing
-- `reason`: Explanation if blocked
-- `additionalContext`: Context added to prompt
+**出力制御:**
+- `decision`: 処理を防ぐには `"block"`
+- `reason`: ブロックされた場合の説明
+- `additionalContext`: プロンプトに追加するコンテキスト
 
-### Stop and SubagentStop
+### StopとSubagentStop
 
-Run when Claude finishes responding (Stop) or a subagent completes (SubagentStop). Supports prompt-based evaluation for intelligent task completion checking.
+Claudeが応答を完了した時（Stop）またはサブエージェントが完了した時（SubagentStop）に実行されます。インテリジェントなタスク完了チェックのためのプロンプトベースの評価をサポートします。
 
-**Additional input field:** Both `Stop` and `SubagentStop` hooks receive a `last_assistant_message` field in their JSON input, containing the final message from Claude or the subagent before stopping. This is useful for evaluating task completion.
+**追加入力フィールド:** `Stop` と `SubagentStop` の両方のhookは、JSON入力に `last_assistant_message` フィールドを受け取ります。このフィールドには停止前のClaudeまたはサブエージェントからの最後のメッセージが含まれます。タスク完了の評価に役立ちます。
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -272,7 +272,7 @@ Run when Claude finishes responding (Stop) or a subagent completes (SubagentStop
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Evaluate if Claude completed all requested tasks.",
+            "prompt": "Claudeがリクエストされたすべてのタスクを完了したか評価してください。",
             "timeout": 30
           }
         ]
@@ -284,9 +284,9 @@ Run when Claude finishes responding (Stop) or a subagent completes (SubagentStop
 
 ### SubagentStart
 
-Runs when a subagent begins execution. The matcher input is the agent type name, allowing hooks to target specific subagent types.
+サブエージェントが実行を開始する時に実行されます。マッチャー入力はエージェントタイプ名で、特定のサブエージェントタイプをターゲットにしたhookを設定できます。
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -307,11 +307,11 @@ Runs when a subagent begins execution. The matcher input is the agent type name,
 
 ### SessionStart
 
-Runs when session starts or resumes. Can persist environment variables.
+セッションが開始または再開する時に実行されます。環境変数を永続化できます。
 
-**Matchers:** `startup`, `resume`, `clear`, `compact`
+**マッチャー:** `startup`、`resume`、`clear`、`compact`
 
-**Special feature:** Use `CLAUDE_ENV_FILE` to persist environment variables (also available in `CwdChanged` and `FileChanged` hooks):
+**特別機能:** `CLAUDE_ENV_FILE` を使って環境変数を永続化（`CwdChanged` と `FileChanged` フックでも利用可能）：
 
 ```bash
 #!/bin/bash
@@ -323,15 +323,15 @@ exit 0
 
 ### SessionEnd
 
-Runs when session ends to perform cleanup or final logging. Cannot block termination.
+セッション終了時にクリーンアップや最終ログを実行します。終了をブロックできません。
 
-**Reason field values:**
-- `clear` - User cleared the session
-- `logout` - User logged out
-- `prompt_input_exit` - User exited via prompt input
-- `other` - Other reason
+**reasonフィールドの値:**
+- `clear` - ユーザーがセッションをクリアした
+- `logout` - ユーザーがログアウトした
+- `prompt_input_exit` - ユーザーがプロンプト入力を通じて終了した
+- `other` - その他の理由
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -349,58 +349,58 @@ Runs when session ends to perform cleanup or final logging. Cannot block termina
 }
 ```
 
-### Notification Event
+### Notificationイベント
 
-Updated matchers for notification events:
-- `permission_prompt` - Permission request notification
-- `idle_prompt` - Idle state notification
-- `auth_success` - Authentication success
-- `elicitation_dialog` - Dialog shown to user
+通知イベントのマッチャー：
+- `permission_prompt` - パーミッションリクエスト通知
+- `idle_prompt` - アイドル状態通知
+- `auth_success` - 認証成功
+- `elicitation_dialog` - ユーザーに表示されるダイアログ
 
-## Component-Scoped Hooks
+## コンポーネントスコープのHooks
 
-Hooks can be attached to specific components (skills, agents, commands) in their frontmatter:
+Hooksはフロントマターでスキルやエージェントなどのコンポーネントに添付できます：
 
-**In SKILL.md, agent.md, or command.md:**
+**SKILL.md、agent.md、またはcommand.mdで:**
 
 ```yaml
 ---
 name: secure-operations
-description: Perform operations with security checks
+description: セキュリティチェック付きで操作を実行
 hooks:
   PreToolUse:
     - matcher: "Bash"
       hooks:
         - type: command
           command: "./scripts/check.sh"
-          once: true  # Only run once per session
+          once: true  # セッションにつき1回だけ実行
 ---
 ```
 
-**Supported events for component hooks:** `PreToolUse`, `PostToolUse`, `Stop`
+**コンポーネントhooksでサポートされるイベント:** `PreToolUse`、`PostToolUse`、`Stop`
 
-This allows defining hooks directly in the component that uses them, keeping related code together.
+これにより、関連するhookをそれを使用するコンポーネント内で直接定義し、コードを一箇所にまとめられます。
 
-### Hooks in Subagent Frontmatter
+### サブエージェントフロントマターのHooks
 
-When a `Stop` hook is defined in a subagent's frontmatter, it is automatically converted to a `SubagentStop` hook scoped to that subagent. This ensures that the stop hook only fires when that specific subagent completes, rather than when the main session stops.
+サブエージェントのフロントマターで `Stop` フックが定義されている場合、そのサブエージェントにスコープされた `SubagentStop` フックに自動的に変換されます。これにより、メインセッションが停止した時ではなく、その特定のサブエージェントが完了した時にのみstopフックが発火するようになります。
 
 ```yaml
 ---
 name: code-review-agent
-description: Automated code review subagent
+description: 自動化されたコードレビューサブエージェント
 hooks:
   Stop:
     - hooks:
         - type: prompt
-          prompt: "Verify the code review is thorough and complete."
-  # The above Stop hook auto-converts to SubagentStop for this subagent
+          prompt: "コードレビューが徹底的で完全かどうか確認してください。"
+  # 上記のStopフックはこのサブエージェントのSubagentStopに自動変換される
 ---
 ```
 
-## PermissionRequest Event
+## PermissionRequestイベント
 
-Handles permission requests with custom output format:
+カスタム出力形式でパーミッションリクエストを処理します：
 
 ```json
 {
@@ -409,18 +409,18 @@ Handles permission requests with custom output format:
     "decision": {
       "behavior": "allow|deny",
       "updatedInput": {},
-      "message": "Custom message",
+      "message": "カスタムメッセージ",
       "interrupt": false
     }
   }
 }
 ```
 
-## Hook Input and Output
+## Hookの入力と出力
 
-### JSON Input (via stdin)
+### JSON入力（stdin経由）
 
-All hooks receive JSON input via stdin:
+すべてのhookはstdin経由でJSON入力を受け取ります：
 
 ```json
 {
@@ -441,38 +441,38 @@ All hooks receive JSON input via stdin:
 }
 ```
 
-**Common fields:**
+**共通フィールド:**
 
-| Field | Description |
-|-------|-------------|
-| `session_id` | Unique session identifier |
-| `transcript_path` | Path to the conversation transcript file |
-| `cwd` | Current working directory |
-| `hook_event_name` | Name of the event that triggered the hook |
-| `agent_id` | Identifier of the agent running this hook |
-| `agent_type` | Type of agent (`"main"`, subagent type name, etc.) |
-| `worktree` | Path to the git worktree, if the agent is running in one |
+| フィールド | 説明 |
+|-----------|------|
+| `session_id` | 一意のセッション識別子 |
+| `transcript_path` | 会話トランスクリプトファイルへのパス |
+| `cwd` | 現在の作業ディレクトリ |
+| `hook_event_name` | hookをトリガーしたイベントの名前 |
+| `agent_id` | このhookを実行するエージェントの識別子 |
+| `agent_type` | エージェントの種類（`"main"`、サブエージェントタイプ名など） |
+| `worktree` | エージェントがworktree内で実行されている場合のgit worktreeのパス |
 
-### Exit Codes
+### 終了コード
 
-| Exit Code | Meaning | Behavior |
-|-----------|---------|----------|
-| **0** | Success | Continue, parse JSON stdout |
-| **2** | Blocking error | Block operation, stderr shown as error |
-| **Other** | Non-blocking error | Continue, stderr shown in verbose mode |
+| 終了コード | 意味 | 動作 |
+|-----------|------|------|
+| **0** | 成功 | 続行、JSON stdoutを解析 |
+| **2** | ブロッキングエラー | 操作をブロック、stderrをエラーとして表示 |
+| **その他** | 非ブロッキングエラー | 続行、stderrをverboseモードで表示 |
 
-### JSON Output (stdout, exit code 0)
+### JSON出力（stdout、終了コード0）
 
 ```json
 {
   "continue": true,
-  "stopReason": "Optional message if stopping",
+  "stopReason": "停止する場合のオプションメッセージ",
   "suppressOutput": false,
-  "systemMessage": "Optional warning message",
+  "systemMessage": "オプションの警告メッセージ",
   "hookSpecificOutput": {
     "hookEventName": "PreToolUse",
     "permissionDecision": "allow",
-    "permissionDecisionReason": "File is in allowed directory",
+    "permissionDecisionReason": "ファイルは許可されたディレクトリ内にある",
     "updatedInput": {
       "file_path": "/modified/path.js"
     }
@@ -480,20 +480,20 @@ All hooks receive JSON input via stdin:
 }
 ```
 
-## Environment Variables
+## 環境変数
 
-| Variable | Availability | Description |
-|----------|-------------|-------------|
-| `CLAUDE_PROJECT_DIR` | All hooks | Absolute path to project root |
-| `CLAUDE_ENV_FILE` | SessionStart, CwdChanged, FileChanged | File path for persisting env vars |
-| `CLAUDE_CODE_REMOTE` | All hooks | `"true"` if running in remote environments |
-| `${CLAUDE_PLUGIN_ROOT}` | Plugin hooks | Path to plugin directory |
-| `${CLAUDE_PLUGIN_DATA}` | Plugin hooks | Path to plugin data directory |
-| `CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS` | SessionEnd hooks | Configurable timeout in milliseconds for SessionEnd hooks (overrides default) |
+| 変数 | 利用可能な場所 | 説明 |
+|-----|-------------|------|
+| `CLAUDE_PROJECT_DIR` | すべてのhooks | プロジェクトルートへの絶対パス |
+| `CLAUDE_ENV_FILE` | SessionStart、CwdChanged、FileChanged | 環境変数永続化のためのファイルパス |
+| `CLAUDE_CODE_REMOTE` | すべてのhooks | リモート環境で実行中の場合 `"true"` |
+| `${CLAUDE_PLUGIN_ROOT}` | プラグインhooks | プラグインディレクトリへのパス |
+| `${CLAUDE_PLUGIN_DATA}` | プラグインhooks | プラグインデータディレクトリへのパス |
+| `CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS` | SessionEndフック | SessionEndフックの設定可能なタイムアウト（ミリ秒） |
 
-## Prompt-Based Hooks
+## プロンプトベースのHooks
 
-For `Stop` and `SubagentStop` events, you can use LLM-based evaluation:
+`Stop` と `SubagentStop` イベントでは、LLMベースの評価を使えます：
 
 ```json
 {
@@ -503,7 +503,7 @@ For `Stop` and `SubagentStop` events, you can use LLM-based evaluation:
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Review if all tasks are complete. Return your decision.",
+            "prompt": "すべてのタスクが完了しているか確認してください。決定を返してください。",
             "timeout": 30
           }
         ]
@@ -513,21 +513,21 @@ For `Stop` and `SubagentStop` events, you can use LLM-based evaluation:
 }
 ```
 
-**LLM Response Schema:**
+**LLMレスポンスのスキーマ:**
 ```json
 {
   "decision": "approve",
-  "reason": "All tasks completed successfully",
+  "reason": "すべてのタスクが正常に完了した",
   "continue": false,
-  "stopReason": "Task complete"
+  "stopReason": "タスク完了"
 }
 ```
 
-## Examples
+## 例
 
-### Example 1: Bash Command Validator (PreToolUse)
+### 例1: Bashコマンドバリデーター（PreToolUse）
 
-**File:** `.claude/hooks/validate-bash.py`
+**ファイル:** `.claude/hooks/validate-bash.py`
 
 ```python
 #!/usr/bin/env python3
@@ -536,8 +536,8 @@ import sys
 import re
 
 BLOCKED_PATTERNS = [
-    (r"\brm\s+-rf\s+/", "Blocking dangerous rm -rf / command"),
-    (r"\bsudo\s+rm", "Blocking sudo rm command"),
+    (r"\brm\s+-rf\s+/", "危険なrm -rf /コマンドをブロック"),
+    (r"\bsudo\s+rm", "sudo rmコマンドをブロック"),
 ]
 
 def main():
@@ -552,7 +552,7 @@ def main():
     for pattern, message in BLOCKED_PATTERNS:
         if re.search(pattern, command):
             print(message, file=sys.stderr)
-            sys.exit(2)  # Exit 2 = blocking error
+            sys.exit(2)  # 終了コード2 = ブロッキングエラー
 
     sys.exit(0)
 
@@ -560,7 +560,7 @@ if __name__ == "__main__":
     main()
 ```
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -579,9 +579,9 @@ if __name__ == "__main__":
 }
 ```
 
-### Example 2: Security Scanner (PostToolUse)
+### 例2: セキュリティスキャナー（PostToolUse）
 
-**File:** `.claude/hooks/security-scan.py`
+**ファイル:** `.claude/hooks/security-scan.py`
 
 ```python
 #!/usr/bin/env python3
@@ -590,8 +590,8 @@ import sys
 import re
 
 SECRET_PATTERNS = [
-    (r"password\s*=\s*['\"][^'\"]+['\"]", "Potential hardcoded password"),
-    (r"api[_-]?key\s*=\s*['\"][^'\"]+['\"]", "Potential hardcoded API key"),
+    (r"password\s*=\s*['\"][^'\"]+['\"]", "ハードコードされたパスワードの可能性"),
+    (r"api[_-]?key\s*=\s*['\"][^'\"]+['\"]", "ハードコードされたAPIキーの可能性"),
 ]
 
 def main():
@@ -614,7 +614,7 @@ def main():
         output = {
             "hookSpecificOutput": {
                 "hookEventName": "PostToolUse",
-                "additionalContext": f"Security warnings for {file_path}: " + "; ".join(warnings)
+                "additionalContext": f"{file_path}のセキュリティ警告: " + "; ".join(warnings)
             }
         }
         print(json.dumps(output))
@@ -625,14 +625,14 @@ if __name__ == "__main__":
     main()
 ```
 
-### Example 3: Auto-Format Code (PostToolUse)
+### 例3: コードの自動フォーマット（PostToolUse）
 
-**File:** `.claude/hooks/format-code.sh`
+**ファイル:** `.claude/hooks/format-code.sh`
 
 ```bash
 #!/bin/bash
 
-# Read JSON from stdin
+# stdinからJSONを読み込む
 INPUT=$(cat)
 TOOL_NAME=$(echo "$INPUT" | python3 -c "import sys, json; print(json.load(sys.stdin).get('tool_name', ''))")
 FILE_PATH=$(echo "$INPUT" | python3 -c "import sys, json; print(json.load(sys.stdin).get('tool_input', {}).get('file_path', ''))")
@@ -641,7 +641,7 @@ if [ "$TOOL_NAME" != "Write" ] && [ "$TOOL_NAME" != "Edit" ]; then
     exit 0
 fi
 
-# Format based on file extension
+# 拡張子に基づいてフォーマット
 case "$FILE_PATH" in
     *.js|*.jsx|*.ts|*.tsx|*.json)
         command -v prettier &>/dev/null && prettier --write "$FILE_PATH" 2>/dev/null
@@ -657,9 +657,9 @@ esac
 exit 0
 ```
 
-### Example 4: Prompt Validator (UserPromptSubmit)
+### 例4: プロンプトバリデーター（UserPromptSubmit）
 
-**File:** `.claude/hooks/validate-prompt.py`
+**ファイル:** `.claude/hooks/validate-prompt.py`
 
 ```python
 #!/usr/bin/env python3
@@ -668,8 +668,8 @@ import sys
 import re
 
 BLOCKED_PATTERNS = [
-    (r"delete\s+(all\s+)?database", "Dangerous: database deletion"),
-    (r"rm\s+-rf\s+/", "Dangerous: root deletion"),
+    (r"delete\s+(all\s+)?database", "危険: データベースの削除"),
+    (r"rm\s+-rf\s+/", "危険: ルートの削除"),
 ]
 
 def main():
@@ -680,7 +680,7 @@ def main():
         if re.search(pattern, prompt, re.IGNORECASE):
             output = {
                 "decision": "block",
-                "reason": f"Blocked: {message}"
+                "reason": f"ブロック: {message}"
             }
             print(json.dumps(output))
             sys.exit(0)
@@ -691,7 +691,7 @@ if __name__ == "__main__":
     main()
 ```
 
-### Example 5: Intelligent Stop Hook (Prompt-Based)
+### 例5: インテリジェントなStopフック（プロンプトベース）
 
 ```json
 {
@@ -701,7 +701,7 @@ if __name__ == "__main__":
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Review if Claude completed all requested tasks. Check: 1) Were all files created/modified? 2) Were there unresolved errors? If incomplete, explain what's missing.",
+            "prompt": "Claudeがリクエストされたすべてのタスクを完了したか確認してください。チェック: 1) すべてのファイルが作成/修正されたか? 2) 未解決のエラーがあるか? 不完全な場合は、何が欠けているか説明してください。",
             "timeout": 30
           }
         ]
@@ -711,60 +711,55 @@ if __name__ == "__main__":
 }
 ```
 
-### Example 6: Context Usage Tracker (Hook Pairs)
+### 例6: コンテキスト使用量トラッカー（Hookペア）
 
-Track token consumption per request using `UserPromptSubmit` (pre-message) and `Stop` (post-response) hooks together.
+`UserPromptSubmit`（プレメッセージ）と `Stop`（ポストレスポンス）フックを組み合わせてリクエストごとのトークン消費を追跡します。
 
-**File:** `.claude/hooks/context-tracker.py`
+**ファイル:** `.claude/hooks/context-tracker.py`
 
 ```python
 #!/usr/bin/env python3
 """
-Context Usage Tracker - Tracks token consumption per request.
+Context Usage Tracker - リクエストごとのトークン消費を追跡。
 
-Uses UserPromptSubmit as "pre-message" hook and Stop as "post-response" hook
-to calculate the delta in token usage for each request.
+UserPromptSubmitを「プレメッセージ」フックとして、Stopを「ポストレスポンス」フックとして使用し、
+各リクエストのトークン使用量のデルタを計算します。
 
-Token Counting Methods:
-1. Character estimation (default): ~4 chars per token, no dependencies
-2. tiktoken (optional): More accurate (~90-95%), requires: pip install tiktoken
+トークンカウント方法:
+1. 文字数推定（デフォルト）: 約4文字/トークン、依存関係なし
+2. tiktoken（省略可）: より正確（約90-95%）、必要: pip install tiktoken
 """
 import json
 import os
 import sys
 import tempfile
 
-# Configuration
-CONTEXT_LIMIT = 128000  # Claude's context window (adjust for your model)
-USE_TIKTOKEN = False    # Set True if tiktoken is installed for better accuracy
+# 設定
+CONTEXT_LIMIT = 128000  # Claudeのコンテキストウィンドウ（モデルに合わせて調整）
+USE_TIKTOKEN = False    # 精度向上にはtiktokenインストール後にTrueに設定
 
 
 def get_state_file(session_id: str) -> str:
-    """Get temp file path for storing pre-message token count, isolated by session."""
+    """セッションで分離された、プレメッセージトークン数保存用の一時ファイルパスを取得。"""
     return os.path.join(tempfile.gettempdir(), f"claude-context-{session_id}.json")
 
 
 def count_tokens(text: str) -> int:
-    """
-    Count tokens in text.
-
-    Uses tiktoken with p50k_base encoding if available (~90-95% accuracy),
-    otherwise falls back to character estimation (~80-90% accuracy).
-    """
+    """テキストのトークン数をカウント。"""
     if USE_TIKTOKEN:
         try:
             import tiktoken
             enc = tiktoken.get_encoding("p50k_base")
             return len(enc.encode(text))
         except ImportError:
-            pass  # Fall back to estimation
+            pass  # 推定にフォールバック
 
-    # Character-based estimation: ~4 characters per token for English
+    # 文字ベースの推定: 英語テキストは約4文字/トークン
     return len(text) // 4
 
 
 def read_transcript(transcript_path: str) -> str:
-    """Read and concatenate all content from transcript file."""
+    """トランスクリプトファイルからすべてのコンテンツを読み込んで結合。"""
     if not transcript_path or not os.path.exists(transcript_path):
         return ""
 
@@ -773,7 +768,6 @@ def read_transcript(transcript_path: str) -> str:
         for line in f:
             try:
                 entry = json.loads(line.strip())
-                # Extract text content from various message formats
                 if "message" in entry:
                     msg = entry["message"]
                     if isinstance(msg.get("content"), str):
@@ -789,28 +783,26 @@ def read_transcript(transcript_path: str) -> str:
 
 
 def handle_user_prompt_submit(data: dict) -> None:
-    """Pre-message hook: Save current token count before request."""
+    """プレメッセージフック: リクエスト前の現在のトークン数を保存。"""
     session_id = data.get("session_id", "unknown")
     transcript_path = data.get("transcript_path", "")
 
     transcript_content = read_transcript(transcript_path)
     current_tokens = count_tokens(transcript_content)
 
-    # Save to temp file for later comparison
     state_file = get_state_file(session_id)
     with open(state_file, "w") as f:
         json.dump({"pre_tokens": current_tokens}, f)
 
 
 def handle_stop(data: dict) -> None:
-    """Post-response hook: Calculate and report token delta."""
+    """ポストレスポンスフック: トークンデルタを計算してレポート。"""
     session_id = data.get("session_id", "unknown")
     transcript_path = data.get("transcript_path", "")
 
     transcript_content = read_transcript(transcript_path)
     current_tokens = count_tokens(transcript_content)
 
-    # Load pre-message count
     state_file = get_state_file(session_id)
     pre_tokens = 0
     if os.path.exists(state_file):
@@ -821,16 +813,14 @@ def handle_stop(data: dict) -> None:
         except (json.JSONDecodeError, IOError):
             pass
 
-    # Calculate delta
     delta_tokens = current_tokens - pre_tokens
     remaining = CONTEXT_LIMIT - current_tokens
     percentage = (current_tokens / CONTEXT_LIMIT) * 100
 
-    # Report usage
-    method = "tiktoken" if USE_TIKTOKEN else "estimated"
-    print(f"Context ({method}): ~{current_tokens:,} tokens ({percentage:.1f}% used, ~{remaining:,} remaining)", file=sys.stderr)
+    method = "tiktoken" if USE_TIKTOKEN else "推定"
+    print(f"コンテキスト（{method}）: 約{current_tokens:,}トークン（{percentage:.1f}%使用済み、約{remaining:,}残り）", file=sys.stderr)
     if delta_tokens > 0:
-        print(f"This request: ~{delta_tokens:,} tokens", file=sys.stderr)
+        print(f"このリクエスト: 約{delta_tokens:,}トークン", file=sys.stderr)
 
 
 def main():
@@ -849,7 +839,7 @@ if __name__ == "__main__":
     main()
 ```
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -877,35 +867,31 @@ if __name__ == "__main__":
 }
 ```
 
-**How it works:**
-1. `UserPromptSubmit` fires before your prompt is processed - saves current token count
-2. `Stop` fires after Claude responds - calculates delta and reports usage
-3. Each session is isolated via `session_id` in the temp filename
+**仕組み:**
+1. `UserPromptSubmit` がプロンプト処理前に発火 - 現在のトークン数を保存
+2. `Stop` がClaudeの応答後に発火 - デルタを計算してレポート
+3. 各セッションは一時ファイル名の `session_id` で分離
 
-**Token Counting Methods:**
+**トークンカウント方法:**
 
-| Method | Accuracy | Dependencies | Speed |
-|--------|----------|--------------|-------|
-| Character estimation | ~80-90% | None | <1ms |
-| tiktoken (p50k_base) | ~90-95% | `pip install tiktoken` | <10ms |
+| 方法 | 精度 | 依存関係 | 速度 |
+|------|------|---------|------|
+| 文字数推定 | 約80-90% | なし | <1ms |
+| tiktoken (p50k_base) | 約90-95% | `pip install tiktoken` | <10ms |
 
-> **Note:** Anthropic hasn't released an official offline tokenizer. Both methods are approximations. The transcript includes user prompts, Claude's responses, and tool outputs, but NOT system prompts or internal context.
+### 例7: 自動アダプトモード（PostToolUse）
 
-### Example 7: Auto-Adapt Mode (PostToolUse)
+ツール承認から自動的に学習し、`~/.claude/settings.json` のパーミッションを更新します。ツール実行を承認するたびに、hookがコマンドを再利用可能なパーミッションルールに汎用化します — 同じ種類のコマンドを二度承認する必要がなくなります。危険/破壊的なコマンドは**決して**記憶されません。
 
-Automatically learns from your tool approvals and updates `~/.claude/settings.json` permissions. Every time you accept a tool execution, the hook generalizes the command into a reusable permission rule — so you never have to approve the same type of command twice. Dangerous/destructive commands are **never** remembered.
-
-On first run, it seeds your config with auto-mode-equivalent baseline permissions (read/write files, git operations, package managers, common CLI tools).
-
-**File:** `.claude/hooks/auto-adapt-mode.py`
+**ファイル:** `.claude/hooks/auto-adapt-mode.py`
 
 ```python
 #!/usr/bin/env python3
 """
-auto-adapt-mode: Learn from user's tool approvals and update Claude config.
+auto-adapt-mode: ユーザーのツール承認から学習してClaude設定を更新。
 
-Hook Type: PostToolUse
-Event: Fires after a tool is successfully executed (meaning user approved it)
+Hookの種類: PostToolUse
+イベント: ツールが正常に実行された後（ユーザーが承認したことを意味する）に発火
 """
 
 import json
@@ -917,7 +903,7 @@ from pathlib import Path
 SETTINGS_PATH = Path.home() / ".claude" / "settings.json"
 LOG_PATH = Path.home() / ".claude" / "auto-adapt-mode.log"
 
-# Auto-mode baseline: safe, local, reversible operations
+# 自動モードのベースライン: 安全、ローカル、可逆な操作
 AUTO_MODE_BASELINE = [
     "Read(*)", "Edit(*)", "Write(*)", "Glob(*)", "Grep(*)",
     "Bash(git status:*)", "Bash(git log:*)", "Bash(git diff:*)",
@@ -928,40 +914,39 @@ AUTO_MODE_BASELINE = [
     "Bash(cp:*)", "Bash(mv:*)", "Bash(chmod:*)",
     "Bash(gh pr view:*)", "Bash(gh issue list:*)",
     "Agent(*)", "Skill(*)", "WebSearch(*)", "WebFetch(*)",
-    # ... (full list includes 70+ safe patterns)
+    # ...（フルリストには70以上の安全なパターンを含む）
 ]
 
-# Commands that are NEVER auto-remembered
+# 決して自動記憶されないコマンド
 DANGEROUS_PATTERNS = [
     r"rm\s+(-[a-zA-Z]*r[a-zA-Z]*|--recursive)",   # rm -rf
     r"git\s+push\s+(-[a-zA-Z]*f|--force)",          # force push
     r"git\s+reset\s+--hard",                         # hard reset
-    r"DROP\s+(TABLE|DATABASE)",                       # SQL destructive
-    r"curl\s+.*\|\s*(bash|sh)",                       # pipe to shell
-    r"sudo\b",                                        # privilege escalation
-    r"docker\s+(rm|rmi|system\s+prune)",              # container destructive
-    r"kubectl\s+delete",                              # k8s destructive
-    r"terraform\s+destroy",                           # infra destructive
-    r"npm\s+publish",                                 # irreversible publish
-    r"deploy\s+.*prod",                               # production deploy
-    # ... (full list includes 25+ patterns)
+    r"DROP\s+(TABLE|DATABASE)",                       # SQL破壊的操作
+    r"curl\s+.*\|\s*(bash|sh)",                       # シェルへのパイプ
+    r"sudo\b",                                        # 権限昇格
+    r"docker\s+(rm|rmi|system\s+prune)",              # コンテナ破壊的操作
+    r"kubectl\s+delete",                              # k8s破壊的操作
+    r"terraform\s+destroy",                           # インフラ破壊的操作
+    r"npm\s+publish",                                 # 不可逆な公開
+    r"deploy\s+.*prod",                               # 本番デプロイ
+    # ...（フルリストには25以上のパターンを含む）
 ]
 
 
 def is_dangerous_command(command: str) -> bool:
-    """Check if a bash command matches any dangerous pattern."""
+    """bashコマンドが危険なパターンにマッチするか確認。"""
     return any(re.search(p, command, re.IGNORECASE) for p in DANGEROUS_PATTERNS)
 
 
 def generalize_tool_permission(tool_name: str, tool_input: dict) -> str | None:
-    """Convert a specific tool invocation into a generalized permission rule."""
+    """特定のツール呼び出しを汎用化されたパーミッションルールに変換。"""
     if tool_name == "Bash":
         command = tool_input.get("command", "")
         if not command or is_dangerous_command(command):
             return None
         parts = command.strip().split()
         base = parts[0]
-        # Compound commands: "git push" -> "Bash(git push:*)"
         compound = ["git", "npm", "npx", "pip", "cargo", "go", "gh", "python3"]
         if base in compound and len(parts) > 1:
             sub = parts[1]
@@ -969,8 +954,6 @@ def generalize_tool_permission(tool_name: str, tool_input: dict) -> str | None:
                 return None
             return f"Bash({base} {sub}:*)"
         return f"Bash({base}:*)"
-    elif tool_name == "Bash":  # Never allow generic Bash(*)
-        return None
     else:
         return f"{tool_name}(*)"
 
@@ -986,11 +969,9 @@ def main():
     if not tool_name:
         sys.exit(0)
 
-    # Load settings, ensure baseline, add new rule if safe
     settings = json.load(open(SETTINGS_PATH)) if SETTINGS_PATH.exists() else {}
     allow = settings.setdefault("permissions", {}).setdefault("allow", [])
 
-    # Seed baseline on first run
     marker = Path.home() / ".claude" / ".auto-adapt-mode-initialized"
     if not marker.exists():
         existing = set(allow)
@@ -999,7 +980,6 @@ def main():
                 allow.append(rule)
         marker.touch()
 
-    # Generalize and add the new rule
     rule = generalize_tool_permission(tool_name, tool_input)
     if rule and rule not in allow:
         allow.append(rule)
@@ -1013,7 +993,7 @@ if __name__ == "__main__":
     main()
 ```
 
-**Configuration:**
+**設定:**
 ```json
 {
   "hooks": {
@@ -1033,38 +1013,22 @@ if __name__ == "__main__":
 }
 ```
 
-**How it works:**
-1. `PostToolUse` fires after **every** successful tool execution (meaning you already approved it)
-2. The hook extracts the tool name and input, then generalizes it into a permission rule
-3. Compound commands like `git push origin main` become `Bash(git push:*)` — matching any `git push` variant
-4. The rule is added to `~/.claude/settings.json` → `permissions.allow` if not already present
-5. On first run, seeds ~70 auto-mode-equivalent baseline permissions
+**汎用化の例:**
 
-**Safety guarantees:**
-- Dangerous commands (force push, rm -rf, sudo, DROP TABLE, etc.) are **never** remembered
-- Irreversible operations (npm publish, terraform destroy, prod deploys) are **always** blocked
-- Commands in the `deny` list are never overridden
-- The hook never blocks tool execution (always exits 0)
-- A log file at `~/.claude/auto-adapt-mode.log` tracks all decisions for auditing
-
-**Generalization examples:**
-
-| You approve | Rule added | Covers |
+| 承認したコマンド | 追加されたルール | 対象範囲 |
 |-------------|-----------|--------|
-| `git push origin main` | `Bash(git push:*)` | All git push variants |
-| `npm run build` | `Bash(npm run:*)` | All npm scripts |
-| `ls -la src/` | `Bash(ls:*)` | All ls invocations |
-| `rm -rf /tmp/test` | *(blocked)* | Never remembered |
-| `git push --force` | *(blocked)* | Never remembered |
-| `Write` tool | `Write(*)` | All file writes |
+| `git push origin main` | `Bash(git push:*)` | すべてのgit pushのバリエーション |
+| `npm run build` | `Bash(npm run:*)` | すべてのnpmスクリプト |
+| `ls -la src/` | `Bash(ls:*)` | すべてのls呼び出し |
+| `rm -rf /tmp/test` | *（ブロック）* | 決して記憶されない |
+| `git push --force` | *（ブロック）* | 決して記憶されない |
+| `Write` ツール | `Write(*)` | すべてのファイル書き込み |
 
-> **Tip:** Delete `~/.claude/.auto-adapt-mode-initialized` to re-seed baseline permissions. Check `~/.claude/auto-adapt-mode.log` to audit what rules were added and which were blocked.
+## プラグインHooks
 
-## Plugin Hooks
+プラグインは `hooks/hooks.json` ファイルにhooksを含められます：
 
-Plugins can include hooks in their `hooks/hooks.json` file:
-
-**File:** `plugins/hooks/hooks.json`
+**ファイル:** `plugins/hooks/hooks.json`
 
 ```json
 {
@@ -1084,15 +1048,15 @@ Plugins can include hooks in their `hooks/hooks.json` file:
 }
 ```
 
-**Environment Variables in Plugin Hooks:**
-- `${CLAUDE_PLUGIN_ROOT}` - Path to the plugin directory
-- `${CLAUDE_PLUGIN_DATA}` - Path to the plugin data directory
+**プラグインhooksの環境変数:**
+- `${CLAUDE_PLUGIN_ROOT}` - プラグインディレクトリへのパス
+- `${CLAUDE_PLUGIN_DATA}` - プラグインデータディレクトリへのパス
 
-This allows plugins to include custom validation and automation hooks.
+これにより、プラグインにカスタムバリデーションと自動化hooksを含められます。
 
-## MCP Tool Hooks
+## MCPツールのHooks
 
-MCP tools follow the pattern `mcp__<server>__<tool>`:
+MCPツールは `mcp__<server>__<tool>` のパターンに従います：
 
 ```json
 {
@@ -1103,7 +1067,7 @@ MCP tools follow the pattern `mcp__<server>__<tool>`:
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"systemMessage\": \"Memory operation logged\"}'"
+            "command": "echo '{\"systemMessage\": \"メモリ操作をログ記録\"}'"
           }
         ]
       }
@@ -1112,59 +1076,59 @@ MCP tools follow the pattern `mcp__<server>__<tool>`:
 }
 ```
 
-## Security Considerations
+## セキュリティに関する考慮事項
 
-### Disclaimer
+### 免責事項
 
-**USE AT YOUR OWN RISK**: Hooks execute arbitrary shell commands. You are solely responsible for:
-- Commands you configure
-- File access/modification permissions
-- Potential data loss or system damage
-- Testing hooks in safe environments before production use
+**自己責任で使用してください**: Hooksは任意のシェルコマンドを実行します。以下については利用者の責任となります：
+- 設定するコマンド
+- ファイルアクセス/修正パーミッション
+- データ損失やシステム損傷の可能性
+- 本番環境での使用前に安全な環境でhooksをテストすること
 
-### Security Notes
+### セキュリティメモ
 
-- **Workspace trust required:** The `statusLine` and `fileSuggestion` hook output commands now require workspace trust acceptance before they take effect.
-- **HTTP hooks and environment variables:** HTTP hooks require an explicit `allowedEnvVars` list to use environment variable interpolation in URLs. This prevents accidental leakage of sensitive environment variables to remote endpoints.
-- **Managed settings hierarchy:** The `disableAllHooks` setting now respects the managed settings hierarchy, meaning organization-level settings can enforce hook disablement that individual users cannot override.
+- **ワークスペースの信頼が必要:** `statusLine` と `fileSuggestion` のhook出力コマンドは、効果を発揮する前にワークスペースの信頼承認が必要になりました。
+- **HTTPフックと環境変数:** HTTPフックでURLの環境変数インターポレーションを使用するには明示的な `allowedEnvVars` リストが必要です。これにより機密環境変数が誤ってリモートエンドポイントに漏洩することを防ぎます。
+- **マネージド設定の階層:** `disableAllHooks` 設定はマネージド設定の階層を尊重するようになり、組織レベルの設定で個々のユーザーが上書きできないhookの無効化を強制できます。
 
-### Best Practices
+### ベストプラクティス
 
-| Do | Don't |
-|-----|-------|
-| Validate and sanitize all inputs | Trust input data blindly |
-| Quote shell variables: `"$VAR"` | Use unquoted: `$VAR` |
-| Block path traversal (`..`) | Allow arbitrary paths |
-| Use absolute paths with `$CLAUDE_PROJECT_DIR` | Hardcode paths |
-| Skip sensitive files (`.env`, `.git/`, keys) | Process all files |
-| Test hooks in isolation first | Deploy untested hooks |
-| Use explicit `allowedEnvVars` for HTTP hooks | Expose all env vars to webhooks |
+| やること | やってはいけないこと |
+|---------|-------------|
+| すべての入力をバリデートして無害化する | 入力データを盲目的に信頼する |
+| シェル変数をクォートする: `"$VAR"` | クォートなしで使用: `$VAR` |
+| パストラバーサル（`..`）をブロックする | 任意のパスを許可する |
+| `$CLAUDE_PROJECT_DIR` で絶対パスを使用 | パスをハードコードする |
+| 機密ファイル（`.env`、`.git/`、鍵）をスキップ | すべてのファイルを処理する |
+| まず隔離環境でhooksをテストする | テストせずにhooksをデプロイする |
+| HTTPフックには明示的な `allowedEnvVars` を使用 | すべての環境変数をウェブフックに公開する |
 
-## Debugging
+## デバッグ
 
-### Enable Debug Mode
+### デバッグモードを有効化
 
-Run Claude with debug flag for detailed hook logs:
+デバッグフラグ付きでClaudeを実行して詳細なhookログを取得：
 
 ```bash
 claude --debug
 ```
 
-### Verbose Mode
+### Verboseモード
 
-Use `Ctrl+O` in Claude Code to enable verbose mode and see hook execution progress.
+Claude Codeで `Ctrl+O` を使ってverboseモードを有効化し、hookの実行状況を確認します。
 
-### Test Hooks Independently
+### Hooksを独立してテスト
 
 ```bash
-# Test with sample JSON input
+# サンプルJSON入力でテスト
 echo '{"tool_name": "Bash", "tool_input": {"command": "ls -la"}}' | python3 .claude/hooks/validate-bash.py
 
-# Check exit code
+# 終了コードを確認
 echo $?
 ```
 
-## Complete Configuration Example
+## 完全な設定例
 
 ```json
 {
@@ -1224,7 +1188,7 @@ echo $?
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Verify all tasks are complete before stopping.",
+            "prompt": "停止する前にすべてのタスクが完了しているか確認してください。",
             "timeout": 30
           }
         ]
@@ -1234,61 +1198,61 @@ echo $?
 }
 ```
 
-## Hook Execution Details
+## Hook実行の詳細
 
-| Aspect | Behavior |
-|--------|----------|
-| **Timeout** | 60 seconds default, configurable per command |
-| **Parallelization** | All matching hooks run in parallel |
-| **Deduplication** | Identical hook commands deduplicated |
-| **Environment** | Runs in current directory with Claude Code's environment |
+| 観点 | 動作 |
+|------|------|
+| **タイムアウト** | デフォルト60秒、コマンドごとに設定可能 |
+| **並列化** | マッチするすべてのhookが並列で実行 |
+| **重複排除** | 同一のhookコマンドは重複排除される |
+| **環境** | Claude Codeの環境で現在のディレクトリで実行 |
 
-## Troubleshooting
+## トラブルシューティング
 
-### Hook Not Executing
-- Verify JSON configuration syntax is correct
-- Check matcher pattern matches the tool name
-- Ensure script exists and is executable: `chmod +x script.sh`
-- Run `claude --debug` to see hook execution logs
-- Verify hook reads JSON from stdin (not command args)
+### Hookが実行されない
+- JSON設定構文が正しいか確認
+- マッチャーパターンがツール名にマッチするか確認
+- スクリプトが存在して実行可能か確認: `chmod +x script.sh`
+- `claude --debug` を実行してhookの実行ログを確認
+- hookがコマンド引数ではなくstdinからJSONを読み込んでいるか確認
 
-### Hook Blocks Unexpectedly
-- Test hook with sample JSON: `echo '{"tool_name": "Write", ...}' | ./hook.py`
-- Check exit code: should be 0 for allow, 2 for block
-- Check stderr output (shown on exit code 2)
+### Hookが予期せずブロックする
+- サンプルJSONでhookをテスト: `echo '{"tool_name": "Write", ...}' | ./hook.py`
+- 終了コードを確認: 許可は0、ブロックは2
+- stderr出力を確認（終了コード2の場合に表示）
 
-### JSON Parsing Errors
-- Always read from stdin, not command arguments
-- Use proper JSON parsing (not string manipulation)
-- Handle missing fields gracefully
+### JSONパースエラー
+- コマンド引数ではなくstdinから常に読み込む
+- 適切なJSONパース（文字列操作ではなく）を使用
+- 欠けているフィールドを優雅に処理する
 
-## Installation
+## インストール
 
-### Step 1: Create Hooks Directory
+### ステップ1: Hooksディレクトリを作成
 ```bash
 mkdir -p ~/.claude/hooks
 ```
 
-### Step 2: Copy Example Hooks
+### ステップ2: 例のhooksをコピー
 ```bash
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 ```
 
-### Step 3: Configure in Settings
-Edit `~/.claude/settings.json` or `.claude/settings.json` with the hook configuration shown above.
+### ステップ3: 設定で構成
+`~/.claude/settings.json` または `.claude/settings.json` を上記のhook設定で編集します。
 
-## Related Concepts
+## 関連概念
 
-- **[Checkpoints and Rewind](../08-checkpoints/)** - Save and restore conversation state
-- **[Slash Commands](../01-slash-commands/)** - Create custom slash commands
-- **[Skills](../03-skills/)** - Reusable autonomous capabilities
-- **[Subagents](../04-subagents/)** - Delegated task execution
-- **[Plugins](../07-plugins/)** - Bundled extension packages
-- **[Advanced Features](../09-advanced-features/)** - Explore advanced Claude Code capabilities
+- **[CheckpointsとRewind](../08-checkpoints/)** - 会話状態の保存と復元
+- **[スラッシュコマンド](../01-slash-commands/)** - カスタムスラッシュコマンドの作成
+- **[スキル](../03-skills/)** - 再利用可能な自律的な機能
+- **[サブエージェント](../04-subagents/)** - 委譲されたタスク実行
+- **[プラグイン](../07-plugins/)** - バンドルされた拡張パッケージ
+- **[高度な機能](../09-advanced-features/)** - Claude Codeの高度な機能を探索
 
-## Additional Resources
+## 追加リソース
 
-- **[Official Hooks Documentation](https://code.claude.com/docs/en/hooks)** - Complete hooks reference
-- **[CLI Reference](https://code.claude.com/docs/en/cli-reference)** - Command-line interface documentation
-- **[Memory Guide](../02-memory/)** - Persistent context configuration
+- **[公式Hooksドキュメント](https://code.claude.com/docs/en/hooks)** - 完全なhooksリファレンス
+- **[CLIリファレンス](https://code.claude.com/docs/en/cli-reference)** - コマンドラインインターフェースのドキュメント
+- **[メモリガイド](../02-memory/)** - 永続コンテキストの設定
